@@ -86,10 +86,7 @@ function insertImageInfo(id,element)
 
 
 
-changes by git..
-skdfjsd 
 
-lskamfkm
 
 /********************************** Code End by Kruti ***********************************************************************************************/
 
@@ -97,9 +94,8 @@ lskamfkm
 
 /*************************************** Code Added by Sahib ***************************************************************************************/
 
-
-This is a sample change made by sahib.
-
+This is the first sample change made by sahib.
+This is the second sample change made by sahib.
 
 
 
