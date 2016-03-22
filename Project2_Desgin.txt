@@ -95,6 +95,7 @@ function insertImageInfo(id,element)
 /*************************************** Code Added by Sahib ***************************************************************************************/
 
 
+This is a sample change made by sahib.
 
 
 
@@ -165,5 +166,3 @@ zoomAll(canvas.height / localHeight);
 </head>
   
 </html>
-
-This is a sample change made by sahib.
