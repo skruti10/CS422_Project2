@@ -19,6 +19,7 @@
 		
 <!-- ************************************** HTML Code Added by Kruti ********************************************************************************* -->
 	<img src="..//CS422_Project2//Icons//menu1.png" id="kMenuIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//sos.png" id="kSOSIcon" style="display:none">
 
 
 
@@ -88,7 +89,7 @@
 var insideDoor = new fabric.Rect({
   left: 22,
   top: 0,
-  fill: 'grey',
+  fill: 'white',
   stroke: 'black',
   width: 555,
   height: localHeight,
@@ -103,7 +104,7 @@ insideDoor.lockMovementX = insideDoor.lockMovementY = true;
 var outsideDoor = new fabric.Rect({
   left: 642,
   top: 0,
-  fill: 'grey',
+  fill: 'white',
   stroke: 'black',
   width: 555,
   height: localHeight,
@@ -122,24 +123,57 @@ canvas.add(outsideDoor);
 
 /*************************************** Code Added by Kruti ***************************************************************************************/
 function kInsertImageInfo(kId,kElement)
-  {
+{
 	this.kImageId = kId;
 	this.kImageElement = kElement;
 	this.kisUsed = false;
-  };
+};
+  
+var iconW = 60;
+var iconH = 70;
 
-var kMenuIconInfo = new kInsertImageInfo("kMenuIcon",document.getElementById('kMenuIcon'));  
-
-var kMenuIcon = new fabric.Image(kMenuIconInfo.kImageElement, {
-left: 275, //1635,
-top: 495 , //100,
-strokeWidth : 1,
-width: 80,
-height: 50
+var kID_MainPanelLeft = 22;
+var kID_MainPanelTop = 485;
+  
+var kID_MainPanel = new fabric.Rect({
+  left: kID_MainPanelLeft,
+  top: kID_MainPanelTop,
+  fill: 'grey',
+  width: 555,
+  height: 80
 });
 
-canvas.add(kMenuIcon);
+canvas.add(kID_MainPanel);
 
+var kSOSIconInfo = new kInsertImageInfo("kSOSIcon",document.getElementById('kSOSIcon'));  
+var kID_SOSIcon = new fabric.Image(kSOSIconInfo.kImageElement, {
+left: kID_MainPanelLeft+60, //1635,
+top: kID_MainPanelTop + 16 , //100,
+width: iconW,
+height: iconH-20
+});
+
+canvas.add(kID_SOSIcon);
+  
+var kMenuIconInfo = new kInsertImageInfo("kMenuIcon",document.getElementById('kMenuIcon'));  
+var kID_MenuIcon = new fabric.Image(kMenuIconInfo.kImageElement, {
+left: kID_MainPanelLeft+250, //1635,
+top: kID_MainPanelTop + 5 , //100,
+width: iconW,
+height: iconH
+});
+
+canvas.add(kID_MenuIcon);
+
+
+var kID_DoorKnob = new fabric.Circle({
+  left: kID_MainPanelLeft+440,
+  top: kID_MainPanelTop+9,
+  fill: 'white',
+  radius: iconW-32
+});
+
+canvas.add(kID_DoorKnob);
 
 /********************************** Code End by Kruti ***********************************************************************************************/
 
