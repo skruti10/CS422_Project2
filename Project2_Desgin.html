@@ -18,7 +18,7 @@
 	<canvas id="c" width="2714" height="2200" style="border:2px solid black;" ></canvas>
 		
 <!-- ************************************** HTML Code Added by Kruti ********************************************************************************* -->
-
+	<img src="..//CS422_Project2//Icons//menu1.png" id="kMenuIcon" style="display:none">
 
 
 
@@ -121,16 +121,24 @@ canvas.add(outsideDoor);
 
 
 /*************************************** Code Added by Kruti ***************************************************************************************/
-function insertImageInfo(id,element)
+function kInsertImageInfo(kId,kElement)
   {
-	this.ImageId = id;
-	this.ImageElement = element;
-	this.isUsed = false;
+	this.kImageId = kId;
+	this.kImageElement = kElement;
+	this.kisUsed = false;
   };
 
+var kMenuIconInfo = new kInsertImageInfo("kMenuIcon",document.getElementById('kMenuIcon'));  
 
+var kMenuIcon = new fabric.Image(kMenuIconInfo.kImageElement, {
+left: 275, //1635,
+top: 495 , //100,
+strokeWidth : 1,
+width: 80,
+height: 50
+});
 
-
+canvas.add(kMenuIcon);
 
 
 /********************************** Code End by Kruti ***********************************************************************************************/
@@ -139,8 +147,8 @@ function insertImageInfo(id,element)
 
 /*************************************** Code Added by Sahib ***************************************************************************************/
 
-This is the first sample change made by sahib.
-This is the second sample change made by sahib.
+//This is the first sample change made by sahib.
+//This is the second sample change made by sahib.
 
 
 
@@ -203,9 +211,11 @@ function zoomAll(SCALE_FACTOR) {
 // draw everything at the appropriate scale for this canvas
 zoomAll(canvas.height / localHeight);
 
+canvas.forEachObject(function(o){ o.hasBorders = false; o.hasControls = false; o.lockMovementX = true; o.lockMovementY = true });
+
 })();
 
-canvas.forEachObject(function(o){ o.hasBorders = false; o.hasControls = false; o.lockMovementX = true; o.lockMovementY = true });
+
 
 </script>
 		
