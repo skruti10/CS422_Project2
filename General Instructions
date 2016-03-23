@@ -1,0 +1,14 @@
+For each contributor there is a section in <body> for html code and <script> for js- please use only your blocks to defined any code - hmtl/js.
+Maintain a local copy of the entire html file taken from the git.
+Do your code changes in your block, do not disturb any other code block of any other coder.
+Once you are done with your changes and want to commit, please take the latest first, in that latest copy just remove your code block
+and add your latest code block. No conflicts will occur and it will save our time and no overwriting of the code will happen.
+Copy all your image icons in the Icon folder.
+Use absolute path for using any images.
+For every variable/function names please use ur initial and then follow camel casing for naming convention. 
+Example : kMenuIcon - icon defined for menu by Kruti (initial => k)
+Do not give x and y for each image icons, try to define a rectangle - this rectangle should be in reference with its above rectangle or
+in reference with the door.
+Put all ur image icons in this rectangle with their x and y defined with respect to this. Whenever you want to move the entire set of 
+icons, you can just add value to the rectangles top and left - it will be automatically reflected in the others - you will not need to 
+shift each icon manually. At the end we can remove the border of this rectangle and fill it with same color as background.
