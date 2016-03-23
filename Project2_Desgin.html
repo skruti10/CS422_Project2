@@ -20,6 +20,16 @@
 <!-- ************************************** HTML Code Added by Kruti ********************************************************************************* -->
 	<img src="..//CS422_Project2//Icons//menu1.png" id="kMenuIcon" style="display:none">
 	<img src="..//CS422_Project2//Icons//sos.png" id="kSOSIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//camera1.png" id="kCameraIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//nounreadmessage1.png" id="kNoUnreadMessageIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//calendar1.png" id="kCalendarIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//unmute.png" id="kUnMuteIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//settings4.png" id="kSettingsIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//MirrorIcon_New_1.png" id="kMirrorIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//rightarrow1.png.jpg" id="kRightArrowIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//leftarrow1.png.jpg" id="kLeftArrowIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//locked1.png" id="kLockIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//unlock.png" id="kUnLockIcon" style="display:none">
 
 
 
@@ -132,6 +142,106 @@ function kInsertImageInfo(kId,kElement)
 var iconW = 60;
 var iconH = 70;
 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/***************************** code for lock unlock icons start ***********************************/
+
+
+
+
+/***************************** code for lock unlock icons end ***********************************/
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/**************************** code for menu icons start *************************************/
+
+var kID_MenuPanelLeft = 23;
+var kID_MenuPanelTop = 230;
+
+var kID_MenuPanel = new fabric.Rect({
+  left: kID_MenuPanelLeft,
+  top: kID_MenuPanelTop,
+  fill: 'white',
+  width: 554,
+  height: 180
+});
+
+canvas.add(kID_MenuPanel);
+
+var kCameraIconInfo = new kInsertImageInfo("kCameraIcon",document.getElementById('kCameraIcon'));  
+var kID_CameraIcon = new fabric.Image(kCameraIconInfo.kImageElement, {
+left: kID_MenuPanelLeft+65, 
+top: kID_MenuPanelTop -32 , 
+width: iconW+10,
+height: iconH-5
+});
+canvas.add(kID_CameraIcon);
+
+var kNoUnreadMessageIconInfo = new kInsertImageInfo("kNoUnreadMessageIcon",document.getElementById('kNoUnreadMessageIcon'));  
+var kID_NoUnreadIcon = new fabric.Image(kNoUnreadMessageIconInfo.kImageElement, {
+left: kID_MenuPanelLeft+ iconW + 185, 
+top: kID_MenuPanelTop-50  , 
+width: iconW+10,
+height: iconH+30
+});
+canvas.add(kID_NoUnreadIcon);
+
+var kCalendarIconInfo = new kInsertImageInfo("kCalendarIcon",document.getElementById('kCalendarIcon'));  
+var kID_CalendarIcon = new fabric.Image(kCalendarIconInfo.kImageElement, {
+left: kID_MenuPanelLeft+ iconW*2 + 300, 
+top: kID_MenuPanelTop-38 , 
+width: iconW,
+height: iconH
+});
+canvas.add(kID_CalendarIcon);
+
+var kUnMuteIconInfo = new kInsertImageInfo("kUnMuteIcon",document.getElementById('kUnMuteIcon'));  
+var kID_UnMuteIcon = new fabric.Image(kUnMuteIconInfo.kImageElement, {
+left: kID_MenuPanelLeft+ 60, 
+top: kID_MenuPanelTop + 90 , 
+width: iconW+20,
+height: iconH+25
+});
+canvas.add(kID_UnMuteIcon);
+
+var kSettingsIconInfo = new kInsertImageInfo("kSettingsIcon",document.getElementById('kSettingsIcon'));  
+var kID_SettingsIcon = new fabric.Image(kSettingsIconInfo.kImageElement, {
+left: kID_MenuPanelLeft+ iconW + 185,
+top: kID_MenuPanelTop + 95, 
+width: iconW+10,
+height: iconH+10
+});
+canvas.add(kID_SettingsIcon);
+
+var kMirrorIconInfo = new kInsertImageInfo("kMirrorIcon",document.getElementById('kMirrorIcon'));  
+var kID_MirrorIcon = new fabric.Image(kMirrorIconInfo.kImageElement, {
+left: kID_MenuPanelLeft+ iconW*2 + 300,
+top: kID_MenuPanelTop + 90 , 
+width: iconW,
+height: iconH+10
+});
+canvas.add(kID_MirrorIcon);
+
+var kRightArrowIconInfo = new kInsertImageInfo("kRightArrowIcon",document.getElementById('kRightArrowIcon'));  
+var kID_RightArrowIcon = new fabric.Image(kRightArrowIconInfo.kImageElement, {
+left: kID_MenuPanelLeft+ iconW*2 + 370,
+top: kID_MenuPanelTop + 50 , 
+width: iconW-20,
+height: iconH-30
+});
+canvas.add(kID_RightArrowIcon);
+
+/**************************** code for menu icons end *************************************/
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/****************** code for main menu strip for inside door start *******************************/
 var kID_MainPanelLeft = 22;
 var kID_MainPanelTop = 485;
   
@@ -148,32 +258,34 @@ canvas.add(kID_MainPanel);
 var kSOSIconInfo = new kInsertImageInfo("kSOSIcon",document.getElementById('kSOSIcon'));  
 var kID_SOSIcon = new fabric.Image(kSOSIconInfo.kImageElement, {
 left: kID_MainPanelLeft+60, //1635,
-top: kID_MainPanelTop + 16 , //100,
-width: iconW,
-height: iconH-20
+top: kID_MainPanelTop +8 , //100,
+width: iconW+20,
+height: iconH-5
 });
 
 canvas.add(kID_SOSIcon);
   
 var kMenuIconInfo = new kInsertImageInfo("kMenuIcon",document.getElementById('kMenuIcon'));  
 var kID_MenuIcon = new fabric.Image(kMenuIconInfo.kImageElement, {
-left: kID_MainPanelLeft+250, //1635,
-top: kID_MainPanelTop + 5 , //100,
-width: iconW,
-height: iconH
+left: kID_MainPanelLeft+245, //1635,
+top: kID_MainPanelTop -5  , //100,
+width: iconW+10,
+height: iconH+25
 });
 
 canvas.add(kID_MenuIcon);
 
 
 var kID_DoorKnob = new fabric.Circle({
-  left: kID_MainPanelLeft+440,
-  top: kID_MainPanelTop+9,
+  left: kID_MainPanelLeft+420,
+  top: kID_MainPanelTop+6,
   fill: 'white',
-  radius: iconW-32
+  radius: iconW-26
 });
 
 canvas.add(kID_DoorKnob);
+
+/****************** code for main menu strip for inside door start *******************************/
 
 /********************************** Code End by Kruti ***********************************************************************************************/
 
