@@ -7,6 +7,7 @@
 	
 	<!-- Get version 1.5.0 of Fabric.js from CDN -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js" ></script>
+	<script src="jquery-2.2.2.min.js"></script>
  
 
 	 
@@ -30,6 +31,11 @@
 	<img src="..//CS422_Project2//Icons//leftarrow1.png.jpg" id="kLeftArrowIcon" style="display:none">
 	<img src="..//CS422_Project2//Icons//locked1.png" id="kLockIcon" style="display:none">
 	<img src="..//CS422_Project2//Icons//unlock.png" id="kUnLockIcon" style="display:none">
+	<img src="" id="kCurrentCloudIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//mute.png" id="kMuteIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//oneunreadmessage1.png" id="kOneUnreadMessageIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//GoogleExpressDelivery.png" id="kGoogleExpressDeliveryIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//Alert.png" id="kAlertIcon" style="display:none">
 
 
 
@@ -139,8 +145,219 @@ function kInsertImageInfo(kId,kElement)
 	this.kisUsed = false;
 };
   
-var iconW = 60;
-var iconH = 70;
+var kID_IconW = 60;
+var kID_IconH = 70;
+var kID_Font = 'Tahoma';
+var kID_FontSize = 20;
+
+/********************** code for date + time + weather start ***************************************************************************************/
+var kID_HeaderPanelLeft = 23;
+var kID_HeaderPanelTop = 2;
+
+var kID_HeaderPanel = new fabric.Rect({
+  left: kID_HeaderPanelLeft,
+  top: kID_HeaderPanelTop,
+  fill: 'white',
+  width: 554,
+  height: 100
+});
+
+canvas.add(kID_HeaderPanel);
+
+var kID_CurrentDateTime ;
+var kID_DD;
+var kID_MM;
+var kID_YYYY;
+    
+var kID_DateText = new fabric.Text('',{
+	left: kID_HeaderPanelLeft +8,
+	top: kID_HeaderPanelTop + 5,
+	fontSize: kID_FontSize,
+	fontFamily: kID_Font
+});
+canvas.add(kID_DateText);
+
+var kID_Hrs;
+var kID_Mins;
+
+var kID_TimeText = new fabric.Text('',{
+	left: kID_HeaderPanelLeft +25,
+	top: kID_HeaderPanelTop + 35,
+	fontSize: kID_FontSize,
+	fontFamily: kID_Font
+});
+canvas.add(kID_TimeText);
+
+function kID_Refresh_DateTime(){
+	kID_CurrentDateTime = new Date();
+	kID_DD = kID_CurrentDateTime.getDate();
+
+	kID_MM = kID_CurrentDateTime.getMonth()+1; //January is 0!
+
+	kID_YYYY = kID_CurrentDateTime.getFullYear();
+    
+	if(kID_DD<10){
+		kID_DD='0'+kID_DD;
+	} 
+
+	if(kID_MM<10){
+		kID_MM='0'+kID_MM;
+	}
+	
+	kID_Hrs = kID_CurrentDateTime.getHours();
+	kID_Mins = kID_CurrentDateTime.getMinutes();
+
+	if(kID_Hrs < 10){
+		kID_Hrs = '0'+kID_Hrs;
+	}
+	
+	if(kID_Mins < 10){
+		kID_Mins = '0'+kID_Mins;
+	}
+	
+	kID_DateText.set({
+		text: kID_MM+"/"+kID_DD+"/"+kID_YYYY
+	});
+	canvas.remove(kID_DateText);
+	canvas.add(kID_DateText);
+	
+	kID_TimeText.set({
+		text:kID_Hrs+":"+kID_Mins
+	});
+	canvas.remove(kID_TimeText);
+	canvas.add(kID_TimeText);
+};
+
+kID_Refresh_DateTime();
+setInterval(kID_Refresh_DateTime, 10000);
+
+var kID_WeatherTemp = new fabric.Text('', {
+	left: kID_HeaderPanelLeft +450,
+	top: kID_HeaderPanelTop + 35,
+	fontSize: kID_FontSize,
+	fontFamily: kID_Font
+});
+canvas.add(kID_WeatherTemp);
+
+var kCurrentCloudIconInfo = new kInsertImageInfo("kCurrentCloudIcon",document.getElementById('kCurrentCloudIcon'));  
+var kID_CurrentCloudIcon = new fabric.Image(kCurrentCloudIconInfo.kImageElement, 
+{
+	left: kID_HeaderPanelLeft +380,
+	top: kID_HeaderPanelTop,
+	width: kID_IconW,
+	height: kID_IconH
+});
+canvas.add(kID_CurrentCloudIcon);
+
+
+
+//jQuery(document).ready(function ($)
+function kWeatherUpdate()
+{
+	/* Edit these variables */
+	var api = "a175edc1bcfb5ef4";
+	var state = "IL";
+	var city = "Chicago";
+
+	$.ajax
+	({
+		url: "http://api.wunderground.com/api/" + api + "/forecast/conditions/q/" + state + "/" + city + ".json",
+		dataType: "jsonp",
+		success: function (parsed_json) 
+		{
+			//var celcius, far;
+			var icon_url_json = "http://icons.wxug.com/i/c/f/" + parsed_json['current_observation']['icon'] + ".gif";
+			var icon_json = '<img src ="' + icon_url_json + '" />';
+			var temp_json = parsed_json['current_observation']['temp_f'];
+			var temp_json_C = parsed_json['current_observation']['temp_c'];
+			temp_json += "°F";
+			temp_json_C += "°C";
+
+			var condition_json = parsed_json['current_observation']['weather'];
+			var real_feel_json = "Feels Like " + parsed_json['current_observation']['feelslike_f'] + "°F";
+
+			var wind_json = 'Winds are ' + parsed_json['current_observation']['wind_string'];
+			var location_json = city + ', ' + state;
+			
+			document.getElementById("kCurrentCloudIcon").src= icon_url_json;
+			
+			kID_WeatherTemp.set({
+				text:temp_json
+			});
+			canvas.remove(kID_WeatherTemp);
+			canvas.add(kID_WeatherTemp);
+			
+			canvas.remove(kID_CurrentCloudIcon);
+			canvas.add(kID_CurrentCloudIcon);
+
+		}
+	});
+};
+kWeatherUpdate();
+/*update in every half an hour*/
+setInterval(kWeatherUpdate, 1800000);
+//});
+
+/********************** code for date + time + weather end ***************************************************************************************/
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/********************** code for notification panel start ***************************************************************************************/
+var kID_NotificationPanelLeft = 23;
+var kID_NotificationPanelTop = 90;
+
+var kID_NotificationPanel = new fabric.Rect({
+  left: kID_NotificationPanelLeft,
+  top: kID_NotificationPanelTop,
+  fill: 'white',
+  width: 554,
+  height: 50
+});
+
+canvas.add(kID_NotificationPanel);
+
+var kMuteIconInfo = new kInsertImageInfo("kMuteIcon",document.getElementById('kMuteIcon'));  
+var kID_MuteIcon = new fabric.Image(kMuteIconInfo.kImageElement, {
+	left: kID_NotificationPanelLeft+75, 
+	top: kID_NotificationPanelTop-3, 
+	width: kID_IconW+10,
+	height: kID_IconH-10
+});
+canvas.add(kID_MuteIcon);
+
+var kOneUnreadMessageIconInfo = new kInsertImageInfo("kOneUnreadMessageIcon",document.getElementById('kOneUnreadMessageIcon'));  
+var kID_OneUnreadMessageIcon = new fabric.Image(kOneUnreadMessageIconInfo.kImageElement, {
+	left: kID_NotificationPanelLeft+190, 
+	top: kID_NotificationPanelTop+8, 
+	width: kID_IconW,
+	height: kID_IconH-20
+});
+canvas.add(kID_OneUnreadMessageIcon);
+
+var kGoogleExpressDeliveryIconInfo = new kInsertImageInfo("kGoogleExpressDeliveryIcon",document.getElementById('kGoogleExpressDeliveryIcon'));  
+var kID_GoogleExpressDeliveryIcon = new fabric.Image(kGoogleExpressDeliveryIconInfo.kImageElement, {
+	left: kID_NotificationPanelLeft+300, 
+	top: kID_NotificationPanelTop-10, 
+	width: kID_IconW+10,
+	height: kID_IconH-10,
+	angle:10
+});
+canvas.add(kID_GoogleExpressDeliveryIcon);
+
+var kAlertIconInfo = new kInsertImageInfo("kAlertIcon",document.getElementById('kAlertIcon'));  
+var kID_AlertIcon = new fabric.Image(kAlertIconInfo.kImageElement, {
+	left: kID_NotificationPanelLeft+420, 
+	top: kID_NotificationPanelTop, 
+	width: kID_IconW+10,
+	height: kID_IconH-20
+});
+canvas.add(kID_AlertIcon);
+
+
+
+/********************** code for notification panel end ******************************************************************************************/
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -148,7 +365,27 @@ var iconH = 70;
 
 /***************************** code for lock unlock icons start ***********************************/
 
+var kID_LockUnlcokPanelLeft = 23;
+var kID_LockUnlcokPanelTop = 250;
 
+var kID_LockUnlcokPanel = new fabric.Rect({
+  left: kID_LockUnlcokPanelLeft,
+  top: kID_LockUnlcokPanelTop,
+  fill: 'white',
+  width: 554,
+  height: 100
+});
+
+canvas.add(kID_LockUnlcokPanel);
+
+var kLockIconInfo = new kInsertImageInfo("kLockIcon",document.getElementById('kLockIcon'));  
+var kID_LockIcon = new fabric.Image(kLockIconInfo.kImageElement, {
+	left: kID_LockUnlcokPanelLeft+245, 
+	top: kID_LockUnlcokPanelTop, 
+	width: kID_IconW+10,
+	height: kID_IconH+20
+});
+canvas.add(kID_LockIcon);
 
 
 /***************************** code for lock unlock icons end ***********************************/
@@ -170,70 +407,70 @@ var kID_MenuPanel = new fabric.Rect({
   height: 180
 });
 
-canvas.add(kID_MenuPanel);
+//canvas.add(kID_MenuPanel);
 
 var kCameraIconInfo = new kInsertImageInfo("kCameraIcon",document.getElementById('kCameraIcon'));  
 var kID_CameraIcon = new fabric.Image(kCameraIconInfo.kImageElement, {
 left: kID_MenuPanelLeft+65, 
 top: kID_MenuPanelTop -32 , 
-width: iconW+10,
-height: iconH-5
+width: kID_IconW+10,
+height: kID_IconH-5
 });
-canvas.add(kID_CameraIcon);
+//canvas.add(kID_CameraIcon);
 
 var kNoUnreadMessageIconInfo = new kInsertImageInfo("kNoUnreadMessageIcon",document.getElementById('kNoUnreadMessageIcon'));  
 var kID_NoUnreadIcon = new fabric.Image(kNoUnreadMessageIconInfo.kImageElement, {
-left: kID_MenuPanelLeft+ iconW + 185, 
+left: kID_MenuPanelLeft+ kID_IconW + 185, 
 top: kID_MenuPanelTop-50  , 
-width: iconW+10,
-height: iconH+30
+width: kID_IconW+10,
+height: kID_IconH+30
 });
-canvas.add(kID_NoUnreadIcon);
+//canvas.add(kID_NoUnreadIcon);
 
 var kCalendarIconInfo = new kInsertImageInfo("kCalendarIcon",document.getElementById('kCalendarIcon'));  
 var kID_CalendarIcon = new fabric.Image(kCalendarIconInfo.kImageElement, {
-left: kID_MenuPanelLeft+ iconW*2 + 300, 
+left: kID_MenuPanelLeft+ kID_IconW*2 + 300, 
 top: kID_MenuPanelTop-38 , 
-width: iconW,
-height: iconH
+width: kID_IconW,
+height: kID_IconH
 });
-canvas.add(kID_CalendarIcon);
+//canvas.add(kID_CalendarIcon);
 
 var kUnMuteIconInfo = new kInsertImageInfo("kUnMuteIcon",document.getElementById('kUnMuteIcon'));  
 var kID_UnMuteIcon = new fabric.Image(kUnMuteIconInfo.kImageElement, {
 left: kID_MenuPanelLeft+ 60, 
 top: kID_MenuPanelTop + 90 , 
-width: iconW+20,
-height: iconH+25
+width: kID_IconW+20,
+height: kID_IconH+25
 });
-canvas.add(kID_UnMuteIcon);
+//canvas.add(kID_UnMuteIcon);
 
 var kSettingsIconInfo = new kInsertImageInfo("kSettingsIcon",document.getElementById('kSettingsIcon'));  
 var kID_SettingsIcon = new fabric.Image(kSettingsIconInfo.kImageElement, {
-left: kID_MenuPanelLeft+ iconW + 185,
+left: kID_MenuPanelLeft+ kID_IconW + 185,
 top: kID_MenuPanelTop + 95, 
-width: iconW+10,
-height: iconH+10
+width: kID_IconW+10,
+height: kID_IconH+10
 });
-canvas.add(kID_SettingsIcon);
+//canvas.add(kID_SettingsIcon);
 
 var kMirrorIconInfo = new kInsertImageInfo("kMirrorIcon",document.getElementById('kMirrorIcon'));  
 var kID_MirrorIcon = new fabric.Image(kMirrorIconInfo.kImageElement, {
-left: kID_MenuPanelLeft+ iconW*2 + 300,
+left: kID_MenuPanelLeft+ kID_IconW*2 + 300,
 top: kID_MenuPanelTop + 90 , 
-width: iconW,
-height: iconH+10
+width: kID_IconW,
+height: kID_IconH+10
 });
-canvas.add(kID_MirrorIcon);
+//canvas.add(kID_MirrorIcon);
 
 var kRightArrowIconInfo = new kInsertImageInfo("kRightArrowIcon",document.getElementById('kRightArrowIcon'));  
 var kID_RightArrowIcon = new fabric.Image(kRightArrowIconInfo.kImageElement, {
-left: kID_MenuPanelLeft+ iconW*2 + 370,
+left: kID_MenuPanelLeft+ kID_IconW*2 + 370,
 top: kID_MenuPanelTop + 50 , 
-width: iconW-20,
-height: iconH-30
+width: kID_IconW-20,
+height: kID_IconH-30
 });
-canvas.add(kID_RightArrowIcon);
+//canvas.add(kID_RightArrowIcon);
 
 /**************************** code for menu icons end *************************************/
 
@@ -259,8 +496,8 @@ var kSOSIconInfo = new kInsertImageInfo("kSOSIcon",document.getElementById('kSOS
 var kID_SOSIcon = new fabric.Image(kSOSIconInfo.kImageElement, {
 left: kID_MainPanelLeft+60, //1635,
 top: kID_MainPanelTop +8 , //100,
-width: iconW+20,
-height: iconH-5
+width: kID_IconW+20,
+height: kID_IconH-5
 });
 
 canvas.add(kID_SOSIcon);
@@ -269,8 +506,8 @@ var kMenuIconInfo = new kInsertImageInfo("kMenuIcon",document.getElementById('kM
 var kID_MenuIcon = new fabric.Image(kMenuIconInfo.kImageElement, {
 left: kID_MainPanelLeft+245, //1635,
 top: kID_MainPanelTop -5  , //100,
-width: iconW+10,
-height: iconH+25
+width: kID_IconW+10,
+height: kID_IconH+25
 });
 
 canvas.add(kID_MenuIcon);
@@ -280,7 +517,7 @@ var kID_DoorKnob = new fabric.Circle({
   left: kID_MainPanelLeft+420,
   top: kID_MainPanelTop+6,
   fill: 'white',
-  radius: iconW-26
+  radius: kID_IconW-26
 });
 
 canvas.add(kID_DoorKnob);
