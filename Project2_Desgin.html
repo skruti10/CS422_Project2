@@ -156,7 +156,30 @@ canvas.add(insideDoor);
 canvas.add(outsideDoor);
 
 /************************************************** Common set of codes for everyone start -JS ***************************************************************/
+/***START Kruti added the code for profiles***/
 
+function kUserProfiles(kUserName,kImageIcon,kFingerIcon,kVoiceCommand,kPhoneSynced,kMessages,kToDoList,kCalendar,kHasUsedMenu)
+{
+	this.kUserName 		= kUserName;
+	this.kImageIcon 	= kImageIcon;
+	this.kFingerIcon 	= kFingerIcon;
+	this.kVoiceCommand 	= kVoiceCommand;
+	this.kPhoneSynced 	= kPhoneSynced;
+	this.kMessages 		= kMessages;
+	this.kToDoList 		= kToDoList;
+	this.kCalendar 		= kCalendar;
+	this.kHasUsedMenu 	= kHasUsedMenu;
+};
+
+var k_KrutiProfile = new kUserProfiles('Kruti','','','','','','','',false);
+var k_SahibProfile = new kUserProfiles('Sahib','','','','','','','',false);
+var k_AnkurProfile = new kUserProfiles('Ankur','','','','','','','',false);
+var k_RidhiProfile = new kUserProfiles('Ridhi','','','','','','','',false);
+
+var k_GuestProfile1 = new kUserProfiles('Guest1','','','','','','','',false);
+var k_GuestProfile2 = new kUserProfiles('Guest2','','','','','','','',false);
+
+/***END Kruti added the code for profiles***/
 
 
 
@@ -166,13 +189,15 @@ canvas.add(outsideDoor);
 
 
 /*************************************** Code Added by Kruti ***************************************************************************************/
+//common function used for images - whenever we use any image use this function to maintain the icons added on canvas
 function kInsertImageInfo(kId,kElement)
 {
 	this.kImageId = kId;
 	this.kImageElement = kElement;
 	this.kisUsed = false;
 };
-  
+
+//generalized width, height, font and fontsize used in code by kruti  
 var kID_IconW = 60;
 var kID_IconH = 70;
 var kID_Font = 'Tahoma';
@@ -182,6 +207,7 @@ var kID_FontSize = 20;
 var kID_HeaderPanelLeft = 23;
 var kID_HeaderPanelTop = 2;
 
+//added rectangle panel for reference
 var kID_HeaderPanel = new fabric.Rect({
   left: kID_HeaderPanelLeft,
   top: kID_HeaderPanelTop,
@@ -192,11 +218,13 @@ var kID_HeaderPanel = new fabric.Rect({
 
 canvas.add(kID_HeaderPanel);
 
+//variables for date, time
 var kID_CurrentDateTime ;
 var kID_DD;
 var kID_MM;
 var kID_YYYY;
-    
+   
+// add the date to canvas - initially blank, update from function
 var kID_DateText = new fabric.Text('',{
 	left: kID_HeaderPanelLeft +8,
 	top: kID_HeaderPanelTop + 5,
@@ -208,6 +236,7 @@ canvas.add(kID_DateText);
 var kID_Hrs;
 var kID_Mins;
 
+// add the time to canvas - initially blank, update from function
 var kID_TimeText = new fabric.Text('',{
 	left: kID_HeaderPanelLeft +25,
 	top: kID_HeaderPanelTop + 35,
@@ -216,6 +245,7 @@ var kID_TimeText = new fabric.Text('',{
 });
 canvas.add(kID_TimeText);
 
+// refresh the date and time in every  10 seconds
 function kID_Refresh_DateTime(){
 	kID_CurrentDateTime = new Date();
 	kID_DD = kID_CurrentDateTime.getDate();
@@ -246,19 +276,27 @@ function kID_Refresh_DateTime(){
 	kID_DateText.set({
 		text: kID_MM+"/"+kID_DD+"/"+kID_YYYY
 	});
+	
+	//update the date on canvas
 	canvas.remove(kID_DateText);
 	canvas.add(kID_DateText);
 	
 	kID_TimeText.set({
 		text:kID_Hrs+":"+kID_Mins
 	});
+	
+	//update the time on canvas
 	canvas.remove(kID_TimeText);
 	canvas.add(kID_TimeText);
 };
 
+//call the function to update the blank date and time initially.
 kID_Refresh_DateTime();
+
+//refresh the date and time automatically in every 10 seconds.
 setInterval(kID_Refresh_DateTime, 10000);
 
+// add the weather - temperature - initially blank - added through service. Default value shown in Faranheit
 var kID_WeatherTemp = new fabric.Text('', {
 	left: kID_HeaderPanelLeft +450,
 	top: kID_HeaderPanelTop + 35,
@@ -267,6 +305,7 @@ var kID_WeatherTemp = new fabric.Text('', {
 });
 canvas.add(kID_WeatherTemp);
 
+// weather - cloud icon - initially the img tag is blank - updated as fetche from the weather service.
 var kCurrentCloudIconInfo = new kInsertImageInfo("kCurrentCloudIcon",document.getElementById('kCurrentCloudIcon'));  
 var kID_CurrentCloudIcon = new fabric.Image(kCurrentCloudIconInfo.kImageElement, 
 {
@@ -278,8 +317,7 @@ var kID_CurrentCloudIcon = new fabric.Image(kCurrentCloudIconInfo.kImageElement,
 canvas.add(kID_CurrentCloudIcon);
 
 
-
-//jQuery(document).ready(function ($)
+// function to call the weather service - get temperature and cloud icon.
 function kWeatherUpdate()
 {
 	/* Edit these variables */
@@ -294,35 +332,50 @@ function kWeatherUpdate()
 		success: function (parsed_json) 
 		{
 			//var celcius, far;
+			//get the cloud icon image url
 			var icon_url_json = "http://icons.wxug.com/i/c/f/" + parsed_json['current_observation']['icon'] + ".gif";
+			
 			var icon_json = '<img src ="' + icon_url_json + '" />';
+			
+			//temperature in Faranheit
 			var temp_json = parsed_json['current_observation']['temp_f'];
+			
+			//convert temperature into Celsius
 			var temp_json_C = parsed_json['current_observation']['temp_c'];
+			
 			temp_json += "°F";
 			temp_json_C += "°C";
 
+			// more text on weather can be filled in later
 			var condition_json = parsed_json['current_observation']['weather'];
 			var real_feel_json = "Feels Like " + parsed_json['current_observation']['feelslike_f'] + "°F";
 
 			var wind_json = 'Winds are ' + parsed_json['current_observation']['wind_string'];
 			var location_json = city + ', ' + state;
 			
+			//get the image element added in html for cloud - initially the src is blank
 			document.getElementById("kCurrentCloudIcon").src= icon_url_json;
 			
+			// set the fabric icon with updated image icon.
 			kID_WeatherTemp.set({
 				text:temp_json
 			});
+			
+			// rebind the temperature reading
 			canvas.remove(kID_WeatherTemp);
 			canvas.add(kID_WeatherTemp);
 			
+			// rebind the cloud icon
 			canvas.remove(kID_CurrentCloudIcon);
 			canvas.add(kID_CurrentCloudIcon);
 
 		}
 	});
 };
+
+// initially everything is blank for temperature and cloud icon - call the service to update the canvas elements.
 kWeatherUpdate();
-/*update in every half an hour*/
+// update in every half an hour
 setInterval(kWeatherUpdate, 1800000);
 //});
 
@@ -333,9 +386,11 @@ setInterval(kWeatherUpdate, 1800000);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /********************** code for notification panel start ***************************************************************************************/
+
 var kID_NotificationPanelLeft = 23;
 var kID_NotificationPanelTop = 90;
 
+// notification panel rectangle - used for reference
 var kID_NotificationPanel = new fabric.Rect({
   left: kID_NotificationPanelLeft,
   top: kID_NotificationPanelTop,
@@ -391,48 +446,18 @@ canvas.add(kID_AlertIcon);
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/***************************** code for lock unlock icons start ***********************************/
-
-var kID_LockUnlcokPanelLeft = 23;
-var kID_LockUnlcokPanelTop = 250;
-
-var kID_LockUnlcokPanel = new fabric.Rect({
-  left: kID_LockUnlcokPanelLeft,
-  top: kID_LockUnlcokPanelTop,
-  fill: 'white',
-  width: 554,
-  height: 100
-});
-
-canvas.add(kID_LockUnlcokPanel);
-
-var kLockIconInfo = new kInsertImageInfo("kLockIcon",document.getElementById('kLockIcon'));  
-var kID_LockIcon = new fabric.Image(kLockIconInfo.kImageElement, {
-	left: kID_LockUnlcokPanelLeft+245, 
-	top: kID_LockUnlcokPanelTop, 
-	width: kID_IconW+10,
-	height: kID_IconH+20
-});
-canvas.add(kID_LockIcon);
-
-
-/***************************** code for lock unlock icons end ***********************************/
-
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 /**************************** code for menu icons start *************************************/
 
 var kID_MenuPanelLeft = 23;
 var kID_MenuPanelTop = 230;
 
+// menu rectangle - added for reference
 var kID_MenuPanel = new fabric.Rect({
   left: kID_MenuPanelLeft,
-  top: kID_MenuPanelTop,
+  top: kID_MenuPanelTop-40,
   fill: 'white',
   width: 554,
-  height: 180
+  height: 220
 });
 
 //canvas.add(kID_MenuPanel);
@@ -444,7 +469,7 @@ top: kID_MenuPanelTop -32 ,
 width: kID_IconW+10,
 height: kID_IconH-5
 });
-//canvas.add(kID_CameraIcon);
+canvas.add(kID_CameraIcon);
 
 var kNoUnreadMessageIconInfo = new kInsertImageInfo("kNoUnreadMessageIcon",document.getElementById('kNoUnreadMessageIcon'));  
 var kID_NoUnreadIcon = new fabric.Image(kNoUnreadMessageIconInfo.kImageElement, {
@@ -453,7 +478,7 @@ top: kID_MenuPanelTop-50  ,
 width: kID_IconW+10,
 height: kID_IconH+30
 });
-//canvas.add(kID_NoUnreadIcon);
+canvas.add(kID_NoUnreadIcon);
 
 var kCalendarIconInfo = new kInsertImageInfo("kCalendarIcon",document.getElementById('kCalendarIcon'));  
 var kID_CalendarIcon = new fabric.Image(kCalendarIconInfo.kImageElement, {
@@ -462,7 +487,7 @@ top: kID_MenuPanelTop-38 ,
 width: kID_IconW,
 height: kID_IconH
 });
-//canvas.add(kID_CalendarIcon);
+canvas.add(kID_CalendarIcon);
 
 var kUnMuteIconInfo = new kInsertImageInfo("kUnMuteIcon",document.getElementById('kUnMuteIcon'));  
 var kID_UnMuteIcon = new fabric.Image(kUnMuteIconInfo.kImageElement, {
@@ -471,7 +496,7 @@ top: kID_MenuPanelTop + 90 ,
 width: kID_IconW+20,
 height: kID_IconH+25
 });
-//canvas.add(kID_UnMuteIcon);
+canvas.add(kID_UnMuteIcon);
 
 var kSettingsIconInfo = new kInsertImageInfo("kSettingsIcon",document.getElementById('kSettingsIcon'));  
 var kID_SettingsIcon = new fabric.Image(kSettingsIconInfo.kImageElement, {
@@ -480,7 +505,7 @@ top: kID_MenuPanelTop + 95,
 width: kID_IconW+10,
 height: kID_IconH+10
 });
-//canvas.add(kID_SettingsIcon);
+canvas.add(kID_SettingsIcon);
 
 var kMirrorIconInfo = new kInsertImageInfo("kMirrorIcon",document.getElementById('kMirrorIcon'));  
 var kID_MirrorIcon = new fabric.Image(kMirrorIconInfo.kImageElement, {
@@ -489,7 +514,7 @@ top: kID_MenuPanelTop + 90 ,
 width: kID_IconW,
 height: kID_IconH+10
 });
-//canvas.add(kID_MirrorIcon);
+canvas.add(kID_MirrorIcon);
 
 var kRightArrowIconInfo = new kInsertImageInfo("kRightArrowIcon",document.getElementById('kRightArrowIcon'));  
 var kID_RightArrowIcon = new fabric.Image(kRightArrowIconInfo.kImageElement, {
@@ -498,9 +523,57 @@ top: kID_MenuPanelTop + 50 ,
 width: kID_IconW-20,
 height: kID_IconH-30
 });
-//canvas.add(kID_RightArrowIcon);
+canvas.add(kID_RightArrowIcon);
+canvas.add(kID_MenuPanel);
 
 /**************************** code for menu icons end *************************************/
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/***************************** code for lock unlock icons start ***********************************/
+
+var kID_LockUnlcokPanelLeft = 23;
+var kID_LockUnlcokPanelTop = 250;
+
+
+// lock panel rectangle - added only for reference
+var kID_LockUnlcokPanel = new fabric.Rect({
+  left: kID_LockUnlcokPanelLeft,
+  top: kID_LockUnlcokPanelTop,
+  fill: 'white',
+  width: 554,
+  height: 100
+});
+
+//canvas.add(kID_LockUnlcokPanel);
+
+var kUnLockIconInfo = new kInsertImageInfo("kUnLockIcon",document.getElementById('kUnLockIcon'));  
+var kID_UnLockIcon = new fabric.Image(kUnLockIconInfo.kImageElement, {
+	left: kID_LockUnlcokPanelLeft+245, 
+	top: kID_LockUnlcokPanelTop, 
+	width: kID_IconW+10,
+	height: kID_IconH+20
+});
+canvas.add(kID_UnLockIcon);
+
+//hide the unlock panel with the rectangle panel
+canvas.add(kID_LockUnlcokPanel);
+
+
+var kLockIconInfo = new kInsertImageInfo("kLockIcon",document.getElementById('kLockIcon'));  
+var kID_LockIcon = new fabric.Image(kLockIconInfo.kImageElement, {
+	left: kID_LockUnlcokPanelLeft+245, 
+	top: kID_LockUnlcokPanelTop, 
+	width: kID_IconW+10,
+	height: kID_IconH+20
+});
+canvas.add(kID_LockIcon);
+
+
+
+/***************************** code for lock unlock icons end ***********************************/
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -550,7 +623,7 @@ var kID_DoorKnob = new fabric.Circle({
 
 canvas.add(kID_DoorKnob);
 
-/****************** code for main menu strip for inside door start *******************************/
+/****************** code for main menu strip for inside door end *******************************/
 
 /********************************** Code End by Kruti ***********************************************************************************************/
 
