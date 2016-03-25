@@ -49,6 +49,7 @@
 	<img src="..//CS422_Project2//Icons//oneunreadmessage1.png" id="kOneUnreadMessageIcon" style="display:none">
 	<img src="..//CS422_Project2//Icons//GoogleExpressDelivery.png" id="kGoogleExpressDeliveryIcon" style="display:none">
 	<img src="..//CS422_Project2//Icons//Alert.png" id="kAlertIcon" style="display:none">
+	<img src="..//CS422_Project2//Icons//CallDisconnectIcon.svg" id="kCallDisconnectIcon" style="display:none">
 
 
 
@@ -194,7 +195,7 @@ function kInsertImageInfo(kId,kElement)
 {
 	this.kImageId = kId;
 	this.kImageElement = kElement;
-	this.kisUsed = false;
+	this.kIsUsed = false;
 };
 
 //generalized width, height, font and fontsize used in code by kruti  
@@ -202,6 +203,9 @@ var kID_IconW = 60;
 var kID_IconH = 70;
 var kID_Font = 'Tahoma';
 var kID_FontSize = 20;
+
+// initially the menu is closed.
+var kID_IsMenuOpen = false;
 
 /********************** code for date + time + weather start ***************************************************************************************/
 var kID_HeaderPanelLeft = 23;
@@ -246,7 +250,8 @@ var kID_TimeText = new fabric.Text('',{
 canvas.add(kID_TimeText);
 
 // refresh the date and time in every  10 seconds
-function kID_Refresh_DateTime(){
+function kID_Refresh_DateTime()
+{
 	kID_CurrentDateTime = new Date();
 	kID_DD = kID_CurrentDateTime.getDate();
 
@@ -377,7 +382,7 @@ function kWeatherUpdate()
 kWeatherUpdate();
 // update in every half an hour
 setInterval(kWeatherUpdate, 1800000);
-//});
+
 
 /********************** code for date + time + weather end ***************************************************************************************/
 
@@ -396,10 +401,10 @@ var kID_NotificationPanel = new fabric.Rect({
   top: kID_NotificationPanelTop,
   fill: 'white',
   width: 554,
-  height: 50
+  height: 60
 });
 
-canvas.add(kID_NotificationPanel);
+//canvas.add(kID_NotificationPanel);
 
 var kMuteIconInfo = new kInsertImageInfo("kMuteIcon",document.getElementById('kMuteIcon'));  
 var kID_MuteIcon = new fabric.Image(kMuteIconInfo.kImageElement, {
@@ -437,7 +442,7 @@ var kID_AlertIcon = new fabric.Image(kAlertIconInfo.kImageElement, {
 	height: kID_IconH-20
 });
 canvas.add(kID_AlertIcon);
-
+canvas.add(kID_NotificationPanel);
 
 
 /********************** code for notification panel end ******************************************************************************************/
@@ -464,64 +469,83 @@ var kID_MenuPanel = new fabric.Rect({
 
 var kCameraIconInfo = new kInsertImageInfo("kCameraIcon",document.getElementById('kCameraIcon'));  
 var kID_CameraIcon = new fabric.Image(kCameraIconInfo.kImageElement, {
-left: kID_MenuPanelLeft+65, 
-top: kID_MenuPanelTop -32 , 
-width: kID_IconW+10,
-height: kID_IconH-5
+	left: kID_MenuPanelLeft+65, 
+	top: kID_MenuPanelTop -32 , 
+	width: kID_IconW+10,
+	height: kID_IconH-5
 });
 canvas.add(kID_CameraIcon);
 
 var kNoUnreadMessageIconInfo = new kInsertImageInfo("kNoUnreadMessageIcon",document.getElementById('kNoUnreadMessageIcon'));  
 var kID_NoUnreadIcon = new fabric.Image(kNoUnreadMessageIconInfo.kImageElement, {
-left: kID_MenuPanelLeft+ kID_IconW + 185, 
-top: kID_MenuPanelTop-50  , 
-width: kID_IconW+10,
-height: kID_IconH+30
+	left: kID_MenuPanelLeft+ kID_IconW + 185, 
+	top: kID_MenuPanelTop-50  , 
+	width: kID_IconW+10,
+	height: kID_IconH+30
 });
 canvas.add(kID_NoUnreadIcon);
 
+//add the un read message icon along with read message icons in menu - use same id as used for notification panel.
+var kID_OneUnreadMessageIcon_Menu = new fabric.Image(kOneUnreadMessageIconInfo.kImageElement, {
+	left: kID_MenuPanelLeft+ kID_IconW + 185, 
+	top: kID_MenuPanelTop-30  ,
+	width: kID_IconW+10,
+	height: kID_IconH+10
+});
+canvas.add(kID_OneUnreadMessageIcon_Menu);
+
+
 var kCalendarIconInfo = new kInsertImageInfo("kCalendarIcon",document.getElementById('kCalendarIcon'));  
 var kID_CalendarIcon = new fabric.Image(kCalendarIconInfo.kImageElement, {
-left: kID_MenuPanelLeft+ kID_IconW*2 + 300, 
-top: kID_MenuPanelTop-38 , 
-width: kID_IconW,
-height: kID_IconH
+	left: kID_MenuPanelLeft+ kID_IconW*2 + 300, 
+	top: kID_MenuPanelTop-38 , 
+	width: kID_IconW,
+	height: kID_IconH
 });
 canvas.add(kID_CalendarIcon);
 
 var kUnMuteIconInfo = new kInsertImageInfo("kUnMuteIcon",document.getElementById('kUnMuteIcon'));  
 var kID_UnMuteIcon = new fabric.Image(kUnMuteIconInfo.kImageElement, {
-left: kID_MenuPanelLeft+ 60, 
-top: kID_MenuPanelTop + 90 , 
-width: kID_IconW+20,
-height: kID_IconH+25
+	left: kID_MenuPanelLeft+ 60, 
+	top: kID_MenuPanelTop + 90 , 
+	width: kID_IconW+20,
+	height: kID_IconH+25
 });
 canvas.add(kID_UnMuteIcon);
 
+//add the mute icon along with unmute - use the same id as used in notification panel
+var kID_MuteIcon_Menu = new fabric.Image(kMuteIconInfo.kImageElement, {
+	left: kID_MenuPanelLeft+ 60, 
+	top: kID_MenuPanelTop + 90 , 
+	width: kID_IconW+20,
+	height: kID_IconH+25
+});
+canvas.add(kID_MuteIcon_Menu);
+
 var kSettingsIconInfo = new kInsertImageInfo("kSettingsIcon",document.getElementById('kSettingsIcon'));  
 var kID_SettingsIcon = new fabric.Image(kSettingsIconInfo.kImageElement, {
-left: kID_MenuPanelLeft+ kID_IconW + 185,
-top: kID_MenuPanelTop + 95, 
-width: kID_IconW+10,
-height: kID_IconH+10
+	left: kID_MenuPanelLeft+ kID_IconW + 185,
+	top: kID_MenuPanelTop + 95, 
+	width: kID_IconW+10,
+	height: kID_IconH+10
 });
 canvas.add(kID_SettingsIcon);
 
 var kMirrorIconInfo = new kInsertImageInfo("kMirrorIcon",document.getElementById('kMirrorIcon'));  
 var kID_MirrorIcon = new fabric.Image(kMirrorIconInfo.kImageElement, {
-left: kID_MenuPanelLeft+ kID_IconW*2 + 300,
-top: kID_MenuPanelTop + 90 , 
-width: kID_IconW,
-height: kID_IconH+10
+	left: kID_MenuPanelLeft+ kID_IconW*2 + 300,
+	top: kID_MenuPanelTop + 90 , 
+	width: kID_IconW,
+	height: kID_IconH+10
 });
 canvas.add(kID_MirrorIcon);
 
 var kRightArrowIconInfo = new kInsertImageInfo("kRightArrowIcon",document.getElementById('kRightArrowIcon'));  
 var kID_RightArrowIcon = new fabric.Image(kRightArrowIconInfo.kImageElement, {
-left: kID_MenuPanelLeft+ kID_IconW*2 + 370,
-top: kID_MenuPanelTop + 50 , 
-width: kID_IconW-20,
-height: kID_IconH-30
+	left: kID_MenuPanelLeft+ kID_IconW*2 + 370,
+	top: kID_MenuPanelTop + 50 , 
+	width: kID_IconW-20,
+	height: kID_IconH-30
 });
 canvas.add(kID_RightArrowIcon);
 canvas.add(kID_MenuPanel);
@@ -569,8 +593,51 @@ var kID_LockIcon = new fabric.Image(kLockIconInfo.kImageElement, {
 	width: kID_IconW+10,
 	height: kID_IconH+20
 });
-canvas.add(kID_LockIcon);
+//this icon must come on the start of the application if tutorial and registering users is finished.
+//canvas.add(kID_LockIcon);
 
+
+// set property - the icon is dispplayed.
+kID_LockIcon.kIsUsed = true;
+
+
+// intially the door is in locked state.
+var kID_IsDoorLocked = true;
+
+// select event for unlock icon - the door is in unlocked state - when user clicks on unlock - it locks the door - show lock icon
+kID_UnLockIcon.on('selected', function() 
+{
+	kID_IsDoorLocked = true;
+	
+	canvas.remove(kID_UnLockIcon);
+	// set property - the icon is used.
+	kID_UnLockIcon.kIsUsed = false;
+	
+	canvas.add(kID_LockIcon);
+	// set property - the icon is used.
+	kID_LockIcon.kIsUsed = true;
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+// select event for lock icon - the door is in locked state - when user clicks on lock - it unlocks the door - show unlock icon
+kID_LockIcon.on('selected', function() 
+{
+	//avoid double adding of unlock icon - it is already added once - onloading the page - so remove it and then add it.
+	canvas.remove(kID_UnLockIcon);
+	canvas.remove(kID_LockUnlcokPanel);
+	kID_IsDoorLocked = false;
+	
+	canvas.add(kID_UnLockIcon);
+	// set property - the icon is used.
+	kID_UnLockIcon.kIsUsed = true;
+	
+	canvas.remove(kID_LockIcon);
+	// set property - the icon is used.
+	kID_LockIcon.kIsUsed = false;
+	
+	canvas.deactivateAll(); // deselect everything
+});
 
 
 /***************************** code for lock unlock icons end ***********************************/
@@ -584,46 +651,262 @@ var kID_MainPanelLeft = 22;
 var kID_MainPanelTop = 485;
   
 var kID_MainPanel = new fabric.Rect({
-  left: kID_MainPanelLeft,
-  top: kID_MainPanelTop,
-  fill: 'grey',
-  width: 555,
-  height: 80
+	left: kID_MainPanelLeft,
+	top: kID_MainPanelTop,
+	fill: 'grey',
+	width: 555,
+	height: 80
 });
 
 canvas.add(kID_MainPanel);
 
 var kSOSIconInfo = new kInsertImageInfo("kSOSIcon",document.getElementById('kSOSIcon'));  
 var kID_SOSIcon = new fabric.Image(kSOSIconInfo.kImageElement, {
-left: kID_MainPanelLeft+60, //1635,
-top: kID_MainPanelTop +8 , //100,
-width: kID_IconW+20,
-height: kID_IconH-5
+	left: kID_MainPanelLeft+60, //1635,
+	top: kID_MainPanelTop +8 , //100,
+	width: kID_IconW+20,
+	height: kID_IconH-5
 });
 
 canvas.add(kID_SOSIcon);
+
+/*** START - icons related to SOS Screens ****/
+
+var kID_SOSPanelLeft = 23;
+var kID_SOSPanelTop = 250;
+
+var kID_SOSPanel = new fabric.Rect({
+	left: kID_SOSPanelLeft,
+	top: kID_SOSPanelTop,
+	fill: 'white',
+	width: 554,
+	height: 200
+});
+//canvas.add(kID_SOSPanel);
+
+//calling 911 text
+var kID_Calling911 = new fabric.Text('Calling 911....',{
+	left: kID_SOSPanelLeft+175, //1635,
+	top: kID_SOSPanelTop +20, //100,
+	fontSize: kID_FontSize + 15,
+	fontWeight:'bold',
+	fontFamily: kID_Font
+});
+canvas.add(kID_Calling911);
+
+// use unmute icon id as is
+var kID_SOS_UnMuteIcon	= new fabric.Image(kUnMuteIconInfo.kImageElement, {
+	left: kID_SOSPanelLeft+150, //1635,
+	top: kID_SOSPanelTop + 100, //100,
+	width: kID_IconW+20,
+	height: kID_IconH-5
+});
+
+canvas.add(kID_SOS_UnMuteIcon);
+
+var kCallDisconnectIconInfo = new kInsertImageInfo("kCallDisconnectIcon",document.getElementById('kCallDisconnectIcon')); 
+var kID_SOS_CallDisconnectIcon = new fabric.Image(kCallDisconnectIconInfo.kImageElement, {
+	left: kID_SOSPanelLeft+320, //1635,
+	top: kID_SOSPanelTop +100, //100,
+	width: kID_IconW+20,
+	height: kID_IconH-5
+});
+
+canvas.add(kID_SOS_CallDisconnectIcon);
+
+//hide all the icons for sos
+canvas.add(kID_SOSPanel);
+
+/*** END - icons related to SOS Screens ****/
   
 var kMenuIconInfo = new kInsertImageInfo("kMenuIcon",document.getElementById('kMenuIcon'));  
 var kID_MenuIcon = new fabric.Image(kMenuIconInfo.kImageElement, {
-left: kID_MainPanelLeft+245, //1635,
-top: kID_MainPanelTop -5  , //100,
-width: kID_IconW+10,
-height: kID_IconH+25
+	left: kID_MainPanelLeft+245, //1635,
+	top: kID_MainPanelTop -5  , //100,
+	width: kID_IconW+10,
+	height: kID_IconH+25
 });
 
 canvas.add(kID_MenuIcon);
 
 
 var kID_DoorKnob = new fabric.Circle({
-  left: kID_MainPanelLeft+420,
-  top: kID_MainPanelTop+6,
-  fill: 'white',
-  radius: kID_IconW-26
+	  left: kID_MainPanelLeft+420,
+	  top: kID_MainPanelTop+6,
+	  fill: 'white',
+	  radius: kID_IconW-26
 });
 
 canvas.add(kID_DoorKnob);
 
+// bind select event for SOS - panel should appear - calling 911.
+kID_SOSIcon.on('selected', function() 
+{
+	// make the open menu as false - if the user again clicks on menu icon - this will open up the menu again.
+	kID_IsMenuOpen = false;
+/*************************************** Remove all icons - menu + lock + sos ****************************/
+	/********* lock panel removal ***********/
+	canvas.remove(kID_LockUnlcokPanel);
+	canvas.remove(kID_LockIcon);
+	canvas.remove(kID_UnLockIcon);
+	/********* lock panel removal ***********/
+	
+	/******** menu icons removal *************/
+	canvas.remove(kID_MenuPanel);
+	canvas.remove(kID_CameraIcon);
+	canvas.remove(kID_NoUnreadIcon);
+	canvas.remove(kID_OneUnreadMessageIcon_Menu);
+	canvas.remove(kID_CalendarIcon);
+	canvas.remove(kID_UnMuteIcon);
+	canvas.remove(kID_MuteIcon_Menu);
+	canvas.remove(kID_SettingsIcon);
+	canvas.remove(kID_MirrorIcon);
+	canvas.remove(kID_RightArrowIcon);
+	/******** menu icons removal *************/
+	
+	/********* remove all the sos related icons ***********/
+	canvas.remove(kID_SOSPanel);
+	canvas.remove(kID_Calling911);
+	canvas.remove(kID_SOS_UnMuteIcon);
+	canvas.remove(kID_SOS_CallDisconnectIcon);
+	/********* remove all the sos related icons ***********/
+/*************************************** Remove all icons - menu + lock + sos ****************************/
+	//now add all the icons again
+	canvas.add(kID_Calling911);
+	canvas.add(kID_SOS_UnMuteIcon);
+	canvas.add(kID_SOS_CallDisconnectIcon);
+
+	canvas.deactivateAll(); // deselect everything
+});
+
+// select event for the main menu icon
+kID_MenuIcon.on('selected', function()
+{
+	//check if the menu is already displayed and user is trying to collapse.
+	if(kID_IsMenuOpen)
+	{
+		kID_IsMenuOpen = false;
+		
+		/******** menu icons removal *************/
+		canvas.remove(kID_MenuPanel);
+		canvas.remove(kID_CameraIcon);
+		canvas.remove(kID_NoUnreadIcon);
+		canvas.remove(kID_OneUnreadMessageIcon_Menu);
+		canvas.remove(kID_CalendarIcon);
+		canvas.remove(kID_UnMuteIcon);
+		canvas.remove(kID_MuteIcon_Menu);
+		canvas.remove(kID_SettingsIcon);
+		canvas.remove(kID_MirrorIcon);
+		canvas.remove(kID_RightArrowIcon);
+		/******** menu icons removal *************/
+		
+		/**** conditions to check whether there were any notifications - then add the notification panel icons***************/
+		
+		
+		/**** conditions to check whether there were any notifications - then add the notification panel icons***************/
+		
+		/**** add the lock icon on the door ************************/
+		canvas.add(kID_LockIcon);
+		/**** add the lock icon on the door ************************/
+		
+		
+	}
+	else
+	{
+		kID_IsMenuOpen = true;
+	
+	/*************************************** Remove all icons - menu + lock + sos ****************************/
+		/********** notification panel ***************/
+		canvas.remove(kID_NotificationPanel);
+		canvas.remove(kID_MuteIcon);
+		canvas.remove(kID_OneUnreadMessageIcon);
+		canvas.remove(kID_GoogleExpressDeliveryIcon);
+		canvas.remove(kID_AlertIcon);
+		/********** notification panel ***************/
+		
+		/********* lock panel removal ***********/
+		canvas.remove(kID_LockUnlcokPanel);
+		canvas.remove(kID_LockIcon);
+		canvas.remove(kID_UnLockIcon);
+		/********* lock panel removal ***********/
+		
+		/******** menu icons removal *************/
+		canvas.remove(kID_MenuPanel);
+		canvas.remove(kID_CameraIcon);
+		canvas.remove(kID_NoUnreadIcon);
+		canvas.remove(kID_OneUnreadMessageIcon_Menu);
+		canvas.remove(kID_CalendarIcon);
+		canvas.remove(kID_UnMuteIcon);
+		canvas.remove(kID_MuteIcon_Menu);
+		canvas.remove(kID_SettingsIcon);
+		canvas.remove(kID_MirrorIcon);
+		canvas.remove(kID_RightArrowIcon);
+		/******** menu icons removal *************/
+		
+		/********* remove all the sos related icons ***********/
+		canvas.remove(kID_SOSPanel);
+		canvas.remove(kID_Calling911);
+		canvas.remove(kID_SOS_UnMuteIcon);
+		canvas.remove(kID_SOS_CallDisconnectIcon);
+		/********* remove all the sos related icons ***********/
+	/*************************************** Remove all icons - menu + lock + sos ****************************/
+		canvas.add(kID_CameraIcon);
+		
+		/***** condition check will be required - if there are unread messages then other icon needs to be added ****/
+		canvas.add(kID_NoUnreadIcon);
+		//canvas.add(kID_OneUnreadMessageIcon_Menu);
+		
+		canvas.add(kID_CalendarIcon);
+		
+		/***** condition check will be required - if there are bell is already in mute state ****/
+		canvas.add(kID_UnMuteIcon);
+		//canvas.add(kID_MuteIcon_Menu);
+		
+		canvas.add(kID_SettingsIcon);
+		canvas.add(kID_MirrorIcon);
+		canvas.add(kID_RightArrowIcon);
+	}
+	canvas.deactivateAll(); // deselect everything
+
+});
+
+
 /****************** code for main menu strip for inside door end *******************************/
+
+// remove function code : remove all icons used on the menu screen do not call this function - use the icons from this function and remove in your function
+
+function kID_RemoveAllIcons()
+{
+	/********* lock panel removal ***********/
+	canvas.remove(kID_LockUnlcokPanel);
+	canvas.remove(kID_LockIcon);
+	canvas.remove(kID_UnLockIcon);
+	/********* lock panel removal ***********/
+	
+	/******** menu icons removal *************/
+	canvas.remove(kID_MenuPanel);
+	canvas.remove(kID_CameraIcon);
+	canvas.remove(kID_NoUnreadIcon);
+	canvas.remove(kID_OneUnreadMessageIcon_Menu);
+	canvas.remove(kID_CalendarIcon);
+	canvas.remove(kID_UnMuteIcon);
+	canvas.remove(kID_MuteIcon_Menu);
+	canvas.remove(kID_SettingsIcon);
+	canvas.remove(kID_MirrorIcon);
+	canvas.remove(kID_RightArrowIcon);
+	/******** menu icons removal *************/
+	
+	/********* remove all the sos related icons ***********/
+	canvas.remove(kID_SOSPanel);
+	canvas.remove(kID_Calling911);
+	canvas.remove(kID_SOS_UnMuteIcon);
+	canvas.remove(kID_SOS_CallDisconnectIcon);
+	/********* remove all the sos related icons ***********/
+};
+
+//add the lock icon at the end - needed on the start
+canvas.remove(kID_LockIcon);
+canvas.add(kID_LockIcon);
 
 /********************************** Code End by Kruti ***********************************************************************************************/
 
@@ -664,6 +947,12 @@ canvas.add(kID_DoorKnob);
 
 /*************************************** Code End by Ridhi ***************************************************************************************/
 
+
+/**************************** START Common set of JS Code at the END OF FILE **************************************************************/
+
+
+/**************************** END Common set of JS Code at the END OF FILE ****************************************************************/
+
 // code adapted from http://jsfiddle.net/tornado1979/39up3jcm/
 // this code deals with scaling all the elements on the canvas
 
@@ -695,10 +984,10 @@ function zoomAll(SCALE_FACTOR) {
 // draw everything at the appropriate scale for this canvas
 zoomAll(canvas.height / localHeight);
 
+
 canvas.forEachObject(function(o){ o.hasBorders = false; o.hasControls = false; o.lockMovementX = true; o.lockMovementY = true });
 
 })();
-
 
 
 </script>
