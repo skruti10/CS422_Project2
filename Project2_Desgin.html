@@ -1,4 +1,4 @@
-ï»¿<!-- template for Project 1 - CS 422 - Spring 2016 - Andrew Johnson -->
+<!-- template for Project 1 - CS 422 - Spring 2016 - Andrew Johnson -->
 
 <!DOCTYPE html>    
 <head>
@@ -176,6 +176,7 @@ function kInsertImageInfo(kId,kElement)
 var kID_IconW = 60;
 var kID_IconH = 70;
 var kID_Font = 'Tahoma';
+//Sahib
 var kID_FontSize = 25;
 // initially the menu is closed.
 var kID_IsMenuOpen = false;
@@ -202,6 +203,7 @@ var kID_DateText = new fabric.Text('',{
   left: kID_HeaderPanelLeft +8,
   top: kID_HeaderPanelTop + 5,
   fontSize: kID_FontSize,
+  //Sahib
   fontWeight: 'bold',
   fontFamily: kID_Font
 });
@@ -210,9 +212,11 @@ var kID_Hrs;
 var kID_Mins;
 // add the time to canvas - initially blank, update from function
 var kID_TimeText = new fabric.Text('',{
+  //Sahib
   left: kID_HeaderPanelLeft +8,
   top: kID_HeaderPanelTop + 35,
   fontSize: kID_FontSize,
+  //Sahib
   fontWeight: 'bold',
   fontFamily: kID_Font
 });
@@ -267,6 +271,7 @@ var kID_WeatherTemp = new fabric.Text('', {
   left: kID_HeaderPanelLeft +450,
   top: kID_HeaderPanelTop + 35,
   fontSize: kID_FontSize,
+  //Sahib
   fontWeight: 'bold',
   fontFamily: kID_Font
 });
@@ -276,6 +281,7 @@ var kCurrentCloudIconInfo = new kInsertImageInfo("kCurrentCloudIcon",document.ge
 var kID_CurrentCloudIcon = new fabric.Image(kCurrentCloudIconInfo.kImageElement, 
 {
   left: kID_HeaderPanelLeft +380,
+  //Sahib
   top: kID_HeaderPanelTop + 5,
   width: kID_IconW,
   height: kID_IconH
@@ -306,11 +312,11 @@ function kWeatherUpdate()
       //convert temperature into Celsius
       var temp_json_C = parsed_json['current_observation']['temp_c'];
       
-      temp_json += "Â°F";
-      temp_json_C += "Â°C";
+      temp_json += "°F";
+      temp_json_C += "°C";
       // more text on weather can be filled in later
       var condition_json = parsed_json['current_observation']['weather'];
-      var real_feel_json = "Feels Like " + parsed_json['current_observation']['feelslike_f'] + "Â°F";
+      var real_feel_json = "Feels Like " + parsed_json['current_observation']['feelslike_f'] + "°F";
       var wind_json = 'Winds are ' + parsed_json['current_observation']['wind_string'];
       var location_json = city + ', ' + state;
       
@@ -453,7 +459,8 @@ canvas.add(kID_MuteIcon_Menu);
 var kSettingsIconInfo = new kInsertImageInfo("kSettingsIcon",document.getElementById('kSettingsIcon'));  
 var kID_SettingsIcon = new fabric.Image(kSettingsIconInfo.kImageElement, {
   left: kID_MenuPanelLeft+ kID_IconW + 185,
-  top: kID_MenuPanelTop + 95, 
+  top: kID_MenuPanelTop + 95,
+  //Sahib 
   width: kID_IconW+15,
   height: kID_IconH+10
 });
@@ -553,24 +560,29 @@ kID_LockIcon.on('selected', function()
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /****************** code for main menu strip for inside door start *******************************/
 var kID_MainPanelLeft = 22;
+//Sahib
 var kID_MainPanelTop = 475;
   
 var kID_MainPanel = new fabric.Rect({
   left: kID_MainPanelLeft,
   top: kID_MainPanelTop,
   fill: 'grey',
+  //Sahib starts
   strokeWidth: 5,
   stroke: 'rgba(0,0,0,20)',
   width: 552,
   height: 100
+  //Sahib ends
 });
 canvas.add(kID_MainPanel);
 var kSOSIconInfo = new kInsertImageInfo("kSOSIcon",document.getElementById('kSOSIcon'));  
 var kID_SOSIcon = new fabric.Image(kSOSIconInfo.kImageElement, {
   left: kID_MainPanelLeft+60, //1635,
+  //Sahib starts
   top: kID_MainPanelTop +18 , //100,
   width: kID_IconW+18,
   height: kID_IconH
+  //Sahib ends
 });
 canvas.add(kID_SOSIcon);
 /*** START - icons related to SOS Screens ****/
@@ -616,6 +628,7 @@ canvas.add(kID_SOSPanel);
 var kMenuIconInfo = new kInsertImageInfo("kMenuIcon",document.getElementById('kMenuIcon'));  
 var kID_MenuIcon = new fabric.Image(kMenuIconInfo.kImageElement, {
   left: kID_MainPanelLeft+245, //1635,
+  //Sahib
   top: kID_MainPanelTop +5  , //100,
   width: kID_IconW+10,
   height: kID_IconH+25
@@ -623,10 +636,13 @@ var kID_MenuIcon = new fabric.Image(kMenuIconInfo.kImageElement, {
 canvas.add(kID_MenuIcon);
 var kID_DoorKnob = new fabric.Circle({
     left: kID_MainPanelLeft+420,
+    //Sahib
     top: kID_MainPanelTop+16,
     fill: 'white',
+    //Sahib starts
     strokeWidth: 5,
     stroke: 'rgba(0,0,0,20)',
+    //Sahib ends
     radius: kID_IconW-26
 });
 canvas.add(kID_DoorKnob);
