@@ -104,7 +104,12 @@
 
 
 
+<img src="Icons/tickmark.png" id="rTickMark" style="display:none">
+<img src="Icons/rightarrow1.png" id="rRightArrow" style="display:none">
 
+<img src="Icons/play1.jpg.png" id="rPlay1" style="display:none">
+<img src="Icons/user icon.jpg" id="rUser1" style="display:none">
+<img src="Icons/camera3.png" id="rCamera2" style="display:none">
 
 
 
@@ -1779,6 +1784,833 @@ canvas.add(kID_TimeText);
 /*************************************** Code Added by Ankur ***************************************************************************************/
 /*************************************** Code End by Ankur ***************************************************************************************/
 /*************************************** Code Added by Ridhi ***************************************************************************************/
+var rID_Font = 'Tahoma';
+var rID_FontSize = 20;
+var rID_TutorialLeft = 100;
+var rID_TutorialTop =170 ;
+
+var rID_FirstTimeSetupBox = new fabric.Rect({
+  left: rID_TutorialLeft + 200,
+  top: rID_TutorialTop + 700,
+  fill: '',
+  strokeWidth: 2,
+  stroke: 'black',
+  width: 200,
+  height: 50
+});
+
+
+var rID_FirstTimeSetupText = new fabric.Text('First Time Setup',{
+  left: rID_TutorialLeft+ 205,
+  top: rID_TutorialTop + 710,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_GroupFirstTimeSetupButton = new fabric.Group([rID_FirstTimeSetupBox, rID_FirstTimeSetupText], {
+
+  left: rID_TutorialLeft+ 200,
+  top: rID_TutorialTop + 700,
+  angle: 0
+});
+
+var rID_Tutorial = new fabric.Rect({
+  left: rID_TutorialLeft,
+  top: rID_TutorialTop,
+  fill: '',
+  strokeWidth: 5,
+  stroke: 'black',
+  width: 1100,
+  height: 800
+});
+
+
+var rID_WelcomeText = new fabric.Text('Welcome to',{
+  left: rID_TutorialLeft+ 200,
+  top: rID_TutorialTop + 10,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_WelcomeText2 = new fabric.Text('AUTUMN!',{
+  left: rID_TutorialLeft+ 190,
+  top: rID_TutorialTop + 35,
+  fontSize: rID_FontSize+ 5,
+  fontWeight: 'bold',
+  fontFamily: rID_Font
+});
+
+var rID_LanguageText = new fabric.Text('Please choose your language  ',{
+  left: rID_TutorialLeft+ 100,
+  top: rID_TutorialTop + 80,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_RightArrowImg = document.getElementById('rRightArrow');
+var rID_RightArrowIcon1 = new fabric.Image(rID_RightArrowImg, {
+left: rID_TutorialLeft+ 1000,
+  top: rID_TutorialTop + 300,
+           
+            width: 50,
+            height: 60
+        });
+		
+var rID_RightArrowImg2 = document.getElementById('rRightArrow');
+var rID_RightArrowIcon2 = new fabric.Image(rID_RightArrowImg2, {
+left: rID_TutorialLeft+ 1000,
+  top: rID_TutorialTop + 300,
+           
+            width: 50,
+            height: 60
+        });
+
+
+var rID_EnglishBox = new fabric.Rect({
+  left: rID_TutorialLeft +100,
+  top: rID_TutorialTop + 110,
+  fill: '',
+  strokeWidth: 2,
+  stroke: 'black',
+  width: 115,
+  height: 30
+});
+
+var rID_EnglishText = new fabric.Text('English',{
+  left: rID_TutorialLeft+ 110,
+  top: rID_TutorialTop + 115,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+
+
+
+var rID_GroupEnglishButton = new fabric.Group([rID_EnglishBox, rID_EnglishText], {
+
+  left: rID_TutorialLeft+ 105,
+  top: rID_TutorialTop + 110,
+  angle: 0
+});
+
+var rID_TickMarkImg = document.getElementById('rTickMark');
+var rID_TickMarkIcon = new fabric.Image(rID_TickMarkImg, {
+left: rID_TutorialLeft+ 88,
+  top: rID_TutorialTop + 125,
+            originX: 'center',
+            originY: 'center',
+            angle: 0,
+            opacity: 0.85,
+            width: 20,
+            height: 20
+        });
+
+var rID_SpanishBox = new fabric.Rect({
+  left: rID_TutorialLeft +100,
+  top: rID_TutorialTop + 160,
+  fill: '',
+  strokeWidth: 2,
+  stroke: 'black',
+  width: 115,
+  height: 30
+});
+
+var rID_SpanishText = new fabric.Text('el espanol',{
+  left: rID_TutorialLeft+ 110,
+  top: rID_TutorialTop + 165,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+
+var rID_GroupSpanishButton = new fabric.Group([rID_SpanishBox, rID_SpanishText], {
+
+  left: rID_TutorialLeft+ 105,
+  top: rID_TutorialTop + 160,
+  angle: 0
+});
+
+var rID_FrenchBox = new fabric.Rect({
+  left: rID_TutorialLeft +100,
+  top: rID_TutorialTop + 210,
+  fill: '',
+  strokeWidth: 2,
+  stroke: 'black',
+  width: 115,
+  height: 30
+});
+
+var rID_FrenchText = new fabric.Text('Francais',{
+  left: rID_TutorialLeft+ 110,
+  top: rID_TutorialTop + 215,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+
+var rID_GroupFrenchButton = new fabric.Group([rID_FrenchBox, rID_FrenchText], {
+
+  left: rID_TutorialLeft+ 105,
+  top: rID_TutorialTop + 210,
+  angle: 0
+});
+
+var rID_ChineseBox = new fabric.Rect({
+  left: rID_TutorialLeft +100,
+  top: rID_TutorialTop + 260,
+  fill: '',
+  strokeWidth: 2,
+  stroke: 'black',
+  width: 115,
+  height: 30
+});
+
+var rID_ChineseText = new fabric.Text('中国',{
+  left: rID_TutorialLeft+ 120,
+  top: rID_TutorialTop + 265,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font-10
+});
+
+
+
+
+var rID_GroupChineseButton = new fabric.Group([rID_ChineseBox, rID_ChineseText], {
+
+  left: rID_TutorialLeft+ 105,
+  top: rID_TutorialTop + 260,
+  angle: 0
+});
+
+var rID_HindiBox = new fabric.Rect({
+  left: rID_TutorialLeft +100,
+  top: rID_TutorialTop + 310,
+  fill: '',
+  strokeWidth: 2,
+  stroke: 'black',
+  width: 115,
+  height: 30
+});
+
+var rID_HindiText = new fabric.Text('हिंदी',{
+  left: rID_TutorialLeft+ 120,
+  top: rID_TutorialTop + 315,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+
+
+
+var rID_GroupHindiButton = new fabric.Group([rID_HindiBox, rID_HindiText], {
+
+  left: rID_TutorialLeft+ 105,
+  top: rID_TutorialTop + 310,
+  angle: 0
+});
+
+
+var rID_ArabicBox = new fabric.Rect({
+  left: rID_TutorialLeft +300,
+  top: rID_TutorialTop + 110,
+  fill: '',
+  strokeWidth: 2,
+  stroke: 'black',
+  width: 115,
+  height: 30
+});
+
+var rID_ArabicText = new fabric.Text('عربى',{
+  left: rID_TutorialLeft+ 315,
+  top: rID_TutorialTop + 115,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+
+
+
+var rID_GroupArabicButton = new fabric.Group([rID_ArabicBox, rID_ArabicText], {
+
+  left: rID_TutorialLeft+ 310,
+  top: rID_TutorialTop + 110,
+  angle: 0
+});
+
+var rID_GermanBox = new fabric.Rect({
+  left: rID_TutorialLeft +300,
+  top: rID_TutorialTop + 160,
+  fill: '',
+  strokeWidth: 2,
+  stroke: 'black',
+  width: 115,
+  height: 30
+});
+
+var rID_GermanText = new fabric.Text('Deutsch',{
+  left: rID_TutorialLeft+ 315,
+  top: rID_TutorialTop + 165,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+
+
+
+var rID_GroupGermanButton = new fabric.Group([rID_GermanBox, rID_GermanText], {
+
+  left: rID_TutorialLeft+ 310,
+  top: rID_TutorialTop + 160,
+  angle: 0
+});
+
+var rID_JapaneseBox = new fabric.Rect({
+  left: rID_TutorialLeft +300,
+  top: rID_TutorialTop + 210,
+  fill: '',
+  strokeWidth: 2,
+  stroke: 'black',
+  width: 115,
+  height: 30
+});
+
+var rID_JapaneseText = new fabric.Text('日本',{
+  left: rID_TutorialLeft+ 325,
+  top: rID_TutorialTop + 215,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+
+
+
+var rID_GroupJapaneseButton = new fabric.Group([rID_JapaneseBox, rID_JapaneseText], {
+
+  left: rID_TutorialLeft+ 310,
+  top: rID_TutorialTop + 210,
+  angle: 0
+});
+
+
+var rID_DutchBox = new fabric.Rect({
+  left: rID_TutorialLeft +300,
+  top: rID_TutorialTop + 260,
+  fill: '',
+  strokeWidth: 2,
+  stroke: 'black',
+  width: 115,
+  height: 30
+});
+
+var rID_DutchText = new fabric.Text('Néerlandais',{
+  left: rID_TutorialLeft+ 305,
+  top: rID_TutorialTop + 265,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+
+
+
+var rID_GroupDutchButton = new fabric.Group([rID_DutchBox, rID_DutchText], {
+
+  left: rID_TutorialLeft+ 310,
+  top: rID_TutorialTop + 260,
+  angle: 0
+});
+
+var rID_PolishBox = new fabric.Rect({
+  left: rID_TutorialLeft +300,
+  top: rID_TutorialTop + 310,
+  fill: '',
+  strokeWidth: 2,
+  stroke: 'black',
+  width: 115,
+  height: 30
+});
+
+var rID_PolishText = new fabric.Text('Polski',{
+  left: rID_TutorialLeft+ 315,
+  top: rID_TutorialTop + 315,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+
+
+
+var rID_GroupPolishButton = new fabric.Group([rID_PolishBox, rID_PolishText], {
+
+  left: rID_TutorialLeft+ 310,
+  top: rID_TutorialTop + 310,
+  angle: 0
+});
+
+var rID_HeaderText = new fabric.Text('No more searching for keys. Just touch, speak \n or use your phone to unlock the door!',{
+  left: rID_TutorialLeft+ 198,
+  top: rID_TutorialTop + 198,
+  fontSize: rID_FontSize+20,
+  fontWeight: 'normal',
+  fontFamily: rID_Font 
+});
+
+var rID_SetupBox = new fabric.Rect({
+  left: rID_TutorialLeft +400,
+  top: rID_TutorialTop + 360,
+  fill: '',
+  strokeWidth: 5,
+  stroke: 'black',
+  width: 300,
+  height: 90
+});
+
+var rID_SetupText = new fabric.Text('Setup',{
+  left: rID_TutorialLeft+ 470,
+  top: rID_TutorialTop + 380,
+  fontSize: rID_FontSize+ 25,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+
+var rID_GroupSetupButton = new fabric.Group([rID_SetupBox, rID_SetupText], {
+
+  left: rID_TutorialLeft+ 400,
+  top: rID_TutorialTop + 360,
+  angle: 0
+});
+
+var rID_LearnMoreBox = new fabric.Rect({
+  left: rID_TutorialLeft +400,
+  top: rID_TutorialTop + 500,
+  fill: '',
+  strokeWidth: 5,
+  stroke: 'black',
+  width: 300,
+  height: 90
+});
+
+var rID_LearnMoreText = new fabric.Text('Learn More',{
+  left: rID_TutorialLeft+ 450,
+  top: rID_TutorialTop + 515,
+  fontSize: rID_FontSize+ 25,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+
+
+
+var rID_GroupLearnMoreButton = new fabric.Group([rID_LearnMoreBox, rID_LearnMoreText], {
+
+  left: rID_TutorialLeft+ 400,
+  top: rID_TutorialTop + 500,
+  angle: 0
+});
+
+var rID_LeftArrowImg = document.getElementById('kLeftArrowIcon');
+var rID_LeftArrowIcon1 = new fabric.Image(rID_LeftArrowImg, {
+  
+  width: 50,
+  height: 60,
+  left: rID_TutorialLeft+ 80,
+  top: rID_TutorialTop + 300,
+});
+
+var rID_LeftArrowImg2 = document.getElementById('kLeftArrowIcon');
+var rID_LeftArrowIcon2 = new fabric.Image(rID_LeftArrowImg2, {
+  
+  width: 50,
+  height: 60,
+  left: rID_TutorialLeft+ 80,
+  top: rID_TutorialTop + 300,
+});
+
+var rID_VideoImg = document.getElementById('rPlay1');
+var rID_VideoIcon = new fabric.Image(rID_VideoImg, {
+  
+  width: 60,
+  height: 60,
+  left: rID_TutorialLeft+ 300,
+  top: rID_TutorialTop + 400,
+});
+
+
+var rID_Circle1 = new fabric.Circle({
+   left: rID_TutorialLeft+ 400,
+  top: rID_TutorialTop + 70,
+  stroke: "black",
+  fill: "white",
+  strokeWidth: 2,
+  radius: 15
+});
+
+var rID_Circle2 = new fabric.Circle({
+   left: rID_TutorialLeft+ 450,
+  top: rID_TutorialTop + 70,
+  stroke: "black",
+   fill: "white",
+  strokeWidth: 2,
+  radius: 15
+});
+
+var rID_Circle3 = new fabric.Circle({
+   left: rID_TutorialLeft+ 500,
+  top: rID_TutorialTop + 70,
+  stroke: "black",
+   fill: "white",
+  strokeWidth: 2,
+  radius: 15
+});
+
+var rID_Circle4 = new fabric.Circle({
+   left: rID_TutorialLeft+ 550,
+  top: rID_TutorialTop + 70,
+  stroke: "black",
+   fill: "white",
+  strokeWidth: 2,
+  radius: 15
+});
+
+var rID_Circle5 = new fabric.Circle({
+   left: rID_TutorialLeft+ 600,
+  top: rID_TutorialTop + 70,
+  stroke: "black",
+   fill: "white",
+  strokeWidth: 2,
+  radius: 15
+});
+
+var rID_ClickPictureText = new fabric.Text('Click a cool picture!',{
+  left: rID_TutorialLeft+ 340,
+  top: rID_TutorialTop + 170,
+  fontSize: rID_FontSize+ 25,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_PictureBox = new fabric.Rect({
+  left: rID_TutorialLeft + 350,
+  top: rID_TutorialTop + 250,
+  fill: '',
+  strokeWidth: 5,
+  stroke: 'black',
+  width: 400,
+  height: 300
+});
+
+var rID_CameraImg = document.getElementById('kCameraIcon');
+var rID_CameraIcon = new fabric.Image(rID_CameraImg, {
+  
+  width: 70,
+  height: 60,
+  left: rID_TutorialLeft+ 810,
+  top: rID_TutorialTop + 400,
+});
+
+var rID_ClickPictureText2 = new fabric.Text('Click to capture.',{
+  left: rID_TutorialLeft+ 790,
+  top: rID_TutorialTop + 480,
+  fontSize: rID_FontSize +5,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_CameraImg2 = document.getElementById('rCamera2');
+var rID_CameraIcon2 = new fabric.Image(rID_CameraImg2, {
+  
+  width: 70,
+  height: 60,
+  left: rID_TutorialLeft+ 810,
+  top: rID_TutorialTop + 400,
+});
+
+var rID_RetakeText = new fabric.Text('Retake.',{
+  left: rID_TutorialLeft+ 810,
+  top: rID_TutorialTop + 480,
+  fontSize: rID_FontSize +5,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rUserIcon1Info = new kInsertImageInfo("rUser1",document.getElementById('rUser1')).visible = true;
+var rID_UserIcon1 = new fabric.Image(rUserIcon1Info.kImageElement, {
+  left: rID_TutorialLeft+ 396,
+  top: rID_TutorialTop + 300, 
+  width: 60,
+  height: 50
+}).visible = true;
+
+//canvas.add(rID_GroupFirstTimeSetupButton);
+
+rID_GroupFirstTimeSetupButton.on('selected', function () 
+{
+  //  rID_HideChooseLangugage();
+	rID_RenderChooseLanguage();
+	rID_ShowChooseLanguage();
+	canvas.deactivateAll(); 
+});
+
+rID_GroupEnglishButton.on('selected', function () {
+ 
+  canvas.add(rID_TickMarkIcon);
+  rID_HideChooseLangugage();
+ 
+  rID_RenderTutorialPage2();
+  rID_ShowTutorialPage2();
+
+      
+ });  
+ 
+ rID_RightArrowIcon1.on('selected', function () {
+ 
+  canvas.add(rID_TickMarkIcon);
+  rID_HideChooseLangugage();
+ 
+  rID_RenderTutorialPage2();
+  rID_ShowTutorialPage2();
+
+      
+ });  
+ 
+ rID_LeftArrowIcon1.on('selected', function () {
+ 
+ 
+   
+   rID_HideTutorialPage2();
+    rID_ShowChooseLanguage();
+	canvas.add(rID_RightArrowIcon1);
+	rID_RightArrowIcon1.visible = true;
+ 
+ 
+canvas.deactivateAll();   
+ });  
+ 
+ rID_GroupSetupButton.on('selected', function () {
+ 
+   rID_HideTutorialPage2();
+   rID_RenderClickPicture();
+    rID_ShowClickPicture();
+	
+ 
+ 
+canvas.deactivateAll();   
+ });  
+ 
+ rID_GroupLearnMoreButton.on('selected', function () {
+ 
+   rID_HideTutorialPage2();
+   rID_RenderVideo();
+    rID_ShowVideo();
+ 
+ 
+canvas.deactivateAll();   
+ });  
+
+ 
+ rID_LeftArrowIcon2.on('selected', function () {
+ 
+   rID_ShowTutorialPage2();
+   rID_HideVideo();
+    
+ 
+canvas.deactivateAll();   
+ });  
+ 
+rID_CameraIcon.on('selected', function () {
+
+if(rUserIcon1Info.isUsed == false)
+{
+   k_RidhiProfile.kImageIcon = rID_UserIcon1;
+   rUserIcon1Info.isUsed = true;
+   
+   rID_CameraIcon.visible = false;
+   rID_ClickPictureText2.visible = false;
+    canvas.add(rID_);
+	canvas.add(rID_RetakeText);
+	
+	canvas.add(rID_CameraIcon2);
+}
+ 
+canvas.deactivateAll();   
+ });   
+ 
+
+function rID_RenderChooseLanguage ()
+{
+canvas.add(rID_Tutorial);
+//canvas.add(rID_RightArrowIcon1);
+//canvas.remove(kID_LockIcon);
+kID_LockIcon.visible = false;
+canvas.add(rID_WelcomeText);
+canvas.add(rID_WelcomeText2);
+canvas.add(rID_LanguageText);
+
+canvas.add(rID_GroupEnglishButton);
+
+canvas.add(rID_GroupSpanishButton);
+canvas.add(rID_GroupFrenchButton);
+canvas.add(rID_GroupChineseButton);
+canvas.add(rID_GroupHindiButton);
+canvas.add(rID_GroupArabicButton);
+canvas.add(rID_GroupGermanButton);
+canvas.add(rID_GroupJapaneseButton);
+canvas.add(rID_GroupDutchButton);
+canvas.add(rID_GroupPolishButton);
+}
+
+function rID_ShowChooseLanguage ()
+{
+   rID_Tutorial.visible = true;
+//canvas.remove(kID_LockIcon.visible = true;
+kID_LockIcon.visible = false;
+//rID_RightArrowIcon1.visible = true;
+rID_WelcomeText.visible = true;
+rID_WelcomeText2.visible = true;
+rID_LanguageText.visible = true;
+
+rID_GroupEnglishButton.visible = true;
+rID_TickMarkIcon.visible = true;
+rID_GroupSpanishButton.visible = true;
+rID_GroupFrenchButton.visible = true;
+rID_GroupChineseButton.visible = true;
+rID_GroupHindiButton.visible = true;
+rID_GroupArabicButton.visible = true;
+rID_GroupGermanButton.visible = true;
+rID_GroupJapaneseButton.visible = true;
+rID_GroupDutchButton.visible = true;
+rID_GroupPolishButton.visible = true;
+   
+}
+
+function rID_HideChooseLangugage ()
+{
+  rID_Tutorial.visible = false;
+  rID_RightArrowIcon1.visible = false;
+//canvas.remove(kID_LockIcon.visible = false;
+kID_LockIcon.visible = false;
+rID_WelcomeText.visible = false;
+rID_WelcomeText2.visible = false;
+rID_LanguageText.visible = false;
+
+rID_GroupEnglishButton.visible = false;
+rID_TickMarkIcon.visible = false;
+rID_GroupSpanishButton.visible = false;
+rID_GroupFrenchButton.visible = false;
+rID_GroupChineseButton.visible = false;
+rID_GroupHindiButton.visible = false;
+rID_GroupArabicButton.visible = false;
+rID_GroupGermanButton.visible = false;
+rID_GroupJapaneseButton.visible = false;
+rID_GroupDutchButton.visible = false;
+rID_GroupPolishButton.visible = false;
+}
+
+
+
+         
+
+function rID_RenderTutorialPage2()
+{
+
+canvas.add(rID_HeaderText);
+canvas.add(rID_GroupSetupButton);
+canvas.add(rID_GroupLearnMoreButton);
+canvas.add(rID_LeftArrowIcon1);
+//canvas.add(rID_RightArrowIcon2);
+}
+
+function rID_ShowTutorialPage2()
+{
+    rID_Tutorial.visible = true;
+	rID_LeftArrowIcon1.visible = true;
+	rID_RightArrowIcon1.visible =false;
+	//rID_RightArrowIcon2.visible = true;
+   rID_HeaderText.visible = true;
+   rID_GroupSetupButton.visible = true;
+   rID_GroupLearnMoreButton.visible = true;
+   
+}
+
+function rID_HideTutorialPage2()
+{
+   rID_HeaderText.visible = false;
+   rID_GroupSetupButton.visible = false;
+   rID_GroupLearnMoreButton.visible = false;
+  // rID_RightArrowIcon2.visible = false;
+   rID_LeftArrowIcon1.visible = false;
+}
+
+function rID_RenderVideo()
+{
+   canvas.add(rID_VideoIcon);
+   canvas.add(rID_LeftArrowIcon2);
+  
+}
+
+
+function rID_ShowVideo()
+{
+   rID_VideoIcon.visible =true;
+   rID_LeftArrowIcon2.visible = true;
+   
+}
+
+function rID_HideVideo()
+{
+   rID_VideoIcon.visible =false;
+   rID_LeftArrowIcon2.visible = false;
+}
+
+function rID_RenderClickPicture()
+{  canvas.add(rID_Circle1);
+rID_Circle1.set('fill', "black");
+canvas.add(rID_Circle2);
+canvas.add(rID_Circle3);
+   canvas.add(rID_Circle4);
+   canvas.add(rID_Circle5);
+  canvas.add(rID_ClickPictureText);
+   canvas.add(rID_PictureBox);
+   canvas.add(rID_CameraIcon);
+   canvas.add(rID_ClickPictureText2);
+   
+   
+  rID_Circle1.set('fill', "black");
+   canvas.add(rID_RightArrowIcon2);
+   
+}
+
+function rID_ShowClickPicture()
+{ 
+  rID_Circle1.visible = true;
+   rID_Circle2.visible = true;
+   rID_Circle3.visible = true;
+   rID_Circle4.visible = true;
+   rID_Circle5.visible = true;
+  rID_ClickPictureText.visible = true;
+   rID_PictureBox.visible = true;
+   rID_CameraIcon.visible = true;
+   rID_ClickPictureText2.visible = true;
+  
+   rID_RightArrowIcon2.visible = true;
+}
+
+canvas.add(rID_GroupFirstTimeSetupButton);
+
+
 /*************************************** Code End by Ridhi ***************************************************************************************/
 /**************************** START Common set of JS Code at the END OF FILE **************************************************************/
 /**************************** END Common set of JS Code at the END OF FILE ****************************************************************/
