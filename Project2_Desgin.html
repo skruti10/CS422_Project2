@@ -1868,6 +1868,13 @@ left: rID_TutorialLeft+ 1000,
             height: 60
         });
 
+var rID_RightArrowIcon3 = new fabric.Image(rID_RightArrowImg2, {
+left: rID_TutorialLeft+ 1000,
+  top: rID_TutorialTop + 300,
+           
+            width: 50,
+            height: 60
+        });
 
 var rID_EnglishBox = new fabric.Rect({
   left: rID_TutorialLeft +100,
@@ -1901,13 +1908,16 @@ var rID_TickMarkImg = document.getElementById('rTickMark');
 var rID_TickMarkIcon = new fabric.Image(rID_TickMarkImg, {
 left: rID_TutorialLeft+ 88,
   top: rID_TutorialTop + 125,
-            originX: 'center',
-            originY: 'center',
-            angle: 0,
-            opacity: 0.85,
             width: 20,
             height: 20
         });
+		
+var rID_TickMarkIcon2 = new fabric.Image(rID_TickMarkImg, {
+left: rID_TutorialLeft+ 760 ,
+  top: rID_TutorialTop + 170,
+            width: 50,
+            height: 40
+        });		
 
 var rID_SpanishBox = new fabric.Rect({
   left: rID_TutorialLeft +100,
@@ -2239,6 +2249,14 @@ var rID_LeftArrowIcon2 = new fabric.Image(rID_LeftArrowImg2, {
   top: rID_TutorialTop + 300,
 });
 
+var rID_LeftArrowIcon3 = new fabric.Image(rID_LeftArrowImg2, {
+  
+  width: 50,
+  height: 60,
+  left: rID_TutorialLeft+ 80,
+  top: rID_TutorialTop + 300,
+});
+
 var rID_VideoImg = document.getElementById('rPlay1');
 var rID_VideoIcon = new fabric.Image(rID_VideoImg, {
   
@@ -2346,13 +2364,21 @@ var rID_RetakeText = new fabric.Text('Retake.',{
   fontFamily: rID_Font
 });
 
-var rUserIcon1Info = new kInsertImageInfo("rUser1",document.getElementById('rUser1')).visible = true;
+var rUserIcon1Info = new kInsertImageInfo("rUser1",document.getElementById('rUser1'));
 var rID_UserIcon1 = new fabric.Image(rUserIcon1Info.kImageElement, {
   left: rID_TutorialLeft+ 396,
   top: rID_TutorialTop + 300, 
-  width: 60,
-  height: 50
-}).visible = true;
+  width: 250,
+  height: 240
+});
+
+var rUserIcon2Info = new kInsertImageInfo("rUser2",document.getElementById('rUser2'));
+var rID_UserIcon2 = new fabric.Image(rUserIcon2Info.kImageElement, {
+  left: rID_TutorialLeft+ 396,
+  top: rID_TutorialTop + 300, 
+  width: 250,
+  height: 240
+});
 
 //canvas.add(rID_GroupFirstTimeSetupButton);
 
@@ -2432,22 +2458,87 @@ canvas.deactivateAll();
  
 rID_CameraIcon.on('selected', function () {
 
-if(rUserIcon1Info.isUsed == false)
+if(rUserIcon1Info.kIsUsed == false)
 {
    k_RidhiProfile.kImageIcon = rID_UserIcon1;
-   rUserIcon1Info.isUsed = true;
+   rUserIcon1Info.kIsUsed = true;
    
-   rID_CameraIcon.visible = false;
-   rID_ClickPictureText2.visible = false;
-    canvas.add(rID_);
-	canvas.add(rID_RetakeText);
+    rID_RenderCameraOnClick();
+	rID_ShowCameraOnClick();
 	
-	canvas.add(rID_CameraIcon2);
+	canvas.add(rID_UserIcon1);
+	rID_UserIcon1.visible= true;
+	 rID_CameraIcon.visible = false;
+ rID_ClickPictureText2.visible = false;
 }
+
+/*else if(rUserIcon2Info.kIsUsed == false)
+{
+  k_RidhiProfile.kImageIcon = rID_UserIcon2;
+   rUserIcon2Info.kIsUsed = true;
+   
+    rID_RenderCameraOnClick();
+	rID_ShowCameraOnClick();
+}*/
  
 canvas.deactivateAll();   
  });   
  
+ rID_CameraIcon2.on('selected', function () {
+
+if(rUserIcon1Info.kIsUsed == true)
+{
+  
+  k_RidhiProfile.kImageIcon = rID_UserIcon2;
+   rUserIcon2Info.kIsUsed = true;
+   rUserIcon1Info.kIsUsed = false;
+   
+   rID_HideCameraOnClick();
+   rID_RenderCameraOnClick();
+	rID_ShowCameraOnClick();
+	canvas.add(rID_UserIcon2);
+	rID_UserIcon2.visible = true;
+	 rID_CameraIcon.visible = true;
+	 rID_RetakeText.visible =false;
+ rID_ClickPictureText2.visible = true;
+ rID_CameraIcon2.visible = false;
+}
+
+ 
+canvas.deactivateAll();   
+ }); 
+
+rID_LeftArrowIcon3.on('selected', function () {
+
+rID_HideCameraOnClick();
+rID_ShowTutorialPage2();
+ rID_ClickPictureText.visible =false;
+ rID_PictureBox.visible =false;
+ rID_Circle1.visible = false;
+   rID_Circle2.visible = false;
+   rID_Circle3.visible = false;
+   rID_Circle4.visible = false;
+   rID_Circle5.visible = false;
+   rID_LeftArrowIcon3.visible =false;
+   rID_RightArrowIcon3.visible =false;
+   rID_LeftArrowIcon2.visible =true;
+   canvas.add(rID_RightArrowIcon2);
+   rID_RightArrowIcon2.visible =true;
+ 
+  //rID_RenderTutorialPage2();
+  rID_ShowTutorialPage2();
+canvas.deactivateAll();  
+
+});
+ 
+ rID_RightArrowIcon2.on('selected', function () {
+ 
+ rID_HideTutorialPage2();
+   rID_RenderClickPicture();
+    rID_ShowClickPicture();
+ 
+canvas.deactivateAll();
+});
 
 function rID_RenderChooseLanguage ()
 {
@@ -2586,10 +2677,11 @@ canvas.add(rID_Circle3);
    canvas.add(rID_PictureBox);
    canvas.add(rID_CameraIcon);
    canvas.add(rID_ClickPictureText2);
+   canvas.add(rID_LeftArrowIcon3);
    
    
   rID_Circle1.set('fill', "black");
-   canvas.add(rID_RightArrowIcon2);
+   canvas.add(rID_RightArrowIcon3);
    
 }
 
@@ -2605,8 +2697,44 @@ function rID_ShowClickPicture()
    rID_CameraIcon.visible = true;
    rID_ClickPictureText2.visible = true;
   
-   rID_RightArrowIcon2.visible = true;
+   rID_RightArrowIcon3.visible = true;
+   rID_LeftArrowIcon3.visible = true;
 }
+
+function rID_RenderCameraOnClick()
+{
+  
+
+  
+
+	canvas.add(rID_RetakeText);
+	canvas.add(rID_CameraIcon2);
+	canvas.add(rID_TickMarkIcon2);
+	
+}
+
+function rID_ShowCameraOnClick()
+{
+ 
+  
+	rID_RetakeText.visible = true;
+	rID_CameraIcon2.visible = true;
+	rID_TickMarkIcon2.visible = true;
+	
+}
+
+function rID_HideCameraOnClick()
+{
+ rID_CameraIcon.visible = false;
+   rID_ClickPictureText2.visible = false;
+   
+    rID_UserIcon1.visible = false;
+	rID_UserIcon2.visible = false;
+	rID_RetakeText.visible = false;
+	rID_CameraIcon2.visible = false;
+	rID_TickMarkIcon2.visible = false;
+}
+
 
 canvas.add(rID_GroupFirstTimeSetupButton);
 
