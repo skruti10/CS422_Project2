@@ -116,7 +116,6 @@
 <!-- ************************************ HTML Code Added by Ridhi ************************************************************************************* -->
 
 
-
 <img src="Icons/tickmark.png" id="rTickMark" style="display:none">
 <img src="Icons/rightarrow1.png" id="rRightArrow" style="display:none">
 
@@ -125,6 +124,11 @@
 <img src="Icons/camera3.png" id="rCamera2" style="display:none">
 
 <img src="Icons/profile2.PNG" id="rUser2" style="display:none">
+<img src="Icons/Arrow.jpg" id="rArrow" style="display:none">
+<img src="Icons/handpointer1.png" id="rHand" style="display:none">
+<img src="Icons/speakingmicrophone1.png" id="rVoice" style="display:none">
+<img src="Icons/nfc.png" id="rPhone1" style="display:none">
+<img src="Icons/sync.png" id="rSync" style="display:none">
 
 
 
@@ -2208,6 +2212,8 @@ var rID_Font = 'Tahoma';
 var rID_FontSize = 20;
 var rID_TutorialLeft = 100;
 var rID_TutorialTop =170 ;
+var rID_Capture = 0;
+var rID_SyncPhone = 0;
 
 var rID_FirstTimeSetupBox = new fabric.Rect({
   left: rID_TutorialLeft + 200,
@@ -2296,6 +2302,38 @@ left: rID_TutorialLeft+ 1000,
             height: 60
         });
 
+var rID_RightArrowIcon4 = new fabric.Image(rID_RightArrowImg2, {
+left: rID_TutorialLeft+ 1000,
+  top: rID_TutorialTop + 300,
+           
+            width: 50,
+            height: 60
+        });
+		
+var rID_RightArrowIcon5 = new fabric.Image(rID_RightArrowImg2, {
+left: rID_TutorialLeft+ 1000,
+  top: rID_TutorialTop + 300,
+           
+            width: 50,
+            height: 60
+        });
+
+var rID_RightArrowIcon6 = new fabric.Image(rID_RightArrowImg2, {
+left: rID_TutorialLeft+ 1000,
+  top: rID_TutorialTop + 300,
+           
+            width: 50,
+            height: 60
+        });		
+		
+var rID_RightArrowIcon7 = new fabric.Image(rID_RightArrowImg2, {
+left: rID_TutorialLeft+ 1000,
+  top: rID_TutorialTop + 300,
+           
+            width: 50,
+            height: 60
+        });	
+		
 var rID_EnglishBox = new fabric.Rect({
   left: rID_TutorialLeft +100,
   top: rID_TutorialTop + 110,
@@ -2339,6 +2377,27 @@ left: rID_TutorialLeft+ 760 ,
             height: 40
         });		
 
+var rID_TickMarkIcon3 = new fabric.Image(rID_TickMarkImg, {
+left: rID_TutorialLeft+ 390 ,
+  top: rID_TutorialTop + 418,
+            width: 40,
+            height: 40
+        });	
+
+var rID_TickMarkIcon4= new fabric.Image(rID_TickMarkImg, {
+left: rID_TutorialLeft+ 840 ,
+  top: rID_TutorialTop + 180,
+            width: 50,
+            height: 40
+        });			
+		
+var rID_TickMarkIcon5= new fabric.Image(rID_TickMarkImg, {
+left: rID_TutorialLeft+ 840 ,
+  top: rID_TutorialTop + 180,
+            width: 50,
+            height: 40
+        });
+		
 var rID_SpanishBox = new fabric.Rect({
   left: rID_TutorialLeft +100,
   top: rID_TutorialTop + 160,
@@ -2641,7 +2700,31 @@ var rID_LearnMoreText = new fabric.Text('Learn More',{
   fontFamily: rID_Font
 });
 
+var rID_AnotherUserBox = new fabric.Rect({
+  left: rID_TutorialLeft +400,
+  top: rID_TutorialTop + 400,
+  fill: '',
+  strokeWidth: 5,
+  stroke: 'black',
+  width: 320,
+  height: 90
+});
 
+var rID_AnotherUserText = new fabric.Text('Add another user',{
+  left: rID_TutorialLeft+ 420,
+  top: rID_TutorialTop + 419,
+  fontSize: rID_FontSize+ 15,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+
+var rID_GroupAnotherUserButton = new fabric.Group([rID_AnotherUserBox, rID_AnotherUserText], {
+
+  left: rID_TutorialLeft+ 400,
+  top: rID_TutorialTop + 400,
+  angle: 0
+});
 
 
 var rID_GroupLearnMoreButton = new fabric.Group([rID_LearnMoreBox, rID_LearnMoreText], {
@@ -2677,6 +2760,39 @@ var rID_LeftArrowIcon3 = new fabric.Image(rID_LeftArrowImg2, {
   top: rID_TutorialTop + 300,
 });
 
+
+var rID_LeftArrowIcon4 = new fabric.Image(rID_LeftArrowImg2, {
+  
+  width: 50,
+  height: 60,
+  left: rID_TutorialLeft+ 80,
+  top: rID_TutorialTop + 300,
+}); 
+
+var rID_LeftArrowIcon5 = new fabric.Image(rID_LeftArrowImg2, {
+  
+  width: 50,
+  height: 60,
+  left: rID_TutorialLeft+ 80,
+  top: rID_TutorialTop + 300,
+});
+
+var rID_LeftArrowIcon6 = new fabric.Image(rID_LeftArrowImg2, {
+  
+  width: 50,
+  height: 60,
+  left: rID_TutorialLeft+ 80,
+  top: rID_TutorialTop + 300,
+});
+
+var rID_LeftArrowIcon7 = new fabric.Image(rID_LeftArrowImg2, {
+  
+  width: 50,
+  height: 60,
+  left: rID_TutorialLeft+ 80,
+  top: rID_TutorialTop + 300,
+});
+
 var rID_VideoImg = document.getElementById('rPlay1');
 var rID_VideoIcon = new fabric.Image(rID_VideoImg, {
   
@@ -2686,6 +2802,14 @@ var rID_VideoIcon = new fabric.Image(rID_VideoImg, {
   top: rID_TutorialTop + 400,
 });
 
+
+var rID_VideoIcon2 = new fabric.Image(rID_VideoImg, {
+  
+  width: 60,
+  height: 60,
+  left: rID_TutorialLeft+ 460,
+  top: rID_TutorialTop + 460,
+});
 
 var rID_Circle1 = new fabric.Circle({
    left: rID_TutorialLeft+ 400,
@@ -2740,6 +2864,46 @@ var rID_ClickPictureText = new fabric.Text('Click a cool picture!',{
   fontFamily: rID_Font
 });
 
+var rID_ScanFingerText = new fabric.Text('Scan your finger!',{
+  left: rID_TutorialLeft+ 340,
+  top: rID_TutorialTop + 170,
+  fontSize: rID_FontSize+ 25,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_VoiceCommandText = new fabric.Text('Record voice command!',{
+  left: rID_TutorialLeft+ 340,
+  top: rID_TutorialTop + 170,
+  fontSize: rID_FontSize+ 25,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_SyncPhoneText = new fabric.Text('Sync your phone!',{
+  left: rID_TutorialLeft+ 340,
+  top: rID_TutorialTop + 170,
+  fontSize: rID_FontSize+ 25,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_LastPageText = new fabric.Text('Great!',{
+  left: rID_TutorialLeft+ 450,
+  top: rID_TutorialTop + 170,
+  fontSize: rID_FontSize+ 25,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_LastPageText2 = new fabric.Text('You are all set. Enjoy the \nsmart door experience!',{
+  left: rID_TutorialLeft+ 380,
+  top: rID_TutorialTop + 290,
+  fontSize: rID_FontSize+ 10,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
 var rID_PictureBox = new fabric.Rect({
   left: rID_TutorialLeft + 350,
   top: rID_TutorialTop + 250,
@@ -2749,6 +2913,132 @@ var rID_PictureBox = new fabric.Rect({
   width: 400,
   height: 300
 });
+
+var rID_FingerScanBox = new fabric.Rect({
+  left: rID_TutorialLeft + 350,
+  top: rID_TutorialTop + 250,
+  fill: '',
+  strokeWidth: 5,
+  stroke: 'black',
+  width: 400,
+  height: 300
+});
+
+var rID_VoiceCommandBox = new fabric.Rect({
+  left: rID_TutorialLeft + 350,
+  top: rID_TutorialTop + 250,
+  fill: '',
+  strokeWidth: 5,
+  stroke: 'black',
+  width: 400,
+  height: 300
+});
+
+var rID_SyncPhoneBox = new fabric.Rect({
+  left: rID_TutorialLeft + 350,
+  top: rID_TutorialTop + 250,
+  fill: '',
+  strokeWidth: 5,
+  stroke: 'black',
+  width: 400,
+  height: 300
+});
+
+
+var rID_LastPageBox = new fabric.Rect({
+  left: rID_TutorialLeft + 350,
+  top: rID_TutorialTop + 250,
+  fill: '',
+  strokeWidth: 5,
+  stroke: 'black',
+  width: 400,
+  height: 300
+});
+
+var rID_VoiceCommandInnerText = new fabric.Text('Please  repeat the voice \n command after the beep.',{
+  left: rID_TutorialLeft + 365,
+  top: rID_TutorialTop + 260,
+  fontSize: rID_FontSize+ 10,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_VoiceCommandInnerText2 = new fabric.Text('Open Autumn.',{
+  left: rID_TutorialLeft + 470,
+  top: rID_TutorialTop + 400,
+  fontSize: rID_FontSize+ 10,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_SyncPhoneText2 = new fabric.Text('  Turn ON NFC on your \n  phone and bring close \n to the door.',{
+  left: rID_TutorialLeft + 365,
+  top: rID_TutorialTop + 260,
+  fontSize: rID_FontSize+ 10,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_SyncedText = new fabric.Text('Synced!',{
+  left: rID_TutorialLeft + 460,
+  top: rID_TutorialTop + 380,
+  fontSize: rID_FontSize+ 10,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_VoiceCommandTickBox = new fabric.Rect({
+  left: rID_TutorialLeft + 390,
+  top: rID_TutorialTop + 400,
+  fill: '',
+  strokeWidth: 5,
+  stroke: 'black',
+  width: 50,
+  height: 50
+});
+
+var rID_VoiceImg = document.getElementById('rVoice');
+var rID_VoiceIcon = new fabric.Image(rID_VoiceImg, {
+  
+  width: 70,
+  height: 70,
+  left: rID_TutorialLeft+ 460,
+  top: rID_TutorialTop + 460,
+});
+var rFingerPrintInner = new fabric.Circle({
+     left: rID_TutorialLeft + 920,
+  top: rID_TutorialTop + 945,
+    fill: 'black',
+    stroke: 'rgba(0,0,256,20)',
+    radius: 52
+});
+
+var rFingerPrintBox = new fabric.Circle({
+  left: rID_TutorialLeft + 480,
+  top: rID_TutorialTop + 350,
+    fill: 'black',
+    stroke: 'rgba(0,0,256,20)',
+    radius: 40
+});
+
+var rID_HandImg = document.getElementById('rHand');
+var rID_HandIcon = new fabric.Image(rID_HandImg, {
+  
+  width: 70,
+  height: 70,
+  left: rID_TutorialLeft+ 480,
+  top: rID_TutorialTop + 410,
+});
+
+var rID_ArrowImg = document.getElementById('rArrow');
+var rID_ArrowIcon = new fabric.Image(rID_ArrowImg, {
+  
+  width: 70,
+  height: 80,
+  left: rID_TutorialLeft+ 800,
+  top: rID_TutorialTop + 350,
+});
+
 
 var rID_CameraImg = document.getElementById('kCameraIcon');
 var rID_CameraIcon = new fabric.Image(rID_CameraImg, {
@@ -2798,6 +3088,26 @@ var rID_UserIcon2 = new fabric.Image(rUserIcon2Info.kImageElement, {
   top: rID_TutorialTop + 300, 
   width: 250,
   height: 240
+});
+
+//var rID_voicecommand = new Audio("voice.mp3");
+var rID_beep = new Audio("beep.mp3");
+var rID_VoiceCommandCapture = new Audio("VoiceCommandCapture.mp3");
+
+	var rPhoneIconInfo = new kInsertImageInfo("rPhone1",document.getElementById('rPhone1'));  
+var rID_Phone1Icon = new fabric.Image(rPhoneIconInfo.kImageElement, {
+	left: rID_TutorialLeft + 460,
+  top: rID_TutorialTop + 440 ,
+	width: 70,
+	height: 60
+});
+
+var rID_SyncImg = document.getElementById('rSync');	
+var rID_SyncIcon = new fabric.Image(rID_SyncImg, {
+	left: rID_TutorialLeft + 460,
+  top: rID_TutorialTop + 380,
+	width: 60,
+	height: 55
 });
 
 //canvas.add(rID_GroupFirstTimeSetupButton);
@@ -2882,15 +3192,28 @@ if(rUserIcon1Info.kIsUsed == false)
 {
    k_RidhiProfile.kImageIcon = rID_UserIcon1;
    rUserIcon1Info.kIsUsed = true;
+   rUserIcon2Info.kIsUsed = false;
    
-    rID_RenderCameraOnClick();
-	rID_ShowCameraOnClick();
+   
+    
 	
 	canvas.add(rID_UserIcon1);
 	rID_UserIcon1.visible= true;
-	 rID_CameraIcon.visible = false;
- rID_ClickPictureText2.visible = false;
+	 
 }
+
+else 
+{
+k_RidhiProfile.kImageIcon = rID_UserIcon2;
+   rUserIcon2Info.kIsUsed = true;
+   rUserIcon1Info.kIsUsed = false;
+   canvas.add(rID_UserIcon2);
+	rID_UserIcon2.visible= true;
+}
+rID_RenderCameraOnClick();
+	rID_ShowCameraOnClick();
+	rID_CameraIcon.visible = false;
+ rID_ClickPictureText2.visible = false;
 
 /*else if(rUserIcon2Info.kIsUsed == false)
 {
@@ -2906,23 +3229,32 @@ canvas.deactivateAll();
  
  rID_CameraIcon2.on('selected', function () {
 
-if(rUserIcon1Info.kIsUsed == true)
+/*if(rUserIcon1Info.kIsUsed == true)
 {
   
   k_RidhiProfile.kImageIcon = rID_UserIcon2;
    rUserIcon2Info.kIsUsed = true;
    rUserIcon1Info.kIsUsed = false;
    
-   rID_HideCameraOnClick();
-   rID_RenderCameraOnClick();
-	rID_ShowCameraOnClick();
-	canvas.add(rID_UserIcon2);
-	rID_UserIcon2.visible = true;
+   
+	//canvas.add(rID_UserIcon2);
+	//rID_UserIcon2.visible = false;
 	 rID_CameraIcon.visible = true;
 	 rID_RetakeText.visible =false;
  rID_ClickPictureText2.visible = true;
  rID_CameraIcon2.visible = false;
-}
+}*/
+
+rID_HideCameraOnClick();
+   rID_RenderCameraOnClick();
+	rID_ShowCameraOnClick();
+	rID_CameraIcon.visible = true;
+	rID_RetakeText.visible =false;
+	rID_ClickPictureText2.visible = true;
+	rID_CameraIcon2.visible = false;
+	rID_TickMarkIcon2.visible = false;
+	
+	
 
  
 canvas.deactivateAll();   
@@ -2959,6 +3291,92 @@ canvas.deactivateAll();
  
 canvas.deactivateAll();
 });
+
+
+rID_RightArrowIcon3.on('selected', function () {
+ 
+ 
+   
+    rID_HideCameraOnClick();
+	rID_Circle1.fill = 'white';
+	rID_Circle2.fill = 'black';
+	rID_PictureBox.visible = false;
+	rID_ClickPictureText.visible = false;
+	rID_LeftArrowIcon3.visible = false;
+	rID_RightArrowIcon3.visible = false;
+	rID_RenderScanFinger();
+	rID_ShowScanFinger();
+	
+   
+ 
+canvas.deactivateAll();
+});
+
+rID_LeftArrowIcon4.on('selected', function() {
+
+
+  rID_HideScanFinger();
+  rID_Circle1.fill = 'black';
+  rID_Circle2.fill = 'white';
+  
+  rID_ShowClickPicture();
+canvas.deactivateAll();
+});
+
+
+rID_RightArrowIcon4.on('selected', function () {
+
+rID_Circle2.fill = 'white';
+rID_Circle3.fill = 'black';
+rID_HideScanFinger();
+rID_RenderVoiceCommand();
+rID_ShowVoiceCommand();
+setTimeout(rID_VoiceCapture,4500);
+
+setTimeout(rID_Captured,5600);
+
+canvas.deactivateAll();
+
+});
+
+
+rID_RightArrowIcon5.on('selected', function () {
+
+rID_Circle3.fill = 'white';
+rID_Circle4.fill = 'black';
+rID_HideVoiceCommand();
+rID_RenderSyncPhone();
+rID_ShowSyncPhone();
+setTimeout(rID_DisplayPhone,1000);
+setTimeout(rID_Synced , 6000);
+
+
+canvas.deactivateAll();
+
+});
+
+rID_RightArrowIcon6.on('selected', function () {
+
+rID_Circle4.fill = 'white';
+rID_Circle5.fill = 'black';
+rID_HideSyncPhone();
+rID_RenderLastPage();
+rID_ShowLastPage();
+
+
+
+canvas.deactivateAll();
+
+});
+
+rID_RightArrowIcon7.on('selected', function () {
+
+rID_HideLastPage();
+
+canvas.deactivateAll();
+
+});
+
 
 function rID_RenderChooseLanguage ()
 {
@@ -3061,7 +3479,7 @@ function rID_HideTutorialPage2()
    rID_HeaderText.visible = false;
    rID_GroupSetupButton.visible = false;
    rID_GroupLearnMoreButton.visible = false;
-  // rID_RightArrowIcon2.visible = false;
+   rID_RightArrowIcon2.visible = false;
    rID_LeftArrowIcon1.visible = false;
 }
 
@@ -3153,8 +3571,206 @@ function rID_HideCameraOnClick()
 	rID_RetakeText.visible = false;
 	rID_CameraIcon2.visible = false;
 	rID_TickMarkIcon2.visible = false;
+	
 }
 
+function rID_RenderScanFinger() 
+{
+    canvas.add(rID_ScanFingerText);
+	canvas.add(rID_FingerScanBox);
+	canvas.add(rFingerPrintBox);
+	canvas.add(rID_HandIcon);
+	canvas.add(rID_ArrowIcon);
+	canvas.add(rFingerPrintInner);
+	canvas.add(rID_LeftArrowIcon4);
+	canvas.add(rID_RightArrowIcon4);
+	
+}
+
+function rID_ShowScanFinger() 
+{
+    rID_ScanFingerText.visible = true;
+	rID_FingerScanBox.visible = true;
+	rFingerPrintBox.visible = true;
+	rID_HandIcon.visible = true;
+	rFingerPrintInner.visible = true;
+	rID_ArrowIcon.visible = true;
+	rID_LeftArrowIcon4.visible = true;
+	rID_RightArrowIcon4.visible = true;
+}
+
+function rID_HideScanFinger() 
+{
+  rID_ScanFingerText.visible = false;
+	rID_FingerScanBox.visible = false;
+	rFingerPrintBox.visible = false;
+	rID_HandIcon.visible = false;
+	rFingerPrintInner.visible = false;
+	rID_ArrowIcon.visible= false;
+	rID_LeftArrowIcon4.visible = false;
+	rID_RightArrowIcon4.visible = false;
+	
+}
+
+function rID_RenderVoiceCommand()
+{
+   canvas.add(rID_VoiceCommandText);
+   canvas.add(rID_VoiceCommandBox);
+   canvas.add(rID_VoiceCommandInnerText);
+   canvas.add(rID_VoiceCommandInnerText2);
+   canvas.add(rID_VoiceCommandTickBox);
+   canvas.add(rID_VoiceIcon);
+   canvas.add(rID_LeftArrowIcon5);
+   canvas.add(rID_RightArrowIcon5);
+  // setTimeout(rID_PlayVoicecommand, 3000);
+   setTimeout(rID_Playbeep, 3500);
+   //clearInterval(rID_PlayVoicecommand, 3000);
+   rID_Capture = 1;
+   
+}
+
+function rID_ShowVoiceCommand()
+{
+   rID_VoiceCommandText.visible =true;
+   rID_VoiceCommandBox.visible =true;
+   rID_VoiceCommandInnerText.visible =true;
+   rID_VoiceCommandInnerText2.visible =true;
+   rID_VoiceCommandTickBox.visible =true;
+   rID_VoiceIcon.visible =true;
+   rID_LeftArrowIcon5.visible =true;
+ rID_RightArrowIcon5.visible =true;
+   
+}
+
+function rID_VoiceCapture()
+{
+     rID_VoiceCommandCapture.play();
+}
+
+/*function rID_PlayVoicecommand()
+{
+     rID_voicecommand.play();
+}*/
+function rID_Playbeep()
+{
+     rID_beep.play();
+}
+
+function rID_Captured()
+{
+if(rID_Capture == 1 )
+{ 
+   rID_VoiceIcon.visible = false;
+   canvas.add(rID_TickMarkIcon3);
+   canvas.add(rID_VideoIcon2);
+   k_RidhiProfile.kVoiceCommand = rID_VoiceCommandCapture;
+   canvas.add(rID_TickMarkIcon4);
+}
+}
+
+function rID_HideVoiceCommand()
+{
+
+   rID_VoiceCommandText.visible =false;
+   rID_VoiceCommandBox.visible =false;
+   rID_VoiceCommandInnerText.visible =false;
+   rID_VoiceCommandInnerText2.visible =false;
+   rID_VoiceCommandTickBox.visible =false;
+   rID_VoiceIcon.visible =false;
+   rID_LeftArrowIcon5.visible =false;
+ rID_RightArrowIcon5.visible =false;
+ rID_VideoIcon2.visible =false;
+ rID_TickMarkIcon3.visible =false;
+ rID_TickMarkIcon4.visible =false;
+}
+
+function rID_RenderSyncPhone()
+{
+    canvas.add(rID_SyncPhoneText);
+	canvas.add(rID_SyncPhoneBox);
+	canvas.add(rID_SyncPhoneText2);
+    canvas.add(rID_LeftArrowIcon6);
+	canvas.add(rID_RightArrowIcon6);
+}
+
+function rID_ShowSyncPhone()
+{
+    
+rID_SyncPhoneText.visible =true
+	rID_SyncPhoneBox.visible =true
+	rID_SyncPhoneText2.visible =true
+    rID_LeftArrowIcon6.visible =true
+	rID_RightArrowIcon6.visible =true
+}
+
+function rID_DisplayPhone()
+{
+   if(rID_SyncPhone == 0)
+   {
+   canvas.add(rID_Phone1Icon);
+   canvas.add(rID_SyncIcon);
+   rID_SyncPhone = 1;
+   }
+}
+
+function rID_Synced()
+{
+
+  rID_SyncIcon.visible = false;
+  rID_Playbeep();
+  canvas.add(rID_SyncedText);
+  canvas.add(rID_TickMarkIcon5);
+}
+
+function rID_HideSyncPhone()
+{
+    rID_SyncPhoneText.visible = false;
+	rID_SyncPhoneBox.visible = false;
+	rID_SyncPhoneText2.visible = false;
+    rID_LeftArrowIcon6.visible = false;
+	rID_RightArrowIcon6.visible = false;
+	rID_Phone1Icon.visible = false;
+     rID_SyncIcon.visible = false;
+	 rID_SyncedText.visible = false;
+	 rID_TickMarkIcon5.visible = false;
+}
+
+function rID_RenderLastPage()
+{
+  canvas.add(rID_LastPageBox);
+  canvas.add(rID_LastPageText);
+  canvas.add(rID_LastPageText2);
+  canvas.add(rID_LeftArrowIcon7);
+  canvas.add(rID_RightArrowIcon7);
+  canvas.add(rID_GroupAnotherUserButton);
+}
+
+function rID_ShowLastPage()
+{
+rID_LastPageBox.visible = true;
+  rID_LastPageText.visible = true;
+  rID_LastPageText2.visible = true;
+  rID_LeftArrowIcon7.visible = true;
+  rID_RightArrowIcon7.visible = true;
+  rID_GroupAnotherUserButton.visible = true;
+}
+
+function rID_HideLastPage()
+{
+  rID_Circle1.visible =  false;
+
+rID_Circle2.visible=  false;
+rID_Circle3.visible=  false;
+  rID_Circle4.visible=  false;
+   rID_Circle5.visible=  false;
+ rID_LastPageBox.visible = false;
+  rID_LastPageText.visible = false;
+  rID_LastPageText2.visible = false;
+  rID_LeftArrowIcon7.visible = false;
+  rID_RightArrowIcon7.visible = false;
+  rID_GroupAnotherUserButton.visible = false;
+  rID_Tutorial.visible = false;
+}
 
 canvas.add(rID_GroupFirstTimeSetupButton);
 
