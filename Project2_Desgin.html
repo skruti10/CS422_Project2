@@ -128,6 +128,8 @@
 <img src="Icons/handpointer1.png" id="rHand" style="display:none">
 <img src="Icons/speakingmicrophone1.png" id="rVoice" style="display:none">
 <img src="Icons/nfc.png" id="rPhone1" style="display:none">
+<img src="Icons/NFC_2.png" id="rPhone2" style="display:none">
+
 <img src="Icons/sync.png" id="rSync" style="display:none">
 
 
@@ -2214,6 +2216,8 @@ var rID_TutorialLeft = 100;
 var rID_TutorialTop =170 ;
 var rID_Capture = 0;
 var rID_SyncPhone = 0;
+var isUsedTutorial = 0;
+var activeuser = '';
 
 var rID_FirstTimeSetupBox = new fabric.Rect({
   left: rID_TutorialLeft + 200,
@@ -2239,6 +2243,38 @@ var rID_GroupFirstTimeSetupButton = new fabric.Group([rID_FirstTimeSetupBox, rID
   left: rID_TutorialLeft+ 200,
   top: rID_TutorialTop + 700,
   angle: 0
+});
+
+var rID_Ridhi = new fabric.Text('RIDHI',{
+  left: rID_TutorialLeft+ 10,
+  top: rID_TutorialTop + 510,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_Kruti = new fabric.Text('KRUTI',{
+  left: rID_TutorialLeft+ 110,
+  top: rID_TutorialTop + 510,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_Sahib = new fabric.Text('SAHIB',{
+  left: rID_TutorialLeft+ 210,
+  top: rID_TutorialTop + 510,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
+});
+
+var rID_Ankur = new fabric.Text('ANKUR',{
+  left: rID_TutorialLeft+ 310,
+  top: rID_TutorialTop + 510,
+  fontSize: rID_FontSize,
+  fontWeight: 'normal',
+  fontFamily: rID_Font
 });
 
 var rID_Tutorial = new fabric.Rect({
@@ -3074,7 +3110,7 @@ var rID_RetakeText = new fabric.Text('Retake.',{
   fontFamily: rID_Font
 });
 
-var rUserIcon1Info = new kInsertImageInfo("rUser1",document.getElementById('rUser1'));
+var rUserIcon1Info = new kInsertImageInfo("kRidhiImageIcon",document.getElementById('kRidhiImageIcon'));
 var rID_UserIcon1 = new fabric.Image(rUserIcon1Info.kImageElement, {
   left: rID_TutorialLeft+ 396,
   top: rID_TutorialTop + 300, 
@@ -3082,7 +3118,7 @@ var rID_UserIcon1 = new fabric.Image(rUserIcon1Info.kImageElement, {
   height: 240
 });
 
-var rUserIcon2Info = new kInsertImageInfo("rUser2",document.getElementById('rUser2'));
+var rUserIcon2Info = new kInsertImageInfo("kKrutiImageIcon",document.getElementById('kKrutiImageIcon'));
 var rID_UserIcon2 = new fabric.Image(rUserIcon2Info.kImageElement, {
   left: rID_TutorialLeft+ 396,
   top: rID_TutorialTop + 300, 
@@ -3094,8 +3130,16 @@ var rID_UserIcon2 = new fabric.Image(rUserIcon2Info.kImageElement, {
 var rID_beep = new Audio("beep.mp3");
 var rID_VoiceCommandCapture = new Audio("VoiceCommandCapture.mp3");
 
-	var rPhoneIconInfo = new kInsertImageInfo("rPhone1",document.getElementById('rPhone1'));  
-var rID_Phone1Icon = new fabric.Image(rPhoneIconInfo.kImageElement, {
+	var rPhoneIcon1Info = new kInsertImageInfo("rPhone1",document.getElementById('rPhone1'));  
+var rID_Phone1Icon = new fabric.Image(rPhoneIcon1Info.kImageElement, {
+	left: rID_TutorialLeft + 460,
+  top: rID_TutorialTop + 440 ,
+	width: 70,
+	height: 60
+});
+
+	var rPhoneIcon2Info = new kInsertImageInfo("rPhone2",document.getElementById('rPhone2'));  
+var rID_Phone2Icon = new fabric.Image(rPhoneIcon2Info.kImageElement, {
 	left: rID_TutorialLeft + 460,
   top: rID_TutorialTop + 440 ,
 	width: 70,
@@ -3110,6 +3154,48 @@ var rID_SyncIcon = new fabric.Image(rID_SyncImg, {
 	height: 55
 });
 
+
+rID_Ridhi.on('selected', function () 
+{
+     activeuser = 'RIDHI';
+    if(isUsedTutorial == 0)
+	{
+	rID_RenderChooseLanguage();
+	rID_ShowChooseLanguage();
+	 isUsedTutorial =1;
+	}
+	else
+	{
+	  rID_RenderTutorialPage2();
+       rID_ShowTutorialPage2();
+	}
+	
+	
+	
+	canvas.deactivateAll(); 
+});
+
+rID_Kruti.on('selected', function () 
+{
+     activeuser = 'KRUTI';
+    if(isUsedTutorial == 0)
+	{
+	rID_RenderChooseLanguage();
+	rID_ShowChooseLanguage();
+	 isUsedTutorial =1;
+	}
+	else
+	{
+	  rID_RenderTutorialPage2();
+       rID_ShowTutorialPage2();
+	}
+	
+	
+	
+	canvas.deactivateAll(); 
+});
+
+ 
 //canvas.add(rID_GroupFirstTimeSetupButton);
 
 rID_GroupFirstTimeSetupButton.on('selected', function () 
@@ -3120,9 +3206,12 @@ rID_GroupFirstTimeSetupButton.on('selected', function ()
 	canvas.deactivateAll(); 
 });
 
+
+
 rID_GroupEnglishButton.on('selected', function () {
  
   canvas.add(rID_TickMarkIcon);
+  
   rID_HideChooseLangugage();
  
   rID_RenderTutorialPage2();
@@ -3155,6 +3244,114 @@ rID_GroupEnglishButton.on('selected', function () {
 canvas.deactivateAll();   
  });  
  
+  rID_LeftArrowIcon2.on('selected', function () {
+ 
+   rID_ShowTutorialPage2();
+   rID_HideVideo();
+   
+    
+ 
+canvas.deactivateAll();   
+ });  
+ 
+ rID_LeftArrowIcon3.on('selected', function () {
+
+rID_HideCameraOnClick();
+rID_ShowTutorialPage2();
+// rID_ClickPictureText.visible =false;
+ //rID_PictureBox.visible =false;
+//rID_HideCircles();
+   rID_LeftArrowIcon3.visible =false;
+   rID_RightArrowIcon3.visible =false;
+   rID_LeftArrowIcon2.visible =true;
+   canvas.add(rID_RightArrowIcon2);
+   rID_RightArrowIcon2.visible =true;
+ 
+  //rID_RenderTutorialPage2();
+ // rID_ShowTutorialPage2();
+canvas.deactivateAll();  
+
+});
+ 
+  rID_LeftArrowIcon4.on('selected', function () {
+  
+  rID_HideScanFinger();
+    rID_Circle1.fill = 'black';
+  rID_Circle2.fill = 'white';
+  //rID_ClickPictureText2.visible = false;
+  
+  rID_ShowClickPicture();  
+  rID_ShowCameraOnClick();
+  rID_UserIcon1.visible = true;
+  
+  canvas.remove(rID_ClickPictureText2);
+  //rID_RetakeText.visible = true;
+  //rID_RightArrowIcon3.visible = true;
+  // rID_LeftArrowIcon3.visible = true;
+   
+  
+  
+   canvas.deactivateAll();   
+ });
+ 
+ 
+  rID_LeftArrowIcon5.on('selected', function () {
+  
+  rID_HideVoiceCommand();
+  rID_Circle2.fill = 'black';
+  rID_Circle3.fill = 'white';
+  rID_ShowScanFinger();
+
+  
+  canvas.deactivateAll();   
+ });
+  
+ 
+ rID_LeftArrowIcon6.on('selected', function () {
+ 
+ rID_HideSyncPhone();
+ rID_Circle3.fill = 'black';
+rID_Circle4.fill = 'white';
+rID_Circle5.fill = 'white';
+rID_ShowVoiceCommand();
+rID_TickMarkIcon3.visible =  true;
+rID_TickMarkIcon4.visible =  true;
+rID_VideoIcon2.visible = true;
+rID_VoiceIcon.visible = false;
+
+ 
+canvas.deactivateAll();   
+ });
+ 
+
+ 
+ rID_LeftArrowIcon7.on('selected', function () {
+ 
+ rID_HideLastPage(); 
+rID_Tutorial.visible = true;
+rID_ShowCircles();
+rID_Circle3.fill = 'white';
+rID_Circle4.fill = 'black';
+rID_Circle5.fill = 'white';
+ 
+if(activeuser == 'RIDHI' && rPhoneIcon1Info.kIsUsed == true)
+{
+   rID_Phone1Icon.visible = true; 
+}
+
+else if(activeuser == 'KRUTI' && rPhoneIcon2Info.kIsUsed == true)
+{
+   rID_Phone2Icon.visible = true; 
+}
+
+//rID_RenderSyncPhone();
+rID_ShowSyncPhone();
+rID_SyncedText.visible = true;
+rID_TickMarkIcon5.visible = true;
+
+canvas.deactivateAll();   
+ });  
+ 
  rID_GroupSetupButton.on('selected', function () {
  
    rID_HideTutorialPage2();
@@ -3177,39 +3374,39 @@ canvas.deactivateAll();
  });  
 
  
- rID_LeftArrowIcon2.on('selected', function () {
- 
-   rID_ShowTutorialPage2();
-   rID_HideVideo();
-    
- 
-canvas.deactivateAll();   
- });  
+
  
 rID_CameraIcon.on('selected', function () {
 
-if(rUserIcon1Info.kIsUsed == false)
+if(activeuser == 'RIDHI')
 {
-   k_RidhiProfile.kImageIcon = rID_UserIcon1;
+   canvas.add(rID_UserIcon1);
    rUserIcon1Info.kIsUsed = true;
-   rUserIcon2Info.kIsUsed = false;
+   
+   
+   
+  // rUserIcon1Info.kIsUsed = true;
+  // rUserIcon2Info.kIsUsed = false;
    
    
     
 	
-	canvas.add(rID_UserIcon1);
-	rID_UserIcon1.visible= true;
+	//canvas.add(rID_UserIcon1);
+	// rID_UserIcon1.visible= true;
 	 
+//k_RidhiProfile.kImageIcon = rID_UserIcon2;
+//   rUserIcon2Info.kIsUsed = true;
+//   rUserIcon1Info.kIsUsed = false;
+ //  canvas.add(rID_UserIcon2);
+//	rID_UserIcon2.visible= true;
+}
+else if (activeuser == 'KRUTI')
+{
+  canvas.add(rID_UserIcon2);
+  rUserIcon2Info.kIsUsed = true;
+  rID_UserIcon2.visible = true;
 }
 
-else 
-{
-k_RidhiProfile.kImageIcon = rID_UserIcon2;
-   rUserIcon2Info.kIsUsed = true;
-   rUserIcon1Info.kIsUsed = false;
-   canvas.add(rID_UserIcon2);
-	rID_UserIcon2.visible= true;
-}
 rID_RenderCameraOnClick();
 	rID_ShowCameraOnClick();
 	rID_CameraIcon.visible = false;
@@ -3260,34 +3457,23 @@ rID_HideCameraOnClick();
 canvas.deactivateAll();   
  }); 
 
-rID_LeftArrowIcon3.on('selected', function () {
 
-rID_HideCameraOnClick();
-rID_ShowTutorialPage2();
- rID_ClickPictureText.visible =false;
- rID_PictureBox.visible =false;
- rID_Circle1.visible = false;
-   rID_Circle2.visible = false;
-   rID_Circle3.visible = false;
-   rID_Circle4.visible = false;
-   rID_Circle5.visible = false;
-   rID_LeftArrowIcon3.visible =false;
-   rID_RightArrowIcon3.visible =false;
-   rID_LeftArrowIcon2.visible =true;
-   canvas.add(rID_RightArrowIcon2);
-   rID_RightArrowIcon2.visible =true;
- 
-  //rID_RenderTutorialPage2();
-  rID_ShowTutorialPage2();
-canvas.deactivateAll();  
-
-});
  
  rID_RightArrowIcon2.on('selected', function () {
  
  rID_HideTutorialPage2();
-   rID_RenderClickPicture();
+
     rID_ShowClickPicture();
+	rID_Circle1.fill = 'black';
+  rID_Circle2.fill = 'white';
+  //rID_ClickPictureText2.visible = false;
+  canvas.remove(rID_ClickPictureText2);
+  rID_ShowCameraOnClick();  
+  rID_UserIcon1.visible = true;
+  rID_RightArrowIcon3.visible = true;
+   rID_LeftArrowIcon3.visible = true;
+	
+	
  
 canvas.deactivateAll();
 });
@@ -3312,16 +3498,7 @@ rID_RightArrowIcon3.on('selected', function () {
 canvas.deactivateAll();
 });
 
-rID_LeftArrowIcon4.on('selected', function() {
 
-
-  rID_HideScanFinger();
-  rID_Circle1.fill = 'black';
-  rID_Circle2.fill = 'white';
-  
-  rID_ShowClickPicture();
-canvas.deactivateAll();
-});
 
 
 rID_RightArrowIcon4.on('selected', function () {
@@ -3549,6 +3726,7 @@ function rID_RenderCameraOnClick()
 	canvas.add(rID_CameraIcon2);
 	canvas.add(rID_TickMarkIcon2);
 	
+	
 }
 
 function rID_ShowCameraOnClick()
@@ -3571,6 +3749,9 @@ function rID_HideCameraOnClick()
 	rID_RetakeText.visible = false;
 	rID_CameraIcon2.visible = false;
 	rID_TickMarkIcon2.visible = false;
+	rID_LeftArrowIcon3.visible = false;
+	rID_RightArrowIcon3.visible =  false;
+	
 	
 }
 
@@ -3625,7 +3806,8 @@ function rID_RenderVoiceCommand()
   // setTimeout(rID_PlayVoicecommand, 3000);
    setTimeout(rID_Playbeep, 3500);
    //clearInterval(rID_PlayVoicecommand, 3000);
-   rID_Capture = 1;
+ 
+     //  rID_Capture = 1;
    
 }
 
@@ -3658,14 +3840,21 @@ function rID_Playbeep()
 
 function rID_Captured()
 {
-if(rID_Capture == 1 )
+  if(activeuser == 'RIDHI')
 { 
-   rID_VoiceIcon.visible = false;
+  
+   k_RidhiProfile.kVoiceCommand = rID_VoiceCommandCapture;
+   
+}
+
+else if(activeuser == 'KRUTI')
+{
+     k_KrutiProfile.kVoiceCommand = rID_VoiceCommandCapture;
+}
+  canvas.add(rID_TickMarkIcon4);
+ rID_VoiceIcon.visible = false;
    canvas.add(rID_TickMarkIcon3);
    canvas.add(rID_VideoIcon2);
-   k_RidhiProfile.kVoiceCommand = rID_VoiceCommandCapture;
-   canvas.add(rID_TickMarkIcon4);
-}
 }
 
 function rID_HideVoiceCommand()
@@ -3705,12 +3894,21 @@ rID_SyncPhoneText.visible =true
 
 function rID_DisplayPhone()
 {
-   if(rID_SyncPhone == 0)
+   if(activeuser == 'RIDHI')
    {
-   canvas.add(rID_Phone1Icon);
-   canvas.add(rID_SyncIcon);
-   rID_SyncPhone = 1;
+     canvas.add(rID_Phone1Icon);
+	 rPhoneIcon1Info.kIsUsed =  true;
+	 k_RidhiProfile.kPhoneSynced = rPhoneIcon1Info.kId;
+	 
    }
+   
+   else if (activeuser == 'KRUTI')
+   {
+      canvas.add(rID_Phone2Icon);
+	 rPhoneIcon2Info.kIsUsed =  true;
+	 k_KrutiProfile.kPhoneSynced = rPhoneIcon2Info.kId;
+   }
+   canvas.add(rID_SyncIcon);
 }
 
 function rID_Synced()
@@ -3730,6 +3928,7 @@ function rID_HideSyncPhone()
     rID_LeftArrowIcon6.visible = false;
 	rID_RightArrowIcon6.visible = false;
 	rID_Phone1Icon.visible = false;
+	rID_Phone2Icon.visible = false;
      rID_SyncIcon.visible = false;
 	 rID_SyncedText.visible = false;
 	 rID_TickMarkIcon5.visible = false;
@@ -3772,7 +3971,31 @@ rID_Circle3.visible=  false;
   rID_Tutorial.visible = false;
 }
 
+function rID_ShowCircles()
+{
+ rID_Circle1.visible =  true;
+
+rID_Circle2.visible=  true;
+rID_Circle3.visible=  true;
+  rID_Circle4.visible=  true;
+   rID_Circle5.visible=  true;
+}
+
+function rID_HideCircles()
+{
+ rID_Circle1.visible =  false;
+
+rID_Circle2.visible=  false;
+rID_Circle3.visible=  false;
+  rID_Circle4.visible=  false;
+   rID_Circle5.visible= false;
+}
+
 canvas.add(rID_GroupFirstTimeSetupButton);
+canvas.add(rID_Ridhi);
+canvas.add(rID_Kruti);
+canvas.add(rID_Sahib);
+canvas.add(rID_Ankur);
 
 
 /*************************************** Code End by Ridhi ***************************************************************************************/
