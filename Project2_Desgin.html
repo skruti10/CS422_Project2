@@ -129,7 +129,8 @@
 <img src="Icons/speakingmicrophone1.png" id="rVoice" style="display:none">
 <img src="Icons/nfc.png" id="rPhone1" style="display:none">
 <img src="Icons/NFC_2.png" id="rPhone2" style="display:none">
-
+<img src="Icons/NFC_3.png" id="rPhone3" style="display:none">
+<img src="Icons/NFC_4.jpg" id="rPhone4" style="display:none">
 <img src="Icons/sync.png" id="rSync" style="display:none">
 
 
@@ -2203,7 +2204,38 @@ kID_TimeText.set({
 
 canvas.add(kID_TimeText);
 
+sPost =  new fabric.Text('POST',{
+		left: sID_HeaderPanelLeft +1200,
+		top: sID_HeaderPanelTop + 900,
+		fontSize: sID_FontSize,
+		fontWeight: 'bold',
+		fontFamily: sID_Font
+	});
 
+	sNew =  new fabric.Text('NEW',{
+		left: sID_HeaderPanelLeft +1290,
+		top: sID_HeaderPanelTop + 900,
+		fontSize: sID_FontSize,
+		fontWeight: 'bold',
+		fontFamily: sID_Font
+	});
+
+//***RIDHI writing message**
+
+simgInstance3.on('selected', function () {
+		canvas.remove(simgInstance3);
+		canvas.remove(simgInstance4);
+		canvas.remove(sWriteMessageText1);
+		canvas.remove(sWriteMessageText2);
+		canvas.remove(sDeliverPackageText1);
+		canvas.remove(sDeliverPackageText2);
+		canvas.add(sPost);
+		canvas.add(sNew);
+		canvas.isDrawingMode = !canvas.isDrawingMode;
+	    canvas.cursor = 'crosshair';
+		canvas.freeDrawingBrush.color = "black";
+		canvas.freeDrawingBrush.width = 9;
+	});
 
 
 /*************************************** Code End by Sahib ***************************************************************************************/
@@ -3126,6 +3158,22 @@ var rID_UserIcon2 = new fabric.Image(rUserIcon2Info.kImageElement, {
   height: 240
 });
 
+var rUserIcon3Info = new kInsertImageInfo("kSahibImageIcon",document.getElementById('kSahibImageIcon'));
+var rID_UserIcon3 = new fabric.Image(rUserIcon3Info.kImageElement, {
+  left: rID_TutorialLeft+ 396,
+  top: rID_TutorialTop + 300, 
+  width: 250,
+  height: 240
+});
+
+var rUserIcon4Info = new kInsertImageInfo("kAnkurImageIcon",document.getElementById('kAnkurImageIcon'));
+var rID_UserIcon4 = new fabric.Image(rUserIcon4Info.kImageElement, {
+  left: rID_TutorialLeft+ 396,
+  top: rID_TutorialTop + 300, 
+  width: 250,
+  height: 240
+});
+
 //var rID_voicecommand = new Audio("voice.mp3");
 var rID_beep = new Audio("beep.mp3");
 var rID_VoiceCommandCapture = new Audio("VoiceCommandCapture.mp3");
@@ -3140,6 +3188,22 @@ var rID_Phone1Icon = new fabric.Image(rPhoneIcon1Info.kImageElement, {
 
 	var rPhoneIcon2Info = new kInsertImageInfo("rPhone2",document.getElementById('rPhone2'));  
 var rID_Phone2Icon = new fabric.Image(rPhoneIcon2Info.kImageElement, {
+	left: rID_TutorialLeft + 460,
+  top: rID_TutorialTop + 440 ,
+	width: 70,
+	height: 60
+});
+
+	var rPhoneIcon3Info = new kInsertImageInfo("rPhone3",document.getElementById('rPhone3'));  
+var rID_Phone3Icon = new fabric.Image(rPhoneIcon3Info.kImageElement, {
+	left: rID_TutorialLeft + 460,
+  top: rID_TutorialTop + 440 ,
+	width: 70,
+	height: 60
+});
+
+	var rPhoneIcon4Info = new kInsertImageInfo("rPhone4",document.getElementById('rPhone4'));  
+var rID_Phone4Icon = new fabric.Image(rPhoneIcon4Info.kImageElement, {
 	left: rID_TutorialLeft + 460,
   top: rID_TutorialTop + 440 ,
 	width: 70,
@@ -3195,6 +3259,46 @@ rID_Kruti.on('selected', function ()
 	canvas.deactivateAll(); 
 });
 
+
+rID_Sahib.on('selected', function () 
+{
+     activeuser = 'SAHIB';
+    if(isUsedTutorial == 0)
+	{
+	rID_RenderChooseLanguage();
+	rID_ShowChooseLanguage();
+	 isUsedTutorial =1;
+	}
+	else
+	{
+	  rID_RenderTutorialPage2();
+       rID_ShowTutorialPage2();
+	}
+	
+	
+	
+	canvas.deactivateAll(); 
+});
+
+rID_Ankur.on('selected', function () 
+{
+     activeuser = 'ANKUR';
+    if(isUsedTutorial == 0)
+	{
+	rID_RenderChooseLanguage();
+	rID_ShowChooseLanguage();
+	 isUsedTutorial =1;
+	}
+	else
+	{
+	  rID_RenderTutorialPage2();
+       rID_ShowTutorialPage2();
+	}
+	
+	
+	
+	canvas.deactivateAll(); 
+});
  
 //canvas.add(rID_GroupFirstTimeSetupButton);
 
@@ -3382,6 +3486,7 @@ if(activeuser == 'RIDHI')
 {
    canvas.add(rID_UserIcon1);
    rUserIcon1Info.kIsUsed = true;
+   k_RidhiProfile.kImageIcon = rUserIcon1Info.kId;
    
    
    
@@ -3405,7 +3510,25 @@ else if (activeuser == 'KRUTI')
   canvas.add(rID_UserIcon2);
   rUserIcon2Info.kIsUsed = true;
   rID_UserIcon2.visible = true;
+  k_KrutiProfile.kImageIcon = rUserIcon2Info.kId;
 }
+
+else if (activeuser == 'SAHIB')
+{
+  canvas.add(rID_UserIcon3);
+  rUserIcon3Info.kIsUsed = true;
+  rID_UserIcon3.visible = true;
+  k_SahibProfile.kImageIcon = rUserIcon3Info.kId;
+}
+
+else if (activeuser == 'ANKUR')
+{
+  canvas.add(rID_UserIcon4);
+  rUserIcon4Info.kIsUsed = true;
+  rID_UserIcon4.visible = true;
+  k_AnkurProfile.kImageIcon = rUserIcon4Info.kId;
+}
+
 
 rID_RenderCameraOnClick();
 	rID_ShowCameraOnClick();
@@ -3493,6 +3616,10 @@ rID_RightArrowIcon3.on('selected', function () {
 	rID_RenderScanFinger();
 	rID_ShowScanFinger();
 	
+	/*if(activeuser == 'RIDHI')
+	{
+          	
+	}*/
    
  
 canvas.deactivateAll();
@@ -3503,14 +3630,29 @@ canvas.deactivateAll();
 
 rID_RightArrowIcon4.on('selected', function () {
 
-rID_Circle2.fill = 'white';
-rID_Circle3.fill = 'black';
-rID_HideScanFinger();
-rID_RenderVoiceCommand();
-rID_ShowVoiceCommand();
-setTimeout(rID_VoiceCapture,4500);
+ rID_Circle2.fill = 'white';
+ rID_Circle3.fill = 'black';
+ rID_HideScanFinger();
+ 
+/*if(isUsedTutorial == 0)
+{
+ 
+ rID_RenderVoiceCommand();
+ rID_ShowVoiceCommand();
+ 
+ }
+ 
+ else 
+ { 
+    rID_ShowVoiceCommand();
+ }*/
+ 
+ rID_RenderVoiceCommand();
+ rID_ShowVoiceCommand();
+ 
+ setTimeout(rID_VoiceCapture,4500);
 
-setTimeout(rID_Captured,5600);
+ setTimeout(rID_Captured,5600);
 
 canvas.deactivateAll();
 
@@ -3522,6 +3664,16 @@ rID_RightArrowIcon5.on('selected', function () {
 rID_Circle3.fill = 'white';
 rID_Circle4.fill = 'black';
 rID_HideVoiceCommand();
+/*if(isUsedTutorial == 0)
+{
+
+}
+
+else
+{
+   rID_ShowSyncPhone();
+}*/
+
 rID_RenderSyncPhone();
 rID_ShowSyncPhone();
 setTimeout(rID_DisplayPhone,1000);
@@ -3746,6 +3898,8 @@ function rID_HideCameraOnClick()
    
     rID_UserIcon1.visible = false;
 	rID_UserIcon2.visible = false;
+	rID_UserIcon3.visible = false;
+	rID_UserIcon4.visible = false;
 	rID_RetakeText.visible = false;
 	rID_CameraIcon2.visible = false;
 	rID_TickMarkIcon2.visible = false;
@@ -3855,6 +4009,9 @@ else if(activeuser == 'KRUTI')
  rID_VoiceIcon.visible = false;
    canvas.add(rID_TickMarkIcon3);
    canvas.add(rID_VideoIcon2);
+   rID_TickMarkIcon3.visible = true;
+   rID_VideoIcon2.visible = true;
+   
 }
 
 function rID_HideVoiceCommand()
@@ -3885,18 +4042,22 @@ function rID_RenderSyncPhone()
 function rID_ShowSyncPhone()
 {
     
-rID_SyncPhoneText.visible =true
-	rID_SyncPhoneBox.visible =true
-	rID_SyncPhoneText2.visible =true
-    rID_LeftArrowIcon6.visible =true
-	rID_RightArrowIcon6.visible =true
+rID_SyncPhoneText.visible =true;
+	rID_SyncPhoneBox.visible =true;
+	rID_SyncPhoneText2.visible =true;
+    rID_LeftArrowIcon6.visible =true;
+	rID_RightArrowIcon6.visible =true;
 }
 
 function rID_DisplayPhone()
 {
+  canvas.add(rID_SyncIcon);
+   rID_SyncIcon.visible = true;
+
    if(activeuser == 'RIDHI')
    {
      canvas.add(rID_Phone1Icon);
+	 
 	 rPhoneIcon1Info.kIsUsed =  true;
 	 k_RidhiProfile.kPhoneSynced = rPhoneIcon1Info.kId;
 	 
@@ -3905,19 +4066,43 @@ function rID_DisplayPhone()
    else if (activeuser == 'KRUTI')
    {
       canvas.add(rID_Phone2Icon);
+	  rID_Phone2Icon.visible = true;
 	 rPhoneIcon2Info.kIsUsed =  true;
 	 k_KrutiProfile.kPhoneSynced = rPhoneIcon2Info.kId;
    }
-   canvas.add(rID_SyncIcon);
+   
+   else if (activeuser == 'SAHIB')
+   {
+      canvas.add(rID_Phone3Icon);
+	  rID_Phone3Icon.visible = true;
+	 rPhoneIcon3Info.kIsUsed =  true;
+	 k_SahibProfile.kPhoneSynced = rPhoneIcon3Info.kId;
+   }
+   
+   else if (activeuser == 'ANKUR')
+   {
+      canvas.add(rID_Phone4Icon);
+	  rID_Phone4Icon.visible = true;
+	 rPhoneIcon4Info.kIsUsed =  true;
+	 k_AnkurProfile.kPhoneSynced = rPhoneIcon4Info.kId;
+   }
+   
+   
+   
 }
 
 function rID_Synced()
 {
 
   rID_SyncIcon.visible = false;
-  rID_Playbeep();
   canvas.add(rID_SyncedText);
   canvas.add(rID_TickMarkIcon5);
+  rID_SyncedText.visible = true;
+  rID_TickMarkIcon5.visible = true;
+  rID_Playbeep();
+  
+  
+  
 }
 
 function rID_HideSyncPhone()
@@ -3929,6 +4114,10 @@ function rID_HideSyncPhone()
 	rID_RightArrowIcon6.visible = false;
 	rID_Phone1Icon.visible = false;
 	rID_Phone2Icon.visible = false;
+	rID_Phone4Icon.visible = false;
+	rID_Phone3Icon.visible = false;
+		
+		
      rID_SyncIcon.visible = false;
 	 rID_SyncedText.visible = false;
 	 rID_TickMarkIcon5.visible = false;
@@ -3956,12 +4145,8 @@ rID_LastPageBox.visible = true;
 
 function rID_HideLastPage()
 {
-  rID_Circle1.visible =  false;
-
-rID_Circle2.visible=  false;
-rID_Circle3.visible=  false;
-  rID_Circle4.visible=  false;
-   rID_Circle5.visible=  false;
+rID_HideCircles();
+rID_Circle5.set('fill','white');
  rID_LastPageBox.visible = false;
   rID_LastPageText.visible = false;
   rID_LastPageText2.visible = false;
@@ -3996,6 +4181,7 @@ canvas.add(rID_Ridhi);
 canvas.add(rID_Kruti);
 canvas.add(rID_Sahib);
 canvas.add(rID_Ankur);
+
 
 
 /*************************************** Code End by Ridhi ***************************************************************************************/
