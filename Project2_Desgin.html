@@ -3244,7 +3244,10 @@ function kID_AddIcons_AfterTheme()
 	//door knob => 
 	canvas.add(kID_DoorKnob);
 	
-	kID_Refresh_DateTime();
+	if(kID_TimeFormat == 24)
+		kID_Refresh_DateTime_24();
+	else
+		kID_Refresh_DateTime_12();
 
 	//temperature => 
 	canvas.add(kID_WeatherTemp);
