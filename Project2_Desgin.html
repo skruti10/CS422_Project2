@@ -81,7 +81,30 @@
 	<img src="Icons//Kruti//HelpIcon.png" id="kHelpIcon" style="display:none">
 	<img src="Icons//Kruti//house alarm.png" id="kHouseAlarmIcon" style="display:none">
 	<img src="Icons//Kruti//theme1.png" id="kThemeIcon" style="display:none">
-	<img src="Icons//Kruti//todolist1.png" id="kToDoListIcon" style="display:none">	
+	<img src="Icons//Kruti//todolist1.png" id="kToDoListIcon" style="display:none">
+	
+	<img src="Icons//Kruti//ThemeBabyAnnouncement.jpg" id="kThemeBabyAnnouncement" style="display:none">
+	<img src="Icons//Kruti//ThemeBabyAnnouncementIcon.jpg" id="kThemeBabyAnnouncementIcon" style="display:none">
+	<img src="Icons//Kruti//ThemeBirthday.jpg" id="kThemeBirthday" style="display:none">
+	<img src="Icons//Kruti//ThemeBirthdayIcon.png" id="kThemeBirthdayIcon" style="display:none">
+	<img src="Icons//Kruti//ThemeChristmasTree.jpg" id="kThemeChristmasTree" style="display:none">
+	<img src="Icons//Kruti//ThemeChristmasTreeIcon.png" id="kThemeChristmasTreeIcon" style="display:none">
+	<img src="Icons//Kruti//ThemeDoorDesign.jpg" id="kThemeDoorDesign" style="display:none">
+	<img src="Icons//Kruti//ThemeDoorDesignIcon.jpg" id="kThemeDoorDesignIcon" style="display:none">
+	<img src="Icons//Kruti//ThemeHalloween.jpg" id="kThemeHalloween" style="display:none">
+	<img src="Icons//Kruti//ThemeHalloweenIcon.jpg" id="kThemeHalloweenIcon" style="display:none">
+	<img src="Icons//Kruti//ThemeWhiteIcon.png" id="kThemeWhiteIcon" style="display:none">
+	<img src="Icons//Kruti//ThemeWhiteIcon.png" id="kThemeWhiteIcon" style="display:none">
+	<img src="Icons//Kruti//IN.png" id="kINIcon" style="display:none">
+	<img src="Icons//Kruti//OUT.png" id="kOUTIcon" style="display:none">
+	<img src="Icons//Kruti//SelectedIN.png" id="kSelectedINIcon" style="display:none">
+	<img src="Icons//Kruti//SelectedOUT.png" id="kSelectedOUTIcon" style="display:none">
+	
+	<img src="Icons//Kruti//ArrowGrey_Left.png" id="kArrowGrey_LeftIcon" style="display:none">
+	<img src="Icons//Kruti//ArrowGrey_Right.png" id="kArrowGrey_RightIcon" style="display:none">
+	
+	<img src="" id="kIDMsgBinding" style="display:none">
+	<img src="" id="kODMsgBinding" style="display:none">
 
 
 
@@ -191,6 +214,8 @@ outsideDoor.lockMovementX = outsideDoor.lockMovementY = true;
 
 
 
+/************************************************** Common set of codes for everyone start -JS ***************************************************************/
+
 //Functions for playing sound
 
 function playDoorbell() {
@@ -203,13 +228,59 @@ function playBeep(){
     audio2.play(); 
 }
 
+/*** START $$Kruti added the code for profiles*********************************/
+
+function kUserProfiles(kUserName,kImageIcon,kFingerIcon,kVoiceCommand,kPhoneSynced,kMessages,kToDoList,kCalendar,kHasUsedMenu)
+{
+	this.kUserName 		= kUserName;
+	this.kImageIcon 	= kImageIcon;
+	this.kFingerIcon 	= kFingerIcon;
+	this.kVoiceCommand 	= kVoiceCommand;
+	this.kPhoneSynced 	= kPhoneSynced;
+	this.kMessages 		= kMessages;
+	this.kToDoList 		= kToDoList;
+	this.kCalendar 		= kCalendar;
+	this.kHasUsedMenu 	= kHasUsedMenu;
+};
+
+var k_KrutiProfile = new kUserProfiles('Kruti','','','','','','','',false);
+var k_SahibProfile = new kUserProfiles('Sahib','','','','','','','',false);
+var k_AnkurProfile = new kUserProfiles('Ankur','','','','','','','',false);
+var k_RidhiProfile = new kUserProfiles('Ridhi','','','','','','','',false);
+
+var k_GuestProfile1 = new kUserProfiles('Guest1','','','','','','','',false);
+var k_GuestProfile2 = new kUserProfiles('Guest2','','','','','','','',false);
 
 
+function kCommonFunction(name, value)
+{
+	this.kName = name;
+	this.kValue = value;
+	this.kIsUsed = false;
+};
+
+var kUserMessages = [];
+
+kUserMessages.push((new kCommonFunction("all","Icons/Kruti/WelcomeMessage.png")));
+
+kUserMessages.push((new kCommonFunction("kruti","Icons/Kruti/WelcomeMessage.png")));
+kUserMessages.push((new kCommonFunction("kruti","Icons/Kruti/KrutiMessage.png")));
+
+kUserMessages.push((new kCommonFunction("ridhi","Icons/Kruti/WelcomeMessage.png")));
+kUserMessages.push((new kCommonFunction("ridhi","Icons/Kruti/RidhiMessage.png")));
+
+kUserMessages.push((new kCommonFunction("sahib","Icons/Kruti/WelcomeMessage.png")));
+kUserMessages.push((new kCommonFunction("sahib","Icons/Kruti/SahibMessage.png")));
+
+kUserMessages.push((new kCommonFunction("ankur","Icons/Kruti/WelcomeMessage.png")));
+kUserMessages.push((new kCommonFunction("ankur","Icons/Kruti/AnkurMessage.png")));
 
 
+var kUserToDoList = [];
 
+/********************************************************************************************************************/
 
-// add all of the elements to the canvas
+/***END $$Kruti added the code for profiles***/
 
 /************************************START $$ Kruti $$ added code for mirror behind the inside door *****************************/
 
@@ -226,31 +297,139 @@ canvas.add(kID_MirrorFullIcon);
 
 /************************************END $$ Kruti $$ added code for mirror behind the inside door *****************************/
 
+/************************************START $$ Kruti $$ added code for themes behind the inside door *****************************/
+
+var kThemeBabyAnnouncementInfo = new kInsertImageInfo("kThemeBabyAnnouncement",document.getElementById('kThemeBabyAnnouncement'));  
+var kID_ThemeBabyAnnouncement = new fabric.Image(kThemeBabyAnnouncementInfo.kImageElement, 
+{
+	left: 23,
+	top: 0,
+	width: 554,
+	height: localHeight
+});
+canvas.add(kID_ThemeBabyAnnouncement);
+
+var kThemeBirthdayInfo = new kInsertImageInfo("kThemeBirthday",document.getElementById('kThemeBirthday'));  
+var kID_ThemeBirthday = new fabric.Image(kThemeBirthdayInfo.kImageElement, 
+{
+	left: 23,
+	top: 0,
+	width: 554,
+	height: localHeight
+});
+canvas.add(kID_ThemeBirthday);
+
+var kThemeChristmasTreeInfo = new kInsertImageInfo("kThemeChristmasTree",document.getElementById('kThemeChristmasTree'));  
+var kID_ThemeChristmasTree = new fabric.Image(kThemeChristmasTreeInfo.kImageElement, 
+{
+	left: 23,
+	top: 0,
+	width: 554,
+	height: localHeight
+});
+canvas.add(kID_ThemeChristmasTree);
+
+var kThemeDoorDesignInfo = new kInsertImageInfo("kThemeDoorDesign",document.getElementById('kThemeDoorDesign'));  
+var kID_ThemeDoorDesign = new fabric.Image(kThemeDoorDesignInfo.kImageElement, 
+{
+	left: 23,
+	top: 0,
+	width: 554,
+	height: localHeight
+});
+canvas.add(kID_ThemeDoorDesign);
+
+var kThemeHalloweenInfo = new kInsertImageInfo("kThemeHalloween",document.getElementById('kThemeHalloween'));  
+var kID_ThemeHalloween = new fabric.Image(kThemeHalloweenInfo.kImageElement, 
+{
+	left: 23,
+	top: 0,
+	width: 554,
+	height: localHeight
+});
+canvas.add(kID_ThemeHalloween);
+
+/************************************END $$ Kruti $$ added code for themes behind the inside door *****************************/
+
+/************************************START $$ Kruti $$ added code for themes behind the outside door *****************************/
+
+var kOD_ThemeBabyAnnouncement = new fabric.Image(kThemeBabyAnnouncementInfo.kImageElement, 
+{
+	left: 642,
+	top: 0,
+	width: 554,
+	height: localHeight
+});
+canvas.add(kOD_ThemeBabyAnnouncement);
+
+
+var kOD_ThemeBirthday = new fabric.Image(kThemeBirthdayInfo.kImageElement, 
+{
+	left: 642,
+	top: 0,
+	width: 554,
+	height: localHeight
+});
+canvas.add(kOD_ThemeBirthday);
+
+
+var kOD_ThemeChristmasTree = new fabric.Image(kThemeChristmasTreeInfo.kImageElement, 
+{
+	left: 642,
+	top: 0,
+	width: 554,
+	height: localHeight
+});
+canvas.add(kOD_ThemeChristmasTree);
+
+var kOD_ThemeDoorDesign = new fabric.Image(kThemeDoorDesignInfo.kImageElement, 
+{
+	left: 642,
+	top: 0,
+	width: 554,
+	height: localHeight
+});
+canvas.add(kOD_ThemeDoorDesign);
+
+
+var kOD_ThemeHalloween = new fabric.Image(kThemeHalloweenInfo.kImageElement, 
+{
+	left: 642,
+	top: 0,
+	width: 554,
+	height: localHeight
+});
+canvas.add(kOD_ThemeHalloween);
+
+function kRemoveThemeWallpapers()
+{
+	canvas.remove(kID_ThemeBabyAnnouncement);
+	canvas.remove(kID_ThemeBirthday);
+	canvas.remove(kID_ThemeChristmasTree);
+	canvas.remove(kID_ThemeDoorDesign);
+	canvas.remove(kID_ThemeHalloween);
+	
+	canvas.remove(kOD_ThemeBabyAnnouncement);
+	canvas.remove(kOD_ThemeBirthday);
+	canvas.remove(kOD_ThemeChristmasTree);
+	canvas.remove(kOD_ThemeDoorDesign);
+	canvas.remove(kOD_ThemeHalloween);
+};
+
+
+/************************************END $$ Kruti $$ added code for themes behind the outside door *****************************/
+
+
+/************************************************** Common set of codes for everyone end - JS *****************************************************************/
+
+// add all of the elements to the canvas
 canvas.add(insideDoor);
 canvas.add(outsideDoor);
-/************************************************** Common set of codes for everyone start -JS ***************************************************************/
-/***START $$Kruti added the code for profiles***/
-function kUserProfiles(kUserName,kImageIcon,kFingerIcon,kVoiceCommand,kPhoneSynced,kMessages,kToDoList,kCalendar,kHasUsedMenu)
-{
-  this.kUserName    = kUserName;
-  this.kImageIcon   = kImageIcon;
-  this.kFingerIcon  = kFingerIcon;
-  this.kVoiceCommand  = kVoiceCommand;
-  this.kPhoneSynced   = kPhoneSynced;
-  this.kMessages    = kMessages;
-  this.kToDoList    = kToDoList;
-  this.kCalendar    = kCalendar;
-  this.kHasUsedMenu   = kHasUsedMenu;
-};
-var k_KrutiProfile = new kUserProfiles('Kruti','','','','','','','',false);
-var k_SahibProfile = new kUserProfiles('Sahib','','','','','','','',false);
-var k_AnkurProfile = new kUserProfiles('Ankur','','','','','','','',false);
-var k_RidhiProfile = new kUserProfiles('Ridhi','','','','','','','',false);
-var k_GuestProfile1 = new kUserProfiles('Guest1','','','','','','','',false);
-var k_GuestProfile2 = new kUserProfiles('Guest2','','','','','','','',false);
-/***END $$Kruti added the code for profiles***/
-/************************************************** Common set of codes for everyone end - JS *****************************************************************/
+
+
+
 /*************************************** Code Added by Kruti ***************************************************************************************/
+
 //common function used for images - whenever we use any image use this function to maintain the icons added on canvas
 function kInsertImageInfo(kId,kElement)
 {
@@ -274,6 +453,28 @@ var kID_IsMenuOpen = false;
 //intially the bell is not muted
 var kID_IsBellMuted = false;
 
+//is inside theme selected
+var kID_ThemeApplied = false;
+
+var kID_SelThemeIcon = '';
+
+//is outside theme selected
+var kOD_ThemeApplied = false;
+
+//for checking read and unread messages
+var kID_AnyUnReadMsg = false;
+
+var kID_AnyPackageDelivered = false;
+
+var kID_AnyAlert = false;
+
+var kOD_SelThemeIcon = '';
+
+var kStrokeColor = 'black';
+var kStrokeWidth10 = 5;
+var kStrokeWidth0 = 0;
+
+
 /********************** code for date + time + weather start ***************************************************************************************/
 var kID_HeaderPanelLeft = 23;
 var kID_HeaderPanelTop = 2;
@@ -284,7 +485,7 @@ var kID_HeaderPanel = new fabric.Rect({
   top: kID_HeaderPanelTop,
   fill: 'white',
   width: 554,
-  height: 100
+  height: 90
 });
 
 canvas.add(kID_HeaderPanel);
@@ -487,7 +688,7 @@ var kID_MuteIcon = new fabric.Image(kMuteIconInfo.kImageElement, {
 	width: kID_NIconW+10,
 	height: kID_NIconH-10
 });
-canvas.add(kID_MuteIcon);
+
 
 var kOneUnreadMessageIconInfo = new kInsertImageInfo("kOneUnreadMessageIcon",document.getElementById('kOneUnreadMessageIcon'));  
 var kID_OneUnreadMessageIcon = new fabric.Image(kOneUnreadMessageIconInfo.kImageElement, {
@@ -496,17 +697,15 @@ var kID_OneUnreadMessageIcon = new fabric.Image(kOneUnreadMessageIconInfo.kImage
 	width: kID_NIconW,
 	height: kID_NIconH-20
 });
-canvas.add(kID_OneUnreadMessageIcon);
 
-var kGoogleExpressDeliveryIconInfo = new kInsertImageInfo("kGoogleExpressDeliveryIcon",document.getElementById('kGoogleExpressDeliveryIcon'));  
-var kID_GoogleExpressDeliveryIcon = new fabric.Image(kGoogleExpressDeliveryIconInfo.kImageElement, {
+var kDeliveryIconInfo = new kInsertImageInfo("sDeliverPackageIcon",document.getElementById('sDeliverPackageIcon'));  
+var kID_DeliveryIcon = new fabric.Image(kDeliveryIconInfo.kImageElement, {
+	width: 60,
+	height: 60,
 	left: kID_NotificationPanelLeft+300, 
-	top: kID_NotificationPanelTop-10, 
-	width: kID_NIconW+10,
-	height: kID_NIconH-10,
-	angle:10
+	top: kID_NotificationPanelTop-10,  
 });
-canvas.add(kID_GoogleExpressDeliveryIcon);
+
 
 var kAlertIconInfo = new kInsertImageInfo("kAlertIcon",document.getElementById('kAlertIcon'));  
 var kID_AlertIcon = new fabric.Image(kAlertIconInfo.kImageElement, {
@@ -515,9 +714,38 @@ var kID_AlertIcon = new fabric.Image(kAlertIconInfo.kImageElement, {
 	width: kID_NIconW+10,
 	height: kID_NIconH-20
 });
-canvas.add(kID_AlertIcon);
-canvas.add(kID_NotificationPanel);
 
+
+
+function kAddNotificationIcons_WithHidingPanel()
+{
+	canvas.add(kID_MuteIcon);
+	canvas.add(kID_OneUnreadMessageIcon);
+	canvas.add(kID_DeliveryIcon);
+	canvas.add(kID_AlertIcon);
+	canvas.add(kID_NotificationPanel);
+};
+
+
+function kAddNotificationPanel()
+{
+	if(kID_IsBellMuted ||kID_AnyUnReadMsg || kID_AnyPackageDelivered || kID_AnyAlert)
+	canvas.add(kID_NotificationPanel);
+	if(kID_IsBellMuted)
+		canvas.add(kID_MuteIcon);
+	
+	if(kID_AnyUnReadMsg)
+		canvas.add(kID_OneUnreadMessageIcon);
+	
+	if(kID_AnyPackageDelivered)
+		canvas.add(kID_DeliveryIcon);
+	
+	if(kID_AnyAlert)
+		canvas.add(kID_AlertIcon);
+};
+
+
+kAddNotificationIcons_WithHidingPanel();
 
 /********************** code for notification panel end ******************************************************************************************/
 
@@ -539,7 +767,7 @@ var kID_MenuPanel = new fabric.Rect({
   top: kID_MenuPanelTop-40,
   fill: 'white',
   width: 554,
-  height: 220
+  height: 230
 });
 
 //canvas.add(kID_MenuPanel);
@@ -724,6 +952,7 @@ function kAddCameraPanel_WithHidingPanel()
 
 function kAddCameraPanel_WithoutHidingPanel()
 {
+	canvas.add(kID_CameraPanel);
 	canvas.add(kID_CameraLeftArrowIcon);
 	canvas.add(kID_OutsideGuestImageIcon1);
 	canvas.add(kID_FOutsideGuestImageIcon1);
@@ -759,16 +988,19 @@ function kLeftArrowCameraRemove()
 	canvas.remove(kID_MicrophoneOnIcon);
 	canvas.remove(kID_MicrophoneOffIcon);
 	canvas.remove(kID_CameraLeftArrowIcon);
-}
+	canvas.remove(kID_CameraPanel);
+};
 
 /************************************ events for camera panel ***************************************************************************/
 kID_CameraLeftArrowIcon.on('selected', function() 
 {
 	kID_IsAvatarShown = false;
 	kID_IsMicrophoneMute = false;
+	kID_IsMenuOpen = true;
 	kRemoveCameraPanel_WithHidingPanel_OD();
 	kLeftArrowCameraRemove();
-	canvas.add(kID_LockIcon);	
+	//canvas.add(kID_LockIcon);	
+	kAddMenuPanel1();
 	canvas.deactivateAll(); // deselect everything
 });
 
@@ -962,12 +1194,22 @@ kID_InsideCameraOffIcon.on('selected', function()
 	/*** add the image icons for outside panel - make the inside user visible *****/
 	
 	/*** IMP - need to fetch the image as per the user profile inside standing near the door ****/
-	
-	canvas.add(kOD_CameraPanel);
-	//canvas.add(kOD_KrutiImageIcon);
-	//canvas.add(kOD_RidhiImageIcon);
-	//canvas.add(kOD_SahibImageIcon);
-	canvas.add(kOD_AnkurImageIcon);
+	if(activeuser.toLowerCase() == 'ridhi')
+	{
+		canvas.add(kOD_RidhiImageIcon);
+	}
+	else if(activeuser.toLowerCase() == 'kruti')
+	{
+		canvas.add(kOD_KrutiImageIcon);
+	}
+	else if(activeuser.toLowerCase() == 'sahib')
+	{
+		canvas.add(kOD_SahibImageIcon);
+	}
+	else if(activeuser.toLowerCase() == 'sahib')
+	{
+		canvas.add(kOD_AnkurImageIcon);
+	}
 	/*** add the image icons for outside panel - make the inside user visible *****/
 
 	canvas.deactivateAll(); // deselect everything
@@ -1025,6 +1267,940 @@ var kID_OneUnreadMessageIcon_Menu = new fabric.Image(kOneUnreadMessageIconInfo.k
 	width: kID_MenuIconW+10,
 	height: kID_MenuIconH+10
 });
+
+/**********************************START Message Panel ****************************************************************/
+var kID_MsgIconW = 60;
+var kID_MsgIconH = 70;
+
+var kID_MsgPanelLeft = 23;
+var kID_MsgPanelTop = 100;
+
+var kID_RightArrowCounter = 0;
+var kID_LeftArrowCounter = 0;
+
+var kID_IsReadMode = false;
+var kID_IsWriteMode = false;
+var kID_MsgAllSel = false;
+var kID_MsgKrutiSel = false;
+var kID_MsgRidhiSel = false;
+var kID_MsgSahibSel = false;
+var kID_MsgAnkurSel = false;
+var kID_IsPostInSel = false;
+var kID_IsPostOutSel = false;
+
+var kID_CurMsgUser = 'all';
+
+
+// message panel rectangle - added for reference
+var kID_MsgPanel = new fabric.Rect({
+  left: kID_MsgPanelLeft,
+  top: kID_MsgPanelTop,
+  fill: 'white',
+  width: 554,
+  height: 350
+});
+
+
+var kID_MsgTopLeftArrowIcon = new fabric.Image(kLeftArrowIconInfo.kImageElement, {
+	left: kID_MsgPanelLeft+5,
+	top: kID_MsgPanelTop+14, 
+	width: kID_MsgIconW-20,
+	height: kID_MsgIconH-30
+});
+
+var kID_MsgRead = new fabric.Rect({
+  left: kID_MsgPanelLeft+65,
+  top: kID_MsgPanelTop+10,
+  fill: 'grey',
+  stroke: 'black',
+  strokeWidth:2,
+  width: 215,
+  height: 50
+});
+
+var kID_MsgReadTxt = new fabric.Text('Read',{
+	left: kID_MsgPanelLeft+120, //1635,
+	top: kID_MsgPanelTop +15, //100,
+	fontSize: kID_FontSize + 10,
+	//fontWeight:'bold',
+	fontFamily: kID_Font
+});
+
+
+var kID_MsgWrite = new fabric.Rect({
+  left: kID_MsgPanelLeft+280,
+  top: kID_MsgPanelTop+10,
+  fill: 'white',
+  stroke: 'black',
+  strokeWidth:2,
+  width: 215,
+  height: 50
+});
+
+var kID_MsgWriteTxt = new fabric.Text('Write',{
+	left: kID_MsgPanelLeft+330, //1635,
+	top: kID_MsgPanelTop +15, //100,
+	fontSize: kID_FontSize + 10,
+	//fontWeight:'bold',
+	fontFamily: kID_Font
+});
+
+var kID_MsgAll = new fabric.Rect({
+  left: kID_MsgPanelLeft+65,
+  top: kID_MsgPanelTop+60,
+  fill: 'grey',
+  stroke: 'black',
+  strokeWidth:2,
+  width: 86,
+  height: 50
+});
+
+var kID_MsgAllTxt = new fabric.Text('All',{
+	left: kID_MsgPanelLeft+90, //1635,
+	top: kID_MsgPanelTop +70, //100,
+	fontSize: kID_FontSize+5,
+	//fontWeight:'bold',
+	fontFamily: kID_Font
+});
+
+var kID_MsgKruti = new fabric.Rect({
+  left: kID_MsgPanelLeft+151,
+  top: kID_MsgPanelTop+60,
+  fill: 'white',
+  stroke: 'black',
+  strokeWidth:2,
+  width: 86,
+  height: 50
+});
+
+var kID_MsgKrutiTxt = new fabric.Text('Kruti',{
+	left: kID_MsgPanelLeft+160, //1635,
+	top: kID_MsgPanelTop +70, //100,
+	fontSize: kID_FontSize,
+	//fontWeight:'bold',
+	fontFamily: kID_Font
+});
+
+var kID_MsgRidhi = new fabric.Rect({
+  left: kID_MsgPanelLeft+237,
+  top: kID_MsgPanelTop+60,
+  fill: 'white',
+  stroke: 'black',
+  strokeWidth:2,
+  width: 86,
+  height: 50
+});
+
+var kID_MsgRidhiTxt = new fabric.Text('Ridhi',{
+	left: kID_MsgPanelLeft+245, //1635,
+	top: kID_MsgPanelTop +70, //100,
+	fontSize: kID_FontSize,
+	//fontWeight:'bold',
+	fontFamily: kID_Font
+});
+
+var kID_MsgSahib = new fabric.Rect({
+  left: kID_MsgPanelLeft+323,
+  top: kID_MsgPanelTop+60,
+  fill: 'white',
+  stroke: 'black',
+  strokeWidth:2,
+  width: 86,
+  height: 50
+});
+
+var kID_MsgSahibTxt = new fabric.Text('Sahib',{
+	left: kID_MsgPanelLeft+333, //1635,
+	top: kID_MsgPanelTop +70, //100,
+	fontSize: kID_FontSize,
+	//fontWeight:'bold',
+	fontFamily: kID_Font
+});
+
+var kID_MsgAnkur = new fabric.Rect({
+  left: kID_MsgPanelLeft+409,
+  top: kID_MsgPanelTop+60,
+  fill: 'white',
+  stroke: 'black',
+  strokeWidth:2,
+  width: 86,
+  height: 50
+});
+
+var kID_MsgAnkurTxt = new fabric.Text('Ankur',{
+	left: kID_MsgPanelLeft+415, //1635,
+	top: kID_MsgPanelTop +70, //100,
+	fontSize: kID_FontSize,
+	//fontWeight:'bold',
+	fontFamily: kID_Font
+});
+
+var kMsgMidGreyLeftArrowIconInfo = new kInsertImageInfo("kArrowGrey_LeftIcon",document.getElementById('kArrowGrey_LeftIcon'));  
+var kID_MsgMidGreyLeftArrowIcon = new fabric.Image(kMsgMidGreyLeftArrowIconInfo.kImageElement, {
+	left: kID_MsgPanelLeft+5,
+	top: kID_MsgPanelTop+190, 
+	width: kID_MsgIconW-20,
+	height: kID_MsgIconH-30
+});
+
+var kMsgMidGreyRightArrowIconInfo = new kInsertImageInfo("kArrowGrey_RightIcon",document.getElementById('kArrowGrey_RightIcon'));  
+var kID_MsgMidGreyRightArrowIcon = new fabric.Image(kMsgMidGreyRightArrowIconInfo.kImageElement, {
+	left: kID_MsgPanelLeft+505,
+	top: kID_MsgPanelTop+190, 
+	width: kID_MsgIconW-20,
+	height: kID_MsgIconH-30
+});
+
+
+var kMsgMidLeftArrowIconInfo = new kInsertImageInfo("kLeftArrowIcon",document.getElementById('kLeftArrowIcon'));  
+var kID_MsgMidLeftArrowIcon = new fabric.Image(kMsgMidLeftArrowIconInfo.kImageElement, {
+	left: kID_MsgPanelLeft+5,
+	top: kID_MsgPanelTop+190, 
+	width: kID_MsgIconW-20,
+	height: kID_MsgIconH-30
+});
+
+var kMsgMidRightArrowIconInfo = new kInsertImageInfo("kRightArrowIcon",document.getElementById('kRightArrowIcon'));  
+var kID_MsgMidRightArrowIcon = new fabric.Image(kMsgMidRightArrowIconInfo.kImageElement, {
+	left: kID_MsgPanelLeft+505,
+	top: kID_MsgPanelTop+190, 
+	width: kID_MsgIconW-20,
+	height: kID_MsgIconH-30
+});
+
+
+var kMsgBindInfo = new kInsertImageInfo("kIDMsgBinding",document.getElementById('kIDMsgBinding'));  
+var kID_MsgBind1 = new fabric.Image(kMsgBindInfo.kImageElement, 
+{
+	left: kID_MsgPanelLeft +65,
+	top: kID_MsgPanelTop+120,
+	strokeWidth:2,
+	width: 420,
+	height: 180
+});
+
+
+var kID_MsgPostIN = new fabric.Rect({
+  left: kID_MsgPanelLeft+65,
+  top: kID_MsgPanelTop+290,
+  fill: 'white',
+  stroke: 'black',
+  strokeWidth:2,
+  width: 215,
+  height: 50
+});
+
+var kID_MsgPostINTxt = new fabric.Text('Post In',{
+	left: kID_MsgPanelLeft+110, //1635,
+	top: kID_MsgPanelTop +300, //100,
+	fontSize: kID_FontSize+10,
+	//fontWeight:'bold',
+	fontFamily: kID_Font
+});
+
+var kID_MsgPostOUT = new fabric.Rect({
+  left: kID_MsgPanelLeft+280,
+  top: kID_MsgPanelTop+290,
+  fill: 'white',
+  stroke: 'black',
+  strokeWidth:2,
+  width: 215,
+  height: 50
+});
+
+var kID_MsgPostOUTTxt = new fabric.Text('Post Out',{
+	left: kID_MsgPanelLeft+320, //1635,
+	top: kID_MsgPanelTop +300, //100,
+	fontSize: kID_FontSize+10,
+	//fontWeight:'bold',
+	fontFamily: kID_Font
+});
+
+function kAddMessagePanel_WithHidingPanel()
+{
+	canvas.add(kID_MsgTopLeftArrowIcon);
+	
+	canvas.add(kID_MsgRead);
+	canvas.add(kID_MsgWrite);
+	
+	canvas.add(kID_MsgAll);
+	canvas.add(kID_MsgKruti);
+	canvas.add(kID_MsgRidhi);
+	canvas.add(kID_MsgSahib);
+	canvas.add(kID_MsgAnkur);
+	
+	canvas.add(kID_MsgPostIN);
+	canvas.add(kID_MsgPostOUT);
+	
+	canvas.add(kID_MsgReadTxt);
+	canvas.add(kID_MsgWriteTxt);
+	canvas.add(kID_MsgAllTxt);
+	canvas.add(kID_MsgKrutiTxt);
+	canvas.add(kID_MsgRidhiTxt);
+	canvas.add(kID_MsgSahibTxt);
+	canvas.add(kID_MsgAnkurTxt);
+	
+	canvas.add(kID_MsgMidGreyLeftArrowIcon);
+	canvas.add(kID_MsgMidGreyRightArrowIcon);
+	canvas.add(kID_MsgMidLeftArrowIcon);
+	canvas.add(kID_MsgMidRightArrowIcon);
+	
+	canvas.add(kID_MsgBind1);
+	
+	
+	canvas.add(kID_MsgPostINTxt);
+	canvas.add(kID_MsgPostOUTTxt);
+	
+	//hide with the panel
+	canvas.add(kID_MsgPanel);
+};
+
+kAddMessagePanel_WithHidingPanel();
+
+function kAddMessagePanel_WithoutHidingPanel()
+{
+	canvas.add(kID_MsgPanel);
+	canvas.add(kID_MsgTopLeftArrowIcon);
+	
+	canvas.add(kID_MsgRead);
+	kID_MsgRead.set({
+		fill:'grey'
+	});
+	canvas.add(kID_MsgWrite);
+	
+	canvas.add(kID_MsgAll);
+	canvas.add(kID_MsgKruti);
+	canvas.add(kID_MsgRidhi);
+	canvas.add(kID_MsgSahib);
+	canvas.add(kID_MsgAnkur);
+	
+	if(activeuser.toLowerCase() == '' || activeuser.toLowerCase() == 'all')
+	{
+		kID_MsgAll.set({
+			fill:'grey'
+		});
+	}
+	else if(activeuser.toLowerCase() == 'ridhi')
+	{
+		kID_MsgRidhi.set({
+			fill:'grey'
+		});
+	}
+	else if(activeuser.toLowerCase() == 'kruti')
+	{
+		kID_MsgKruti.set({
+			fill:'grey'
+		});
+	}
+	else if(activeuser.toLowerCase() == 'sahib')
+	{
+		kID_MsgSahib.set({
+			fill:'grey'
+		});
+	}
+	else if(activeuser.toLowerCase() == 'ankur')
+	{
+		kID_MsgAnkur.set({
+			fill:'grey'
+		});
+	}
+	
+	canvas.add(kID_MsgReadTxt);
+	canvas.add(kID_MsgWriteTxt);
+	canvas.add(kID_MsgAllTxt);
+	canvas.add(kID_MsgKrutiTxt);
+	canvas.add(kID_MsgRidhiTxt);
+	canvas.add(kID_MsgSahibTxt);
+	canvas.add(kID_MsgAnkurTxt);
+	
+	canvas.add(kID_MsgBind1);
+	
+	
+	getMessagesAsPerUser(activeuser,0);
+};
+
+
+function kRemoveMessagePanel()
+{
+	canvas.remove(kID_MsgPanel);
+	canvas.remove(kID_MsgTopLeftArrowIcon);
+	
+	canvas.remove(kID_MsgRead);
+	canvas.remove(kID_MsgWrite);
+	
+	canvas.remove(kID_MsgAll);
+	canvas.remove(kID_MsgKruti);
+	canvas.remove(kID_MsgRidhi);
+	canvas.remove(kID_MsgSahib);
+	canvas.remove(kID_MsgAnkur);
+	
+	canvas.remove(kID_MsgPostIN);
+	canvas.remove(kID_MsgPostOUT);
+	
+	canvas.remove(kID_MsgReadTxt);
+	canvas.remove(kID_MsgWriteTxt);
+	canvas.remove(kID_MsgAllTxt);
+	canvas.remove(kID_MsgKrutiTxt);
+	canvas.remove(kID_MsgRidhiTxt);
+	canvas.remove(kID_MsgSahibTxt);
+	canvas.remove(kID_MsgAnkurTxt);
+	
+	canvas.remove(kID_MsgMidGreyLeftArrowIcon);
+	canvas.remove(kID_MsgMidGreyRightArrowIcon);
+	canvas.remove(kID_MsgMidLeftArrowIcon);
+	canvas.remove(kID_MsgMidRightArrowIcon);
+	
+	canvas.remove(kID_MsgBind1);
+	
+	canvas.remove(kID_MsgPostINTxt);
+	canvas.remove(kID_MsgPostOUTTxt);
+};
+
+function kID_ResetRWMsgIcons(leaveThis)
+{
+	if(leaveThis != 'read')
+	{
+		kID_MsgRead.set({
+			fill:'white'
+		});
+	}
+	
+	if(leaveThis != 'write')
+	{
+		kID_MsgWrite.set({
+			fill:'white'
+		});
+	}
+	
+};
+
+function kID_ResetNamesMsgIcons(leaveThis)
+{	
+	if(leaveThis == '' || leaveThis.toLowerCase() != 'all')
+	{
+		kID_MsgAllSel = false;
+		
+		kID_MsgAll.set({
+			fill:'white'
+		});
+	}
+	
+	if(leaveThis.toLowerCase() != 'kruti')
+	{
+		kID_MsgKrutiSel = false;
+		
+		kID_MsgKruti.set({
+			fill:'white'
+		});
+	}
+	
+	if(leaveThis.toLowerCase() != 'ridhi')
+	{
+		kID_MsgRidhiSel = false;
+		
+		kID_MsgRidhi.set({
+			fill:'white'
+		});
+	
+	}
+	
+	if(leaveThis.toLowerCase() != 'sahib')
+	{
+		kID_MsgSahibSel = false;
+		
+		kID_MsgSahib.set({
+			fill:'white'
+		});
+	}
+	
+	if(leaveThis.toLowerCase() != 'ankur')
+	{
+		kID_MsgAnkurSel = false;
+		
+		kID_MsgAnkur.set({
+			fill:'white'
+		});
+	}
+};
+
+function kID_ResetPostMsgIcons(leaveThis)
+{
+	if(leaveThis.toLowerCase() != 'postIn')
+	{
+		kID_IsPostInSel = false;
+		
+		kID_MsgPostIN.set({
+			fill:'white'
+		});
+	}
+	
+	if(leaveThis.toLowerCase() != 'postOut')
+	{
+		kID_IsPostOutSel = false;
+		
+		kID_MsgPostOUT.set({
+			fill:'white'
+		});
+	}
+};
+
+function kID_ResetAllMsgIcons()
+{
+	
+	kID_MsgRead.set({
+		fill:'white'
+	});
+	
+	kID_IsWriteMode = false;
+		
+	kID_MsgWrite.set({
+		fill:'white'
+	});
+	
+	kID_MsgAllSel = false;
+		
+	kID_MsgAll.set({
+		fill:'white'
+	});
+	
+	kID_MsgKrutiSel = false;
+		
+	kID_MsgKruti.set({
+		fill:'white'
+	});
+		
+	kID_MsgRidhiSel = false;
+		
+	kID_MsgRidhi.set({
+		fill:'white'
+	});
+	
+	kID_MsgSahibSel = false;
+		
+	kID_MsgSahib.set({
+		fill:'white'
+	});
+
+	kID_MsgAnkurSel = false;
+		
+	kID_MsgAnkur.set({
+		fill:'white'
+	});
+		
+	kID_IsPostInSel = false;
+		
+	kID_MsgPostIN.set({
+		fill:'white'
+	});
+		
+	kID_IsPostOutSel = false;
+		
+	kID_MsgPostOUT.set({
+		fill:'white'
+	});
+	kID_IsPostInSel = false;
+		
+	kID_MsgPostIN.set({
+		fill:'white'
+	});
+	
+	kID_IsPostOutSel = false;
+		
+	kID_MsgPostOUT.set({
+		fill:'white'
+	});
+}
+
+/**********************************END Message Panel ****************************************************************/
+
+/**************START bind on selected for message icons ***************************************************************/
+
+kID_NoUnreadIcon.on('selected', function() 
+{
+	// make the open menu as false - if the user again clicks on menu icon - this will open up the menu again.
+	kID_IsMenuOpen = false;
+	kID_IsDoorLocked = true;
+	
+	kID_CurMsgUser = activeuser;
+	kID_IsReadMode = true;
+	kID_RightArrowCounter = 0;
+	
+	kID_ResetAllMsgIcons();
+	
+	kRemoveMessagePanel();
+	kRemoveMenuIcons();
+	
+	kAddMessagePanel_WithoutHidingPanel();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_OneUnreadMessageIcon_Menu.on('selected', function() 
+{
+	// make the open menu as false - if the user again clicks on menu icon - this will open up the menu again.
+	kID_IsMenuOpen = false;
+	kID_IsDoorLocked = true;
+	
+	kID_CurMsgUser = activeuser;
+	kID_IsReadMode = true;
+	kID_RightArrowCounter = 0;
+	
+	kID_ResetAllMsgIcons();
+	
+	kRemoveMessagePanel();
+	kRemoveMenuIcons();
+	
+	kAddMessagePanel_WithoutHidingPanel();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_MsgTopLeftArrowIcon.on('selected', function() 
+{
+	// make the open menu as false - if the user again clicks on menu icon - this will open up the menu again.
+	kID_IsMenuOpen = true;
+	
+	kRemoveMessagePanel();
+	
+	kAddMenuPanel1();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_MsgRead.on('selected', function() 
+{	
+	kID_ResetRWMsgIcons('read');
+	kID_ResetNamesMsgIcons(activeuser);
+	
+	if(kID_IsReadMode == false)
+	{
+		kID_CurMsgUser = activeuser;
+		kID_IsReadMode = true;
+		kID_IsWriteMode = false;
+		
+		kID_MsgRead.set({
+			fill:'grey'
+		});
+		
+		canvas.remove(kID_MsgPostIN);
+		canvas.remove(kID_MsgPostOUT);
+		
+		canvas.remove(kID_MsgPostINTxt);
+		canvas.remove(kID_MsgPostOUTTxt);
+		
+		canvas.remove(kID_MsgMidLeftArrowIcon);
+		canvas.remove(kID_MsgMidRightArrowIcon);
+		
+		canvas.remove(kID_MsgMidGreyLeftArrowIcon);
+		canvas.remove(kID_MsgMidGreyRightArrowIcon);
+		
+		kID_RightArrowCounter = 0;
+		
+		getMessagesAsPerUser(kID_CurMsgUser,0);
+	}
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_MsgWrite.on('selected', function() 
+{	
+	kID_ResetRWMsgIcons('write');
+	kID_ResetNamesMsgIcons('none');
+	kID_ResetPostMsgIcons('none');
+	
+	if(kID_IsWriteMode == false)
+	{
+		kID_IsReadMode = false;
+		kID_IsWriteMode = true;
+		
+		kID_MsgWrite.set({
+			fill:'grey'
+		});
+		
+		kID_MsgAll.set({
+			fill:'grey'
+		});
+		
+		//canvas.isDrawingMode = true;
+		
+		canvas.remove(kID_MsgBind1);
+		kID_CurMsgUser = 'all';
+		
+		
+		canvas.add(kID_MsgPostIN);
+		canvas.add(kID_MsgPostOUT);
+		
+		canvas.add(kID_MsgPostINTxt);
+		canvas.add(kID_MsgPostOUTTxt);
+		
+		canvas.remove(kID_MsgMidLeftArrowIcon);
+		canvas.remove(kID_MsgMidRightArrowIcon);
+		
+		canvas.remove(kID_MsgMidGreyLeftArrowIcon);
+		canvas.remove(kID_MsgMidGreyRightArrowIcon);
+	}
+	canvas.deactivateAll(); // deselect everything
+});
+
+function getMessagesAsPerUser(current,position)
+{
+	var tempArray = [];
+	kCounter = -1;
+	
+	for(kCounter = kUserMessages.length-1 ; kCounter >= 0; kCounter--)
+	{
+		if(kUserMessages[kCounter].kName.toLowerCase() == current.toLowerCase())
+		{
+			tempArray.push(kUserMessages[kCounter].kValue);
+		}
+	}
+	
+	if(tempArray.length >= 1)
+	{
+		document.getElementById("kIDMsgBinding").src= tempArray[position];
+	}
+	
+	for(kCounter = 0 ; kCounter < kUserMessages.length; kCounter++)
+	{
+		if( kUserMessages[kCounter].kName.toLowerCase() == current.toLowerCase() && kUserMessages[kCounter].kValue == tempArray[position])
+		{
+			kUserMessages[kCounter].kIsUsed = true;
+		}
+	}
+	
+	canvas.remove(kID_MsgBind1);
+	
+	canvas.add(kID_MsgBind1);
+	
+	/********* to added only if user has more than two messages ************************/
+	if(position >= 0 && tempArray.length-1 > position)
+	{
+		canvas.remove(kID_MsgMidGreyRightArrowIcon);
+		canvas.remove(kID_MsgMidRightArrowIcon);
+		canvas.add(kID_MsgMidRightArrowIcon);
+	}
+	else
+	{
+		canvas.remove(kID_MsgMidRightArrowIcon);
+		canvas.add(kID_MsgMidGreyRightArrowIcon);
+	}
+	
+	if(position == 0)
+	{
+		canvas.remove(kID_MsgMidLeftArrowIcon);
+		canvas.remove(kID_MsgMidGreyLeftArrowIcon);
+		canvas.add(kID_MsgMidGreyLeftArrowIcon);
+	}
+	else
+	{
+		canvas.remove(kID_MsgMidGreyLeftArrowIcon);
+		canvas.remove(kID_MsgMidLeftArrowIcon);
+		canvas.add(kID_MsgMidLeftArrowIcon);
+	}
+	
+	canvas.deactivateAll(); // deselect everything
+	/***********************************************************************************/
+};
+
+function kOnSelectMsgAll()
+{
+	kID_RightArrowCounter = 0;
+	kID_ResetNamesMsgIcons('all');
+	if(kID_MsgAllSel == false)
+	{
+		kID_CurMsgUser = 'all';
+		kID_MsgAllSel = true;
+		
+		kID_MsgAll.set({
+			fill:'grey'
+		});
+		if(kID_IsReadMode)
+			getMessagesAsPerUser(kID_CurMsgUser,0);
+	}
+	canvas.deactivateAll(); // deselect everything
+};
+
+kID_MsgAll.on('selected', function() 
+{	
+	kOnSelectMsgAll();
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_MsgAllTxt.on('selected',function(){
+	kOnSelectMsgAll();
+	canvas.deactivateAll(); // deselect everything
+});
+
+function kOnSelectMsgKruti()
+{
+	kID_RightArrowCounter = 0;
+	kID_ResetNamesMsgIcons('kruti');
+	if(kID_MsgKrutiSel == false)
+	{
+		kID_CurMsgUser = 'kruti';
+		kID_MsgKrutiSel = true;
+		
+		kID_MsgKruti.set({
+			fill:'grey'
+		});
+		
+		if(kID_IsReadMode)
+			getMessagesAsPerUser(kID_CurMsgUser,0);
+	}
+	canvas.deactivateAll();
+};
+
+kID_MsgKruti.on('selected', function() 
+{	
+	kOnSelectMsgKruti();
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_MsgKrutiTxt.on('selected', function() 
+{	
+	kOnSelectMsgKruti();
+	canvas.deactivateAll(); // deselect everything
+});
+
+function kOnSelectMsgRidhi()
+{
+	kID_RightArrowCounter = 0;
+	kID_ResetNamesMsgIcons('ridhi');
+	if(kID_MsgRidhiSel == false)
+	{
+		kID_CurMsgUser = 'ridhi';
+		kID_MsgRidhiSel = true;
+		
+		kID_MsgRidhi.set({
+			fill:'grey'
+		});
+		
+		if(kID_IsReadMode)
+			getMessagesAsPerUser(kID_CurMsgUser,0);
+	}
+	canvas.deactivateAll(); // deselect everything
+};
+
+kID_MsgRidhi.on('selected', function() 
+{	
+	kOnSelectMsgRidhi();
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_MsgRidhiTxt.on('selected', function() 
+{	
+	kOnSelectMsgRidhi();
+	canvas.deactivateAll(); // deselect everything
+});
+
+function kOnSelectMsgSahib()
+{
+	kID_RightArrowCounter = 0;
+	kID_ResetNamesMsgIcons('sahib');
+	if(kID_MsgSahibSel == false)
+	{
+		kID_CurMsgUser = 'sahib';
+		kID_MsgSahibSel = true;
+		
+		kID_MsgSahib.set({
+			fill:'grey'
+		});
+		
+		if(kID_IsReadMode)
+			getMessagesAsPerUser(kID_CurMsgUser,0);
+	}
+	canvas.deactivateAll(); // deselect everything
+};
+
+kID_MsgSahib.on('selected', function() 
+{	
+	kOnSelectMsgSahib();
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_MsgSahibTxt.on('selected', function() 
+{	
+	kOnSelectMsgSahib();
+	canvas.deactivateAll(); // deselect everything
+});
+
+function kOnSelectMsgAnkur()
+{
+	kID_RightArrowCounter = 0;
+	kID_ResetNamesMsgIcons('ankur');
+	if(kID_MsgAnkurSel == false)
+	{
+		kID_CurMsgUser = 'ankur';
+		kID_MsgAnkurSel = true;
+		
+		kID_MsgAnkur.set({
+			fill:'grey'
+		});
+		
+		if(kID_IsReadMode)
+			getMessagesAsPerUser(kID_CurMsgUser,0);
+	}
+	canvas.deactivateAll(); // deselect everything
+};
+
+kID_MsgAnkur.on('selected', function() 
+{	
+	kOnSelectMsgAnkur();
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_MsgAnkurTxt.on('selected', function() 
+{	
+	kOnSelectMsgAnkur();
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_MsgMidRightArrowIcon.on('selected', function() 
+{	
+	kID_RightArrowCounter = kID_RightArrowCounter + 1;
+	getMessagesAsPerUser(kID_CurMsgUser,kID_RightArrowCounter);
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_MsgMidLeftArrowIcon.on('selected', function() 
+{	
+	kID_RightArrowCounter = kID_RightArrowCounter - 1;
+	getMessagesAsPerUser(kID_CurMsgUser,kID_RightArrowCounter);
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_MsgPostIN.on('selected', function() 
+{	
+	kID_ResetPostMsgIcons('postIn');
+	if(kID_IsPostInSel == false)
+	{
+		kID_IsPostInSel = true;
+		
+		kID_MsgPostIN.set({
+			fill:'grey'
+		});
+		
+		kUserMessages.push((new kCommonFunction(kID_CurMsgUser,"Icons/Kruti/NewMsgPostedIn.png")));
+		
+	}
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_MsgPostOUT.on('selected', function() 
+{	
+	kID_ResetPostMsgIcons('postOut');
+	if(kID_IsPostOutSel == false)
+	{
+		kID_IsPostOutSel = true;
+		
+		kID_MsgPostOUT.set({
+			fill:'grey'
+		});
+	}
+	canvas.deactivateAll(); // deselect everything
+});
+
+/***************END of bind on selected for message icons*************************************************************/
 
 
 var kCalendarIconInfo = new kInsertImageInfo("kCalendarIcon",document.getElementById('kCalendarIcon'));  
@@ -1148,19 +2324,6 @@ function kAddMenuPanel_WithHidingPanel()
 	canvas.add(kID_MenuPanel);
 };
 
-function kAddMenuPanel()
-{
-	canvas.add(kID_CameraIcon);
-	canvas.add(kID_NoUnreadIcon);
-	canvas.add(kID_OneUnreadMessageIcon_Menu);
-	canvas.add(kID_CalendarIcon);
-	canvas.add(kID_UnMuteIcon);
-	canvas.add(kID_MuteIcon_Menu);
-	canvas.add(kID_SettingsIcon);
-	canvas.add(kID_MirrorIcon);
-	canvas.add(kID_RightArrowIcon);
-};
-
 kAddMenuPanel_WithHidingPanel();
 
 
@@ -1186,27 +2349,7 @@ kID_Menu2LeftArrowIcon.on('selected', function()
 {
 	kRemoveMenuPanel2();
 	
-	canvas.add(kID_CameraIcon);
-		
-	/***** condition check will be required - if there are unread messages then other icon needs to be added ****/
-	canvas.add(kID_NoUnreadIcon);
-	//canvas.add(kID_OneUnreadMessageIcon_Menu);
-		
-	canvas.add(kID_CalendarIcon);
-		
-	/***** condition check will be required - if there are bell is already in mute state ****/
-	if(kID_IsBellMuted)
-	{
-		canvas.add(kID_MuteIcon_Menu);
-	}
-	else
-	{
-		canvas.add(kID_UnMuteIcon);
-	}
-		
-	canvas.add(kID_SettingsIcon);
-	canvas.add(kID_MirrorIcon);
-	canvas.add(kID_RightArrowIcon);
+	kAddMenuPanel1();
 	
 	canvas.deactivateAll(); // deselect everything
 });
@@ -1218,6 +2361,1013 @@ var kID_ThemeIcon = new fabric.Image(kThemeIconInfo.kImageElement, {
 	width: kID_MenuIconW+10,
 	height: kID_MenuIconH+20
 });
+
+kID_ThemeIcon.on('selected',function()
+{
+	// make the open menu as false - if the user again clicks on menu icon - this will open up the menu again.
+	kID_IsMenuOpen = false;
+	kID_IsDoorLocked = true;
+	
+	kRemoveMenuPanel2();
+	
+	//kRemoveThemeWallpapers();
+	
+	canvas.add(kID_ThemePanel);
+	
+	canvas.add(kID_SelectedINIcon);
+	canvas.add(kID_OUTIcon);
+	
+	canvas.add(kID_ThemeWhiteIcon);
+	canvas.add(kID_ThemeBabyAnnouncementIcon);
+	canvas.add(kID_ThemeBirthdayIcon);
+	canvas.add(kID_ThemeChristmasTreeIcon);
+	canvas.add(kID_ThemeDoorDesignIcon);
+	canvas.add(kID_ThemeHalloweenIcon);
+	canvas.add(kID_ThemeLeftArrowIcon);
+
+	canvas.deactivateAll(); // deselect everything
+});
+
+/******************************* start icons for theme panel ******************************************/
+
+var kID_ThemePanelLeft = 30;
+var kID_ThemePanelTop = 110;
+
+var kID_ThemePanelIconW = 60;
+var kID_ThemePanelIconH = 70;
+
+var kID_ThemePanel = new fabric.Rect({
+  left: kID_ThemePanelLeft,
+  top: kID_ThemePanelTop-5,
+  fill: 'white',
+  width: 545,
+  height: 335
+});
+
+var kThemeWhiteIconInfo = new kInsertImageInfo("kThemeWhiteIcon",document.getElementById('kThemeWhiteIcon'));  
+var kID_ThemeWhiteIcon = new fabric.Image(kThemeWhiteIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+65, 
+	top: kID_ThemePanelTop + 100 , 
+	width: kID_ThemePanelIconW,
+	height: kID_ThemePanelIconH
+});
+var kOThemeWhiteIconInfo = new kInsertImageInfo("kThemeWhiteIcon",document.getElementById('kThemeWhiteIcon'));
+var kOD_ThemeWhiteIcon = new fabric.Image(kThemeWhiteIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+65, 
+	top: kID_ThemePanelTop + 100 , 
+	width: kID_ThemePanelIconW,
+	height: kID_ThemePanelIconH
+});
+
+var kThemeBabyAnnouncementIconInfo = new kInsertImageInfo("kThemeBabyAnnouncementIcon",document.getElementById('kThemeBabyAnnouncementIcon'));  
+var kID_ThemeBabyAnnouncementIcon = new fabric.Image(kThemeBabyAnnouncementIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+ 245, 
+	top: kID_ThemePanelTop + 100, 
+	width: kID_ThemePanelIconW,
+	height: kID_ThemePanelIconH
+});
+
+var kOThemeBabyAnnouncementIconInfo = new kInsertImageInfo("kThemeBabyAnnouncementIcon",document.getElementById('kThemeBabyAnnouncementIcon'));  
+var kOD_ThemeBabyAnnouncementIcon = new fabric.Image(kThemeBabyAnnouncementIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+ 245, 
+	top: kID_ThemePanelTop + 100, 
+	width: kID_ThemePanelIconW,
+	height: kID_ThemePanelIconH
+});
+
+var kThemeBirthdayIconInfo = new kInsertImageInfo("kThemeBirthdayIcon",document.getElementById('kThemeBirthdayIcon'));  
+var kID_ThemeBirthdayIcon = new fabric.Image(kThemeBirthdayIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+ 420, 
+	top: kID_ThemePanelTop + 100, 
+	width: kID_ThemePanelIconW,
+	height: kID_ThemePanelIconH
+});
+
+var kOThemeBirthdayIconInfo = new kInsertImageInfo("kThemeBirthdayIcon",document.getElementById('kThemeBirthdayIcon'));
+var kOD_ThemeBirthdayIcon = new fabric.Image(kThemeBirthdayIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+ 420, 
+	top: kID_ThemePanelTop + 100,
+	width: kID_ThemePanelIconW,
+	height: kID_ThemePanelIconH
+});
+
+var kThemeChristmasTreeIconInfo = new kInsertImageInfo("kThemeChristmasTreeIcon",document.getElementById('kThemeChristmasTreeIcon'));  
+var kID_ThemeChristmasTreeIcon = new fabric.Image(kThemeChristmasTreeIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+ 65, 
+	top: kID_ThemePanelTop + 220, 
+	width: kID_ThemePanelIconW,
+	height: kID_ThemePanelIconH
+});
+
+var kOThemeChristmasTreeIconInfo = new kInsertImageInfo("kThemeChristmasTreeIcon",document.getElementById('kThemeChristmasTreeIcon'));  
+var kOD_ThemeChristmasTreeIcon = new fabric.Image(kThemeChristmasTreeIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+ 65, 
+	top: kID_ThemePanelTop + 220, 
+	width: kID_ThemePanelIconW,
+	height: kID_ThemePanelIconH
+});
+
+var kThemeDoorDesignIconInfo = new kInsertImageInfo("kThemeDoorDesignIcon",document.getElementById('kThemeDoorDesignIcon'));  
+var kID_ThemeDoorDesignIcon = new fabric.Image(kThemeDoorDesignIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+ 245, 
+	top: kID_ThemePanelTop + 220, 
+	width: kID_ThemePanelIconW,
+	height: kID_ThemePanelIconH
+});
+
+var kOThemeDoorDesignIconInfo = new kInsertImageInfo("kThemeDoorDesignIcon",document.getElementById('kThemeDoorDesignIcon')); 
+var kOD_ThemeDoorDesignIcon = new fabric.Image(kThemeDoorDesignIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+ 245, 
+	top: kID_ThemePanelTop + 220, 
+	width: kID_ThemePanelIconW,
+	height: kID_ThemePanelIconH
+});
+
+
+var kThemeHalloweenIconInfo = new kInsertImageInfo("kThemeHalloweenIcon",document.getElementById('kThemeHalloweenIcon'));  
+var kID_ThemeHalloweenIcon = new fabric.Image(kThemeHalloweenIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+ 420, 
+	top: kID_ThemePanelTop + 220, 
+	width: kID_ThemePanelIconW,
+	height: kID_ThemePanelIconH
+});
+
+var kOThemeHalloweenIconInfo = new kInsertImageInfo("kThemeHalloweenIcon",document.getElementById('kThemeHalloweenIcon')); 
+var kOD_ThemeHalloweenIcon = new fabric.Image(kThemeHalloweenIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+ 420, 
+	top: kID_ThemePanelTop + 220,
+	width: kID_ThemePanelIconW,
+	height: kID_ThemePanelIconH
+});
+
+var kID_ThemeLeftArrowIcon = new fabric.Image(kLeftArrowIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+5, 
+	top: kID_ThemePanelTop +175, 
+	width: kID_MenuIconW-20,
+	height: kID_MenuIconH-30
+});
+
+var kINIconInfo = new kInsertImageInfo("kINIcon",document.getElementById('kINIcon'));  
+var kID_INIcon = new fabric.Image(kINIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+ 65, 
+	top: kID_ThemePanelTop, 
+	width: kID_ThemePanelIconW+155,
+	height: kID_ThemePanelIconH-20
+});
+
+
+var kOUTIconInfo = new kInsertImageInfo("kOUTIcon",document.getElementById('kOUTIcon'));  
+var kID_OUTIcon = new fabric.Image(kOUTIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+ 275, 
+	top: kID_ThemePanelTop, 
+	width: kID_ThemePanelIconW+153,
+	height: kID_ThemePanelIconH-20
+});
+
+var kSelectedINIconInfo = new kInsertImageInfo("kSelectedINIcon",document.getElementById('kSelectedINIcon'));  
+var kID_SelectedINIcon = new fabric.Image(kSelectedINIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+ 65, 
+	top: kID_ThemePanelTop , 
+	width: kID_ThemePanelIconW+155,
+	height: kID_ThemePanelIconH-20
+});
+
+
+var kSelectedOUTIconInfo = new kInsertImageInfo("kSelectedOUTIcon",document.getElementById('kSelectedOUTIcon'));  
+var kID_SelectedOUTIcon = new fabric.Image(kSelectedOUTIconInfo.kImageElement, {
+	left: kID_ThemePanelLeft+ 275, 
+	top: kID_ThemePanelTop, 
+	width: kID_ThemePanelIconW+153,
+	height: kID_ThemePanelIconH-20
+});
+
+
+kID_ThemeLeftArrowIcon.on('selected', function() 
+{
+	kID_IsMenuOpen = true;
+	
+	kRemoveThemePanel();
+	
+	kAddMenuPanel2();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+/******************* selected event for all theme icons for inside door************************************/
+
+kID_ThemeWhiteIcon.on('selected', function() 
+{
+	kThemeWhiteIconInfo.kIsUsed = true;
+	
+	kThemeBabyAnnouncementIconInfo.kIsUsed = false;
+	kThemeBirthdayIconInfo.kIsUsed = false;
+	kThemeChristmasTreeIconInfo.kIsUsed = false;
+	kThemeDoorDesignIconInfo.kIsUsed = false;
+	kThemeHalloweenIconInfo.kIsUsed = false;
+	
+	kID_ApplyTheme();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_ThemeBabyAnnouncementIcon.on('selected', function() 
+{
+	kThemeBabyAnnouncementIconInfo.kIsUsed = true;
+	
+	kThemeWhiteIconInfo.kIsUsed = false;	
+	kThemeBirthdayIconInfo.kIsUsed = false;
+	kThemeChristmasTreeIconInfo.kIsUsed = false;
+	kThemeDoorDesignIconInfo.kIsUsed = false;
+	kThemeHalloweenIconInfo.kIsUsed = false;
+	
+	kID_ApplyTheme();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_ThemeBirthdayIcon.on('selected', function() 
+{
+	kThemeBirthdayIconInfo.kIsUsed = true;
+	
+	kThemeBabyAnnouncementIconInfo.kIsUsed = false;	
+	kThemeWhiteIconInfo.kIsUsed = false;	
+	kThemeChristmasTreeIconInfo.kIsUsed = false;
+	kThemeDoorDesignIconInfo.kIsUsed = false;
+	kThemeHalloweenIconInfo.kIsUsed = false;
+	
+	kID_ApplyTheme();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_ThemeChristmasTreeIcon.on('selected', function() 
+{
+	kThemeChristmasTreeIconInfo.kIsUsed = true;
+	
+	kThemeBirthdayIconInfo.kIsUsed = false;
+	kThemeBabyAnnouncementIconInfo.kIsUsed = false;	
+	kThemeWhiteIconInfo.kIsUsed = false;	
+	kThemeDoorDesignIconInfo.kIsUsed = false;
+	kThemeHalloweenIconInfo.kIsUsed = false;
+	
+	kID_ApplyTheme();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_ThemeDoorDesignIcon.on('selected', function() 
+{
+	kThemeDoorDesignIconInfo.kIsUsed = true;
+	
+	kThemeChristmasTreeIconInfo.kIsUsed = false;
+	kThemeBirthdayIconInfo.kIsUsed = false;
+	kThemeBabyAnnouncementIconInfo.kIsUsed = false;	
+	kThemeWhiteIconInfo.kIsUsed = false;	
+	kThemeHalloweenIconInfo.kIsUsed = false;
+	
+	kID_ApplyTheme();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_ThemeHalloweenIcon.on('selected', function() 
+{
+	kThemeHalloweenIconInfo.kIsUsed = true;
+	
+	kThemeChristmasTreeIconInfo.kIsUsed = false;
+	kThemeBirthdayIconInfo.kIsUsed = false;
+	kThemeBabyAnnouncementIconInfo.kIsUsed = false;	
+	kThemeWhiteIconInfo.kIsUsed = false;	
+	kThemeDoorDesignIconInfo.kIsUsed = false;
+	
+	kID_ApplyTheme();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+/*********************************************************************************************************************************************/
+
+/*******************************************theme icons for outside door*********************************************************/
+
+kOD_ThemeWhiteIcon.on('selected', function() 
+{
+	kOThemeWhiteIconInfo.kIsUsed = true;
+	
+	kOThemeBabyAnnouncementIconInfo.kIsUsed = false;
+	kOThemeBirthdayIconInfo.kIsUsed = false;
+	kOThemeChristmasTreeIconInfo.kIsUsed = false;
+	kOThemeDoorDesignIconInfo.kIsUsed = false;
+	kOThemeHalloweenIconInfo.kIsUsed = false;
+	
+	kOD_ApplyTheme();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kOD_ThemeBabyAnnouncementIcon.on('selected', function() 
+{
+	kOThemeBabyAnnouncementIconInfo.kIsUsed = true;
+	
+	kOThemeWhiteIconInfo.kIsUsed = false;	
+	kOThemeBirthdayIconInfo.kIsUsed = false;
+	kOThemeChristmasTreeIconInfo.kIsUsed = false;
+	kOThemeDoorDesignIconInfo.kIsUsed = false;
+	kOThemeHalloweenIconInfo.kIsUsed = false;
+	
+	kOD_ApplyTheme();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kOD_ThemeBirthdayIcon.on('selected', function() 
+{
+	kOThemeBirthdayIconInfo.kIsUsed = true;
+	
+	kOThemeBabyAnnouncementIconInfo.kIsUsed = false;	
+	kOThemeWhiteIconInfo.kIsUsed = false;	
+	kOThemeChristmasTreeIconInfo.kIsUsed = false;
+	kOThemeDoorDesignIconInfo.kIsUsed = false;
+	kOThemeHalloweenIconInfo.kIsUsed = false;
+	
+	kOD_ApplyTheme();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kOD_ThemeChristmasTreeIcon.on('selected', function() 
+{
+	kOThemeChristmasTreeIconInfo.kIsUsed = true;
+	
+	kOThemeBirthdayIconInfo.kIsUsed = false;
+	kOThemeBabyAnnouncementIconInfo.kIsUsed = false;	
+	kOThemeWhiteIconInfo.kIsUsed = false;	
+	kOThemeDoorDesignIconInfo.kIsUsed = false;
+	kOThemeHalloweenIconInfo.kIsUsed = false;
+	
+	kOD_ApplyTheme();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kOD_ThemeDoorDesignIcon.on('selected', function() 
+{
+	kOThemeDoorDesignIconInfo.kIsUsed = true;
+	
+	kOThemeChristmasTreeIconInfo.kIsUsed = false;
+	kOThemeBirthdayIconInfo.kIsUsed = false;
+	kOThemeBabyAnnouncementIconInfo.kIsUsed = false;	
+	kOThemeWhiteIconInfo.kIsUsed = false;	
+	kOThemeHalloweenIconInfo.kIsUsed = false;
+	
+	kOD_ApplyTheme();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kOD_ThemeHalloweenIcon.on('selected', function() 
+{
+	kOThemeHalloweenIconInfo.kIsUsed = true;
+	
+	kOThemeChristmasTreeIconInfo.kIsUsed = false;
+	kOThemeBirthdayIconInfo.kIsUsed = false;
+	kOThemeBabyAnnouncementIconInfo.kIsUsed = false;	
+	kOThemeWhiteIconInfo.kIsUsed = false;	
+	kOThemeDoorDesignIconInfo.kIsUsed = false;
+	
+	kOD_ApplyTheme();
+	
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+/**********************************************************************************************************************************/
+
+/**********************************************************************************************************************************/
+
+function kID_ApplyTheme()
+{
+	/*************** remove all exising icons ******************/
+	
+	canvas.remove(kID_ThemePanel);
+	
+	canvas.remove(kID_ThemeBabyAnnouncementIcon);
+	canvas.remove(kID_ThemeBirthdayIcon);
+	canvas.remove(kID_ThemeChristmasTreeIcon);
+	canvas.remove(kID_ThemeDoorDesignIcon);
+	canvas.remove(kID_ThemeHalloweenIcon);
+	canvas.remove(kID_ThemeWhiteIcon);
+	
+	canvas.remove(kID_ThemeBabyAnnouncement);
+	canvas.remove(kID_ThemeBirthday);
+	canvas.remove(kID_ThemeChristmasTree);
+	canvas.remove(kID_ThemeDoorDesign);
+	canvas.remove(kID_ThemeHalloween);
+	canvas.remove(kID_ThemeHalloween);
+	
+	
+	canvas.remove(kID_ThemeLeftArrowIcon);
+	
+	canvas.remove(kID_INIcon);
+	canvas.remove(kID_OUTIcon);
+	
+	canvas.remove(kID_SelectedINIcon);
+	canvas.remove(kID_SelectedOUTIcon);
+	
+	canvas.remove(kID_HeaderPanel);
+	
+	//main menu strip 
+	canvas.remove(kID_MainPanel);
+
+	//sos => 
+	canvas.remove(kID_SOSIcon);
+
+	//menu icon => 
+	canvas.remove(kID_MenuIcon);
+
+	//door knob => 
+	canvas.remove(kID_DoorKnob);
+
+	//date => 
+	canvas.remove(kID_DateText);
+
+	//time => 
+	canvas.remove(kID_TimeText);
+
+	//temperature => 
+	canvas.remove(kID_WeatherTemp);
+
+	//cloud => 
+	canvas.remove(kID_CurrentCloudIcon);
+	
+
+
+
+	/***********************************************************/
+	if(kThemeHalloweenIconInfo.kIsUsed)
+	{
+		canvas.add(kID_ThemeHalloween);
+		
+		kID_SelThemeIcon = kThemeHalloweenIconInfo.kImageElement;
+		kID_ThemeApplied = true;
+	}
+	else if(kThemeChristmasTreeIconInfo.kIsUsed)
+	{
+		canvas.add(kID_ThemeChristmasTree);
+		
+		kID_SelThemeIcon = kThemeHalloweenIconInfo.kImageElement;
+		kID_ThemeApplied = true;
+		
+	}
+	else if (kThemeBirthdayIconInfo.kIsUsed)
+	{
+		canvas.add(kID_ThemeBirthday);
+		
+		kID_SelThemeIcon = kThemeBirthdayIconInfo.kImageElement;
+		kID_ThemeApplied = true;
+		
+	}
+	else if(kThemeBabyAnnouncementIconInfo.kIsUsed)
+	{
+		canvas.add(kID_ThemeBabyAnnouncement);
+		
+		kID_SelThemeIcon = kThemeBabyAnnouncementIconInfo.kImageElement;
+		kID_ThemeApplied = true;
+		
+	}
+	else if(kThemeDoorDesignIconInfo.kIsUsed)
+	{
+		canvas.add(kID_ThemeDoorDesign);
+		
+		kID_SelThemeIcon = kThemeDoorDesignIconInfo.kImageElement;
+		kID_ThemeApplied = true;
+		
+	}
+	else
+	{
+		kID_SelThemeIcon = '';
+		kID_ThemeApplied = false;
+	}
+	
+	/********************* add back all the items on the door *******************/
+	/*************** remove all exising icons ******************/
+	kID_AddIcons_AfterTheme();
+	
+	kAddThemePanelIcons_WithoutHidingPanel();
+
+	/***********************************************************/
+	/****************************************************************************/
+};
+
+function kOD_ApplyTheme()
+{
+	/*************** remove all exising icons ******************/
+	canvas.remove(kID_INIcon);
+	canvas.remove(kID_OUTIcon);
+	canvas.remove(kID_SelectedINIcon);
+	canvas.remove(kID_SelectedOUTIcon);
+	
+	canvas.remove(kOD_TimeText);
+	canvas.remove(kOD_DateText);
+	canvas.remove(sNumberPlateText);
+	canvas.remove(sNamePlate);
+	canvas.remove(sDeliverPackageText2);
+	canvas.remove(sDeliverPackageText1);
+	canvas.remove(simgInstance4);
+	canvas.remove(sWriteMessageText2);
+	canvas.remove(sWriteMessageText1);
+	canvas.remove(simgInstance3);
+	canvas.remove(simgInstance2);
+	canvas.remove(sFingerPrintInner);
+	canvas.remove(sFingerPrintOuter);
+	canvas.remove(simgInstance1);
+	canvas.remove(sOD_DoorKnob);
+	canvas.remove(sID_MainPanel);
+	
+	canvas.remove(kID_ThemePanel);
+	
+	canvas.remove(kOD_ThemeBabyAnnouncement);
+	canvas.remove(kOD_ThemeBirthday);
+	canvas.remove(kOD_ThemeChristmasTree);
+	canvas.remove(kOD_ThemeDoorDesign);
+	canvas.remove(kOD_ThemeHalloween);
+	canvas.remove(kOD_ThemeHalloween);
+	
+	canvas.remove(kID_ThemeLeftArrowIcon);
+	
+	
+	canvas.remove(kOD_ThemeBabyAnnouncementIcon);
+	canvas.remove(kOD_ThemeBirthdayIcon);
+	canvas.remove(kOD_ThemeChristmasTreeIcon);
+	canvas.remove(kOD_ThemeDoorDesignIcon);
+	canvas.remove(kOD_ThemeHalloweenIcon);
+	canvas.remove(kOD_ThemeHalloweenIcon);
+
+	/***********************************************************/
+	if(kOThemeHalloweenIconInfo.kIsUsed)
+	{
+		canvas.add(kOD_ThemeHalloween);
+		
+		kOD_SelThemeIcon = kThemeHalloweenIconInfo.kImageElement;
+		kOD_ThemeApplied = true;
+	}
+	else if(kOThemeChristmasTreeIconInfo.kIsUsed)
+	{
+		canvas.add(kOD_ThemeChristmasTree);
+		
+		kOD_SelThemeIcon = kThemeHalloweenIconInfo.kImageElement;
+		kOD_ThemeApplied = true;
+	}
+	else if (kOThemeBirthdayIconInfo.kIsUsed)
+	{
+		canvas.add(kOD_ThemeBirthday);
+		
+		kOD_SelThemeIcon = kThemeBirthdayIconInfo.kImageElement;
+		kOD_ThemeApplied = true;
+		
+	}
+	else if(kOThemeBabyAnnouncementIconInfo.kIsUsed)
+	{
+		canvas.add(kOD_ThemeBabyAnnouncement);
+		
+		kOD_SelThemeIcon = kThemeBabyAnnouncementIconInfo.kImageElement;
+		kOD_ThemeApplied = true;
+		
+	}
+	else if(kOThemeDoorDesignIconInfo.kIsUsed)
+	{
+		canvas.add(kOD_ThemeDoorDesign);
+		
+		kOD_SelThemeIcon = kThemeDoorDesignIconInfo.kImageElement;
+		kOD_ThemeApplied = true;
+		
+	}
+	else
+	{
+		kOD_SelThemeIcon = '';
+		kOD_ThemeApplied = false;
+	}
+	
+	/********************* add back all the items on the door *******************/
+	/*************** remove all exising icons ******************/
+	kOD_AddIcons_AfterTheme();
+	
+	kOAddThemePanelIcons_WithoutHidingPanel();
+
+	/***********************************************************/
+	/****************************************************************************/
+};
+
+kID_INIcon.on('selected', function() 
+{
+	/************* remove all icons for inside door ********************************/
+	canvas.remove(kID_SelectedOUTIcon);
+	canvas.remove(kID_INIcon);
+	canvas.remove(kID_SelectedINIcon);
+	canvas.remove(kID_OUTIcon);
+	
+	canvas.remove(kID_ThemePanel);
+	canvas.remove(kOD_ThemeWhiteIcon);
+	canvas.remove(kOD_ThemeBabyAnnouncementIcon);
+	canvas.remove(kOD_ThemeBirthdayIcon);
+	canvas.remove(kOD_ThemeChristmasTreeIcon);
+	canvas.remove(kOD_ThemeDoorDesignIcon);
+	canvas.remove(kOD_ThemeHalloweenIcon);
+	
+	canvas.remove(kID_ThemeLeftArrowIcon);
+	
+	
+	/*******************************************************************************/
+
+	canvas.add(kID_ThemePanel);
+	
+	canvas.add(kID_SelectedINIcon);
+	canvas.add(kID_OUTIcon);
+	
+	canvas.add(kID_ThemeWhiteIcon);
+	canvas.add(kID_ThemeBabyAnnouncementIcon);
+	canvas.add(kID_ThemeBirthdayIcon);
+	canvas.add(kID_ThemeChristmasTreeIcon);
+	canvas.add(kID_ThemeDoorDesignIcon);
+	canvas.add(kID_ThemeHalloweenIcon);
+	
+	canvas.add(kID_ThemeLeftArrowIcon);
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_SelectedINIcon.on('selected', function() 
+{
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_OUTIcon.on('selected', function() 
+{
+	/************* remove all icons for inside door ********************************/
+	canvas.remove(kID_SelectedINIcon);
+	canvas.remove(kID_OUTIcon);
+	canvas.remove(kID_SelectedOUTIcon);
+	canvas.remove(kID_INIcon);
+	
+	canvas.remove(kID_ThemePanel);
+	canvas.remove(kID_ThemeWhiteIcon);
+	canvas.remove(kID_ThemeBabyAnnouncementIcon);
+	canvas.remove(kID_ThemeBirthdayIcon);
+	canvas.remove(kID_ThemeChristmasTreeIcon);
+	canvas.remove(kID_ThemeDoorDesignIcon);
+	canvas.remove(kID_ThemeHalloweenIcon);
+	
+	canvas.remove(kID_ThemeLeftArrowIcon);
+	
+	/*******************************************************************************/
+	canvas.add(kID_ThemePanel);
+	
+	canvas.add(kID_SelectedOUTIcon);
+	canvas.add(kID_INIcon);
+	
+	
+	canvas.add(kOD_ThemeWhiteIcon);
+	canvas.add(kOD_ThemeBabyAnnouncementIcon);
+	canvas.add(kOD_ThemeBirthdayIcon);
+	canvas.add(kOD_ThemeChristmasTreeIcon);
+	canvas.add(kOD_ThemeDoorDesignIcon);
+	canvas.add(kOD_ThemeHalloweenIcon);
+	
+	canvas.add(kID_ThemeLeftArrowIcon);
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_SelectedOUTIcon.on('selected', function() 
+{
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+/*******************************************************************************************/
+function kOD_AddIcons_AfterTheme()
+{
+	canvas.add(kOD_TimeText);
+	canvas.add(kOD_DateText);
+	canvas.add(sNamePlate);
+	canvas.add(sNumberPlateText);
+	canvas.add(sID_MainPanel);
+	canvas.add(sDeliverPackageText2);
+	canvas.add(sDeliverPackageText1);
+	
+	canvas.add(simgInstance1);
+	canvas.add(simgInstance2);
+	canvas.add(simgInstance3);
+	canvas.add(simgInstance4);
+	
+	canvas.add(sWriteMessageText1);
+	canvas.add(sWriteMessageText2);
+	
+	canvas.add(sFingerPrintOuter);
+	canvas.add(sFingerPrintInner);
+	
+	canvas.add(sOD_DoorKnob);
+};
+
+function kID_AddIcons_AfterTheme()
+{
+	canvas.add(kID_HeaderPanel);
+	
+	//main menu strip 
+	canvas.add(kID_MainPanel);
+
+	//sos => 
+	canvas.add(kID_SOSIcon);
+
+	//menu icon => 
+	canvas.add(kID_MenuIcon);
+
+	//door knob => 
+	canvas.add(kID_DoorKnob);
+	
+	kID_Refresh_DateTime();
+
+	//temperature => 
+	canvas.add(kID_WeatherTemp);
+
+	//cloud => 
+	canvas.add(kID_CurrentCloudIcon);
+};
+
+function kAddThemePanelIcons_WithHidingPanel()
+{
+	canvas.add(kID_ThemeWhiteIcon);
+	canvas.add(kID_ThemeBabyAnnouncementIcon);
+	canvas.add(kID_ThemeBirthdayIcon);
+	canvas.add(kID_ThemeChristmasTreeIcon);
+	canvas.add(kID_ThemeDoorDesignIcon);
+	canvas.add(kID_ThemeHalloweenIcon);
+	
+	canvas.add(kOD_ThemeWhiteIcon);
+	canvas.add(kOD_ThemeBabyAnnouncementIcon);
+	canvas.add(kOD_ThemeBirthdayIcon);
+	canvas.add(kOD_ThemeChristmasTreeIcon);
+	canvas.add(kOD_ThemeDoorDesignIcon);
+	canvas.add(kOD_ThemeHalloweenIcon);
+	
+	
+	canvas.add(kID_INIcon);
+	canvas.add(kID_OUTIcon);
+	canvas.add(kID_SelectedINIcon);
+	canvas.add(kID_SelectedOUTIcon);
+	
+	canvas.add(kID_ThemeLeftArrowIcon);
+	
+	canvas.add(kID_ThemePanel);
+	
+	/*****************************************************************************************************************/
+};
+
+kAddThemePanelIcons_WithHidingPanel();
+
+function kRemoveThemePanel()
+{
+	canvas.remove(kID_ThemePanel);
+	
+	canvas.remove(kID_ThemeBabyAnnouncementIcon);
+	canvas.remove(kID_ThemeBirthdayIcon);
+	canvas.remove(kID_ThemeChristmasTreeIcon);
+	canvas.remove(kID_ThemeDoorDesignIcon);
+	canvas.remove(kID_ThemeHalloweenIcon);
+	canvas.remove(kID_ThemeWhiteIcon);
+	
+	canvas.remove(kID_ThemeLeftArrowIcon);
+	
+	canvas.remove(kID_INIcon);
+	canvas.remove(kID_OUTIcon);
+	canvas.remove(kID_SelectedINIcon);
+	canvas.remove(kID_SelectedOUTIcon);
+	
+	canvas.remove(kOD_ThemeBabyAnnouncementIcon);
+	canvas.remove(kOD_ThemeBirthdayIcon);
+	canvas.remove(kOD_ThemeChristmasTreeIcon);
+	canvas.remove(kOD_ThemeDoorDesignIcon);
+	canvas.remove(kOD_ThemeHalloweenIcon);
+	canvas.remove(kOD_ThemeWhiteIcon);
+	
+};
+
+function kAddThemePanelIcons_WithoutHidingPanel()
+{
+	canvas.add(kID_ThemePanel);
+	
+	canvas.add(kID_ThemeWhiteIcon);
+	canvas.add(kID_ThemeBabyAnnouncementIcon);
+	canvas.add(kID_ThemeBirthdayIcon);
+	canvas.add(kID_ThemeChristmasTreeIcon);
+	canvas.add(kID_ThemeDoorDesignIcon);
+	canvas.add(kID_ThemeHalloweenIcon);
+	
+	canvas.add(kID_SelectedINIcon);
+	canvas.add(kID_OUTIcon);
+	
+	canvas.add(kID_ThemeLeftArrowIcon);
+	
+	kID_ThemeHalloweenIcon.set(
+	{
+		stroke: kStrokeColor,
+		strokeWidth : kStrokeWidth0,
+	});
+	
+	kID_ThemeBabyAnnouncementIcon.set(
+	{
+		stroke: kStrokeColor,
+		strokeWidth : kStrokeWidth0,
+	});
+	
+	kID_ThemeBirthdayIcon.set(
+	{
+		stroke: kStrokeColor,
+		strokeWidth : kStrokeWidth0,
+	});
+	
+	kID_ThemeChristmasTreeIcon.set(
+	{
+		stroke: kStrokeColor,
+		strokeWidth : kStrokeWidth0,
+	});
+	
+	kID_ThemeDoorDesignIcon.set(
+	{
+		stroke: kStrokeColor,
+		strokeWidth : kStrokeWidth0,
+	});
+	
+	kID_ThemeWhiteIcon.set(
+	{
+		stroke: kStrokeColor,
+		strokeWidth : kStrokeWidth0,
+	});
+	
+	/*** remove all the hightlights and then set the hightlight as per the selected theme ****************************/
+	if(kThemeHalloweenIconInfo.kIsUsed)
+	{
+		kID_ThemeHalloweenIcon.set(
+		{
+			stroke: kStrokeColor,
+			strokeWidth : kStrokeWidth10,
+		});
+		
+	}
+	else if(kThemeChristmasTreeIconInfo.kIsUsed)
+	{
+		kID_ThemeChristmasTreeIcon.set(
+		{
+			stroke: kStrokeColor,
+			strokeWidth : kStrokeWidth10,
+		});
+	}
+	else if (kThemeBirthdayIconInfo.kIsUsed)
+	{
+		kID_ThemeBirthdayIcon.set(
+		{
+			stroke: kStrokeColor,
+			strokeWidth : kStrokeWidth10,
+		});
+	}
+	else if(kThemeBabyAnnouncementIconInfo.kIsUsed)
+	{	
+		kID_ThemeBabyAnnouncementIcon.set(
+		{
+			stroke: kStrokeColor,
+			strokeWidth : kStrokeWidth10,
+		});
+	}
+	else if(kThemeDoorDesignIconInfo.kIsUsed)
+	{
+		kID_ThemeDoorDesignIcon.set(
+		{
+			stroke: kStrokeColor,
+			strokeWidth : kStrokeWidth10,
+		});	
+	}
+	else
+	{
+		kID_ThemeWhiteIcon.set(
+		{
+			stroke: kStrokeColor,
+			strokeWidth : kStrokeWidth10,
+		});
+	}
+	
+};
+
+function kOAddThemePanelIcons_WithoutHidingPanel()
+{	
+	canvas.add(kID_ThemePanel);
+	
+	canvas.add(kOD_ThemeWhiteIcon);
+	canvas.add(kOD_ThemeBabyAnnouncementIcon);
+	canvas.add(kOD_ThemeBirthdayIcon);
+	canvas.add(kOD_ThemeChristmasTreeIcon);
+	canvas.add(kOD_ThemeDoorDesignIcon);
+	canvas.add(kOD_ThemeHalloweenIcon);
+	
+	canvas.add(kID_SelectedOUTIcon);
+	canvas.add(kID_INIcon);
+	
+	canvas.add(kID_ThemeLeftArrowIcon);
+	
+	
+	kOD_ThemeHalloweenIcon.set(
+	{
+		stroke: kStrokeColor,
+		strokeWidth : kStrokeWidth0,
+	});
+	
+	kOD_ThemeBabyAnnouncementIcon.set(
+	{
+		stroke: kStrokeColor,
+		strokeWidth : kStrokeWidth0,
+	});
+	
+	kOD_ThemeBirthdayIcon.set(
+	{
+		stroke: kStrokeColor,
+		strokeWidth : kStrokeWidth0,
+	});
+	
+	kOD_ThemeChristmasTreeIcon.set(
+	{
+		stroke: kStrokeColor,
+		strokeWidth : kStrokeWidth0,
+	});
+	
+	kOD_ThemeDoorDesignIcon.set(
+	{
+		stroke: kStrokeColor,
+		strokeWidth : kStrokeWidth0,
+	});
+	
+	kOD_ThemeWhiteIcon.set(
+	{
+		stroke: kStrokeColor,
+		strokeWidth : kStrokeWidth0,
+	});
+	
+	/*** remove all the hightlights and then set the hightlight as per the selected theme ****************************/
+	if(kOThemeHalloweenIconInfo.kIsUsed)
+	{
+		kOD_ThemeHalloweenIcon.set(
+		{
+			stroke: kStrokeColor,
+			strokeWidth : kStrokeWidth10,
+		});
+	}
+	else if(kOThemeChristmasTreeIconInfo.kIsUsed)
+	{
+		kOD_ThemeChristmasTreeIcon.set(
+		{
+			stroke: kStrokeColor,
+			strokeWidth : kStrokeWidth10,
+		});
+		
+	}
+	else if (kOThemeBirthdayIconInfo.kIsUsed)
+	{
+	
+		kOD_ThemeBirthdayIcon.set(
+		{
+			stroke: kStrokeColor,
+			strokeWidth : kStrokeWidth10,
+		});
+		
+	}
+	else if(kOThemeBabyAnnouncementIconInfo.kIsUsed)
+	{	
+		kOD_ThemeBabyAnnouncementIcon.set(
+		{
+			stroke: kStrokeColor,
+			strokeWidth : kStrokeWidth10,
+		});
+		
+	}
+	else if(kOThemeDoorDesignIconInfo.kIsUsed)
+	{
+		kOD_ThemeDoorDesignIcon.set(
+		{
+			stroke: kStrokeColor,
+			strokeWidth : kStrokeWidth10,
+		});	
+	}
+	else
+	{
+		kOD_ThemeWhiteIcon.set(
+		{
+			stroke: kStrokeColor,
+			strokeWidth : kStrokeWidth10,
+		});
+	}
+	
+};
+
+
+/******************************* end icons for theme panel ******************************************/
 
 
 var kToDoListIconInfo = new kInsertImageInfo("kToDoListIcon",document.getElementById('kToDoListIcon'));  
@@ -1259,12 +3409,51 @@ function kAddMenuPanel2_WithHidingPanel()
 
 function kAddMenuPanel2()
 {
+	canvas.add(kID_MenuPanel2);
 	canvas.add(kID_Menu2LeftArrowIcon);
 	canvas.add(kID_ThemeIcon);
 	canvas.add(kID_ToDoListIcon);
 	canvas.add(kID_HouseAlarmIcon);
 	canvas.add(kID_HelpIcon);
 };
+
+function kAddMenuPanel1()
+{
+	canvas.add(kID_MenuPanel);
+	canvas.add(kID_CameraIcon);
+		
+	/***** condition check will be required - if there are unread messages then other icon needs to be added ****/
+	kID_AnyUnReadMsg = false;
+	for(kCounter = 0 ; kCounter < kUserMessages.length; kCounter++)
+	{
+		if( kUserMessages[kCounter].kName.toLowerCase() == activeuser.toLowerCase() && kUserMessages[kCounter].kIsUsed == false)
+		{
+			kID_AnyUnReadMsg = true;
+			break;
+		}
+	}
+		
+	if(kID_AnyUnReadMsg == false)
+		canvas.add(kID_NoUnreadIcon);
+	else if(kID_AnyUnReadMsg == true)
+		canvas.add(kID_OneUnreadMessageIcon_Menu);
+		
+	canvas.add(kID_CalendarIcon);
+		
+	/***** condition check will be required - if there are bell is already in mute state ****/
+	if(kID_IsBellMuted)
+	{
+		canvas.add(kID_MuteIcon_Menu);
+	}
+	else
+	{
+		canvas.add(kID_UnMuteIcon);
+	}
+		
+	canvas.add(kID_SettingsIcon);
+	canvas.add(kID_MirrorIcon);
+	canvas.add(kID_RightArrowIcon);
+}
 
 function kRemoveMenuPanel2()
 {
@@ -1516,6 +3705,7 @@ kID_SOSIcon.on('selected', function()
 	/******** menu icons removal *************/
 	kRemoveMenuIcons();
 	kRemoveMenuPanel2();
+	
 	/******** menu icons removal *************/
 	
 	/********* remove all the sos related icons ***********/
@@ -1526,13 +3716,21 @@ kID_SOSIcon.on('selected', function()
 	kRemoveCameraPanel();
 	/************************************************************************************************************/
 	
+	/********** remove theme panel icons **************/
+	kRemoveThemePanel();
+	/************************************************/
 	/*** outside camera images removal ******/
 	kRemoveCameraPanel_WithHidingPanel_OD();
 	
 	/***************************************/
 	
+	/************ message panel **********************/
+	kRemoveMessagePanel();
+	/*************************************************/
+	
 /*************************************** Remove all icons - menu + lock + sos ****************************/
 	//now add all the icons again
+	canvas.add(kID_SOSPanel);
 	canvas.add(kID_Calling911);
 	canvas.add(kID_SOS_UnMuteIcon);
 	canvas.add(kID_SOS_CallDisconnectIcon);
@@ -1563,6 +3761,7 @@ function kID_Remove_Disconnecting911()
 	if(kID_SOS_CallDisconnectIcon.kIsUsed)
 	{
 		kID_SOS_CallDisconnectIcon.kIsUsed = false;
+		canvas.remove(kID_SOSPanel);
 		if(kID_IsDoorLocked)
 		{
 			canvas.add(kID_LockIcon);
@@ -1595,7 +3794,7 @@ function kRemoveNotificationPanel()
 	canvas.remove(kID_NotificationPanel);
 	canvas.remove(kID_MuteIcon);
 	canvas.remove(kID_OneUnreadMessageIcon);
-	canvas.remove(kID_GoogleExpressDeliveryIcon);
+	canvas.remove(kID_DeliveryIcon);
 	canvas.remove(kID_AlertIcon);
 };
 
@@ -1667,22 +3866,12 @@ kID_MenuIcon.on('selected', function()
 		/******** menu icons removal *************/
 		
 		/**** conditions to check whether there were any notifications - then add the notification panel icons***************/
-		if(kID_IsBellMuted)
-		{
-			canvas.add(kID_MuteIcon);
-		}
+		kAddNotificationPanel();
 		
 		/**** conditions to check whether there were any notifications - then add the notification panel icons***************/
 		
 		/**** add the lock icon on the door ************************/
-		/*if(kID_IsDoorLocked)
-		{
-			canvas.add(kID_LockIcon);
-		}
-		else
-		{
-			canvas.add(kID_UnLockIcon);
-		}*/
+		
 		canvas.remove(kID_LockIcon);
 		canvas.add(kID_LockIcon);
 		
@@ -1692,6 +3881,7 @@ kID_MenuIcon.on('selected', function()
 	}
 	else
 	{
+		activeuser = 'RIDHI';
 		kID_IsMenuOpen = true;
 	
 	/*************************************** Remove all icons - menu + lock + sos ****************************/
@@ -1707,6 +3897,7 @@ kID_MenuIcon.on('selected', function()
 		/******** menu icons removal *************/
 		kRemoveMenuIcons();
 		kRemoveMenuPanel2();
+		
 		/******** menu icons removal *************/
 		
 		/********* remove all the sos related icons ***********/
@@ -1717,34 +3908,21 @@ kID_MenuIcon.on('selected', function()
 		kRemoveCameraPanel();
 		/************************************************************************************************************/
 		
+		/******* theme panel icons removal *********************/
+		kRemoveThemePanel();
+		/*******************************************************/
+		
 		/*** outside camera images removal ******/
 		kRemoveCameraPanel_WithHidingPanel_OD();
 		/***************************************/
+		
+		/************ message panel **********************/
+		kRemoveMessagePanel();
+		/*************************************************/
 	
 	/*************************************** Remove all icons - menu + lock + sos ****************************/
 	
-	
-		canvas.add(kID_CameraIcon);
-		
-		/***** condition check will be required - if there are unread messages then other icon needs to be added ****/
-		canvas.add(kID_NoUnreadIcon);
-		//canvas.add(kID_OneUnreadMessageIcon_Menu);
-		
-		canvas.add(kID_CalendarIcon);
-		
-		/***** condition check will be required - if there are bell is already in mute state ****/
-		if(kID_IsBellMuted)
-		{
-			canvas.add(kID_MuteIcon_Menu);
-		}
-		else
-		{
-			canvas.add(kID_UnMuteIcon);
-		}
-		
-		canvas.add(kID_SettingsIcon);
-		canvas.add(kID_MirrorIcon);
-		canvas.add(kID_RightArrowIcon);
+		kAddMenuPanel1();
 	}
 	canvas.deactivateAll(); // deselect everything
 
@@ -1756,6 +3934,9 @@ kID_CameraIcon.on('selected', function()
 	// make the open menu as false - if the user again clicks on menu icon - this will open up the menu again.
 	kID_IsMenuOpen = false;
 	kID_IsDoorLocked = true;
+	
+	kID_IsAvatarShown = false;
+	kID_IsMicrophoneMute = false;
 	
 	/*** remove all the menu icons ****/
 	kRemoveMenuIcons();
@@ -1779,6 +3960,7 @@ kID_CameraIcon.on('selected', function()
 	});
 	
 	/*** add the icons for camera panel ***********/
+	canvas.add(kID_CameraPanel);
 	canvas.add(kID_CameraLeftArrowIcon);
 	/***************** condition check needs to be added - and then add the images accordingly ******/
 	//canvas.add(kID_OutsideGuestImageIcon1);
@@ -1990,6 +4172,8 @@ kAddCameraPanel_WithHidingPanel_OD();
 
 
 /*********************** END code binding images for showing inside user outside ************************************************/
+
+
 /********************************** Code End by Kruti ***********************************************************************************************/
 
 
