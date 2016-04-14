@@ -509,6 +509,15 @@ canvas.add(kID_DateText);
 var kID_Hrs;
 var kID_Mins;
 
+// **$$$ ankurs new variables **************/
+var kID_AMPM;
+var kID_TimeFormat = 24;
+var kID_TempFormat = "F";
+var kID_DateFormat = 1;
+var kID_CurrentDate;
+
+/***********************************/
+
 // add the time to canvas - initially blank, update from function
 var kID_TimeText = new fabric.Text('',{
 	left: kID_HeaderPanelLeft +8,
@@ -519,57 +528,141 @@ var kID_TimeText = new fabric.Text('',{
 });
 canvas.add(kID_TimeText);
 
-// refresh the date and time in every  10 seconds
-function kID_Refresh_DateTime()
+/* $$ ankurs new function for date ******/
+function kID_Date()
 {
-	kID_CurrentDateTime = new Date();
-	kID_DD = kID_CurrentDateTime.getDate();
 
-	kID_MM = kID_CurrentDateTime.getMonth()+1; //January is 0!
+	kID_CurrentDate = new Date();
+	kID_DD = kID_CurrentDate.getDate();
 
-	kID_YYYY = kID_CurrentDateTime.getFullYear();
-    
+	kID_MM = kID_CurrentDate.getMonth()+1; //January is 0!
+
+	kID_YYYY = kID_CurrentDate.getFullYear();
+	   
 	if(kID_DD<10){
-		kID_DD='0'+kID_DD;
+	kID_DD='0'+kID_DD;
 	} 
 
 	if(kID_MM<10){
-		kID_MM='0'+kID_MM;
+	kID_MM='0'+kID_MM;
 	}
-	
+
+	if(kID_DateFormat==1)
+	{
+
+		kID_DateText.set({
+			text: kID_MM+"/"+kID_DD+"/"+kID_YYYY
+			});
+	}
+
+	if(kID_DateFormat==2)
+	{
+		kID_DateText.set({
+		text: kID_DD+"/"+kID_MM+"/"+kID_YYYY
+		});
+	}
+
+	if(kID_DateFormat==3)
+	{
+		if(kID_MM=='01')kID_MM='JAN';if(kID_MM=='02')kID_MM='FEB';if(kID_MM=='03')kID_MM='MAR';if(kID_MM=='04')kID_MM='APR';
+		if(kID_MM=='05')kID_MM='MAY';if(kID_MM=='06')kID_MM='JUN';if(kID_MM=='07')kID_MM='JUL';if(kID_MM=='08')kID_MM='AUG';
+		if(kID_MM=='09')kID_MM='SEP';if(kID_MM=='10')kID_MM='OCT';if(kID_MM=='11')kID_MM='NOV';if(kID_MM=='12')kID_MM='DEC';
+		kID_DateText.set({
+		text: kID_DD+" "+kID_MM+" "+kID_YYYY
+		});
+	}
+
+	if(kID_DateFormat==4)
+	{
+		if(kID_MM=='01')kID_MM='JAN';if(kID_MM=='02')kID_MM='FEB';if(kID_MM=='03')kID_MM='MAR';if(kID_MM=='04')kID_MM='APR';
+		if(kID_MM=='05')kID_MM='MAY';if(kID_MM=='06')kID_MM='JUN';if(kID_MM=='07')kID_MM='JUL';if(kID_MM=='08')kID_MM='AUG';
+		if(kID_MM=='09')kID_MM='SEP';if(kID_MM=='10')kID_MM='OCT';if(kID_MM=='11')kID_MM='NOV';if(kID_MM=='12')kID_MM='DEC';
+		kID_DateText.set({
+		text: kID_MM+" "+kID_DD+" "+kID_YYYY
+		});
+	}
+	//update the date on canvas
+	canvas.remove(kID_DateText);
+	canvas.add(kID_DateText);
+};
+
+kID_Date();
+
+
+/***************************************/
+
+// $$$$$ Ankurs new code for time refresh ****************************/
+function kID_Refresh_DateTime_24()
+{
+	kID_CurrentDateTime = new Date();
+
 	kID_Hrs = kID_CurrentDateTime.getHours();
 	kID_Mins = kID_CurrentDateTime.getMinutes();
 
 	if(kID_Hrs < 10){
-		kID_Hrs = '0'+kID_Hrs;
+	kID_Hrs = '0'+kID_Hrs;
 	}
-	
+
 	if(kID_Mins < 10){
-		kID_Mins = '0'+kID_Mins;
+	kID_Mins = '0'+kID_Mins;
 	}
-	
-	kID_DateText.set({
-		text: kID_MM+"/"+kID_DD+"/"+kID_YYYY
-	});
-	
-	//update the date on canvas
-	canvas.remove(kID_DateText);
-	canvas.add(kID_DateText);
-	
+
 	kID_TimeText.set({
-		text:kID_Hrs+":"+kID_Mins
+	text:kID_Hrs+":"+kID_Mins
 	});
-	
+
 	//update the time on canvas
 	canvas.remove(kID_TimeText);
 	canvas.add(kID_TimeText);
 };
+function kID_Refresh_DateTime_12()
+{
+	kID_CurrentDateTime = new Date();
+
+	kID_Hrs = kID_CurrentDateTime.getHours();
+	kID_Mins = kID_CurrentDateTime.getMinutes();
+
+	if(kID_Hrs<12){
+	kID_AMPM = 'AM';
+	}
+	if(kID_Hrs>12){
+	kID_Hrs = kID_Hrs -  12;
+	kID_AMPM = 'PM';
+	}
+
+	if(kID_Hrs < 10){
+	kID_Hrs = '0'+kID_Hrs;
+	}
+
+	if(kID_Mins < 10){
+	kID_Mins = '0'+kID_Mins;
+	}
+
+	kID_TimeText.set({
+	text:kID_Hrs+":"+kID_Mins+kID_AMPM
+});
+
+//update the time on canvas
+canvas.remove(kID_TimeText);
+canvas.add(kID_TimeText);
+};
+
 
 //call the function to update the blank date and time initially.
-kID_Refresh_DateTime();
+kID_Refresh_DateTime_24();
+
+var ref_12 = "";
+var ref_24;
+
+
+// *************** end ***********************************************/
+
+
+//call the function to update the blank date and time initially.
+//kID_Refresh_DateTime();
 
 //refresh the date and time automatically in every 10 seconds.
-setInterval(kID_Refresh_DateTime, 30000);
+//setInterval(kID_Refresh_DateTime, 30000);
 
 // add the weather - temperature - initially blank - added through service. Default value shown in Faranheit
 var kID_WeatherTemp = new fabric.Text('', {
@@ -634,9 +727,24 @@ function kWeatherUpdate()
 			document.getElementById("kCurrentCloudIcon").src= icon_url_json;
 			
 			// set the fabric icon with updated image icon.
-			kID_WeatherTemp.set({
+			/*kID_WeatherTemp.set({
 				text:temp_json
-			});
+			});*/
+			
+			// $$ ankurs code for showing f or c as per the settings panel
+			// set the fabric icon with updated image icon.
+			if(kID_TempFormat=="F")
+			{
+				kID_WeatherTemp.set({
+				text:temp_json
+				});
+			}
+			else if(kID_TempFormat=="C")
+			{
+				kID_WeatherTemp.set({
+				text:temp_json_C
+				});
+			}
 			
 			// rebind the temperature reading
 			canvas.remove(kID_WeatherTemp);
@@ -4175,7 +4283,6 @@ kAddCameraPanel_WithHidingPanel_OD();
 
 
 /********************************** Code End by Kruti ***********************************************************************************************/
-
 
 
 
