@@ -115,7 +115,7 @@
 <!-- *********************************** HTML Code End by Kruti **************************************************************************************  -->
 
 
-<!-- ************************************ HTML Code Added by Sahib ************************************************************************************* -->
+<!-- ************************************HTML Code Added by Sahib ************************************************************************************* -->
 
 <img src="..//CS422_Project2//Icons//keyhole1.png" id="sKeyHoleIcon" style="display:none">
 <img src="..//CS422_Project2//Icons//doorbell1.png" id="sDoorBellIcon" style="display:none">
@@ -199,6 +199,7 @@
 <!-- ************************************ HTML Code Added by Ridhi ************************************************************************************* -->
 
 
+
 <img src="Icons/tickmark.png" id="rTickMark" style="display:none">
 <img src="Icons/rightarrow1.png" id="rRightArrow" style="display:none">
 
@@ -215,6 +216,18 @@
 <img src="Icons/NFC_3.png" id="rPhone3" style="display:none">
 <img src="Icons/NFC_4.jpg" id="rPhone4" style="display:none">
 <img src="Icons/sync.png" id="rSync" style="display:none">
+<img src="" id="rTempIcon1" style="display:none">
+<img src="" id="rTempIcon2" style="display:none">
+<img src="" id="rTempIcon3" style="display:none">
+<img src="" id="rTempIcon4" style="display:none">
+<img src="" id="rTempIcon5" style="display:none">
+<img src="" id="rTempIcon6" style="display:none">
+
+<img src="" id="rTempIcon" style="display:none">
+<img src="Icons/rKrutiImageIcon.png" id="kKrutiImageIcon1" style="display:none">	
+	<img src="Icons/rRidhiImageIcon.png" id="kRidhiImageIcon2" style="display:none">
+	<img src="Icons/rAnkurImageIcon.png" id="kAnkurImageIcon3" style="display:none">	
+	<img src="Icons/rSahibImageIcon.png" id="kSahibImageIcon4" style="display:none">
 
 
 
@@ -6099,8 +6112,234 @@ var rID_Capture = 0;
 var rID_SyncPhone = 0;
 var isUsedTutorial = 0;
 var activeuser = '';
+var rID_TempClick = 0;
+var retake = 0;
+var retake2 = 0;
+var retake3 = 0;
+var retake4 = 0;
+var rID_Profile1Done =0;
+var rID_Profile2Done =0;
+var rID_Profile3Done = 0;
+var rID_Profile4Done = 0;
 
-var rID_FirstTimeSetupBox = new fabric.Rect({
+var rID_Hour1 = new fabric.Text('default', {
+		left: rID_TutorialLeft+ 810,
+  top: rID_TutorialTop + 90,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'white',
+		fontFamily: kID_Font
+	});
+	
+
+	var rID_Hour2 = new fabric.Text('', {
+		left: rID_TutorialLeft+ 810,
+       top: rID_TutorialTop + 190,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'white',
+		fontFamily: kID_Font
+	});
+
+	var rID_Hour3 = new fabric.Text('', {
+		left: rID_TutorialLeft+ 810,
+		top: rID_TutorialTop + 290,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'white',
+		fontFamily: kID_Font
+	});
+
+	var rID_Hour4 = new fabric.Text('', {
+		left: rID_TutorialLeft + 810,
+		top: rID_TutorialTop+ 390,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'white',
+		fontFamily: kID_Font
+	});
+
+	var rID_Hour5 = new fabric.Text('', {
+		left: rID_TutorialLeft + 810,
+		top: rID_TutorialTop + 490,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'white',
+		fontFamily: kID_Font
+	});
+
+	var rID_Hour6 = new fabric.Text('', {
+		left: rID_TutorialLeft + 810,
+		top: rID_TutorialTop + 590,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'white',
+		fontFamily: kID_Font
+	});
+	
+	var rTempIcon1Info = new kInsertImageInfo("rTempIcon1",document.getElementById('rTempIcon1'));  
+var rID_TempIcon1 = new fabric.Image(rTempIcon1Info.kImageElement, 
+{
+	left: rID_TutorialLeft+ 950,
+  top: rID_TutorialTop + 80,
+	//top: kID_HeaderPanelTop,
+	width: kID_IconW -5,
+	height: kID_IconH -5
+});
+
+	var rTempIcon2Info = new kInsertImageInfo("rTempIcon1",document.getElementById('rTempIcon2'));  
+var rID_TempIcon2 = new fabric.Image(rTempIcon2Info.kImageElement, 
+{
+	left: rID_TutorialLeft+ 950,
+  top: rID_TutorialTop + 180,
+	//top: kID_HeaderPanelTop,
+	width: kID_IconW -5,
+	height: kID_IconH -5
+});
+
+	var rTempIcon3Info = new kInsertImageInfo("rTempIcon3",document.getElementById('rTempIcon3'));  
+var rID_TempIcon3 = new fabric.Image(rTempIcon3Info.kImageElement, 
+{
+	left: rID_TutorialLeft+ 950,
+  top: rID_TutorialTop + 280,
+	//top: kID_HeaderPanelTop,
+	width: kID_IconW -5,
+	height: kID_IconH -5
+});
+
+	var rTempIcon4Info = new kInsertImageInfo("rTempIcon4",document.getElementById('rTempIcon4'));  
+var rID_TempIcon4 = new fabric.Image(rTempIcon4Info.kImageElement, 
+{
+	left: rID_TutorialLeft+ 950,
+  top: rID_TutorialTop + 380,
+	//top: kID_HeaderPanelTop,
+	width: kID_IconW -5,
+	height: kID_IconH -5
+});
+
+	var rTempIcon5Info = new kInsertImageInfo("rTempIcon5",document.getElementById('rTempIcon5'));  
+var rID_TempIcon5 = new fabric.Image(rTempIcon5Info.kImageElement, 
+{
+	left: rID_TutorialLeft+ 950,
+  top: rID_TutorialTop + 480,
+	//top: kID_HeaderPanelTop,
+	width: kID_IconW -5,
+	height: kID_IconH -5
+});
+	var rTempIcon6Info = new kInsertImageInfo("rTempIcon6",document.getElementById('rTempIcon6'));  
+var rID_TempIcon6 = new fabric.Image(rTempIcon6Info.kImageElement, 
+{
+	left: rID_TutorialLeft+ 950,
+  top: rID_TutorialTop + 580,
+	//top: kID_HeaderPanelTop,
+	width: kID_IconW -5,
+	height: kID_IconH -5
+});
+
+var rID_ClickableWeatherBox = new fabric.Rect({
+  left: rID_TutorialLeft + 780,
+  top: rID_TutorialTop + 10,
+  fill: '#595959',
+  strokeWidth: 2,
+  stroke: '',
+  width: 400,
+  height: 700
+});
+
+var rID_ClickableWeatherBox2 = new fabric.Rect({
+  left: rID_TutorialLeft + 780,
+  top: rID_TutorialTop + 10,
+  fill: '#595959',
+  strokeWidth: 2,
+  stroke: 'black',
+  width: 400,
+  height: 50
+});
+
+var rID_Day = new fabric.Text('Today',{
+  left: rID_TutorialLeft+ 800,
+  top: rID_TutorialTop + 25,
+  fontSize: rID_FontSize +6,
+  fontWeight: 'bold',
+  fill:'white',
+  fontFamily: rID_Font
+});
+
+var rID_TempDisplay = new fabric.Text('',{
+  left: rID_TutorialLeft+ 1050,
+  top: rID_TutorialTop + 25,
+  fontSize: rID_FontSize +6,
+  fontWeight: 'bold',
+  fill:'white',
+  fontFamily: rID_Font
+});
+
+	var rTempIconInfo = new kInsertImageInfo("rTempIcon",document.getElementById('rTempIcon'));  
+var rID_TempIcon = new fabric.Image(rTempIconInfo.kImageElement, 
+{
+	left: rID_TutorialLeft+ 950,
+  top: rID_TutorialTop + 10,
+	//top: kID_HeaderPanelTop,
+	width: kID_IconW -7,
+	height: kID_IconH -12
+});
+
+	var rID_Temp1 = new fabric.Text('', {
+		left: rID_TutorialLeft+ 1070,
+  top: rID_TutorialTop + 90,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'white',
+		fontFamily: kID_Font
+	});
+
+	var rID_Temp2 = new fabric.Text('', {
+		left: rID_TutorialLeft+ 1070,
+      top: rID_TutorialTop + 190,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'white',
+		fontFamily: kID_Font
+	});
+
+	var rID_Temp3 = new fabric.Text('', {
+		left: rID_TutorialLeft+ 1070,
+      top: rID_TutorialTop + 290,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'white',
+		fontFamily: kID_Font
+	});
+
+	var rID_Temp4 = new fabric.Text('', {
+		left: rID_TutorialLeft+ 1070,
+      top: rID_TutorialTop + 390,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill: 'white',
+		fontFamily: kID_Font
+	});
+
+	var rID_Temp5 = new fabric.Text('', {
+	left: rID_TutorialLeft+ 1070,
+      top: rID_TutorialTop + 490,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'white',
+		fontFamily: kID_Font
+	});
+
+	var rID_Temp6 = new fabric.Text('', {
+		left: rID_TutorialLeft+ 1070,
+      top: rID_TutorialTop + 590,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'white',
+		fontFamily: kID_Font
+	});
+
+
+/*var rID_FirstTimeSetupBox = new fabric.Rect({
   left: rID_TutorialLeft + 200,
   top: rID_TutorialTop + 700,
   fill: '',
@@ -6108,55 +6347,102 @@ var rID_FirstTimeSetupBox = new fabric.Rect({
   stroke: 'black',
   width: 200,
   height: 50
-});
+});*/
 
 
 var rID_FirstTimeSetupText = new fabric.Text('First Time Setup',{
-  left: rID_TutorialLeft+ 205,
-  top: rID_TutorialTop + 710,
+  left: rID_TutorialLeft+ 120,
+  top: rID_TutorialTop + 190,
   fontSize: rID_FontSize,
-  fontWeight: 'normal',
+  fontWeight: 'bold',
   fontFamily: rID_Font
 });
 
-var rID_GroupFirstTimeSetupButton = new fabric.Group([rID_FirstTimeSetupBox, rID_FirstTimeSetupText], {
+/*var rID_GroupFirstTimeSetupButton = new fabric.Group([rID_FirstTimeSetupBox, rID_FirstTimeSetupText], {
 
   left: rID_TutorialLeft+ 200,
   top: rID_TutorialTop + 700,
   angle: 0
+});*/
+
+var rID_UsersBox = new fabric.Rect({
+  left: rID_TutorialLeft + 350,
+  top: rID_TutorialTop + 150,
+  fill: '',
+  strokeWidth: 5,
+  stroke: 'black',
+  width: 400,
+  height: 400
 });
 
 var rID_Ridhi = new fabric.Text('RIDHI',{
-  left: rID_TutorialLeft+ 10,
-  top: rID_TutorialTop + 510,
-  fontSize: rID_FontSize,
-  fontWeight: 'normal',
+  left: rID_TutorialLeft+ 470,
+  top: rID_TutorialTop + 200,
+  fontSize: rID_FontSize + 15,
+  fontWeight: 'bold',
   fontFamily: rID_Font
 });
 
 var rID_Kruti = new fabric.Text('KRUTI',{
-  left: rID_TutorialLeft+ 110,
-  top: rID_TutorialTop + 510,
-  fontSize: rID_FontSize,
-  fontWeight: 'normal',
+  left: rID_TutorialLeft+ 470,
+  top: rID_TutorialTop + 260,
+  fontSize: rID_FontSize + 15,
+  fontWeight: 'bold',
   fontFamily: rID_Font
 });
 
 var rID_Sahib = new fabric.Text('SAHIB',{
-  left: rID_TutorialLeft+ 210,
-  top: rID_TutorialTop + 510,
-  fontSize: rID_FontSize,
-  fontWeight: 'normal',
+  left: rID_TutorialLeft+ 470,
+  top: rID_TutorialTop + 320,
+  fontSize: rID_FontSize+15,
+  fontWeight: 'bold',
   fontFamily: rID_Font
 });
 
 var rID_Ankur = new fabric.Text('ANKUR',{
-  left: rID_TutorialLeft+ 310,
-  top: rID_TutorialTop + 510,
-  fontSize: rID_FontSize,
-  fontWeight: 'normal',
+  left: rID_TutorialLeft+ 470,
+  top: rID_TutorialTop + 380,
+  fontSize: rID_FontSize+15,
+  fontWeight: 'bold',
   fontFamily: rID_Font
 });
+
+var rID_TickMarkImg = document.getElementById('rTickMark');
+var rID_TickMarkIcon = new fabric.Image(rID_TickMarkImg, {
+left: rID_TutorialLeft+ 200,
+  top: rID_TutorialTop + 255,
+            width: 40,
+            height: 40
+        });
+
+var rID_RidhiTick = new fabric.Image(rID_TickMarkImg, {
+left: rID_TutorialLeft+ 600 ,
+  top: rID_TutorialTop + 205,
+            width: 50,
+            height: 40
+        });	
+		
+	
+var rID_KrutiTick = new fabric.Image(rID_TickMarkImg, {
+left: rID_TutorialLeft+ 600 ,
+  top: rID_TutorialTop + 265,
+            width: 50,
+            height: 40
+        });	
+
+var rID_SahibTick = new fabric.Image(rID_TickMarkImg, {
+left: rID_TutorialLeft+ 600 ,
+  top: rID_TutorialTop + 325,
+            width: 50,
+            height: 40
+        });
+
+var rID_AnkurTick = new fabric.Image(rID_TickMarkImg, {
+left: rID_TutorialLeft+ 600 ,
+  top: rID_TutorialTop + 385,
+            width: 50,
+            height: 40
+        });		
 
 var rID_Tutorial = new fabric.Rect({
   left: rID_TutorialLeft,
@@ -6169,26 +6455,26 @@ var rID_Tutorial = new fabric.Rect({
 });
 
 
-var rID_WelcomeText = new fabric.Text('Welcome to',{
-  left: rID_TutorialLeft+ 200,
-  top: rID_TutorialTop + 10,
-  fontSize: rID_FontSize,
-  fontWeight: 'normal',
-  fontFamily: rID_Font
-});
-
-var rID_WelcomeText2 = new fabric.Text('AUTUMN!',{
-  left: rID_TutorialLeft+ 190,
-  top: rID_TutorialTop + 35,
-  fontSize: rID_FontSize+ 5,
+var rID_WelcomeText = new fabric.Text('Welcome to Autumn!',{
+  left: rID_TutorialLeft+ 350,
+  top: rID_TutorialTop + 100,
+  fontSize: rID_FontSize + 20,
   fontWeight: 'bold',
   fontFamily: rID_Font
 });
 
+/*var rID_WelcomeText2 = new fabric.Text('AUTUMN!',{
+  left: rID_TutorialLeft+ 410,
+  top: rID_TutorialTop + 150,
+  fontSize: rID_FontSize+ 11,
+  fontWeight: 'bold',
+  fontFamily: rID_Font
+});*/
+
 var rID_LanguageText = new fabric.Text('Please choose your language  ',{
-  left: rID_TutorialLeft+ 100,
-  top: rID_TutorialTop + 80,
-  fontSize: rID_FontSize,
+  left: rID_TutorialLeft+ 300,
+  top: rID_TutorialTop + 160,
+  fontSize: rID_FontSize + 20,
   fontWeight: 'normal',
   fontFamily: rID_Font
 });
@@ -6255,18 +6541,18 @@ var rID_EnglishBox = new fabric.Rect({
   left: rID_TutorialLeft +100,
   top: rID_TutorialTop + 110,
   fill: '',
-  strokeWidth: 2,
+  strokeWidth: 3,
   stroke: 'black',
-  width: 115,
-  height: 30
+  width: 215,
+  height: 65
 });
 
 var rID_EnglishText = new fabric.Text('English',{
-  left: rID_TutorialLeft+ 110,
-  top: rID_TutorialTop + 115,
-  fontSize: rID_FontSize,
+  left: rID_TutorialLeft+ 135,
+  top: rID_TutorialTop + 125,
+  fontSize: rID_FontSize + 15,
   fontWeight: 'normal',
-  fontFamily: rID_Font
+  fontFamily: rID_Font 
 });
 
 
@@ -6274,17 +6560,17 @@ var rID_EnglishText = new fabric.Text('English',{
 
 var rID_GroupEnglishButton = new fabric.Group([rID_EnglishBox, rID_EnglishText], {
 
-  left: rID_TutorialLeft+ 105,
-  top: rID_TutorialTop + 110,
+  left: rID_TutorialLeft+ 255,
+  top: rID_TutorialTop + 250,
   angle: 0
 });
 
 var rID_TickMarkImg = document.getElementById('rTickMark');
 var rID_TickMarkIcon = new fabric.Image(rID_TickMarkImg, {
-left: rID_TutorialLeft+ 88,
-  top: rID_TutorialTop + 125,
-            width: 20,
-            height: 20
+left: rID_TutorialLeft+ 200,
+  top: rID_TutorialTop + 255,
+            width: 40,
+            height: 40
         });
 		
 var rID_TickMarkIcon2 = new fabric.Image(rID_TickMarkImg, {
@@ -6319,16 +6605,16 @@ var rID_SpanishBox = new fabric.Rect({
   left: rID_TutorialLeft +100,
   top: rID_TutorialTop + 160,
   fill: '',
-  strokeWidth: 2,
+  strokeWidth: 3,
   stroke: 'black',
-  width: 115,
-  height: 30
+  width: 215,
+  height: 65
 });
 
 var rID_SpanishText = new fabric.Text('el espanol',{
   left: rID_TutorialLeft+ 110,
   top: rID_TutorialTop + 165,
-  fontSize: rID_FontSize,
+  fontSize: rID_FontSize+15,
   fontWeight: 'normal',
   fontFamily: rID_Font
 });
@@ -6336,8 +6622,8 @@ var rID_SpanishText = new fabric.Text('el espanol',{
 
 var rID_GroupSpanishButton = new fabric.Group([rID_SpanishBox, rID_SpanishText], {
 
-  left: rID_TutorialLeft+ 105,
-  top: rID_TutorialTop + 160,
+  left: rID_TutorialLeft+ 255,
+  top: rID_TutorialTop + 350,
   angle: 0
 });
 
@@ -6345,16 +6631,16 @@ var rID_FrenchBox = new fabric.Rect({
   left: rID_TutorialLeft +100,
   top: rID_TutorialTop + 210,
   fill: '',
-  strokeWidth: 2,
+  strokeWidth: 3,
   stroke: 'black',
-  width: 115,
-  height: 30
+  width: 215,
+  height: 65
 });
 
 var rID_FrenchText = new fabric.Text('Francais',{
   left: rID_TutorialLeft+ 110,
   top: rID_TutorialTop + 215,
-  fontSize: rID_FontSize,
+  fontSize: rID_FontSize+15,
   fontWeight: 'normal',
   fontFamily: rID_Font
 });
@@ -6362,8 +6648,8 @@ var rID_FrenchText = new fabric.Text('Francais',{
 
 var rID_GroupFrenchButton = new fabric.Group([rID_FrenchBox, rID_FrenchText], {
 
-  left: rID_TutorialLeft+ 105,
-  top: rID_TutorialTop + 210,
+  left: rID_TutorialLeft+ 255,
+  top: rID_TutorialTop + 450,
   angle: 0
 });
 
@@ -6371,16 +6657,16 @@ var rID_ChineseBox = new fabric.Rect({
   left: rID_TutorialLeft +100,
   top: rID_TutorialTop + 260,
   fill: '',
-  strokeWidth: 2,
+  strokeWidth: 3,
   stroke: 'black',
-  width: 115,
-  height: 30
+  width: 215,
+  height: 65
 });
 
 var rID_ChineseText = new fabric.Text('中国',{
   left: rID_TutorialLeft+ 120,
   top: rID_TutorialTop + 265,
-  fontSize: rID_FontSize,
+  fontSize: rID_FontSize+15,
   fontWeight: 'normal',
   fontFamily: rID_Font-10
 });
@@ -6390,8 +6676,8 @@ var rID_ChineseText = new fabric.Text('中国',{
 
 var rID_GroupChineseButton = new fabric.Group([rID_ChineseBox, rID_ChineseText], {
 
-  left: rID_TutorialLeft+ 105,
-  top: rID_TutorialTop + 260,
+  left: rID_TutorialLeft+ 255,
+  top: rID_TutorialTop + 550,
   angle: 0
 });
 
@@ -6399,16 +6685,16 @@ var rID_HindiBox = new fabric.Rect({
   left: rID_TutorialLeft +100,
   top: rID_TutorialTop + 310,
   fill: '',
-  strokeWidth: 2,
+  strokeWidth: 3,
   stroke: 'black',
-  width: 115,
-  height: 30
+  width: 215,
+  height: 65
 });
 
 var rID_HindiText = new fabric.Text('हिंदी',{
   left: rID_TutorialLeft+ 120,
   top: rID_TutorialTop + 315,
-  fontSize: rID_FontSize,
+  fontSize: rID_FontSize+15,
   fontWeight: 'normal',
   fontFamily: rID_Font
 });
@@ -6418,8 +6704,8 @@ var rID_HindiText = new fabric.Text('हिंदी',{
 
 var rID_GroupHindiButton = new fabric.Group([rID_HindiBox, rID_HindiText], {
 
-  left: rID_TutorialLeft+ 105,
-  top: rID_TutorialTop + 310,
+  left: rID_TutorialLeft+ 255,
+  top: rID_TutorialTop + 650,
   angle: 0
 });
 
@@ -6428,16 +6714,16 @@ var rID_ArabicBox = new fabric.Rect({
   left: rID_TutorialLeft +300,
   top: rID_TutorialTop + 110,
   fill: '',
-  strokeWidth: 2,
+  strokeWidth: 3,
   stroke: 'black',
-  width: 115,
-  height: 30
+  width: 215,
+  height: 65
 });
 
 var rID_ArabicText = new fabric.Text('عربى',{
   left: rID_TutorialLeft+ 315,
   top: rID_TutorialTop + 115,
-  fontSize: rID_FontSize,
+  fontSize: rID_FontSize+15,
   fontWeight: 'normal',
   fontFamily: rID_Font
 });
@@ -6447,8 +6733,8 @@ var rID_ArabicText = new fabric.Text('عربى',{
 
 var rID_GroupArabicButton = new fabric.Group([rID_ArabicBox, rID_ArabicText], {
 
-  left: rID_TutorialLeft+ 310,
-  top: rID_TutorialTop + 110,
+  left: rID_TutorialLeft+ 575,
+  top: rID_TutorialTop + 250,
   angle: 0
 });
 
@@ -6456,16 +6742,16 @@ var rID_GermanBox = new fabric.Rect({
   left: rID_TutorialLeft +300,
   top: rID_TutorialTop + 160,
   fill: '',
-  strokeWidth: 2,
+  strokeWidth: 3,
   stroke: 'black',
-  width: 115,
-  height: 30
+  width: 215,
+  height: 65
 });
 
 var rID_GermanText = new fabric.Text('Deutsch',{
   left: rID_TutorialLeft+ 315,
   top: rID_TutorialTop + 165,
-  fontSize: rID_FontSize,
+  fontSize: rID_FontSize+15,
   fontWeight: 'normal',
   fontFamily: rID_Font
 });
@@ -6475,8 +6761,8 @@ var rID_GermanText = new fabric.Text('Deutsch',{
 
 var rID_GroupGermanButton = new fabric.Group([rID_GermanBox, rID_GermanText], {
 
-  left: rID_TutorialLeft+ 310,
-  top: rID_TutorialTop + 160,
+  left: rID_TutorialLeft+ 575,
+  top: rID_TutorialTop + 350,
   angle: 0
 });
 
@@ -6484,16 +6770,16 @@ var rID_JapaneseBox = new fabric.Rect({
   left: rID_TutorialLeft +300,
   top: rID_TutorialTop + 210,
   fill: '',
-  strokeWidth: 2,
+  strokeWidth: 3,
   stroke: 'black',
-  width: 115,
-  height: 30
+  width: 215,
+  height: 65
 });
 
 var rID_JapaneseText = new fabric.Text('日本',{
   left: rID_TutorialLeft+ 325,
   top: rID_TutorialTop + 215,
-  fontSize: rID_FontSize,
+  fontSize: rID_FontSize+15,
   fontWeight: 'normal',
   fontFamily: rID_Font
 });
@@ -6503,8 +6789,8 @@ var rID_JapaneseText = new fabric.Text('日本',{
 
 var rID_GroupJapaneseButton = new fabric.Group([rID_JapaneseBox, rID_JapaneseText], {
 
-  left: rID_TutorialLeft+ 310,
-  top: rID_TutorialTop + 210,
+  left: rID_TutorialLeft+ 575,
+  top: rID_TutorialTop + 450,
   angle: 0
 });
 
@@ -6513,16 +6799,16 @@ var rID_DutchBox = new fabric.Rect({
   left: rID_TutorialLeft +300,
   top: rID_TutorialTop + 260,
   fill: '',
-  strokeWidth: 2,
+  strokeWidth: 3,
   stroke: 'black',
-  width: 115,
-  height: 30
+  width: 215,
+  height: 65
 });
 
 var rID_DutchText = new fabric.Text('Néerlandais',{
-  left: rID_TutorialLeft+ 305,
+  left: rID_TutorialLeft+ 315,
   top: rID_TutorialTop + 265,
-  fontSize: rID_FontSize,
+  fontSize: rID_FontSize + 15,
   fontWeight: 'normal',
   fontFamily: rID_Font
 });
@@ -6532,8 +6818,8 @@ var rID_DutchText = new fabric.Text('Néerlandais',{
 
 var rID_GroupDutchButton = new fabric.Group([rID_DutchBox, rID_DutchText], {
 
-  left: rID_TutorialLeft+ 310,
-  top: rID_TutorialTop + 260,
+  left: rID_TutorialLeft+ 575,
+  top: rID_TutorialTop + 550,
   angle: 0
 });
 
@@ -6541,16 +6827,16 @@ var rID_PolishBox = new fabric.Rect({
   left: rID_TutorialLeft +300,
   top: rID_TutorialTop + 310,
   fill: '',
-  strokeWidth: 2,
+  strokeWidth: 3,
   stroke: 'black',
-  width: 115,
-  height: 30
+  width: 215,
+  height: 65
 });
 
 var rID_PolishText = new fabric.Text('Polski',{
   left: rID_TutorialLeft+ 315,
   top: rID_TutorialTop + 315,
-  fontSize: rID_FontSize,
+  fontSize: rID_FontSize+15,
   fontWeight: 'normal',
   fontFamily: rID_Font
 });
@@ -6560,14 +6846,14 @@ var rID_PolishText = new fabric.Text('Polski',{
 
 var rID_GroupPolishButton = new fabric.Group([rID_PolishBox, rID_PolishText], {
 
-  left: rID_TutorialLeft+ 310,
-  top: rID_TutorialTop + 310,
+  left: rID_TutorialLeft+ 575,
+  top: rID_TutorialTop + 650,
   angle: 0
 });
 
 var rID_HeaderText = new fabric.Text('No more searching for keys. Just touch, speak \n or use your phone to unlock the door!',{
   left: rID_TutorialLeft+ 198,
-  top: rID_TutorialTop + 198,
+  top: rID_TutorialTop + 140,
   fontSize: rID_FontSize+20,
   fontWeight: 'normal',
   fontFamily: rID_Font 
@@ -6579,14 +6865,14 @@ var rID_SetupBox = new fabric.Rect({
   fill: '',
   strokeWidth: 5,
   stroke: 'black',
-  width: 300,
-  height: 90
+  width: 215,
+  height: 65
 });
 
 var rID_SetupText = new fabric.Text('Setup',{
-  left: rID_TutorialLeft+ 470,
-  top: rID_TutorialTop + 380,
-  fontSize: rID_FontSize+ 25,
+  left: rID_TutorialLeft+ 460,
+  top: rID_TutorialTop + 385,
+  fontSize: rID_FontSize+ 20,
   fontWeight: 'normal',
   fontFamily: rID_Font
 });
@@ -6595,7 +6881,7 @@ var rID_SetupText = new fabric.Text('Setup',{
 var rID_GroupSetupButton = new fabric.Group([rID_SetupBox, rID_SetupText], {
 
   left: rID_TutorialLeft+ 400,
-  top: rID_TutorialTop + 360,
+  top: rID_TutorialTop + 330,
   angle: 0
 });
 
@@ -6605,14 +6891,14 @@ var rID_LearnMoreBox = new fabric.Rect({
   fill: '',
   strokeWidth: 5,
   stroke: 'black',
-  width: 300,
-  height: 90
+  width: 215,
+  height: 65
 });
 
 var rID_LearnMoreText = new fabric.Text('Learn More',{
-  left: rID_TutorialLeft+ 450,
+  left: rID_TutorialLeft+ 410,
   top: rID_TutorialTop + 515,
-  fontSize: rID_FontSize+ 25,
+  fontSize: rID_FontSize+ 20,
   fontWeight: 'normal',
   fontFamily: rID_Font
 });
@@ -6647,12 +6933,20 @@ var rID_GroupAnotherUserButton = new fabric.Group([rID_AnotherUserBox, rID_Anoth
 var rID_GroupLearnMoreButton = new fabric.Group([rID_LearnMoreBox, rID_LearnMoreText], {
 
   left: rID_TutorialLeft+ 400,
-  top: rID_TutorialTop + 500,
+  top: rID_TutorialTop + 450,
   angle: 0
 });
 
-var rID_LeftArrowImg = document.getElementById('kLeftArrowIcon');
-var rID_LeftArrowIcon1 = new fabric.Image(rID_LeftArrowImg, {
+	var rID_LeftArrowImg = document.getElementById('kLeftArrowIcon');
+	var rID_LeftArrowIcon1 = new fabric.Image(rID_LeftArrowImg, {
+
+		width: 50,
+		height: 60,
+		left: rID_TutorialLeft+ 80,
+		top: rID_TutorialTop + 300,
+	});
+
+var rID_LeftArrowIcon2 = new fabric.Image(rID_LeftArrowImg, {
   
   width: 50,
   height: 60,
@@ -6660,16 +6954,7 @@ var rID_LeftArrowIcon1 = new fabric.Image(rID_LeftArrowImg, {
   top: rID_TutorialTop + 300,
 });
 
-var rID_LeftArrowImg2 = document.getElementById('kLeftArrowIcon');
-var rID_LeftArrowIcon2 = new fabric.Image(rID_LeftArrowImg2, {
-  
-  width: 50,
-  height: 60,
-  left: rID_TutorialLeft+ 80,
-  top: rID_TutorialTop + 300,
-});
-
-var rID_LeftArrowIcon3 = new fabric.Image(rID_LeftArrowImg2, {
+var rID_LeftArrowIcon3 = new fabric.Image(rID_LeftArrowImg, {
   
   width: 50,
   height: 60,
@@ -6678,7 +6963,7 @@ var rID_LeftArrowIcon3 = new fabric.Image(rID_LeftArrowImg2, {
 });
 
 
-var rID_LeftArrowIcon4 = new fabric.Image(rID_LeftArrowImg2, {
+var rID_LeftArrowIcon4 = new fabric.Image(rID_LeftArrowImg, {
   
   width: 50,
   height: 60,
@@ -6686,7 +6971,7 @@ var rID_LeftArrowIcon4 = new fabric.Image(rID_LeftArrowImg2, {
   top: rID_TutorialTop + 300,
 }); 
 
-var rID_LeftArrowIcon5 = new fabric.Image(rID_LeftArrowImg2, {
+var rID_LeftArrowIcon5 = new fabric.Image(rID_LeftArrowImg, {
   
   width: 50,
   height: 60,
@@ -6694,7 +6979,7 @@ var rID_LeftArrowIcon5 = new fabric.Image(rID_LeftArrowImg2, {
   top: rID_TutorialTop + 300,
 });
 
-var rID_LeftArrowIcon6 = new fabric.Image(rID_LeftArrowImg2, {
+var rID_LeftArrowIcon6 = new fabric.Image(rID_LeftArrowImg, {
   
   width: 50,
   height: 60,
@@ -6702,7 +6987,7 @@ var rID_LeftArrowIcon6 = new fabric.Image(rID_LeftArrowImg2, {
   top: rID_TutorialTop + 300,
 });
 
-var rID_LeftArrowIcon7 = new fabric.Image(rID_LeftArrowImg2, {
+var rID_LeftArrowIcon7 = new fabric.Image(rID_LeftArrowImg, {
   
   width: 50,
   height: 60,
@@ -6789,13 +7074,13 @@ var rID_ScanFingerText = new fabric.Text('Scan your finger!',{
   fontFamily: rID_Font
 });
 
-var rID_VoiceCommandText = new fabric.Text('Record voice command!',{
+/*var rID_VoiceCommandText = new fabric.Text('Record voice command!',{
   left: rID_TutorialLeft+ 340,
   top: rID_TutorialTop + 170,
   fontSize: rID_FontSize+ 25,
   fontWeight: 'normal',
   fontFamily: rID_Font
-});
+});*/
 
 var rID_SyncPhoneText = new fabric.Text('Sync your phone!',{
   left: rID_TutorialLeft+ 340,
@@ -6872,7 +7157,7 @@ var rID_LastPageBox = new fabric.Rect({
   height: 300
 });
 
-var rID_VoiceCommandInnerText = new fabric.Text('Please  repeat the voice \n command after the beep.',{
+/*var rID_VoiceCommandInnerText = new fabric.Text('Please  repeat the voice \n command after the beep.',{
   left: rID_TutorialLeft + 365,
   top: rID_TutorialTop + 260,
   fontSize: rID_FontSize+ 10,
@@ -6886,7 +7171,7 @@ var rID_VoiceCommandInnerText2 = new fabric.Text('Open Autumn.',{
   fontSize: rID_FontSize+ 10,
   fontWeight: 'normal',
   fontFamily: rID_Font
-});
+});*/
 
 var rID_SyncPhoneText2 = new fabric.Text('  Turn ON NFC on your \n  phone and bring close \n to the door.',{
   left: rID_TutorialLeft + 365,
@@ -6904,7 +7189,7 @@ var rID_SyncedText = new fabric.Text('Synced!',{
   fontFamily: rID_Font
 });
 
-var rID_VoiceCommandTickBox = new fabric.Rect({
+/*var rID_VoiceCommandTickBox = new fabric.Rect({
   left: rID_TutorialLeft + 390,
   top: rID_TutorialTop + 400,
   fill: '',
@@ -6921,7 +7206,7 @@ var rID_VoiceIcon = new fabric.Image(rID_VoiceImg, {
   height: 70,
   left: rID_TutorialLeft+ 460,
   top: rID_TutorialTop + 460,
-});
+});*/
 var rFingerPrintInner = new fabric.Circle({
      left: rID_TutorialLeft + 920,
   top: rID_TutorialTop + 945,
@@ -6991,15 +7276,15 @@ var rID_RetakeText = new fabric.Text('Retake.',{
   fontFamily: rID_Font
 });
 
-var rUserIcon1Info = new kInsertImageInfo("kRidhiImageIcon",document.getElementById('kRidhiImageIcon'));
+var rUserIcon1Info = new kInsertImageInfo("kRidhiImageIcon2",document.getElementById('kRidhiImageIcon2'));
 var rID_UserIcon1 = new fabric.Image(rUserIcon1Info.kImageElement, {
   left: rID_TutorialLeft+ 396,
-  top: rID_TutorialTop + 300, 
+  top: rID_TutorialTop + 293, 
   width: 250,
   height: 240
 });
 
-var rUserIcon2Info = new kInsertImageInfo("kKrutiImageIcon",document.getElementById('kKrutiImageIcon'));
+var rUserIcon2Info = new kInsertImageInfo("kKrutiImageIcon1",document.getElementById('kKrutiImageIcon1'));
 var rID_UserIcon2 = new fabric.Image(rUserIcon2Info.kImageElement, {
   left: rID_TutorialLeft+ 396,
   top: rID_TutorialTop + 300, 
@@ -7007,7 +7292,7 @@ var rID_UserIcon2 = new fabric.Image(rUserIcon2Info.kImageElement, {
   height: 240
 });
 
-var rUserIcon3Info = new kInsertImageInfo("kSahibImageIcon",document.getElementById('kSahibImageIcon'));
+var rUserIcon3Info = new kInsertImageInfo("kSahibImageIcon4",document.getElementById('kSahibImageIcon4'));
 var rID_UserIcon3 = new fabric.Image(rUserIcon3Info.kImageElement, {
   left: rID_TutorialLeft+ 396,
   top: rID_TutorialTop + 300, 
@@ -7015,7 +7300,7 @@ var rID_UserIcon3 = new fabric.Image(rUserIcon3Info.kImageElement, {
   height: 240
 });
 
-var rUserIcon4Info = new kInsertImageInfo("kAnkurImageIcon",document.getElementById('kAnkurImageIcon'));
+var rUserIcon4Info = new kInsertImageInfo("kAnkurImageIcon3",document.getElementById('kAnkurImageIcon3'));
 var rID_UserIcon4 = new fabric.Image(rUserIcon4Info.kImageElement, {
   left: rID_TutorialLeft+ 396,
   top: rID_TutorialTop + 300, 
@@ -7025,7 +7310,10 @@ var rID_UserIcon4 = new fabric.Image(rUserIcon4Info.kImageElement, {
 
 //var rID_voicecommand = new Audio("voice.mp3");
 var rID_beep = new Audio("beep.mp3");
-var rID_VoiceCommandCapture = new Audio("VoiceCommand1Capture.mp3");
+/*var rID_VoiceCommand1Capture = new Audio("VoiceCommand1Capture.mp3");
+	var rID_VoiceCommand2Capture = new Audio("VoiceCommand2Capture.mp3");
+	var rID_VoiceCommand3Capture = new Audio("VoiceCommand3Capture.mp3");
+	var rID_VoiceCommand4Capture = new Audio("VoiceCommand4Capture.mp3");*/
 
 	var rPhoneIcon1Info = new kInsertImageInfo("rPhone1",document.getElementById('rPhone1'));  
 var rID_Phone1Icon = new fabric.Image(rPhoneIcon1Info.kImageElement, {
@@ -7070,7 +7358,11 @@ var rID_SyncIcon = new fabric.Image(rID_SyncImg, {
 
 rID_Ridhi.on('selected', function () 
 {
+
+     rID_HideFirstTimeSetup();
      activeuser = 'RIDHI';
+	 rID_HideUserTicks();
+	 
     if(isUsedTutorial == 0)
 	{
 	rID_RenderChooseLanguage();
@@ -7090,6 +7382,8 @@ rID_Ridhi.on('selected', function ()
 
 rID_Kruti.on('selected', function () 
 {
+    rID_HideFirstTimeSetup();
+	rID_HideUserTicks();
      activeuser = 'KRUTI';
     if(isUsedTutorial == 0)
 	{
@@ -7108,9 +7402,13 @@ rID_Kruti.on('selected', function ()
 	canvas.deactivateAll(); 
 });
 
+	
+
 
 rID_Sahib.on('selected', function () 
 {
+     rID_HideFirstTimeSetup();
+	 rID_HideUserTicks();
      activeuser = 'SAHIB';
     if(isUsedTutorial == 0)
 	{
@@ -7131,6 +7429,8 @@ rID_Sahib.on('selected', function ()
 
 rID_Ankur.on('selected', function () 
 {
+     rID_HideFirstTimeSetup();
+	 rID_HideUserTicks();
      activeuser = 'ANKUR';
     if(isUsedTutorial == 0)
 	{
@@ -7151,11 +7451,14 @@ rID_Ankur.on('selected', function ()
  
 //canvas.add(rID_GroupFirstTimeSetupButton);
 
-rID_GroupFirstTimeSetupButton.on('selected', function () 
+rID_FirstTimeSetupText.on('selected', function () 
 {
-  //  rID_HideChooseLangugage();
-	rID_RenderChooseLanguage();
-	rID_ShowChooseLanguage();
+  kID_LockIcon.visible = false;
+  canvas.add(rID_UsersBox);
+    canvas.add(rID_Ridhi);
+canvas.add(rID_Kruti);
+canvas.add(rID_Sahib);
+canvas.add(rID_Ankur);
 	canvas.deactivateAll(); 
 });
 
@@ -7189,6 +7492,8 @@ rID_GroupEnglishButton.on('selected', function () {
  
    
    rID_HideTutorialPage2();
+   rID_HideCircles();
+   rID_WelcomeText.visible = false;
     rID_ShowChooseLanguage();
 	canvas.add(rID_RightArrowIcon1);
 	rID_RightArrowIcon1.visible = true;
@@ -7211,6 +7516,7 @@ canvas.deactivateAll();
 
 rID_HideCameraOnClick();
 rID_ShowTutorialPage2();
+rID_HideCircles();
 // rID_ClickPictureText.visible =false;
  //rID_PictureBox.visible =false;
 //rID_HideCircles();
@@ -7221,6 +7527,7 @@ rID_ShowTutorialPage2();
    rID_RightArrowIcon2.visible =true;
  
   //rID_RenderTutorialPage2();
+
  // rID_ShowTutorialPage2();
 canvas.deactivateAll();  
 
@@ -7229,15 +7536,37 @@ canvas.deactivateAll();
   rID_LeftArrowIcon4.on('selected', function () {
   
   rID_HideScanFinger();
-    rID_Circle1.fill = 'black';
-  rID_Circle2.fill = 'white';
-  //rID_ClickPictureText2.visible = false;
+    rID_Circle2.fill = 'black';
+  rID_Circle3.fill = 'white';
+
   
   rID_ShowClickPicture();  
   rID_ShowCameraOnClick();
-  rID_UserIcon1.visible = true;
+	if(activeuser == 'RIDHI')
+	{
+
+		rID_UserIcon1.visible = true;
+
+	}
+
+	else if(activeuser == 'KRUTI')
+	  {
+		  rID_HideUser();
+		  rID_UserIcon2.visible = true;
+	  }
+	else if(activeuser == 'SAHIB')
+	{
+		rID_HideUser();
+		rID_UserIcon3.visible = true;
+	}
+	else if(activeuser == 'ANKUR')
+	{
+		rID_HideUser();
+		rID_UserIcon4.visible = true;
+	}
   
   canvas.remove(rID_ClickPictureText2);
+    rID_ClickPictureText2.visible = false;
   //rID_RetakeText.visible = true;
   //rID_RightArrowIcon3.visible = true;
   // rID_LeftArrowIcon3.visible = true;
@@ -7250,42 +7579,35 @@ canvas.deactivateAll();
  
   rID_LeftArrowIcon5.on('selected', function () {
   
-  rID_HideVoiceCommand();
-  rID_Circle2.fill = 'black';
-  rID_Circle3.fill = 'white';
-  rID_ShowScanFinger();
+rID_HideSyncPhone();
+rID_ShowScanFinger();
+ //rID_Circle2.fill = 'black';
+rID_Circle2.fill = 'white';
+rID_Circle4.fill = 'white';
+rID_Circle3.fill = 'black';
+
+//rID_ShowVoiceCommand();
+//rID_TickMarkIcon3.visible =  true;
+//rID_TickMarkIcon4.visible =  true;
+//rID_VideoIcon2.visible = true;
+//rID_VoiceIcon.visible = false;
 
   
   canvas.deactivateAll();   
  });
   
  
+ 
+
+ 
  rID_LeftArrowIcon6.on('selected', function () {
- 
- rID_HideSyncPhone();
- rID_Circle3.fill = 'black';
-rID_Circle4.fill = 'white';
-rID_Circle5.fill = 'white';
-rID_ShowVoiceCommand();
-rID_TickMarkIcon3.visible =  true;
-rID_TickMarkIcon4.visible =  true;
-rID_VideoIcon2.visible = true;
-rID_VoiceIcon.visible = false;
-
- 
-canvas.deactivateAll();   
- });
- 
-
- 
- rID_LeftArrowIcon7.on('selected', function () {
  
  rID_HideLastPage(); 
 rID_Tutorial.visible = true;
 rID_ShowCircles();
-rID_Circle3.fill = 'white';
 rID_Circle4.fill = 'black';
 rID_Circle5.fill = 'white';
+//rID_Circle5.fill = 'white';
  
 if(activeuser == 'RIDHI' && rPhoneIcon1Info.kIsUsed == true)
 {
@@ -7295,6 +7617,14 @@ if(activeuser == 'RIDHI' && rPhoneIcon1Info.kIsUsed == true)
 else if(activeuser == 'KRUTI' && rPhoneIcon2Info.kIsUsed == true)
 {
    rID_Phone2Icon.visible = true; 
+}
+else if(activeuser == 'SAHIB' && rPhoneIcon3Info.kIsUsed == true)
+{
+	rID_Phone3Icon.visible = true;
+}
+else if(activeuser == 'ANKUR' && rPhoneIcon4Info.kIsUsed == true)
+{
+	rID_Phone4Icon.visible = true;
 }
 
 //rID_RenderSyncPhone();
@@ -7333,10 +7663,31 @@ rID_CameraIcon.on('selected', function () {
 
 if(activeuser == 'RIDHI')
 {
-   canvas.add(rID_UserIcon1);
-   rUserIcon1Info.kIsUsed = true;
-   k_RidhiProfile.kImageIcon = rUserIcon1Info.kId;
-   
+    if(retake == 0)
+	{
+	
+	  
+	     // rID_PictureBox.visible = true;
+	  rID_HideUser();
+	 // rID_UserIcon1.set('angle', 45);
+     canvas.add(rID_UserIcon1);
+	 rID_UserIcon1 .visible =  true;
+     rUserIcon1Info.kIsUsed = true;
+      k_RidhiProfile.kImageIcon = rUserIcon1Info.kId;
+	  retake = 1;
+    }
+	else 
+	{
+	    rID_PictureBox.visible = true;
+	  rID_HideUser();
+	  rID_UserIcon1.set('angle', -10);
+     //canvas.add(rID_UserIcon1);
+	 rID_UserIcon1 .visible =  true;
+     rUserIcon1Info.kIsUsed = true;
+      k_RidhiProfile.kImageIcon = rUserIcon1Info.kId
+	  retake = 0;
+	  
+	}
    
    
   // rUserIcon1Info.kIsUsed = true;
@@ -7356,26 +7707,76 @@ if(activeuser == 'RIDHI')
 }
 else if (activeuser == 'KRUTI')
 {
-  canvas.add(rID_UserIcon2);
-  rUserIcon2Info.kIsUsed = true;
-  rID_UserIcon2.visible = true;
-  k_KrutiProfile.kImageIcon = rUserIcon2Info.kId;
+   if(retake2 == 0)
+	{
+	 rID_HideUser();
+    canvas.add(rID_UserIcon2);
+    rUserIcon2Info.kIsUsed = true;
+    rID_UserIcon2.visible = true;
+    k_KrutiProfile.kImageIcon = rUserIcon2Info.kId;
+	retake2 = 1;
+	}
+	else
+	{
+	   rID_PictureBox.visible = true;
+	   rID_HideUser();
+	  rID_UserIcon2.set('angle', -10);
+     //canvas.add(rID_UserIcon1);
+	 rID_UserIcon2.visible =  true;
+     rUserIcon2Info.kIsUsed = true;
+      k_KrutiProfile.kImageIcon = rUserIcon2Info.kId
+	  retake2 = 0;
+	   
+	}
 }
 
 else if (activeuser == 'SAHIB')
 {
+   if(retake3 == 0)
+   {
+	rID_HideUser();
   canvas.add(rID_UserIcon3);
   rUserIcon3Info.kIsUsed = true;
   rID_UserIcon3.visible = true;
   k_SahibProfile.kImageIcon = rUserIcon3Info.kId;
+  retake3 = 1;
+  }
+  else 
+  {
+    rID_PictureBox.visible = true;
+	   rID_HideUser();
+	  rID_UserIcon3.set('angle', -10);
+     //canvas.add(rID_UserIcon1);
+	 rID_UserIcon3.visible =  true;
+     rUserIcon2Info.kIsUsed = true;
+      k_SahibProfile.kImageIcon = rUserIcon3Info.kId
+	  retake3 = 0;
+  }
 }
 
 else if (activeuser == 'ANKUR')
-{
+{ 
+   if(retake4 == 0)
+   {
+	rID_HideUser();
   canvas.add(rID_UserIcon4);
   rUserIcon4Info.kIsUsed = true;
   rID_UserIcon4.visible = true;
   k_AnkurProfile.kImageIcon = rUserIcon4Info.kId;
+  retake4 =1;
+  }
+  else
+  {
+  
+  rID_PictureBox.visible = true;
+	   rID_HideUser();
+	  rID_UserIcon4.set('angle', -10);
+     //canvas.add(rID_UserIcon1);
+	 rID_UserIcon4.visible =  true;
+     rUserIcon4Info.kIsUsed = true;
+      k_AnkurProfile.kImageIcon = rUserIcon4Info.kId
+	  retake4 = 0;
+  }
 }
 
 
@@ -7417,6 +7818,10 @@ canvas.deactivateAll();
 rID_HideCameraOnClick();
    rID_RenderCameraOnClick();
 	rID_ShowCameraOnClick();
+	rID_RightArrowIcon3.visible = true;
+   rID_LeftArrowIcon3.visible = true;
+	rID_PictureBox.visible = true;
+	rID_ClickPictureText.visible = true;
 	rID_CameraIcon.visible = true;
 	rID_RetakeText.visible =false;
 	rID_ClickPictureText2.visible = true;
@@ -7426,7 +7831,8 @@ rID_HideCameraOnClick();
 	
 
  
-canvas.deactivateAll();   
+canvas.deactivateAll();
+
  }); 
 
 
@@ -7436,8 +7842,8 @@ canvas.deactivateAll();
  rID_HideTutorialPage2();
 
     rID_ShowClickPicture();
-	rID_Circle1.fill = 'black';
-  rID_Circle2.fill = 'white';
+	rID_Circle2.fill = 'black';
+  rID_Circle3.fill = 'white';
   //rID_ClickPictureText2.visible = false;
   canvas.remove(rID_ClickPictureText2);
   rID_ShowCameraOnClick();  
@@ -7456,12 +7862,9 @@ rID_RightArrowIcon3.on('selected', function () {
  
    
     rID_HideCameraOnClick();
-	rID_Circle1.fill = 'white';
-	rID_Circle2.fill = 'black';
-	rID_PictureBox.visible = false;
-	rID_ClickPictureText.visible = false;
-	rID_LeftArrowIcon3.visible = false;
-	rID_RightArrowIcon3.visible = false;
+	rID_Circle2.fill = 'white';
+	rID_Circle3.fill = 'black';
+
 	rID_RenderScanFinger();
 	rID_ShowScanFinger();
 	
@@ -7479,9 +7882,14 @@ canvas.deactivateAll();
 
 rID_RightArrowIcon4.on('selected', function () {
 
- rID_Circle2.fill = 'white';
- rID_Circle3.fill = 'black';
+ rID_Circle3.fill = 'white';
+ rID_Circle4.fill = 'black';
  rID_HideScanFinger();
+ rID_RenderSyncPhone();
+rID_ShowSyncPhone();
+setTimeout(rID_DisplayPhone,1000);
+setTimeout(rID_Synced, 6000);
+
  
 /*if(isUsedTutorial == 0)
 {
@@ -7496,18 +7904,18 @@ rID_RightArrowIcon4.on('selected', function () {
     rID_ShowVoiceCommand();
  }*/
  
- rID_RenderVoiceCommand();
+ /*rID_RenderVoiceCommand();
  rID_ShowVoiceCommand();
  
  setTimeout(rID_VoiceCapture,4500);
 
- setTimeout(rID_Captured,5600);
+ setTimeout(rID_Captured,5600);*/
 
 canvas.deactivateAll();
 
 });
 
-
+/*
 rID_RightArrowIcon5.on('selected', function () {
 
 rID_Circle3.fill = 'white';
@@ -7521,12 +7929,42 @@ rID_HideVoiceCommand();
 else
 {
    rID_ShowSyncPhone();
-}*/
+}
 
 rID_RenderSyncPhone();
 rID_ShowSyncPhone();
 setTimeout(rID_DisplayPhone,1000);
-setTimeout(rID_Synced , 6000);
+setTimeout(rID_Synced, 6000);
+
+
+canvas.deactivateAll();
+
+});*/
+
+rID_RightArrowIcon5.on('selected', function () {
+
+rID_Circle4.fill = 'white';
+rID_Circle5.fill = 'black';
+rID_HideSyncPhone();
+rID_RenderLastPage();
+rID_ShowLastPage();
+if(activeuser == 'RIDHI')
+{
+  rID_Profile1Done =1;
+}
+if(activeuser == 'KRUTI')
+{
+  rID_Profile2Done =1;
+}
+if(activeuser == 'SAHIB')
+{
+  rID_Profile3Done =1;
+}
+if(activeuser == 'ANKUR')
+{
+  rID_Profile4Done =1;
+}
+
 
 
 canvas.deactivateAll();
@@ -7535,27 +7973,64 @@ canvas.deactivateAll();
 
 rID_RightArrowIcon6.on('selected', function () {
 
-rID_Circle4.fill = 'white';
-rID_Circle5.fill = 'black';
-rID_HideSyncPhone();
-rID_RenderLastPage();
-rID_ShowLastPage();
-
-
-
-canvas.deactivateAll();
-
-});
-
-rID_RightArrowIcon7.on('selected', function () {
-
 rID_HideLastPage();
 
 canvas.deactivateAll();
 
 });
 
+	kID_WeatherTemp.on('selected', function(){
 
+		rHourlyWeatherUpdate();
+    canvas.deactivateAll();
+	});
+	
+rID_GroupAnotherUserButton.on('selected', function()
+{
+  
+ rID_HideLastPage();
+ rID_FirstTimeSetupText.visible = true;
+  rID_UsersBox.visible = true;
+  rID_Ridhi.visible = true;
+  rID_Kruti.visible = true;
+  rID_Sahib.visible = true;
+  rID_Ankur.visible = true;
+  if(rID_Profile1Done == 1)
+  {
+     canvas.add(rID_RidhiTick);
+	 rID_RidhiTick.visible = true;
+  }
+  if (rID_Profile2Done == 1)
+  {
+     canvas.add(rID_KrutiTick);
+	 rID_KrutiTick.visible = true;
+  }
+  if (rID_Profile3Done == 1)
+  {
+     canvas.add(rID_SahibTick);
+	 rID_SahibTick.visible = true;
+  }
+  if (rID_Profile4Done == 1)
+  {
+     canvas.add(rID_AnkurTick);
+	 rID_AnkurTick.visible = true;
+  }
+ 
+ canvas.deactivateAll();
+});
+
+
+function rID_HideFirstTimeSetup()
+{
+  rID_FirstTimeSetupText.visible = false;
+  rID_UsersBox.visible = false;
+  rID_Ridhi.visible = false;
+  rID_Kruti.visible = false;
+  rID_Sahib.visible = false;
+  rID_Ankur.visible = false;
+  
+}	
+	
 function rID_RenderChooseLanguage ()
 {
 canvas.add(rID_Tutorial);
@@ -7563,7 +8038,7 @@ canvas.add(rID_Tutorial);
 //canvas.remove(kID_LockIcon);
 kID_LockIcon.visible = false;
 canvas.add(rID_WelcomeText);
-canvas.add(rID_WelcomeText2);
+//canvas.add(rID_WelcomeText2);
 canvas.add(rID_LanguageText);
 
 canvas.add(rID_GroupEnglishButton);
@@ -7586,7 +8061,7 @@ function rID_ShowChooseLanguage ()
 kID_LockIcon.visible = false;
 //rID_RightArrowIcon1.visible = true;
 rID_WelcomeText.visible = true;
-rID_WelcomeText2.visible = true;
+//rID_WelcomeText2.visible = true;
 rID_LanguageText.visible = true;
 
 rID_GroupEnglishButton.visible = true;
@@ -7610,7 +8085,7 @@ function rID_HideChooseLangugage ()
 //canvas.remove(kID_LockIcon.visible = false;
 kID_LockIcon.visible = false;
 rID_WelcomeText.visible = false;
-rID_WelcomeText2.visible = false;
+//rID_WelcomeText2.visible = false;
 rID_LanguageText.visible = false;
 
 rID_GroupEnglishButton.visible = false;
@@ -7683,9 +8158,10 @@ function rID_HideVideo()
 }
 
 function rID_RenderClickPicture()
-{  canvas.add(rID_Circle1);
-rID_Circle1.set('fill', "black");
+{  //canvas.add(rID_Circle1);
+//rID_Circle2.set('fill', "black");
 canvas.add(rID_Circle2);
+rID_Circle2.set('fill', "black");
 canvas.add(rID_Circle3);
    canvas.add(rID_Circle4);
    canvas.add(rID_Circle5);
@@ -7754,6 +8230,10 @@ function rID_HideCameraOnClick()
 	rID_TickMarkIcon2.visible = false;
 	rID_LeftArrowIcon3.visible = false;
 	rID_RightArrowIcon3.visible =  false;
+
+	rID_PictureBox.visible = false;
+	rID_ClickPictureText.visible = false;
+
 	
 	
 }
@@ -7796,7 +8276,7 @@ function rID_HideScanFinger()
 	
 }
 
-function rID_RenderVoiceCommand()
+/*function rID_RenderVoiceCommand()
 {
    canvas.add(rID_VoiceCommandText);
    canvas.add(rID_VoiceCommandBox);
@@ -7829,7 +8309,26 @@ function rID_ShowVoiceCommand()
 
 function rID_VoiceCapture()
 {
-     rID_VoiceCommandCapture.play();
+	if(activeuser == 'RIDHI')
+	{
+     rID_VoiceCommand1Capture.play();
+    }
+
+	else if (activeuser == 'KRUTI')
+	{
+		rID_VoiceCommand2Capture.play();
+	}
+
+	else if (activeuser == 'SAHIB')
+	{
+		rID_VoiceCommand3Capture.play();
+	}
+
+	else if (activeuser == 'ANKUR')
+	{
+		rID_VoiceCommand4Capture.play();
+	}
+
 }
 
 /*function rID_PlayVoicecommand()
@@ -7840,30 +8339,44 @@ function rID_Playbeep()
 {
      rID_beep.play();
 }
-
+/*
 function rID_Captured()
 {
+	rID_VoiceIcon.visible = false;
+	canvas.add(rID_TickMarkIcon4);
+	canvas.add(rID_TickMarkIcon3);
+	canvas.add(rID_VideoIcon2);
+	rID_TickMarkIcon3.visible = true;
+	rID_VideoIcon2.visible = true;
+	rID_TickMarkIcon4.visible = true;
+
   if(activeuser == 'RIDHI')
 { 
   
-   k_RidhiProfile.kVoiceCommand = rID_VoiceCommandCapture;
+   k_RidhiProfile.kVoiceCommand = rID_VoiceCommand1Capture;
    
 }
 
 else if(activeuser == 'KRUTI')
 {
-     k_KrutiProfile.kVoiceCommand = rID_VoiceCommandCapture;
+     k_KrutiProfile.kVoiceCommand = rID_VoiceCommand2Capture;
 }
-  canvas.add(rID_TickMarkIcon4);
- rID_VoiceIcon.visible = false;
-   canvas.add(rID_TickMarkIcon3);
-   canvas.add(rID_VideoIcon2);
-   rID_TickMarkIcon3.visible = true;
-   rID_VideoIcon2.visible = true;
+
+  else if(activeuser == 'SAHIB')
+  {
+	  k_SahibProfile.kVoiceCommand = rID_VoiceCommand3Capture;
+  }
+
+  else if(activeuser == 'ANKUR')
+  {
+	  k_AnkurProfile.kVoiceCommand = rID_VoiceCommand4Capture;
+  }
+
+
    
 }
 
-function rID_HideVoiceCommand()
+/*function rID_HideVoiceCommand()
 {
 
    rID_VoiceCommandText.visible =false;
@@ -7877,61 +8390,87 @@ function rID_HideVoiceCommand()
  rID_VideoIcon2.visible =false;
  rID_TickMarkIcon3.visible =false;
  rID_TickMarkIcon4.visible =false;
-}
+}*/
 
 function rID_RenderSyncPhone()
 {
     canvas.add(rID_SyncPhoneText);
 	canvas.add(rID_SyncPhoneBox);
 	canvas.add(rID_SyncPhoneText2);
-    canvas.add(rID_LeftArrowIcon6);
-	canvas.add(rID_RightArrowIcon6);
+    canvas.add(rID_LeftArrowIcon5);
+	canvas.add(rID_RightArrowIcon5);
 }
 
 function rID_ShowSyncPhone()
 {
     
-rID_SyncPhoneText.visible =true;
+    rID_SyncPhoneText.visible =true;
 	rID_SyncPhoneBox.visible =true;
 	rID_SyncPhoneText2.visible =true;
-    rID_LeftArrowIcon6.visible =true;
-	rID_RightArrowIcon6.visible =true;
+    rID_LeftArrowIcon5.visible =true;
+	rID_RightArrowIcon5.visible =true;
 }
 
 function rID_DisplayPhone()
 {
-  canvas.add(rID_SyncIcon);
-   rID_SyncIcon.visible = true;
-
+	//
+	canvas.add(rID_SyncIcon);
+	rID_SyncIcon.visible = false;
+	//rID_SyncIcon.visible = true;
    if(activeuser == 'RIDHI')
    {
+
+	   rID_SyncIcon.visible = true;
      canvas.add(rID_Phone1Icon);
-	 
+	  rID_Phone1Icon.visible = true;
+	   rID_Phone2Icon.visible = false;
+	   rID_Phone3Icon.visible = false;
+	   rID_Phone4Icon.visible = false;
+
 	 rPhoneIcon1Info.kIsUsed =  true;
+
 	 k_RidhiProfile.kPhoneSynced = rPhoneIcon1Info.kId;
 	 
    }
    
    else if (activeuser == 'KRUTI')
    {
-      canvas.add(rID_Phone2Icon);
-	  rID_Phone2Icon.visible = true;
+	  //canvas.add(rID_SyncIcon);
+	   rID_SyncIcon.visible = true;
+	   canvas.add(rID_Phone2Icon);
+	   rID_Phone2Icon.visible = true;
+	   rID_Phone1Icon.visible = false;
+	   rID_Phone3Icon.visible = false;
+	   rID_Phone4Icon.visible = false;
+
 	 rPhoneIcon2Info.kIsUsed =  true;
 	 k_KrutiProfile.kPhoneSynced = rPhoneIcon2Info.kId;
    }
    
    else if (activeuser == 'SAHIB')
    {
-      canvas.add(rID_Phone3Icon);
-	  rID_Phone3Icon.visible = true;
+	 //  canvas.add(rID_SyncIcon);
+	   rID_SyncIcon.visible = true;
+	   canvas.add(rID_Phone3Icon);
+	   rID_Phone3Icon.visible = true;
+	   rID_Phone2Icon.visible = false;
+	   rID_Phone1Icon.visible = false;
+	   rID_Phone4Icon.visible = false;
+
 	 rPhoneIcon3Info.kIsUsed =  true;
 	 k_SahibProfile.kPhoneSynced = rPhoneIcon3Info.kId;
    }
    
    else if (activeuser == 'ANKUR')
    {
-      canvas.add(rID_Phone4Icon);
-	  rID_Phone4Icon.visible = true;
+	   //canvas.add(rID_SyncIcon);
+	   rID_SyncIcon.visible = true;
+	   canvas.add(rID_Phone4Icon);
+	   rID_Phone4Icon.visible = true;
+	   rID_Phone1Icon.visible = false;
+	   rID_Phone2Icon.visible = false;
+	   rID_Phone3Icon.visible = false;
+
 	 rPhoneIcon4Info.kIsUsed =  true;
 	 k_AnkurProfile.kPhoneSynced = rPhoneIcon4Info.kId;
    }
@@ -7944,10 +8483,12 @@ function rID_Synced()
 {
 
   rID_SyncIcon.visible = false;
-  canvas.add(rID_SyncedText);
-  canvas.add(rID_TickMarkIcon5);
-  rID_SyncedText.visible = true;
-  rID_TickMarkIcon5.visible = true;
+	canvas.add(rID_SyncedText);
+	canvas.add(rID_TickMarkIcon5);
+	rID_SyncedText.visible = true;
+	rID_TickMarkIcon5.visible = true;
+
+
   rID_Playbeep();
   
   
@@ -7959,8 +8500,8 @@ function rID_HideSyncPhone()
     rID_SyncPhoneText.visible = false;
 	rID_SyncPhoneBox.visible = false;
 	rID_SyncPhoneText2.visible = false;
-    rID_LeftArrowIcon6.visible = false;
-	rID_RightArrowIcon6.visible = false;
+    rID_LeftArrowIcon5.visible = false;
+	rID_RightArrowIcon5.visible = false;
 	rID_Phone1Icon.visible = false;
 	rID_Phone2Icon.visible = false;
 	rID_Phone4Icon.visible = false;
@@ -7977,8 +8518,8 @@ function rID_RenderLastPage()
   canvas.add(rID_LastPageBox);
   canvas.add(rID_LastPageText);
   canvas.add(rID_LastPageText2);
-  canvas.add(rID_LeftArrowIcon7);
-  canvas.add(rID_RightArrowIcon7);
+  canvas.add(rID_LeftArrowIcon6);
+  canvas.add(rID_RightArrowIcon6);
   canvas.add(rID_GroupAnotherUserButton);
 }
 
@@ -7987,8 +8528,8 @@ function rID_ShowLastPage()
 rID_LastPageBox.visible = true;
   rID_LastPageText.visible = true;
   rID_LastPageText2.visible = true;
-  rID_LeftArrowIcon7.visible = true;
-  rID_RightArrowIcon7.visible = true;
+  rID_LeftArrowIcon6.visible = true;
+  rID_RightArrowIcon6.visible = true;
   rID_GroupAnotherUserButton.visible = true;
 }
 
@@ -7999,15 +8540,15 @@ rID_Circle5.set('fill','white');
  rID_LastPageBox.visible = false;
   rID_LastPageText.visible = false;
   rID_LastPageText2.visible = false;
-  rID_LeftArrowIcon7.visible = false;
-  rID_RightArrowIcon7.visible = false;
+  rID_LeftArrowIcon6.visible = false;
+  rID_RightArrowIcon6.visible = false;
   rID_GroupAnotherUserButton.visible = false;
   rID_Tutorial.visible = false;
 }
 
 function rID_ShowCircles()
 {
- rID_Circle1.visible =  true;
+ //rID_Circle1.visible =  true;
 
 rID_Circle2.visible=  true;
 rID_Circle3.visible=  true;
@@ -8017,7 +8558,7 @@ rID_Circle3.visible=  true;
 
 function rID_HideCircles()
 {
- rID_Circle1.visible =  false;
+ //rID_Circle1.visible =  false;
 
 rID_Circle2.visible=  false;
 rID_Circle3.visible=  false;
@@ -8025,11 +8566,244 @@ rID_Circle3.visible=  false;
    rID_Circle5.visible= false;
 }
 
-canvas.add(rID_GroupFirstTimeSetupButton);
-canvas.add(rID_Ridhi);
-canvas.add(rID_Kruti);
-canvas.add(rID_Sahib);
-canvas.add(rID_Ankur);
+	function rID_HideUser()
+
+	{
+		rID_UserIcon1.visible = false;
+		rID_UserIcon2.visible = false;
+		rID_UserIcon3.visible = false;
+		rID_UserIcon4.visible = false;
+
+	}
+
+	function rHourlyWeatherUpdate() 
+	{
+	
+	   
+      if(rID_TempClick == 0)
+       {	
+          rID_TempClick =1;
+	     canvas.add(rID_ClickableWeatherBox);
+		 canvas.add(rID_ClickableWeatherBox2);
+		 canvas.add(rID_Day);
+		 
+		 
+		var	rID_Date = new Date();
+		var	rID_CurrH = String(rID_Date.getHours());
+		//var m = rID_CurrH ;
+		
+       rID_Hour1.set({
+			text: String(parseInt(rID_CurrH)+1) + ":00"
+		});
+		
+
+		rID_Hour2.set({
+			text: String(parseInt(rID_CurrH)+2) + ":00"
+		});
+
+		rID_Hour3.set({
+			text: String(parseInt(rID_CurrH)+3)+ ":00"
+		});
+
+		rID_Hour4.set({
+			text: String(parseInt(rID_CurrH)+4)+ ":00"
+		});
+
+		rID_Hour5.set({
+			text: String(parseInt(rID_CurrH)+5)+ ":00"
+		});
+
+		rID_Hour6.set({
+			text: String(parseInt(rID_CurrH)+6)+ ":00"
+		});
+		canvas.add(rID_Hour1);
+		canvas.add(rID_Hour2);
+		canvas.add(rID_Hour3);
+		canvas.add(rID_Hour4);
+		canvas.add(rID_Hour5);
+		canvas.add(rID_Hour6);
+
+
+
+
+		var api = "43e1608558160f4b";
+		var state = "IL";
+		var city = "Chicago";
+
+		$.ajax
+		({
+			url: "http://api.wunderground.com/api/" + api + "/forecast/conditions/hourly/q/" + state + "/" + city + ".json",
+			dataType: "jsonp",
+			success: function (parsed_json2)
+			{
+			//	var rTemp1 = parsed_json2['hourly_forecast'][0]['temp']['english'];
+//	var rHour = parsed_json2['hourly_forecast']['FCTTIME']['hour'];
+				//var rIcon = parsed_json2['hourly_forecast'][0]['icon_url'];,
+				//var icon_json = '<img src ="' + icon_url_json + '" />';
+                var icon2_url_json = "http://icons.wxug.com/i/c/f/" + parsed_json2['current_observation']['icon'] + ".gif";
+              var temp2_json = parsed_json2['current_observation']['temp_f'];
+			 var temp2_json_C = parsed_json2['current_observation']['temp_c'];
+			  temp2_json += "°F";
+			   temp2_json_C += "°C";
+			  
+				//success : function(parsed_json) {
+				// check we have at least 36 entries
+				//var j = parsed_json2.hourly_forcast.length < 36 ? parsed_json.hourly_forcast.length : 36;
+				document.getElementById("rTempIcon").src= icon2_url_json;
+				rID_TempDisplay.set({
+			    text: temp2_json
+	         	});
+		canvas.add(rID_TempDisplay);
+		 canvas.add(rID_TempIcon);
+				var myParsedData = [];
+			//	var nextSixHrsData = [];
+				for (var i = 0; i < 36; i++) {
+					myParsedData.push({
+						hrs: parsed_json2.hourly_forecast[i].FCTTIME.hour,
+						htemp: parsed_json2.hourly_forecast[i].temp.english,
+						hicon: parsed_json2.hourly_forecast[i].icon_url
+
+					});
+					//console.log(myParsedData.htemp[i]);
+				}
+				rID_Temp1.set({
+					text:myParsedData[0].htemp+ "°F"
+				});
+				
+				rID_Temp2.set({
+					text: myParsedData[1].htemp+ "°F" 
+				});
+
+				rID_Temp3.set({
+					text: myParsedData[2].htemp+ "°F" 
+				});
+
+				rID_Temp4.set({
+					text: myParsedData[3].htemp+ "°F" 
+				});
+
+				rID_Temp5.set({
+					text: myParsedData[4].htemp+ "°F"
+				});
+
+				rID_Temp6.set({
+					text: myParsedData[5].htemp+ "°F"
+				});
+				
+				document.getElementById("rTempIcon1").src= myParsedData[0].hicon;
+				document.getElementById("rTempIcon2").src= myParsedData[1].hicon;
+				document.getElementById("rTempIcon3").src= myParsedData[2].hicon;
+				document.getElementById("rTempIcon4").src= myParsedData[3].hicon;
+				document.getElementById("rTempIcon5").src= myParsedData[4].hicon;
+				document.getElementById("rTempIcon6").src= myParsedData[5].hicon;
+			
+				
+				 canvas.add(rID_Temp1);
+				 canvas.add(rID_Temp2);
+				 canvas.add(rID_Temp3);
+				 canvas.add(rID_Temp4);
+				 canvas.add(rID_Temp5);
+				 canvas.add(rID_Temp6);
+				 canvas.add(rID_TempIcon1);
+				  canvas.add(rID_TempIcon2); 
+				  canvas.add(rID_TempIcon3);
+				   canvas.add(rID_TempIcon4);
+				    canvas.add(rID_TempIcon5);
+					 canvas.add(rID_TempIcon6);
+				 
+			//	 rID_TempIcon1.visible = true;
+				 
+				//console.log(myParsedData[0].htemp);
+				//console.log(myParsedData[0].hrs);
+				
+				/*var obj = JSON.parse(text);
+				//$.each(resp.hourly_forecast, function()
+				{
+                  logTime(this.FCTTIME);    
+                 });
+				 
+	function logTime(obj){
+    $('body').append(obj.temp.english);
+    console.log(obj);*/
+} 
+
+
+				
+/*
+				
+*/
+//console.log("breal");
+				
+				/*for(var k=0; k<36; k++)
+				 {
+				 if(myParsedData[k].hrs == rID_CurrH)
+				 for(var l =0; l<6;l++)
+				 {
+				 nextSixHrsData.push({
+				 hrs1: myParsedData[k].hrs + 1,
+				 tmp1: myParsedData[k]
+
+				 })
+				 }
+
+				 for(var m=0;m<nextSixHrsData.length; m++)
+				 {
+				 console.log(nextSixHrsData[m]);
+				 }
+
+				 }*/
+				
+
+
+			
+		});
+	  }
+	  else if(rID_TempClick == 1)
+	  { 
+	      rID_HideTempClick();
+		  rID_TempClick =0;
+	  }
+	}
+	
+function rID_HideTempClick()
+{
+   canvas.remove(rID_ClickableWeatherBox);
+		 canvas.remove(rID_ClickableWeatherBox2);
+		 canvas.remove(rID_Day);
+		 canvas.remove(rID_Hour1);
+		canvas.remove(rID_Hour2);
+		canvas.remove(rID_Hour3);
+		canvas.remove(rID_Hour4);
+		canvas.remove(rID_Hour5);
+		canvas.remove(rID_Hour6);
+		canvas.remove(rID_TempDisplay);
+		 canvas.remove(rID_TempIcon);
+		 canvas.remove(rID_Temp1);
+				 canvas.remove(rID_Temp2);
+				 canvas.remove(rID_Temp3);
+				 canvas.remove(rID_Temp4);
+				 canvas.remove(rID_Temp5);
+				 canvas.remove(rID_Temp6);
+				 canvas.remove(rID_TempIcon1);
+				  canvas.remove(rID_TempIcon2); 
+				  canvas.remove(rID_TempIcon3);
+				   canvas.remove(rID_TempIcon4);
+				    canvas.remove(rID_TempIcon5);
+					 canvas.remove(rID_TempIcon6);
+		 
+		 
+}
+
+function rID_HideUserTicks()
+{
+  rID_RidhiTick.visible = false;
+  rID_KrutiTick.visible = false;
+  rID_SahibTick.visible = false;
+  rID_AnkurTick.visible = false;
+  
+}
+ 
+canvas.add(rID_FirstTimeSetupText);
 
 
 
