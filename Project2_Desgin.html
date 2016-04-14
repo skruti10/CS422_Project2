@@ -134,7 +134,58 @@
 
 <!-- ************************************ HTML Code Added by Ankur *********************************************************************************** -->
 
+<img src="Icons/time1.png" id="settingsTime" style="display:none">
+<img src="Icons/temperature1.png" id="settingsTemp" style="display:none">
+<img src="Icons/doorbellsoundsettings.png" id="settingsBell" style="display:none">
+<img src="Icons/language.png" id="settingsLang" style="display:none">
+<img src="Icons/date.png" id="settingsDate" style="display:none">
+<img src="Icons/users.png" id="settingsUsers" style="display:none">
 
+<img src="Icons/12hr.png" id="settingsTime12" style="display:none">
+<img src="Icons/24hr.png" id="settingsTime24" style="display:none">
+
+<img src="Icons/celsius.jpg" id="settingsTempC" style="display:none">
+<img src="Icons/fahrenheit.jpg" id="settingsTempF" style="display:none">
+
+<img src="Icons/vol4.png" id="settingsvol4" style="display:none">
+<img src="Icons/vol4fill.png" id="settingsvol4fill" style="display:none">
+<img src="Icons/vol3.png" id="settingsvol3" style="display:none">
+<img src="Icons/vol3fill.png" id="settingsvol3fill" style="display:none">
+<img src="Icons/vol2.png" id="settingsvol2" style="display:none">
+<img src="Icons/vol2fill.png" id="settingsvol2fill" style="display:none">
+<img src="Icons/vol1.png" id="settingsvol1" style="display:none">
+<img src="Icons/vol1fill.png" id="settingsvol1fill" style="display:none">
+
+<img src="Icons/doorbell1.png" id="settingsdoorbell" style="display:none">
+
+<img src="Icons/english.png" id="english" style="display:none">
+<img src="Icons/spanish.png" id="spanish" style="display:none">
+<img src="Icons/russian.png" id="russian" style="display:none">
+<img src="Icons/dutch.png" id="dutch" style="display:none">
+<img src="Icons/chinese.png" id="chinese" style="display:none">
+<img src="Icons/french.png" id="french" style="display:none">
+<img src="Icons/arabic.png" id="arabic" style="display:none">
+<img src="Icons/hindi.png" id="hindi" style="display:none">
+<img src="Icons/bengali.png" id="bengali" style="display:none">
+<img src="Icons/german.png" id="german" style="display:none">
+
+<img src="Icons/date1.png" id="date1" style="display:none">
+<img src="Icons/date2.png" id="date2" style="display:none">
+<img src="Icons/date3.png" id="date3" style="display:none">
+<img src="Icons/date4.png" id="date4" style="display:none">
+
+<img src="Icons/plus.png" id="plus" style="display:none">
+
+<img src="Icons/userfinger.png" id="userfinger" style="display:none">
+<img src="Icons/userphone.png" id="userphone" style="display:none">
+<img src="Icons/edit.png" id="edit" style="display:none">
+<img src="Icons/phonetab.png" id="phonetab" style="display:none">
+<img src="Icons/phonetabselected.png" id="phonetabselected" style="display:none">
+<img src="Icons/fingertab.png" id="fingertab" style="display:none">
+<img src="Icons/fingertabselected.png" id="fingertabselected" style="display:none">
+
+<img src="Icons/rightarrow1.png" id="backButton" style="display:none">
+<img src="Icons/guestuser.png" id="guestuser" style="display:none">
 
 
 
@@ -4789,8 +4840,1250 @@ canvas.add(sDeliverPackageText2);
 
 
 /*************************************** Code End by Sahib ***************************************************************************************/
+
+
+
+
+
 /*************************************** Code Added by Ankur ***************************************************************************************/
+
+
+var atime = document.getElementById('settingsTime');
+var atemp = document.getElementById('settingsTemp');
+var abell = document.getElementById('settingsBell');
+var alang = document.getElementById('settingsLang');
+var adate = document.getElementById('settingsDate');
+var ausers = document.getElementById('settingsUsers');
+
+var atime12 = document.getElementById('settingsTime12');
+var atime24 = document.getElementById('settingsTime24');
+
+var atempC = document.getElementById('settingsTempC');
+var atempF = document.getElementById('settingsTempF');
+
+var avol1 = document.getElementById('settingsvol1');
+var avol1fill = document.getElementById('settingsvol1fill');
+
+var avol2 = document.getElementById('settingsvol2');
+var avol2fill = document.getElementById('settingsvol2fill');
+
+var avol3 = document.getElementById('settingsvol3');
+var avol3fill = document.getElementById('settingsvol3fill');
+
+var avol4 = document.getElementById('settingsvol4');
+var avol4fill = document.getElementById('settingsvol4fill');
+
+var volLevel = 2;
+
+var doorBell = document.getElementById('settingsdoorbell');
+
+var aenglish = document.getElementById('english');
+var aspanish = document.getElementById('spanish');
+var arussian = document.getElementById('russian');
+var agerman = document.getElementById('german');
+var aarabic = document.getElementById('arabic');
+var aechinese = document.getElementById('chinese');
+var adutch = document.getElementById('spanish');
+var afrench = document.getElementById('french');
+var ahindi = document.getElementById('hindi');
+var abengali = document.getElementById('bengali');
+
+var adate1 = document.getElementById('date1');
+var adate2 = document.getElementById('date2');
+var adate3 = document.getElementById('date3');
+var adate4 = document.getElementById('date4');
+
+var auser1 = document.getElementById('kKrutiImageIcon');
+var auser2 = document.getElementById('kSahibImageIcon');
+var auser3 = document.getElementById('kRidhiImageIcon');
+var auser4 = document.getElementById('kAnkurImageIcon');
+var aplus = document.getElementById('plus');
+var auserguest = document.getElementById('guestuser');
+
+var auserfinger = document.getElementById('userfinger');
+var auserphone = document.getElementById('userphone');
+var auseredit = document.getElementById('edit');
+var auserphonetab = document.getElementById('phonetab');
+var auserphonetabselected = document.getElementById('phonetabselected');
+var auserfingertab = document.getElementById('fingertab');
+var auserfingertabselected = document.getElementById('fingertabselected');
+
+var aBackButtonx = document.getElementById('backButton');
+
+// For settings panel
+
+var aBackButton = new fabric.Image(aBackButtonx, {
+  left: 50,  
+  top: 300,
+  angle: 180,
+  width: 25, height: 50,
+  visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
+// For individual settings
+
+var aBackButton2 = new fabric.Image(aBackButtonx, {
+  left: 50,  
+  top: 300,
+  angle: 180,
+  width: 25, height: 50,
+  visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
+
+var aSettingsTime = new fabric.Image(atime, {
+  left: 125,  // 750
+  top: 225,
+  angle: 0,
+  width: 90, height: 90,
+  visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsTemp = new fabric.Image(atemp, {
+  left: 300,  //900
+  top: 225,
+  angle: 0,
+  width: 80, height: 80,
+   visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsBell = new fabric.Image(abell, {
+  left: 475,  //1050
+  top: 225,
+  angle: 0,
+  width: 80, height: 80,
+   visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsLang = new fabric.Image(alang, {
+  left: 125,
+  top: 375,
+  angle: 0,
+  width: 60, height: 60,
+   visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsDate = new fabric.Image(adate, {
+  left: 300,
+  top: 375,
+  angle: 0,
+  width: 70, height: 70,
+   visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsUsers = new fabric.Image(ausers, {
+  left: 475,
+  top: 375,
+  angle: 0,
+  width: 80, height: 80,
+   visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsTime12 = new fabric.Image(atime12, {
+  left: 200, //800
+  top: 275,
+  angle: 0,
+  width: 130, height: 130,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsTime24 = new fabric.Image(atime24, {
+  left: 400,  //1000
+  top: 275,
+  angle: 0,
+  width: 130, height: 130,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsTempC = new fabric.Image(atempC, {
+  left: 200,  //800
+  top: 275,
+  angle: 0,
+  width: 135, height: 135,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsTempF = new fabric.Image(atempF, {
+  left: 400,  //1000
+  top: 275, 
+  angle: 0,
+  width: 125, height: 125,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+// Volume levels in doorbell settings
+
+var aSettingsVol4 = new fabric.Image(avol4, {
+  left: 175,  //750
+  top: 225,
+  angle: 0,
+  width: 150, height: 25,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsVol3 = new fabric.Image(avol3, {
+  left: 162.5, //737.5
+  top: 265,
+  angle: 0,
+  width: 125, height: 25,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsVol2 = new fabric.Image(avol2, {
+  left: 150,
+  top: 305,
+  angle: 0,
+  width: 100, height: 25,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsVol1 = new fabric.Image(avol1, {
+  left: 137.5,
+  top: 345,
+  angle: 0,
+  width: 75, height: 25,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+// filled levels - selected
+
+var aSettingsVolFill4 = new fabric.Image(avol4fill, {
+  left: 175,
+  top: 225,
+  angle: 0,
+  width: 150, height: 25,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsVolFill3 = new fabric.Image(avol3fill, {
+  left: 162.5,
+  top: 265,
+  angle: 0,
+  width: 125, height: 25,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsVolFill2 = new fabric.Image(avol2fill, {
+  left: 150,
+  top: 305,
+  angle: 0,
+  width: 100, height: 25,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsVolFill1 = new fabric.Image(avol1fill, {
+  left: 137.5,
+  top: 345,
+  angle: 0,
+  width: 75, height: 25,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var achimeText1 = new fabric.Text('Doorbell Chime', { left: 375, top: 225, fontFamily: 'Tahoma', fontSize: 20, originX: 'center',
+  originY: 'center', visible: false});
+var achimeText2 = new fabric.Text('Package Chime', { left: 375, top: 305, fontFamily: 'Tahoma', fontSize: 20, originX: 'center',
+  originY: 'center', visible: false});
+
+
+var achime1 = new fabric.Image(doorBell, {
+  left: 325, //900
+  top: 265,
+  angle: 0,
+  width: 25, height: 25,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var achime2 = new fabric.Image(doorBell, {
+  left: 375, //950
+  top: 265,
+  angle: 0,
+  width: 25, height: 25,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var achime3 = new fabric.Image(doorBell, {
+  left: 425, //1000
+  top: 265,
+  angle: 0,
+  width: 25, height: 25,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var achime4 = new fabric.Image(doorBell, {
+  left: 325,
+  top: 345,
+  angle: 0,
+  width: 25, height: 25,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var achime5 = new fabric.Image(doorBell, {
+  left: 375,
+  top: 345,
+  angle: 0,
+  width: 25, height: 25,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var achime6 = new fabric.Image(doorBell, {
+  left: 425,
+  top: 345,
+  angle: 0,
+  width: 25, height: 25,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var alangText = new fabric.Text('Select your Language', { left: 300, top: 175, fontFamily: 'Tahoma', fontSize: 20, originX: 'center',
+  originY: 'center', visible: false});
+
+
+var aSettingsEnglish = new fabric.Image(aenglish, {
+  left: 225, //850
+  top: 225,
+  angle: 0,
+  width: 100, height: 50,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsSpanish = new fabric.Image(aspanish, {
+  left: 375,
+  top: 225,
+  angle: 0,
+  width: 100, height: 50,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsFrench = new fabric.Image(afrench, {
+  left: 225,
+  top: 275,
+  angle: 0,
+  width: 100, height: 50,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsRussian = new fabric.Image(arussian, {
+  left: 375,
+  top: 275,
+  angle: 0,
+  width: 100, height: 50,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsHindi = new fabric.Image(ahindi, {
+  left: 225,
+  top: 325,
+  angle: 0,
+  width: 100, height: 50,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsBengali = new fabric.Image(abengali, {
+  left: 375,
+  top: 325,
+  angle: 0,
+  width: 100, height: 50,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsGerman = new fabric.Image(agerman, {
+  left: 225,
+  top: 375,
+  angle: 0,
+  width: 100, height: 50,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsDutch = new fabric.Image(adutch, {
+  left: 375,
+  top: 375,
+  angle: 0,
+  width: 100, height: 50,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsArabic = new fabric.Image(aarabic, {
+  left: 225,
+  top: 425,
+  angle: 0,
+  width: 100, height: 50,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsChinese = new fabric.Image(aechinese, {
+  left: 375,
+  top: 425,
+  angle: 0,
+  width: 100, height: 50,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsDate1 = new fabric.Image(adate1, {
+  left: 337.5,
+  top: 225,
+  angle: 0,
+  width: 250, height: 50,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+var aSettingsDate2 = new fabric.Image(adate2, {
+  left: 337.5,
+  top: 285,
+  angle: 0,
+  width: 250, height: 50,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsDate3 = new fabric.Image(adate3, {
+  left: 337.5,
+  top: 345,
+  angle: 0,
+  width: 250, height: 50,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsDate4 = new fabric.Image(adate4, {
+  left: 337.5,
+  top: 405,
+  angle: 0,
+  width: 250, height: 50,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsUser1 = new fabric.Image(auser1, {
+  left: 125,
+  top: 225,
+  angle: 0,
+  width: 100, height: 100,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsUser2 = new fabric.Image(auser2, {
+  left: 300,
+  top: 225,
+  angle: 0,
+  width: 100, height: 100,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsUser3 = new fabric.Image(auser3, {
+  left: 475,
+  top: 225,
+  angle: 0,
+  width: 100, height: 100,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsUser4 = new fabric.Image(auser4, {
+  left: 125,
+  top: 350,
+  angle: 0,
+  width: 100, height: 100,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsUserPlus = new fabric.Image(aplus, {
+  left: 300,
+  top: 350,
+  angle: 0,
+  width: 75, height: 75,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsUserGuest = new fabric.Image(auserguest, {
+  left: 300,
+  top: 350,
+  angle: 0,
+  width: 75, height: 75,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
+
+
+var aSettingsUserFinger = new fabric.Image(auserfinger, {
+  left: 300,
+  top: 325,
+  angle: 0,
+  width: 350, height: 225,
+  visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsUserPhone = new fabric.Image(auserphone, {
+  left: 300,
+  top: 325,
+  angle: 0,
+  width: 350, height: 225,
+  visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsUserPhoneTab = new fabric.Image(auserphonetab, {
+  left: 380,
+  top: 200,
+  angle: 0,
+  width: 170, height: 50,
+  visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+var aSettingsUserPhoneTabSelected = new fabric.Image(auserphonetabselected, {
+  left: 380,
+  top: 200,
+  angle: 0,
+  width: 170, height: 50,
+  visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
+
+var aSettingsUserFingerTab = new fabric.Image(auserfingertab, {
+  left: 212,
+  top: 200,
+  angle: 0,
+  width: 166, height: 50,
+  visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+var aSettingsUserFingerTabSelected = new fabric.Image(auserfingertabselected, {
+  left: 212,
+  top: 200,
+  angle: 0,
+  width: 166, height: 50,
+  visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsUserFingerEdit = new fabric.Image(auseredit, {
+  left: 375,
+  top: 300,
+  angle: 0,
+  width: 100, height: 50,
+  visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aSettingsUserPhoneEdit = new fabric.Image(auseredit, {
+  left: 375,
+  top: 300,
+  angle: 0,
+  width: 100, height: 50,
+  visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
+
+
+
+
+
+
+
+canvas.add(aSettingsTime);
+canvas.add(aSettingsTemp);
+canvas.add(aSettingsBell);
+canvas.add(aSettingsLang);
+canvas.add(aSettingsDate);
+canvas.add(aSettingsUsers);
+
+canvas.add(aSettingsTime12);
+canvas.add(aSettingsTime24);
+
+
+canvas.add(aSettingsTempC);
+canvas.add(aSettingsTempF);
+
+canvas.add(aSettingsVol4);
+canvas.add(aSettingsVol3);
+canvas.add(aSettingsVol2);
+canvas.add(aSettingsVol1);
+canvas.add(aSettingsVolFill4);
+canvas.add(aSettingsVolFill3);
+canvas.add(aSettingsVolFill2);
+canvas.add(aSettingsVolFill1);
+
+canvas.add(achimeText1);
+canvas.add(achimeText2);
+canvas.add(achime1);
+canvas.add(achime2);
+canvas.add(achime3);
+canvas.add(achime4);
+canvas.add(achime5);
+canvas.add(achime6);
+
+canvas.add(aSettingsEnglish);
+canvas.add(aSettingsSpanish);
+canvas.add(aSettingsRussian);
+canvas.add(aSettingsFrench);
+canvas.add(aSettingsHindi);
+canvas.add(aSettingsBengali);
+canvas.add(aSettingsDutch);
+canvas.add(aSettingsGerman);
+canvas.add(aSettingsArabic);
+canvas.add(aSettingsChinese);
+canvas.add(alangText);
+
+canvas.add(aSettingsDate1);
+canvas.add(aSettingsDate2);
+canvas.add(aSettingsDate3);
+canvas.add(aSettingsDate4);
+
+canvas.add(aSettingsUser1);
+canvas.add(aSettingsUser2);
+canvas.add(aSettingsUser3);
+canvas.add(aSettingsUser4);
+canvas.add(aSettingsUserPlus);
+
+canvas.add(aSettingsUserFinger);
+canvas.add(aSettingsUserPhone);
+canvas.add(aSettingsUserPhoneTab);
+canvas.add(aSettingsUserPhoneTabSelected);
+canvas.add(aSettingsUserFingerTab);
+canvas.add(aSettingsUserFingerTabSelected);
+canvas.add(aSettingsUserFingerEdit);
+canvas.add(aSettingsUserPhoneEdit);
+
+canvas.add(aBackButton);
+canvas.add(aBackButton2);
+canvas.add(aSettingsUserGuest);
+
+function aHideAnkurCodeSettings(){
+
+aSettingsTime.visible = false;
+aSettingsTemp.visible = false;
+aSettingsBell.visible = false;
+aSettingsLang.visible = false;
+aSettingsDate.visible = false;
+aSettingsUsers.visible = false;
+
+aSettingsTime12.visible = false;
+aSettingsTime24.visible = false;
+
+
+aSettingsTempC.visible = false;
+aSettingsTempF.visible = false;
+
+aSettingsVol4.visible = false;
+aSettingsVol3.visible = false;
+aSettingsVol2.visible = false;
+aSettingsVol1.visible = false;
+aSettingsVolFill4.visible = false;
+aSettingsVolFill3.visible = false;
+aSettingsVolFill2.visible = false;
+aSettingsVolFill1.visible = false;
+
+achimeText1.visible = false;
+achimeText2.visible = false;
+achime1.visible = false;
+achime2.visible = false;
+achime3.visible = false;
+achime4.visible = false;
+achime5.visible = false;
+achime6.visible = false;
+
+aSettingsEnglish.visible = false;
+aSettingsSpanish.visible = false;
+aSettingsRussian.visible = false;
+aSettingsFrench.visible = false;
+aSettingsHindi.visible = false;
+aSettingsBengali.visible = false;
+aSettingsDutch.visible = false;
+aSettingsGerman.visible = false;
+aSettingsArabic.visible = false;
+aSettingsChinese.visible = false;
+alangText.visible = false;
+
+aSettingsDate1.visible = false;
+aSettingsDate2.visible = false;
+aSettingsDate3.visible = false;
+aSettingsDate4.visible = false;
+
+aSettingsUser1.visible = false;
+aSettingsUser2.visible = false;
+aSettingsUser3.visible = false;
+aSettingsUser4.visible = false;
+aSettingsUserPlus.visible = false;
+
+aSettingsUserFinger.visible = false;
+aSettingsUserPhone.visible = false;
+aSettingsUserPhoneTab.visible = false;
+aSettingsUserPhoneTabSelected.visible = false;
+aSettingsUserFingerTab.visible = false;
+aSettingsUserFingerTabSelected.visible = false;
+aSettingsUserFingerEdit.visible = false;
+aSettingsUserPhoneEdit.visible = false;
+
+aBackButton.visible = false;
+aBackButton2.visible = false;
+aSettingsUserGuest.visible = false;
+
+}
+
+
+
+function adisplaySettings(){
+	aSettingsTime.visible = true;
+	aSettingsTemp.visible = true;
+	aSettingsBell.visible = true;
+	aSettingsLang.visible = true;
+	aSettingsDate.visible = true;
+	aSettingsUsers.visible = true;
+	aBackButton.visible = true;
+
+}
+
+function ahideSettings(){
+	aSettingsTime.visible = false;
+	aSettingsTemp.visible = false;
+	aSettingsBell.visible = false;
+	aSettingsLang.visible = false;
+	aSettingsDate.visible = false;
+	aSettingsUsers.visible = false;
+	aBackButton.visible = false;
+	aBackButton2.visible = false;
+}
+
+
+
+function adisplaySettingsTime(){
+
+	aSettingsTime12.visible = true;
+	aSettingsTime24.visible = true;
+
+}
+
+function adisplaySettingsTemp(){
+
+	aSettingsTempC.visible = true;
+	aSettingsTempF.visible = true;
+
+}
+
+function adisplaySettingsBell(){
+
+	aSettingsVol4.visible = true;
+	aSettingsVol3.visible = true;
+	aSettingsVolFill2.visible = true;
+	aSettingsVolFill1.visible = true;
+	achimeText1.visible = true;
+	achimeText2.visible = true;
+	achime1.visible = true;
+	achime2.visible = true;
+	achime3.visible = true;
+	achime4.visible = true;
+	achime5.visible = true;
+	achime6.visible = true;
+}
+
+function adisplaySettingsLang(){
+	aSettingsEnglish.visible = true;
+	aSettingsSpanish.visible = true;
+	aSettingsRussian.visible = true;
+	aSettingsFrench.visible = true;
+	aSettingsHindi.visible = true;
+	aSettingsBengali.visible = true;
+	aSettingsGerman.visible = true;
+	aSettingsDutch.visible = true;
+	aSettingsArabic.visible = true;
+	aSettingsChinese.visible = true;
+	alangText.visible = true;
+}
+
+function adisplaySettingsDate(){
+	aSettingsDate1.visible = true;
+	aSettingsDate2.visible = true;
+	aSettingsDate3.visible = true;
+	aSettingsDate4.visible = true;
+}
+
+function adisplaySettingsUsers(){
+	aSettingsUser1.visible = true;
+	aSettingsUser2.visible = true;
+	aSettingsUser3.visible = true;
+	aSettingsUser4.visible = true;
+	aSettingsUserPlus.visible = true;
+
+}
+function ahideSettingsUsers(){
+	aSettingsUser1.visible = false;
+	aSettingsUser2.visible = false;
+	aSettingsUser3.visible = false;
+	aSettingsUser4.visible = false;
+	aSettingsUserPlus.visible = false;
+
+}
+
+
+kID_SettingsIcon.on('selected',function(){
+	adisplaySettings();
+	kID_IsMenuOpen = false;
+	kID_IsDoorLocked = true;
+	
+	/*** remove all the menu icons ****/
+	kRemoveMenuIcons();
+});
+
+
+aBackButton.on('selected',function(){
+
+		aHideAnkurCodeSettings();
+
+	// Kruti's Menu Display Code..
+		canvas.add(kID_CameraIcon);
+		
+		/***** condition check will be required - if there are unread messages then other icon needs to be added ****/
+		canvas.add(kID_NoUnreadIcon);
+		//canvas.add(kID_OneUnreadMessageIcon_Menu);
+		
+		canvas.add(kID_CalendarIcon);
+		
+		/***** condition check will be required - if there are bell is already in mute state ****/
+		if(kID_IsBellMuted)
+		{
+			canvas.add(kID_MuteIcon_Menu);
+		}
+		else
+		{
+			canvas.add(kID_UnMuteIcon);
+		}
+		
+		canvas.add(kID_SettingsIcon);
+		canvas.add(kID_MirrorIcon);
+		canvas.add(kID_RightArrowIcon);
+// Kruti's code end
+
+
+
+
+
+});
+
+aBackButton2.on('selected',function(){
+	aHideAnkurCodeSettings();
+	adisplaySettings();
+
+
+});
+
+
+aSettingsTime.on('selected',function(){
+
+	ahideSettings();
+	adisplaySettingsTime();
+	aBackButton2.visible = true;
+
+});
+
+aSettingsTemp.on('selected',function(){
+	ahideSettings();
+	adisplaySettingsTemp();
+	aBackButton2.visible = true;
+
+});
+
+aSettingsBell.on('selected',function(){
+	ahideSettings();
+	adisplaySettingsBell();
+	aBackButton2.visible = true;
+
+});
+
+aSettingsLang.on('selected',function(){
+	ahideSettings();
+	adisplaySettingsLang();
+	aBackButton2.visible = true;
+
+});
+
+aSettingsDate.on('selected',function(){
+	ahideSettings();
+	adisplaySettingsDate();
+	aBackButton2.visible = true;
+
+});
+
+aSettingsUsers.on('selected',function(){
+	ahideSettings();
+	adisplaySettingsUsers();
+	aBackButton2.visible = true;
+
+
+});
+
+
+
+
+
+
+aSettingsVol4.on('selected',function(){
+		if(volLevel==4){
+
+		}
+		else if(volLevel==3){
+			volLevel = 4;
+			aSettingsVol4.visible = false;
+			aSettingsVolFill4.visible = true;
+		}
+		else if(volLevel==2){
+			volLevel = 4;
+			aSettingsVol4.visible = false;
+			aSettingsVol3.visible = false;
+			aSettingsVolFill4.visible = true;
+			aSettingsVolFill3.visible = true;
+		}		
+		else if(volLevel==1){
+			volLevel = 4;
+			aSettingsVol4.visible = false;
+			aSettingsVol3.visible = false;
+			aSettingsVol2.visible = false;
+			aSettingsVolFill4.visible = true;
+			aSettingsVolFill3.visible = true;
+			aSettingsVolFill2.visible = true;
+		}		
+
+
+});
+
+aSettingsVol3.on('selected',function(){
+		if(volLevel==4){
+			volLevel = 3;
+			aSettingsVol4.visible = true;
+			aSettingsVolFill4.visible = false;
+		}
+		else if(volLevel==3){
+		}
+		else if(volLevel==2){
+			volLevel = 3;
+			aSettingsVol4.visible = true;
+			aSettingsVolFill4.visible = false;
+			aSettingsVol3.visible = false;
+			aSettingsVolFill3.visible = true;
+		}		
+		else if(volLevel==1){
+			volLevel = 3;
+
+			aSettingsVol3.visible = false;
+			aSettingsVolFill3.visible = true;
+			aSettingsVol2.visible = false;
+			aSettingsVolFill2.visible = true;
+		}		
+
+
+});
+
+aSettingsVol2.on('selected',function(){
+		if(volLevel==1){
+			volLevel = 2;
+			aSettingsVol2.visible = false;
+			aSettingsVolFill2.visible = true;
+		}		
+});
+
+
+
+aSettingsVolFill3.on('selected',function(){
+		if(volLevel==4){
+			volLevel = 3;
+			aSettingsVolFill4.visible = false;
+			aSettingsVol4.visible = true;
+		}
+});
+
+aSettingsVolFill2.on('selected',function(){
+		if(volLevel==4){
+			volLevel = 2;
+			aSettingsVolFill4.visible = false;
+			aSettingsVol4.visible = true;
+			aSettingsVolFill3.visible = false;
+			aSettingsVol3.visible = true;
+		}
+		else if(volLevel==3){
+			volLevel = 2;			
+			aSettingsVolFill3.visible = false;
+			aSettingsVol3.visible = true;
+		}	
+});
+
+aSettingsVolFill1.on('selected',function(){
+		if(volLevel==4){
+			volLevel = 1;
+			aSettingsVolFill4.visible = false;
+			aSettingsVol4.visible = true;
+			aSettingsVolFill3.visible = false;
+			aSettingsVol3.visible = true;
+			aSettingsVolFill2.visible = false;
+			aSettingsVol2.visible = true;
+		}
+		else if(volLevel==3){
+			volLevel = 1;			
+			aSettingsVolFill3.visible = false;
+			aSettingsVol3.visible = true;
+			aSettingsVolFill2.visible = false;
+			aSettingsVol2.visible = true;			
+		}	
+		else if(volLevel==2){
+			volLevel = 1;			
+			aSettingsVolFill3.visible = false;
+			aSettingsVol3.visible = true;
+			aSettingsVolFill2.visible = false;
+			aSettingsVol2.visible = true;			
+		}	
+});
+
+
+aSettingsUser1.on('selected',function(){
+	ahideSettingsUsers();
+	aSettingsUserFinger.visible = true;
+	aSettingsUserFingerTabSelected.visible = true;
+	aSettingsUserPhoneTab.visible = true;
+	aSettingsUserFingerEdit.visible = true;
+});
+
+aSettingsUser2.on('selected',function(){
+	ahideSettingsUsers();
+	aSettingsUserFinger.visible = true;
+	aSettingsUserFingerTabSelected.visible = true;
+	aSettingsUserPhoneTab.visible = true;
+	aSettingsUserFingerEdit.visible = true;
+});
+aSettingsUser3.on('selected',function(){
+	ahideSettingsUsers();
+	aSettingsUserFinger.visible = true;
+	aSettingsUserFingerTabSelected.visible = true;
+	aSettingsUserPhoneTab.visible = true;
+	aSettingsUserFingerEdit.visible = true;
+});
+aSettingsUser4.on('selected',function(){
+	ahideSettingsUsers();
+	aSettingsUserFinger.visible = true;
+	aSettingsUserFingerTabSelected.visible = true;
+	aSettingsUserPhoneTab.visible = true;
+	aSettingsUserFingerEdit.visible = true;
+});
+
+
+aSettingsUserPhoneTab.on('selected',function(){
+	aSettingsUserFinger.visible = false;
+	aSettingsUserFingerEdit.visible = false;
+	aSettingsUserPhone.visible = true;
+	aSettingsUserPhoneEdit.visible = true;
+	aSettingsUserFingerTabSelected.visible = false;
+	aSettingsUserFingerTab.visible = true;
+	aSettingsUserPhoneTabSelected.visible = true;
+	aSettingsUserPhoneTab.visible = false;
+
+});
+
+aSettingsUserFingerTab.on('selected',function(){
+	aSettingsUserFinger.visible = true;
+	aSettingsUserFingerEdit.visible = true;
+	aSettingsUserPhone.visible = false;
+	aSettingsUserPhoneEdit.visible = false;
+	aSettingsUserFingerTabSelected.visible = true;
+	aSettingsUserFingerTab.visible = false;
+	aSettingsUserPhoneTabSelected.visible = false;
+	aSettingsUserPhoneTab.visible = true;
+
+
+});
+
+
+aSettingsTime12.on('selected',function(){
+	kID_TimeFormat = 12;
+	clearInterval(ref_24);
+	ref_12 = setInterval(kID_Refresh_DateTime_12, 3000);
+	kID_Refresh_DateTime_12();
+	
+
+});
+
+aSettingsTime24.on('selected',function(){
+	kID_TimeFormat = 24;
+	if(ref_12 != "")
+		clearInterval(ref_12);
+	ref_24 = setInterval(kID_Refresh_DateTime_24, 3000);
+	kID_Refresh_DateTime_24();
+	
+
+});
+
+aSettingsTempC.on('selected',function(){
+	kID_TempFormat = "C";
+	kWeatherUpdate();
+
+});
+
+aSettingsTempF.on('selected',function(){
+	kID_TempFormat = "F";
+	kWeatherUpdate();
+
+});
+
+aSettingsDate1.on('selected',function(){
+	kID_DateFormat = 1;
+	kID_Date();
+});
+
+aSettingsDate2.on('selected',function(){
+	kID_DateFormat = 2;
+	kID_Date();
+});
+
+aSettingsDate3.on('selected',function(){
+	kID_DateFormat = 3;
+	kID_Date();
+});
+
+aSettingsDate4.on('selected',function(){
+	kID_DateFormat = 4;
+	kID_Date();
+});
+
+
+aSettingsUserPlus.on('selected',function(){
+	if(aSettingsUserPlus.visible == true){
+		ahideSettingsUsers();
+	//need to set active user variable
+		rID_RenderClickPicture();
+    	rID_ShowClickPicture();
+    	aSettingsUserPlus.visible = false;
+    // ask ridhi to do this	
+    //	aSettingsUserGuest.visible = true;
+	}
+
+	else
+	{
+		ahideSettingsUsers();
+		aSettingsUserFinger.visible = true;
+		aSettingsUserFingerTabSelected.visible = true;
+		aSettingsUserPhoneTab.visible = true;
+		aSettingsUserFingerEdit.visible = true;
+
+	}
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*************************************** Code End by Ankur ***************************************************************************************/
+
+
+
+
+
+
+
+
+
 /*************************************** Code Added by Ridhi ***************************************************************************************/
 var rID_Font = 'Tahoma';
 var rID_FontSize = 20;
