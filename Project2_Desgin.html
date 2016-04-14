@@ -4011,6 +4011,7 @@ function kRemoveCameraPanel()
 // select event for the main menu icon
 kID_MenuIcon.on('selected', function()
 {
+	aHideAnkurCodeSettings();
 	kID_IsDoorLocked = true;
 	kID_IsAvatarShown = false;
 	kID_IsMicrophoneMute = false;
