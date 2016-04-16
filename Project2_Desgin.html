@@ -7,12 +7,15 @@
   
   <!-- Get version 1.5.0 of Fabric.js from CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js" ></script>
-  <script src="https://250mils-transfer.s3.amazonaws.com/fabric05182015.js"></script> <!-- added for textbox - auto wrap -->
+  
+ 
   
 <!-- /************************************************** Common set of codes for everyone start -HTML HEAD ***************************************************************/ -->
   
   <script src="jquery-2.2.2.min.js"></script> <!-- added by kruti for ajax calls support - weather -->
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+   <script src="https://apis.google.com/js/client.js?onload=checkAuth"></script>
+   <script src="https://250mils-transfer.s3.amazonaws.com/fabric05182015.js"></script> <!-- added for textbox - auto wrap -->
 
 <!-- /************************************************** Common set of codes for everyone end - HTML HEAD *****************************************************************/ -->
 
@@ -206,6 +209,7 @@
 
 
 
+
 <img src="Icons/tickmark.png" id="rTickMark" style="display:none">
 <img src="Icons/rightarrow1.png" id="rRightArrow" style="display:none">
 
@@ -347,7 +351,8 @@ kUserMessages.push((new kCommonFunction("sahib","Icons/Kruti/SahibMessage.png"))
 kUserMessages.push((new kCommonFunction("ankur","Icons/Kruti/WelcomeMessage.png")));
 kUserMessages.push((new kCommonFunction("ankur","Icons/Kruti/AnkurMessage.png")));
 
-
+var rTasks= [];
+var rCalendarEvents = [];
 /********************************************************************************************************************/
 
 /***END $$Kruti added the code for profiles***/
@@ -2805,6 +2810,19 @@ var kID_ThemeLeftArrowIcon = new fabric.Image(kLeftArrowIconInfo.kImageElement, 
 	width: kID_MenuIconW-20,
 	height: kID_MenuIconH-30
 });
+var kID_TaskLeftArrowIcon = new fabric.Image(kLeftArrowIconInfo.kImageElement, {
+	left: 100, 
+	top: 500, 
+	width: 60,
+	height: 50
+});
+
+var kID_CalendarLeftArrowIcon= new fabric.Image(kLeftArrowIconInfo.kImageElement, {
+	left: 100, 
+	top: 500, 
+	width: 60,
+	height: 50
+});
 
 var kINIconInfo = new kInsertImageInfo("kINIcon",document.getElementById('kINIcon'));  
 var kID_INIcon = new fabric.Image(kINIconInfo.kImageElement, {
@@ -3672,7 +3690,341 @@ function kOAddThemePanelIcons_WithoutHidingPanel()
 
 
 /******************************* end icons for theme panel ******************************************/
+/*******************************texts for tasks************************************************/
 
+var rTask0 = new fabric.Textbox('No tasks for today!', {
+   left: kID_HeaderPanelLeft + 500,
+  top: kID_HeaderPanelTop + 450,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		 width : 800,
+  height: 50,
+		fontFamily: kID_Font
+	});
+	
+	var rTask1 = new fabric.Textbox('', {
+   left: 450,
+  top: 320,
+   width : 800,
+  height: 50,
+  fontSize: kID_FontSize + 20,
+		fontWeight: 'bold',
+		fill:'black',
+		fontFamily: kID_Font
+	});
+	
+	var rEvent0 = new fabric.Textbox('', {
+   left: 450,
+  top: 320,
+   width : 800,
+  height: 50,
+  fontSize: kID_FontSize + 20,
+		fontWeight: 'bold',
+		fill:'black',
+		fontFamily: kID_Font
+	});
+	
+	
+var rTaskr1 = new fabric.Textbox('', {
+   left: kID_HeaderPanelLeft + 300,
+  top: kID_HeaderPanelTop + 450,
+  width : 800,
+  height: 50,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		fontFamily: kID_Font
+	});	
+	
+	var rTaskr2 = new fabric.Textbox('', {
+   left: kID_HeaderPanelLeft + 300,
+  top: kID_HeaderPanelTop + 550,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		 width : 500,
+  height: 50,
+		fill:'black',
+		fontFamily: kID_Font
+	});	
+	
+	var rTaskr3 = new fabric.Textbox('', {
+   left: kID_HeaderPanelLeft + 300,
+  top: kID_HeaderPanelTop + 650,
+   width : 500,
+  height: 50,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		fontFamily: kID_Font
+	});	
+	
+	var rTaskr4 = new fabric.Textbox('', {
+   left: kID_HeaderPanelLeft + 300,
+  top: kID_HeaderPanelTop + 750,
+   width : 500,
+  height: 50,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		fontFamily: kID_Font
+	});	
+		var rTaskr5 = new fabric.Textbox('', {
+   left: kID_HeaderPanelLeft + 300,
+  top: kID_HeaderPanelTop + 850,
+   width : 500,
+  height: 50,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		fontFamily: kID_Font
+	});
+	
+	var rID_ToDoBox1 = new fabric.Rect({
+	
+	
+    left: kID_HeaderPanelLeft + 240,
+  top: kID_HeaderPanelTop + 450,
+  fill: 'white',
+  stroke: 'black',
+  strokeWidth : 5,
+  width: 15,
+  height: 15,
+  angle: 0
+
+	});
+	
+	var rID_ToDoBox1 = new fabric.Rect({
+	
+	
+    left: kID_HeaderPanelLeft + 240,
+  top: kID_HeaderPanelTop + 450,
+  fill: 'white',
+  stroke: 'black',
+  strokeWidth : 5,
+  width: 15,
+  height: 15,
+  angle: 0
+
+	});
+	
+	var rID_ToDoBox2 = new fabric.Rect({
+	
+	
+    left: kID_HeaderPanelLeft + 240,
+  top: kID_HeaderPanelTop + 550,
+  fill: 'white',
+  stroke: 'black',
+  strokeWidth : 5,
+  width: 15,
+  height: 15,
+  angle: 0
+
+	});
+	
+	var rID_ToDoBox3 = new fabric.Rect({
+	
+	
+    left: kID_HeaderPanelLeft + 240,
+  top: kID_HeaderPanelTop + 650,
+  fill: 'white',
+  stroke: 'black',
+  strokeWidth : 5,
+  width: 15,
+  height: 15,
+  angle: 0
+
+	});
+	
+	var rID_ToDoBox4 = new fabric.Rect({
+	
+	
+    left: kID_HeaderPanelLeft + 240,
+  top: kID_HeaderPanelTop + 750,
+  fill: 'white',
+  stroke: 'black',
+  strokeWidth : 5,
+  width: 15,
+  height: 15,
+  angle: 0
+
+	});
+	
+	var rID_ToDoBox5 = new fabric.Rect({
+	
+	
+    left: kID_HeaderPanelLeft + 240,
+  top: kID_HeaderPanelTop + 850,
+  fill: 'white',
+  stroke: 'black',
+  strokeWidth : 5,
+  width: 15,
+  height: 15,
+  angle: 0
+
+	});
+	
+	var rEvent1 = new fabric.Textbox('', {
+   left: kID_HeaderPanelLeft + 700,
+  top: kID_HeaderPanelTop + 450,
+  width : 800,
+  height: 50,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		fontFamily: kID_Font
+	});	
+	
+	var rEvent2 = new fabric.Textbox('', {
+   left: kID_HeaderPanelLeft + 700,
+  top: kID_HeaderPanelTop + 550,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		 width : 500,
+  height: 50,
+		fill:'black',
+		fontFamily: kID_Font
+	});	
+	
+	var rEvent3 = new fabric.Textbox('', {
+   left: kID_HeaderPanelLeft + 700,
+  top: kID_HeaderPanelTop + 650,
+   width : 500,
+  height: 50,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		fontFamily: kID_Font
+	});	
+	
+	var rEvent4 = new fabric.Textbox('', {
+   left: kID_HeaderPanelLeft + 700,
+  top: kID_HeaderPanelTop + 750,
+   width : 500,
+  height: 50,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		fontFamily: kID_Font
+	});	
+		var rEvent5 = new fabric.Textbox('', {
+   left: kID_HeaderPanelLeft + 700,
+  top: kID_HeaderPanelTop + 850,
+   width : 500,
+  height: 50,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		fontFamily: kID_Font
+	});
+	
+			var rEvent6 = new fabric.Textbox('', {
+   left: kID_HeaderPanelLeft + 700,
+  top: kID_HeaderPanelTop + 850,
+   width : 500,
+  height: 50,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		fontFamily: kID_Font
+	});
+	
+		var rHour1 = new fabric.Textbox('', {
+	
+	
+    left: kID_HeaderPanelLeft + 240,
+  top: kID_HeaderPanelTop + 450,
+  fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		fontFamily: kID_Font,
+ 
+  width: 50,
+  height: 50,
+
+
+	});
+	
+	var rHour2 = new fabric.Textbox('', {
+	
+	
+    left: kID_HeaderPanelLeft + 240,
+  top: kID_HeaderPanelTop + 550,
+  fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		fontFamily: kID_Font,
+  width: 50,
+  height: 50,
+  angle: 0
+
+	});
+	
+	var rHour3 = new fabric.Textbox('', {
+	
+	
+    left: kID_HeaderPanelLeft + 240,
+  top: kID_HeaderPanelTop + 650,
+  fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		fontFamily: kID_Font,
+  width: 50,
+  height: 50,
+  angle: 0
+
+	});
+	
+	var rHour4 = new fabric.Textbox('', {
+	
+	
+    left: kID_HeaderPanelLeft + 240,
+  top: kID_HeaderPanelTop + 750,
+  fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		fontFamily: kID_Font,
+
+   width: 50,
+  height: 50,
+  angle: 0
+
+	});
+	
+	var rHour5 = new fabric.Textbox('', {
+	
+	
+    left: kID_HeaderPanelLeft + 240,
+  top: kID_HeaderPanelTop + 850,
+  fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		fontFamily: kID_Font,
+
+  width: 50,
+  height: 50,
+  angle: 0
+
+	});
+	
+		var rHour6 = new fabric.Textbox('', {
+	
+	
+    left: kID_HeaderPanelLeft + 240,
+  top: kID_HeaderPanelTop + 950,
+  fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'black',
+		fontFamily: kID_Font,
+
+  width: 50,
+  height: 50,
+  angle: 0
+
+	});
+	
+
+/***************************end of tasks**************************************************/
 
 var kToDoListIconInfo = new kInsertImageInfo("kToDoListIcon",document.getElementById('kToDoListIcon'));  
 var kID_ToDoListIcon = new fabric.Image(kToDoListIconInfo.kImageElement, {
@@ -3699,6 +4051,52 @@ var kID_HelpIcon = new fabric.Image(kHelpIconInfo.kImageElement, {
 	top: kID_MenuPanelTop + 105 , 
 	width: kID_MenuIconW+10,
 	height: kID_MenuIconH+10
+});
+
+
+kID_CalendarIcon.on('selected', function()
+{
+ kID_IsMenuOpen = false;
+ kID_IsDoorLocked = true;
+kRemoveMenuIcons();
+ rCalendarEvents = [];
+ rEvent0.set({
+ text: activeuser + "'s Calendar!"
+});
+
+canvas.add(kID_CalendarLeftArrowIcon);
+handleAuthClick();
+canvas.add(rEvent0);
+//getUserTasks(activeuser);
+canvas.deactivateAll();
+ });
+
+kID_ToDoListIcon.on('selected', function()
+{
+kID_IsMenuOpen = false;
+kID_IsDoorLocked = true;
+kRemoveMenuPanel2();
+rTasks = [];
+rID_HideTodoList();
+canvas.add(kID_TaskLeftArrowIcon);
+rTask1.set({
+ text: activeuser + "'s tasks!"
+});
+canvas.add(rTask1);
+
+
+TaskHandleAuthClick();
+//getUserTasks(activeuser);
+canvas.deactivateAll();
+
+});
+
+kID_TaskLeftArrowIcon.on('selected', function()
+{
+
+rID_HideTodoList();
+kAddMenuPanel2();
+canvas.deactivateAll();
 });
 
 function kAddMenuPanel2_WithHidingPanel()
@@ -6768,7 +7166,7 @@ aSettingsUserPlus.on('selected',function(){
 
 
 /*************************************** Code Added by Ridhi ***************************************************************************************/
-var rID_Font = 'Tahoma';
+var rID_Font = 'Helvetica';
 var rID_FontSize = 20;
 var rID_TutorialLeft = 100;
 var rID_TutorialTop =170 ;
@@ -7039,7 +7437,7 @@ var rID_UsersBox = new fabric.Rect({
   height: 400
 });
 
-var rID_Ridhi = new fabric.Text('RIDHI',{
+var rID_Ridhi = new fabric.Text('Ridhi',{
   left: rID_TutorialLeft+ 470,
   top: rID_TutorialTop + 200,
   fontSize: rID_FontSize + 15,
@@ -7535,7 +7933,7 @@ var rID_SetupBox = new fabric.Rect({
 
 var rID_SetupText = new fabric.Text('Setup',{
   left: rID_TutorialLeft+ 460,
-  top: rID_TutorialTop + 385,
+  top: rID_TutorialTop + 375,
   fontSize: rID_FontSize+ 20,
   fontWeight: 'normal',
   fontFamily: rID_Font
@@ -8024,7 +8422,7 @@ rID_Ridhi.on('selected', function ()
 {
 
      rID_HideFirstTimeSetup();
-     activeuser = 'RIDHI';
+     activeuser = 'Ridhi';
 	 rID_HideUserTicks();
 	 
     if(isUsedTutorial == 0)
@@ -8206,7 +8604,7 @@ canvas.deactivateAll();
   
   rID_ShowClickPicture();  
   rID_ShowCameraOnClick();
-	if(activeuser == 'RIDHI')
+	if(activeuser == 'Ridhi')
 	{
 
 		rID_UserIcon1.visible = true;
@@ -8273,7 +8671,7 @@ rID_Circle4.fill = 'black';
 rID_Circle5.fill = 'white';
 //rID_Circle5.fill = 'white';
  
-if(activeuser == 'RIDHI' && rPhoneIcon1Info.kIsUsed == true)
+if(activeuser == 'Ridhi' && rPhoneIcon1Info.kIsUsed == true)
 {
    rID_Phone1Icon.visible = true; 
 }
@@ -8325,7 +8723,7 @@ canvas.deactivateAll();
  
 rID_CameraIcon.on('selected', function () {
 
-if(activeuser == 'RIDHI')
+if(activeuser == 'Ridhi')
 {
     if(retake == 0)
 	{
@@ -8532,7 +8930,7 @@ rID_RightArrowIcon3.on('selected', function () {
 	rID_RenderScanFinger();
 	rID_ShowScanFinger();
 	
-	/*if(activeuser == 'RIDHI')
+	/*if(activeuser == 'Ridhi')
 	{
           	
 	}*/
@@ -8612,7 +9010,7 @@ rID_Circle5.fill = 'black';
 rID_HideSyncPhone();
 rID_RenderLastPage();
 rID_ShowLastPage();
-if(activeuser == 'RIDHI')
+if(activeuser == 'Ridhi')
 {
   rID_Profile1Done =1;
 }
@@ -8973,7 +9371,7 @@ function rID_ShowVoiceCommand()
 
 function rID_VoiceCapture()
 {
-	if(activeuser == 'RIDHI')
+	if(activeuser == 'Ridhi')
 	{
      rID_VoiceCommand1Capture.play();
     }
@@ -9014,7 +9412,7 @@ function rID_Captured()
 	rID_VideoIcon2.visible = true;
 	rID_TickMarkIcon4.visible = true;
 
-  if(activeuser == 'RIDHI')
+  if(activeuser == 'Ridhi')
 { 
   
    k_RidhiProfile.kVoiceCommand = rID_VoiceCommand1Capture;
@@ -9077,14 +9475,17 @@ function rID_ShowSyncPhone()
 
 function rID_DisplayPhone()
 {
-	//
 	canvas.add(rID_SyncIcon);
+	
+      
+	
 	rID_SyncIcon.visible = false;
 	//rID_SyncIcon.visible = true;
-   if(activeuser == 'RIDHI')
+   if(activeuser == 'Ridhi')
    {
 
 	   rID_SyncIcon.visible = true;
+	//  rID_AnimateSyncIcon(1, 2500);
      canvas.add(rID_Phone1Icon);
 	  rID_Phone1Icon.visible = true;
 	   rID_Phone2Icon.visible = false;
@@ -9325,34 +9726,68 @@ rID_Circle3.visible=  false;
 					myParsedData.push({
 						hrs: parsed_json2.hourly_forecast[i].FCTTIME.hour,
 						htemp: parsed_json2.hourly_forecast[i].temp.english,
+						htempc: parsed_json2.hourly_forecast[i].temp.metric,
 						hicon: parsed_json2.hourly_forecast[i].icon_url
 
 					});
-					//console.log(myParsedData.htemp[i]);
+					myParsedData[i].htemp = myParsedData[i].htemp+ "°F";
+					myParsedData[i].htempc = myParsedData[i].htempc+ "°C";
+			//console.log(myParsedData[i].htemp);
 				}
+				if(kID_TempFormat == "F")
+			{
 				rID_Temp1.set({
-					text:myParsedData[0].htemp+ "°F"
+					text:myParsedData[0].htemp
 				});
 				
 				rID_Temp2.set({
-					text: myParsedData[1].htemp+ "°F" 
+					text: myParsedData[1].htemp
 				});
 
 				rID_Temp3.set({
-					text: myParsedData[2].htemp+ "°F" 
+					text: myParsedData[2].htemp
 				});
 
 				rID_Temp4.set({
-					text: myParsedData[3].htemp+ "°F" 
+					text: myParsedData[3].htemp
 				});
 
 				rID_Temp5.set({
-					text: myParsedData[4].htemp+ "°F"
+					text: myParsedData[4].htemp
 				});
 
 				rID_Temp6.set({
-					text: myParsedData[5].htemp+ "°F"
+					text: myParsedData[5].htemp
 				});
+				
+				}
+				
+				else if (kID_TempFormat == "C" )
+				{
+				   rID_Temp1.set({
+					text:myParsedData[0].htempc
+				});
+				
+				rID_Temp2.set({
+					text: myParsedData[1].htempc
+				});
+
+				rID_Temp3.set({
+					text: myParsedData[2].htempc
+				});
+
+				rID_Temp4.set({
+					text: myParsedData[3].htempc
+				});
+
+				rID_Temp5.set({
+					text: myParsedData[4].htempc
+				});
+
+				rID_Temp6.set({
+					text: myParsedData[5].htempc
+				});
+				}
 				
 				document.getElementById("rTempIcon1").src= myParsedData[0].hicon;
 				document.getElementById("rTempIcon2").src= myParsedData[1].hicon;
@@ -9466,6 +9901,406 @@ function rID_HideUserTicks()
   rID_AnkurTick.visible = false;
   
 }
+
+function rID_AnimateSyncIcon(i,j)
+{
+rID_SyncIcon.animate('angle', 360 * i, {
+        duration: j,
+        onChange: canvas.renderAll.bind(canvas),
+        easing: fabric.util.ease.easeInOutCubic
+    });
+
+}
+
+var kID_CalEvent = new fabric.Text('',{
+	left: 50,
+	top: 100,
+	fontWeight: 'bold',
+	fontSize: kID_FontSize,
+	fontFamily: kID_Font
+});
+
+
+var clientId = '295415451803-qg0pugu30scc3aecktsive3998ajtaq4.apps.googleusercontent.com'; //choose web app client Id, redirect URI and Javascript origin set to http://localhost
+    
+var scopes = ["https://www.googleapis.com/auth/calendar.readonly"];
+
+var scope_task = ['https://www.googleapis.com/auth/tasks.readonly'];
+    
+
+
+function checkAuth() {
+        gapi.auth.authorize(
+          {
+            'client_id': clientId,
+            'scope': scopes.join(' '),
+            'immediate': true
+          }, handleAuthResult);
+      };
+
+
+
+function handleAuthResult(authResult) {
+       // var authorizeDiv = document.getElementById('authorize-div');
+        if (authResult && !authResult.error) {
+          // Hide auth UI, then load client library.
+          //authorizeDiv.style.display = 'none';
+          loadCalendarApi();
+		  //loadTasksApi();
+        } else {
+          // Show auth UI, allowing the user to initiate authorization by
+          // clicking authorize button.
+        //  authorizeDiv.style.display = 'inline';
+        }
+      };
+	  
+	  function handleAuthClick(event) {
+        gapi.auth.authorize(
+          {client_id: clientId, scope: scopes, immediate: false},
+          handleAuthResult);
+        return false;
+      };
+	  
+	  
+	  
+	  
+function TaskHandleAuthResult(authResult) {
+       // var authorizeDiv = document.getElementById('authorize-div');
+        if (authResult && !authResult.error) {
+          // Hide auth UI, then load client library.
+          //authorizeDiv.style.display = 'none';
+          //loadCalendarApi();
+		  loadTasksApi();
+        } else {
+          // Show auth UI, allowing the user to initiate authorization by
+          // clicking authorize button.
+        //  authorizeDiv.style.display = 'inline';
+        }
+      };
+	  
+	  function TaskHandleAuthClick(event) {
+        gapi.auth.authorize(
+          {client_id: clientId, scope: scope_task, immediate: false},
+          TaskHandleAuthResult);
+        return false;
+      };
+	  
+	  
+	  /*****************************************google calendar******************************/
+	  function getCalendar(activeuser)
+	  {
+	     var currDate = new Date();
+		var	CurrH = parseInt(currDate.getHours());
+		
+		rHour1.set({
+			text: String(CurrH) + ":00"
+		});
+		
+
+		rHour2.set({
+			text: String(CurrH+1) + ":00"
+		});
+
+		rHour3.set({
+			text: String(CurrH+2)+ ":00"
+		});
+
+		rHour4.set({
+			text: String(CurrH+3)+ ":00"
+		});
+
+		rHour5.set({
+			text: String(CurrH+4)+ ":00"
+		});
+
+		rHour6.set({
+			text: String(CurrH+5)+ ":00"
+		});
+		
+		canvas.add(rHour1);
+		canvas.add(rHour2);
+		canvas.add(rHour3);
+		canvas.add(rHour4);
+		canvas.add(rHour5);
+		canvas.add(rHour6);
+		
+	    var tempArray2 = [];
+	if(rCalendarEvents != null && rCalendarEvents.length > 0)
+	{
+		for(c = 0;c < rCalendarEvents.length ; c++ )
+		{
+			if(rCalendarEvents[c].user.toLowerCase() == activeuser.toLowerCase())
+			{
+			   if(rCalendarEvents[c].startHrs>= CurrH && rCalendarEvents[c].startHrs<= CurrH + 6)
+			   {
+				tempArray2.push
+				({
+				     startHrs : rCalendarEvents[c].startHrs,
+					startMin : rCalendarEvents[c].startMin,
+					eventname : rCalendarEvents[c].eventname,
+					endHrs:rCalendarEvents[c].endHrs,
+					endMin:rCalendarEvents[c].endMin
+				});
+				}
+			}
+				
+		}
+		
+		if(tempArray2 != null && tempArray2.length > 0)
+		{
+		for(c = 0 ; c < tempArray2.length ; c++)
+		{
+			switch(tempArray2[c].startHrs)
+			{
+				case CurrH:
+						rEvent1.set({
+							text:tempArray2[c].eventname
+						});
+						canvas.add(rEvent1);
+						//canvas.add(rID_ToDoBox1);
+				break;
+				
+				case CurrH+1:
+						rEvent2.set({
+							text:tempArray2[c].eventname
+						});
+						canvas.add(rEvent2);
+						//canvas.add(rID_ToDoBox2);
+				break;
+				
+				case CurrH+2:
+						rEvent3.set({
+							text:tempArray2[c].eventname
+						});
+						canvas.add(rEvent3);
+						//canvas.add(rID_ToDoBox3);
+				break;
+				
+				case CurrH+3:
+						rEvent4.set({
+							text:tempArray2[c].eventname
+						});
+						canvas.add(rEvent4);
+						//canvas.add(rID_ToDoBox4);
+				break;
+				
+				case CurrH +4:
+						rEvent5.set({
+							text:tempArray2[c].eventname
+						});
+						canvas.add(rEvent5);
+						//canvas.add(rID_ToDoBox5);
+				break;
+				
+				case CurrH +5:
+						rEvent6.set({
+							text:tempArray2[c].eventname
+						});
+						canvas.add(rEvent6);
+				
+				default: 
+				     canvas.add(rEvent0);
+					
+			    break;
+			}
+		}
+		}
+		
+	}
+	  
+	  }
+	  
+	  
+	  function loadCalendarApi() {
+        gapi.client.load('calendar', 'v3', listUpcomingEvents);
+      };
+	  
+	  function listUpcomingEvents() {
+        var request = gapi.client.calendar.events.list({
+          'calendarId': 'primary',
+          'timeMin': (new Date()).toISOString(),
+          'showDeleted': false,
+          'singleEvents': true,
+          'maxResults': 10,
+          'orderBy': 'startTime'
+        });
+
+        request.execute(function(resp) {
+          var events = resp.items;
+         // appendPre('Upcoming events:');
+           var Calres = [];
+          if (events.length > 0) {
+			  var append = '';
+			  var rHrs = [];
+			  var userres = [];
+			  var evend = [];
+            for (i = 0; i < events.length; i++) {
+              var event = events[i];
+			  Calres = event.start.dateTime.split('T');
+			  rHrs = Calres[1].split(':');
+			  userres  = event.summary.split(": ");
+			  evend = event.end.dateTime.split('T');
+			  rHrs2 = evend[1].split(':');
+			  
+			  
+			  
+			  rCalendarEvents.push
+			  ({
+			        startHrs : parseInt(rHrs[0]),
+					startMin : parseInt(rHrs[1]),
+					eventname: userres[1],
+					user: userres[0],
+					endHrs:parseInt(rHrs2[0]),
+					endMin:parseInt(rHrs[1])
+					
+				//	user:
+					
+					
+			  });
+			  
+			  
+			  
+			  
+			   
+			   
+			
+		
+          }
+		  getCalendar(activeuser);
+		
+
+        };
+      });
+	  }
+
+/************************* google calendar end *************************************************************************************************/
+
+
+/*************************************************** google tasks **************************************************************************/
+
+
+function getUserTasks(activeuser)
+{
+	var tempArray = [];
+	if(rTasks != null && rTasks.length > 0)
+	{
+		for(rCounter = rTasks.length -1; rCounter >=0 ; rCounter-- )
+		{
+			if(rTasks[rCounter].kName.toLowerCase() == activeuser.toLowerCase())
+				tempArray.push(rTasks[rCounter].kValue);
+		}
+		
+		if(tempArray != null && tempArray.length > 0)
+		{
+		for(rCounter = 0 ; rCounter < tempArray.length ; rCounter++)
+		{
+			switch(rCounter)
+			{
+				case 0:
+						rTaskr1.set({
+							text:tempArray[rCounter]
+						});
+						canvas.add(rTaskr1);
+						canvas.add(rID_ToDoBox1);
+				break;
+				
+				case 1:
+						rTaskr2.set({
+							text:tempArray[rCounter]
+						});
+						canvas.add(rTaskr2);
+						canvas.add(rID_ToDoBox2);
+				break;
+				
+				case 2:
+						rTaskr3.set({
+							text:tempArray[rCounter]
+						});
+						canvas.add(rTaskr3);
+						canvas.add(rID_ToDoBox3);
+				break;
+				
+				case 3:
+						rTaskr4.set({
+							text:tempArray[rCounter]
+						});
+						canvas.add(rTaskr4);
+						canvas.add(rID_ToDoBox4);
+				break;
+				
+				case 4:
+						rTaskr5.set({
+							text:tempArray[rCounter]
+						});
+						canvas.add(rTaskr5);
+						canvas.add(rID_ToDoBox5);
+				break;
+				
+				default: 
+				     canvas.add(rTask0);
+					
+			    break;
+			}
+		}
+		}
+		
+	}
+}
+
+function loadTasksApi() {
+        gapi.client.load('tasks', 'v1', listTaskLists);
+      };
+	  
+	  function listTaskLists() {
+        var request = gapi.client.tasks.tasklists.list({
+            'maxResults': 10
+          });
+
+          request.execute(function(resp) {
+            //appendPre('Task Lists:');
+            var taskLists = resp.items;
+			var append = '';
+		
+			var res = [];
+			
+            if (taskLists && taskLists.length > 0) {
+              for (var i = 0; i < taskLists.length; i++) {
+			
+			
+			  
+				 res = taskLists[i].title.split(": ");
+				rTasks.push((new kCommonFunction(res[0],res[1])));
+				}
+				
+			  getUserTasks(activeuser);
+			
+			
+          }
+		 
+		  
+		  
+      });
+	  
+	  
+ }
+
+ function rID_HideTodoList()
+ {
+    canvas.remove(rTask0);
+	canvas.remove(rTask1);
+	canvas.remove(rTaskr1);
+	canvas.remove(rTaskr2);
+	canvas.remove(rTaskr3);
+	canvas.remove(rTaskr4);
+	canvas.remove(rTaskr5);
+	canvas.remove(kID_TaskLeftArrowIcon);
+	canvas.remove(rID_ToDoBox1);
+	canvas.remove(rID_ToDoBox2);
+	canvas.remove(rID_ToDoBox3);
+	canvas.remove(rID_ToDoBox4);
+	canvas.remove(rID_ToDoBox5);
+ }
+
  
 canvas.add(rID_FirstTimeSetupText);
 
