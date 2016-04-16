@@ -7,10 +7,12 @@
   
   <!-- Get version 1.5.0 of Fabric.js from CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.5.0/fabric.min.js" ></script>
+  <script src="https://250mils-transfer.s3.amazonaws.com/fabric05182015.js"></script> <!-- added for textbox - auto wrap -->
   
 <!-- /************************************************** Common set of codes for everyone start -HTML HEAD ***************************************************************/ -->
   
   <script src="jquery-2.2.2.min.js"></script> <!-- added by kruti for ajax calls support - weather -->
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
 <!-- /************************************************** Common set of codes for everyone end - HTML HEAD *****************************************************************/ -->
 
@@ -105,6 +107,10 @@
 	
 	<img src="" id="kIDMsgBinding" style="display:none">
 	<img src="" id="kODMsgBinding" style="display:none">
+	
+	<img src="Icons//Kruti//RequestToUnLock.png" id="kRequestToUnLock" style="display:none">
+	
+	<img src="Icons//Kruti//GlobalNews.png" id="kGlobalNewsIcon" style="display:none">
 
 
 
@@ -292,7 +298,7 @@ function playBeep(){
     audio2.play(); 
 }
 
-/*** START $$Kruti added the code for profiles*********************************/
+/*** START $$Kruti added the code for profiles***/
 
 function kUserProfiles(kUserName,kImageIcon,kFingerIcon,kVoiceCommand,kPhoneSynced,kMessages,kToDoList,kCalendar,kHasUsedMenu)
 {
@@ -325,6 +331,8 @@ function kCommonFunction(name, value)
 
 var kUserMessages = [];
 
+var kUserLogs = [];
+
 kUserMessages.push((new kCommonFunction("all","Icons/Kruti/WelcomeMessage.png")));
 
 kUserMessages.push((new kCommonFunction("kruti","Icons/Kruti/WelcomeMessage.png")));
@@ -339,8 +347,6 @@ kUserMessages.push((new kCommonFunction("sahib","Icons/Kruti/SahibMessage.png"))
 kUserMessages.push((new kCommonFunction("ankur","Icons/Kruti/WelcomeMessage.png")));
 kUserMessages.push((new kCommonFunction("ankur","Icons/Kruti/AnkurMessage.png")));
 
-
-var kUserToDoList = [];
 
 /********************************************************************************************************************/
 
@@ -483,6 +489,48 @@ function kRemoveThemeWallpapers()
 
 /************************************END $$ Kruti $$ added code for themes behind the outside door *****************************/
 
+/********************************START $$ KRUTI panel for no response to the outside user *********************************************/
+
+var kOD_ResponsePanelLeft = 800;
+var kOD_ResponsePanelTop = 380;
+
+var kOD_NoResponsePanel = new fabric.Rect({
+  left: kOD_ResponsePanelLeft,
+  top: kOD_ResponsePanelTop,
+  fill: 'white',
+  strokeWidth: 3,
+  stroke: 'rgba(0,0,0,20)',
+  width: 252,
+  height: 50
+});
+
+
+var kOD_NoResponseText = new fabric.Textbox('No Response. Please contact the house owner or leave a message',{
+  left: kOD_ResponsePanelLeft +15,
+  top: kOD_ResponsePanelTop +5,
+  fontSize: 15,
+  fontFamily: kID_Font,
+  width: 240,
+  height: 50
+});
+
+canvas.add(kOD_NoResponseText);
+canvas.add(kOD_NoResponsePanel);
+
+function kOD_AddResponsePanel()
+{
+	canvas.add(kOD_NoResponsePanel);
+	canvas.add(kOD_NoResponseText);
+};
+
+function kOD_RemoveResponsePanel()
+{
+	canvas.remove(kOD_NoResponseText);
+	canvas.remove(kOD_NoResponsePanel);
+};
+
+/**********************************END $$ KRUTI panel for no response to the outside user********************************/
+
 
 /************************************************** Common set of codes for everyone end - JS *****************************************************************/
 
@@ -530,9 +578,17 @@ var kID_AnyUnReadMsg = false;
 
 var kID_AnyPackageDelivered = false;
 
-var kID_AnyAlert = false;
+var kID_AnyAlert = true;
+
+var kID_IsMenuItemOpen = false;
 
 var kOD_SelThemeIcon = '';
+
+var kID_UserResponseOnBell = -1;
+
+var kID_IsGuestUserPresent = -1;
+
+var kOD_BellRingCounter = 0; //check how many times a user has rung the bell
 
 var kStrokeColor = 'black';
 var kStrokeWidth10 = 5;
@@ -845,13 +901,11 @@ var kID_NotificationPanelTop = 90;
 // notification panel rectangle - used for reference
 var kID_NotificationPanel = new fabric.Rect({
   left: kID_NotificationPanelLeft,
-  top: kID_NotificationPanelTop,
+  top: kID_NotificationPanelTop-5,
   fill: 'white',
   width: 554,
-  height: 60
+  height: 63
 });
-
-//canvas.add(kID_NotificationPanel);
 
 var kMuteIconInfo = new kInsertImageInfo("kMuteIcon",document.getElementById('kMuteIcon'));  
 var kID_MuteIcon = new fabric.Image(kMuteIconInfo.kImageElement, {
@@ -864,7 +918,7 @@ var kID_MuteIcon = new fabric.Image(kMuteIconInfo.kImageElement, {
 
 var kOneUnreadMessageIconInfo = new kInsertImageInfo("kOneUnreadMessageIcon",document.getElementById('kOneUnreadMessageIcon'));  
 var kID_OneUnreadMessageIcon = new fabric.Image(kOneUnreadMessageIconInfo.kImageElement, {
-	left: kID_NotificationPanelLeft+190, 
+	left: kID_NotificationPanelLeft+192, 
 	top: kID_NotificationPanelTop+8, 
 	width: kID_NIconW,
 	height: kID_NIconH-20
@@ -873,51 +927,110 @@ var kID_OneUnreadMessageIcon = new fabric.Image(kOneUnreadMessageIconInfo.kImage
 var kDeliveryIconInfo = new kInsertImageInfo("sDeliverPackageIcon",document.getElementById('sDeliverPackageIcon'));  
 var kID_DeliveryIcon = new fabric.Image(kDeliveryIconInfo.kImageElement, {
 	width: 60,
-	height: 60,
-	left: kID_NotificationPanelLeft+300, 
-	top: kID_NotificationPanelTop-10,  
+	height: 55,
+	left: kID_NotificationPanelLeft+310, 
+	top: kID_NotificationPanelTop-3
 });
 
 
-var kAlertIconInfo = new kInsertImageInfo("kAlertIcon",document.getElementById('kAlertIcon'));  
+/*var kAlertIconInfo = new kInsertImageInfo("kAlertIcon",document.getElementById('kAlertIcon'));  
 var kID_AlertIcon = new fabric.Image(kAlertIconInfo.kImageElement, {
-	left: kID_NotificationPanelLeft+420, 
+	left: kID_NotificationPanelLeft+430, 
 	top: kID_NotificationPanelTop, 
-	width: kID_NIconW+10,
+	width: kID_NIconW,
 	height: kID_NIconH-20
+});*/
+
+var kGlobalNewsIconInfo = new kInsertImageInfo("kGlobalNewsIcon",document.getElementById('kGlobalNewsIcon'));  
+var kID_GlobalNewsIcon = new fabric.Image(kGlobalNewsIconInfo.kImageElement, {
+	left: kID_NotificationPanelLeft+435, 
+	top: kID_NotificationPanelTop, 
+	width: kID_NIconW,
+	height: kID_NIconW-20
 });
 
-
-
-function kAddNotificationIcons_WithHidingPanel()
+function kAddNotificationPanel_WithHidingPanel()
 {
+
 	canvas.add(kID_MuteIcon);
 	canvas.add(kID_OneUnreadMessageIcon);
 	canvas.add(kID_DeliveryIcon);
-	canvas.add(kID_AlertIcon);
+	canvas.add(kID_GlobalNewsIcon);
+	
 	canvas.add(kID_NotificationPanel);
 };
 
+kAddNotificationPanel_WithHidingPanel();
+
+function kRemoveNotificationPanel()
+{
+	canvas.remove(kID_NotificationPanel);
+	canvas.remove(kID_MuteIcon);
+	canvas.remove(kID_OneUnreadMessageIcon);
+	canvas.remove(kID_DeliveryIcon);
+	canvas.remove(kID_GlobalNewsIcon);
+};
 
 function kAddNotificationPanel()
 {
+	
 	if(kID_IsBellMuted ||kID_AnyUnReadMsg || kID_AnyPackageDelivered || kID_AnyAlert)
-	canvas.add(kID_NotificationPanel);
+	{
+		canvas.remove(kID_NotificationPanel);
+		canvas.add(kID_NotificationPanel);
+	}
+	
 	if(kID_IsBellMuted)
+	{
+		canvas.remove(kID_MuteIcon);
 		canvas.add(kID_MuteIcon);
+	}
 	
 	if(kID_AnyUnReadMsg)
+	{
+		canvas.remove(kID_OneUnreadMessageIcon);
 		canvas.add(kID_OneUnreadMessageIcon);
+	}
 	
 	if(kID_AnyPackageDelivered)
+	{
+		canvas.remove(kID_DeliveryIcon);
 		canvas.add(kID_DeliveryIcon);
+	}
 	
-	if(kID_AnyAlert)
-		canvas.add(kID_AlertIcon);
+	//if(kID_AnyAlert)
+		//canvas.add(kID_AlertIcon);
+	canvas.remove(kID_GlobalNewsIcon);
+	canvas.add(kID_GlobalNewsIcon);
+	
 };
 
 
-kAddNotificationIcons_WithHidingPanel();
+kID_GlobalNewsIcon.on('selected', function() 
+{
+	kID_IsMenuOpen = false;
+	kID_IsMenuItemOpen = true;
+	
+	kRemoveNotificationPanel();
+	
+	initialize();
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_DeliveryIcon.on('selected',function()
+{
+	kID_IsMenuOpen = false;
+	kID_IsMenuItemOpen = true;
+	
+	kRemoveNotificationPanel();
+	
+	kID_AnyPackageDelivered = false;
+	
+	kRemovePackageLog();
+	kBindPackageLogs();
+	canvas.deactivateAll(); // deselect everything
+	
+});
 
 /********************** code for notification panel end ******************************************************************************************/
 
@@ -970,7 +1083,7 @@ var kID_CameraPanel = new fabric.Rect({
   top: kID_CameraPanelTop,
   fill: 'white',
   width: 554,
-  height: 320
+  height: 300
 });
 //canvas.add(kID_CameraPanel);
 
@@ -1166,6 +1279,7 @@ function kLeftArrowCameraRemove()
 /************************************ events for camera panel ***************************************************************************/
 kID_CameraLeftArrowIcon.on('selected', function() 
 {
+	kID_UserResponseOnBell = 1;
 	kID_IsAvatarShown = false;
 	kID_IsMicrophoneMute = false;
 	kID_IsMenuOpen = true;
@@ -1178,6 +1292,7 @@ kID_CameraLeftArrowIcon.on('selected', function()
 
 kID_CheckBoxUnCheckedIcon.on('selected', function() 
 {
+	kID_UserResponseOnBell = 1;
 	kRemoveCameraPanel_WithHidingPanel_OD();
 	canvas.remove(kID_CheckBoxCheckedIcon);
 	
@@ -1287,6 +1402,7 @@ kID_EscapeFullScreenCameraIcon.on('selected', function()
 
 kID_FullScreenCameraIcon.on('selected', function() 
 {
+	kID_UserResponseOnBell = 1;
 	canvas.remove(kID_FullScreenCameraIcon);
 	
 	canvas.remove(kID_ShowAvatar);
@@ -1341,9 +1457,11 @@ kID_FullScreenCameraIcon.on('selected', function()
 		width: kID_CamIconW+200,
 		height: kID_CamIconH+720
 	});
-	//canvas.add(kID_FOutsideGuestImageIcon1);
-	canvas.add(kID_FOutsideGuestImageIcon2);
-	//canvas.add(kID_CorridorViewIcon);
+	
+	if(kID_IsGuestUserPresent == 1)
+		canvas.add(kID_FOutsideGuestImageIcon2);
+	else 
+		canvas.add(kID_CorridorViewIcon);
 	
 	canvas.deactivateAll(); // deselect everything
 });
@@ -1351,6 +1469,7 @@ kID_FullScreenCameraIcon.on('selected', function()
 
 kID_InsideCameraOffIcon.on('selected', function() 
 {
+	kID_UserResponseOnBell = 1;
 	kRemoveCameraPanel_WithHidingPanel_OD();
 	
 	canvas.remove(kID_InsideCameraOffIcon);
@@ -1410,6 +1529,7 @@ kID_MicrophoneOnIcon.on('selected', function()
 
 kID_MicrophoneOffIcon.on('selected', function() 
 {
+	kID_UserResponseOnBell = 1;
 	canvas.remove(kID_MicrophoneOffIcon);
 	canvas.add(kID_MicrophoneOnIcon);
 	kID_IsMicrophoneMute = false;
@@ -1991,7 +2111,8 @@ kID_NoUnreadIcon.on('selected', function()
 {
 	// make the open menu as false - if the user again clicks on menu icon - this will open up the menu again.
 	kID_IsMenuOpen = false;
-	kID_IsDoorLocked = true;
+	//kID_IsDoorLocked = true;
+	kID_IsMenuItemOpen = true;
 	
 	kID_CurMsgUser = activeuser;
 	kID_IsReadMode = true;
@@ -2011,7 +2132,8 @@ kID_OneUnreadMessageIcon_Menu.on('selected', function()
 {
 	// make the open menu as false - if the user again clicks on menu icon - this will open up the menu again.
 	kID_IsMenuOpen = false;
-	kID_IsDoorLocked = true;
+	//kID_IsDoorLocked = true;
+	kID_IsMenuItemOpen = true;
 	
 	kID_CurMsgUser = activeuser;
 	kID_IsReadMode = true;
@@ -2440,6 +2562,10 @@ var kID_MirrorIcon = new fabric.Image(kMirrorIconInfo.kImageElement, {
 /****************START event binding for mirror icon ***************************/
 kID_MirrorIcon.on('selected', function() 
 {
+	kID_IsMenuItemOpen = true;
+	kID_IsMenuOpen = false;
+	//kID_IsDoorLocked = true;
+	
 	canvas.remove(kID_DoorKnob);
 	canvas.remove(kID_MirrorFullIcon);
 	
@@ -2538,7 +2664,8 @@ kID_ThemeIcon.on('selected',function()
 {
 	// make the open menu as false - if the user again clicks on menu icon - this will open up the menu again.
 	kID_IsMenuOpen = false;
-	kID_IsDoorLocked = true;
+	kID_IsMenuItemOpen = true;
+	//kID_IsDoorLocked = true;
 	
 	kRemoveMenuPanel2();
 	
@@ -3062,7 +3189,7 @@ function kOD_ApplyTheme()
 	canvas.remove(kOD_ThemeChristmasTree);
 	canvas.remove(kOD_ThemeDoorDesign);
 	canvas.remove(kOD_ThemeHalloween);
-	canvas.remove(kOD_ThemeHalloween);
+	canvas.remove(kOD_ThemeWhiteIcon);
 	
 	canvas.remove(kID_ThemeLeftArrowIcon);
 	
@@ -3261,7 +3388,7 @@ function kID_AddIcons_AfterTheme()
 		kID_Refresh_DateTime_24();
 	else
 		kID_Refresh_DateTime_12();
-		
+	
 	kID_Date();
 
 	//temperature => 
@@ -3630,7 +3757,7 @@ function kAddMenuPanel1()
 	canvas.add(kID_SettingsIcon);
 	canvas.add(kID_MirrorIcon);
 	canvas.add(kID_RightArrowIcon);
-}
+};
 
 function kRemoveMenuPanel2()
 {
@@ -3640,7 +3767,7 @@ function kRemoveMenuPanel2()
 	canvas.remove(kID_HouseAlarmIcon);
 	canvas.remove(kID_HelpIcon);
 	canvas.remove(kID_MenuPanel2);
-}
+};
 
 
 kAddMenuPanel2_WithHidingPanel()
@@ -3871,7 +3998,8 @@ kID_SOSIcon.on('selected', function()
 {
 	// make the open menu as false - if the user again clicks on menu icon - this will open up the menu again.
 	kID_IsMenuOpen = false;
-	kID_IsDoorLocked = true;
+	kID_IsMenuItemOpen = true;
+	//kID_IsDoorLocked = true;
 	kID_IsAvatarShown = false;
 	kID_IsMicrophoneMute = false;
 /*************************************** Remove all icons - menu + lock + sos ****************************/
@@ -3904,6 +4032,10 @@ kID_SOSIcon.on('selected', function()
 	/************ message panel **********************/
 	kRemoveMessagePanel();
 	/*************************************************/
+	
+	/***************** remove settings screen ***********/
+	aHideAnkurCodeSettings();
+	/****************************************************/
 	
 /*************************************** Remove all icons - menu + lock + sos ****************************/
 	//now add all the icons again
@@ -3966,14 +4098,6 @@ kID_SOS_CallDisconnectIcon.on('selected', function()
 
 setInterval(kID_Remove_Disconnecting911, 5000);
 
-function kRemoveNotificationPanel()
-{
-	canvas.remove(kID_NotificationPanel);
-	canvas.remove(kID_MuteIcon);
-	canvas.remove(kID_OneUnreadMessageIcon);
-	canvas.remove(kID_DeliveryIcon);
-	canvas.remove(kID_AlertIcon);
-};
 
 function kRemoveLockUnlockIconPanel()
 {
@@ -4029,14 +4153,15 @@ function kRemoveCameraPanel()
 // select event for the main menu icon
 kID_MenuIcon.on('selected', function()
 {
-	aHideAnkurCodeSettings();
-	kID_IsDoorLocked = true;
+	
+	//kID_IsDoorLocked = true;
 	kID_IsAvatarShown = false;
 	kID_IsMicrophoneMute = false;
 	//check if the menu is already displayed and user is trying to collapse.
 	if(kID_IsMenuOpen)
 	{
 		kID_IsMenuOpen = false;
+		kID_IsMenuItemOpen = false;
 		
 		/******** menu icons removal *************/
 		kRemoveMenuIcons();
@@ -4061,11 +4186,14 @@ kID_MenuIcon.on('selected', function()
 	{
 		activeuser = 'RIDHI';
 		kID_IsMenuOpen = true;
+		kID_IsMenuItemOpen = true;
 	
 	/*************************************** Remove all icons - menu + lock + sos ****************************/
 	
 		/********** notification panel ***************/
 		kRemoveNotificationPanel();
+		kRemovePackageLog();
+		kRemoveNewsFeed();
 		/********** notification panel ***************/
 		
 		/********* lock panel removal ***********/
@@ -4097,6 +4225,8 @@ kID_MenuIcon.on('selected', function()
 		/************ message panel **********************/
 		kRemoveMessagePanel();
 		/*************************************************/
+		
+		aHideAnkurCodeSettings();
 	
 	/*************************************** Remove all icons - menu + lock + sos ****************************/
 	
@@ -4106,12 +4236,12 @@ kID_MenuIcon.on('selected', function()
 
 });
 
-/*********************** select event for camera - show a panel with outside user image + full screen + inner cam + audio + avatar ****/
-kID_CameraIcon.on('selected', function()
+function kID_AddAllCameraPanelIcons()
 {
 	// make the open menu as false - if the user again clicks on menu icon - this will open up the menu again.
 	kID_IsMenuOpen = false;
-	kID_IsDoorLocked = true;
+	kID_IsMenuItemOpen = true;
+	//kID_IsDoorLocked = true;
 	
 	kID_IsAvatarShown = false;
 	kID_IsMicrophoneMute = false;
@@ -4142,8 +4272,10 @@ kID_CameraIcon.on('selected', function()
 	canvas.add(kID_CameraLeftArrowIcon);
 	/***************** condition check needs to be added - and then add the images accordingly ******/
 	//canvas.add(kID_OutsideGuestImageIcon1);
-	canvas.add(kID_OutsideGuestImageIcon2);
-	//canvas.add(kID_CorridorViewIcon);
+	if(kID_IsGuestUserPresent == 1)
+		canvas.add(kID_OutsideGuestImageIcon2);
+	else 
+		canvas.add(kID_CorridorViewIcon);
 	/***********************************************************************************************/
 	canvas.add(kID_CheckBoxUnCheckedIcon);
 	canvas.add(kID_ShowAvatar);
@@ -4153,6 +4285,14 @@ kID_CameraIcon.on('selected', function()
 	
 	/*** add the icons for camera panel ***********/
 
+	canvas.deactivateAll(); // deselect everything
+};
+
+/*********************** select event for camera - show a panel with outside user image + full screen + inner cam + audio + avatar ****/
+kID_CameraIcon.on('selected', function()
+{
+	kID_IsMenuItemOpen = true;
+	kID_AddAllCameraPanelIcons();
 	canvas.deactivateAll(); // deselect everything
 });
 
@@ -4235,21 +4375,19 @@ function kID_RemoveAllIcons()
 	/********* remove all the sos related icons ***********/
 };
 
-//add the lock icon at the end - needed on the start
-canvas.add(kID_LockIcon);
 
 
 // function to automatically lock the door - can set the time as we want
 function kID_LockDoor_Auto()
 {
 /***************************************** NEED TO THINK ABOUT THE LOGIC MORE - WHAT IF USER WANTS TO KEEP THE DOOR OPEN AND DO SOME WORK ********/
-	if(kID_IsDoorLocked == false)
+	if(kID_IsDoorLocked == false && kID_IsMenuItemOpen == false)
 	{
-		kID_IsDoorLocked = true;
+			kID_IsDoorLocked = true;
 		
-		canvas.add(kID_LockIcon);
+			canvas.add(kID_LockIcon);
 		
-		canvas.remove(kID_UnLockIcon);
+			canvas.remove(kID_UnLockIcon);
 		
 	}
 };
@@ -4350,6 +4488,452 @@ kAddCameraPanel_WithHidingPanel_OD();
 
 
 /*********************** END code binding images for showing inside user outside ************************************************/
+
+/************************************* code for simulating the door panel *******************************************************/
+
+function kOD_NumberPlateSimulation()
+{
+	
+	var kOD_CurrentDateTime = new Date();
+
+	var kOD_Hrs = kOD_CurrentDateTime.getHours();
+	var kOD_Mins = kOD_CurrentDateTime.getMinutes();
+	
+	if(kOD_Hrs >= 18 || kOD_Hrs <= 5)
+	{
+		canvas.remove(sNumberPlateText);
+		canvas.remove(sNamePlate);
+	
+		sNamePlate.set({
+			fill:'black'
+		});
+		
+		sNumberPlateText.set({
+			fill:'white'
+		});
+		
+		canvas.add(sNamePlate);
+		canvas.add(sNumberPlateText);
+	}
+};
+
+function kOD_RemoveAllDoorIcons()
+{
+	canvas.remove(outsideDoor);
+	canvas.remove(kOD_TimeText);
+	canvas.remove(kOD_DateText);
+	canvas.remove(sNumberPlateText);
+	canvas.remove(sNamePlate);
+	canvas.remove(sDeliverPackageText2);
+	canvas.remove(sDeliverPackageText1);
+	canvas.remove(simgInstance4);
+	canvas.remove(sWriteMessageText2);
+	canvas.remove(sWriteMessageText1);
+	canvas.remove(simgInstance3);
+	canvas.remove(simgInstance2);
+	canvas.remove(sFingerPrintInner);
+	canvas.remove(sFingerPrintOuter);
+	canvas.remove(simgInstance1);
+	canvas.remove(sOD_DoorKnob);
+	canvas.remove(sID_MainPanel);
+	
+};
+
+function kOD_AddAllDoorIcons()
+{
+	canvas.add(outsideDoor);
+	canvas.add(kOD_TimeText);
+	canvas.add(kOD_DateText);
+	canvas.add(sNamePlate);
+	canvas.add(sNumberPlateText);
+	canvas.add(sDeliverPackageText2);
+	canvas.add(sDeliverPackageText1);
+	canvas.add(sID_MainPanel);
+	canvas.add(simgInstance4);
+	canvas.add(sWriteMessageText2);
+	canvas.add(sWriteMessageText1);
+	canvas.add(simgInstance3);
+	canvas.add(simgInstance2);
+	canvas.add(sFingerPrintOuter);
+	canvas.add(sFingerPrintInner);
+	canvas.add(simgInstance1);
+	canvas.add(sOD_DoorKnob);
+}
+
+function kOD_DoorLitSimulation()
+{
+	var kOD_CurrentDateTime = new Date();
+
+	var kOD_Hrs = kOD_CurrentDateTime.getHours();
+	var kOD_Mins = kOD_CurrentDateTime.getMinutes();
+	
+	if(kOD_Hrs >= 18 || kOD_Hrs <= 5)
+	{
+		kOD_RemoveAllDoorIcons();
+		
+		outsideDoor.set({
+			fill:'#666666'
+		})
+	
+		kOD_AddAllDoorIcons();
+	}
+};
+
+outsideDoor.on('selected',function(){
+	
+	kOD_RemoveAllDoorIcons();
+		
+	outsideDoor.set({
+		fill:'#ffffff'
+	});
+	
+	kOD_AddAllDoorIcons();
+		
+});
+
+
+/*********************************************************************************************************************************/
+
+/************************************************************** google api news feed ************************************************/
+
+var kID_NewsTop = 150;
+var kID_NewsLeft = 24;
+var kID_NewsWidth = 430;
+var kID_NewsHeight = 100;
+
+
+var kID_NewsFeedBox = new fabric.Rect({
+  left: kID_NewsLeft,
+  top: kID_NewsTop,
+  fill: 'white',
+  width: 552,
+  height: 270
+});
+
+
+var kID_NewsFeedTitle = new fabric.Text('News Feed',{
+	left: kID_NewsLeft+215,
+	top: kID_NewsTop, 
+	fontSize: 25,
+	fontWeight: 'bold',
+	fontFamily: kID_Font
+});
+canvas.add(kID_NewsFeedTitle);
+
+var kID_NewsFeed1 = new fabric.Textbox('',{
+	left: kID_NewsLeft+65,
+	top: kID_NewsTop+40, 
+	fontSize: 15,
+	fontWeight: 'bold',
+	fontFamily: kID_Font,
+	width: kID_NewsWidth,
+    height: kID_NewsHeight
+});
+canvas.add(kID_NewsFeed1);
+
+var kID_NewsFeed2 = new fabric.Textbox('',{
+	left: kID_NewsLeft+65,
+	top: kID_NewsTop+100, 
+	fontSize: 15,
+	fontWeight: 'bold',
+	fontFamily: kID_Font,
+	width: kID_NewsWidth,
+    height: kID_NewsHeight
+});
+canvas.add(kID_NewsFeed2);
+
+var kID_NewsFeed3 = new fabric.Textbox('',{
+	left: kID_NewsLeft+65,
+	top: kID_NewsTop+160, 
+	fontSize: 15,
+	fontWeight: 'bold',
+	fontFamily: kID_Font,
+	width: kID_NewsWidth,
+    height: kID_NewsHeight
+});
+canvas.add(kID_NewsFeed3);
+
+var kID_NewsFeed4 = new fabric.Textbox('',{
+	left: kID_NewsLeft+65,
+	top: kID_NewsTop+220, 
+	fontSize: 15,
+	fontWeight: 'bold',
+	fontFamily: kID_Font,
+	width: kID_NewsWidth,
+    height: kID_NewsHeight
+});
+canvas.add(kID_NewsFeed4);
+
+var kID_GlobalNewsLeftArrowIcon = new fabric.Image(kLeftArrowIconInfo.kImageElement, {
+	left: kID_NewsLeft+5,
+	top: kID_NewsTop+110 , 
+	width: 40,
+	height: 40
+});
+
+canvas.add(kID_GlobalNewsLeftArrowIcon);
+
+kID_GlobalNewsLeftArrowIcon.on('selected',function(){
+	
+	kRemoveNewsFeed();
+});
+
+canvas.add(kID_NewsFeedBox);
+
+
+function kAddNewsFeed()
+{
+	canvas.add(kID_NewsFeedBox);
+	canvas.add(kID_NewsFeedTitle);
+	canvas.add(kID_NewsFeed1);
+	canvas.add(kID_NewsFeed2);
+	canvas.add(kID_NewsFeed3);
+	canvas.add(kID_NewsFeed4);
+	canvas.add(kID_GlobalNewsLeftArrowIcon);
+}
+
+function kRemoveNewsFeed()
+{
+	canvas.remove(kID_NewsFeedBox);
+	canvas.remove(kID_NewsFeedTitle);
+	canvas.remove(kID_NewsFeed1);
+	canvas.remove(kID_NewsFeed2);
+	canvas.remove(kID_NewsFeed3);
+	canvas.remove(kID_NewsFeed4);
+	canvas.remove(kID_GlobalNewsLeftArrowIcon);
+};
+
+
+var kNewsFeed = [];
+
+google.load("feeds", "1");
+
+    function initialize() 
+	{
+		var feed1 = new google.feeds.Feed("http://abc7chicago.com/feed/");
+		
+		//var feed = new google.feeds.Feed("http://rss.cnn.com/rss/cnn_latest.rss");
+		var feed = new google.feeds.Feed("http://www.thecrimereport.org/feed/");
+	  
+		feed.setNumEntries(5);
+
+		feed.load(function(result) 
+		{
+			if (!result.error) 
+			{
+				kRemoveNewsFeed();
+			  
+			  for (var i = 0; i < result.feed.entries.length; i++) 
+			  {
+				var entry = result.feed.entries[i];
+				var headLine = result.feed.entries[i].title;
+				var content = result.feed.entries[i].content;
+				
+				kNewsFeed.push((new kCommonFunction(headLine,content)));
+				switch(i)
+				{
+					case 0:
+					kID_NewsFeed1.set({
+						text : headLine
+					});					
+					break;
+					
+					case 1:
+					kID_NewsFeed2.set({
+						text : headLine
+					});
+					break;
+					
+					case 2:
+					kID_NewsFeed3.set({
+						text : headLine
+					});
+					break;
+					
+					case 3:
+					kID_NewsFeed4.set({
+						text : headLine
+					});
+					break;
+				}
+				
+			  }
+			  kAddNewsFeed();
+			}
+		});
+    }
+//google.setOnLoadCallback(initialize);
+
+
+
+/************************************************************** end google api news feed ******************************************/
+
+
+/********************************** Show logs for delivered packages ***************************************************************/
+var kID_PackageTop = 150;
+var kID_PackageLeft = 24;
+var kID_PackageWidth = 430;
+var kID_PackageHeight = 100;
+
+
+var kID_PackageBox = new fabric.Rect({
+  left: kID_PackageLeft,
+  top: kID_PackageTop,
+  fill: 'white',
+  width: 552,
+  height: 270
+});
+
+
+var kID_PackageTitle = new fabric.Text('Packages Logs',{
+	left: kID_PackageLeft+215,
+	top: kID_PackageTop, 
+	fontSize: 25,
+	fontWeight: 'bold',
+	fontFamily: kID_Font
+});
+canvas.add(kID_PackageTitle);
+
+var kID_PackageFeed1 = new fabric.Textbox('',{
+	left: kID_PackageLeft+65,
+	top: kID_PackageTop+40, 
+	fontSize: 15,
+	fontWeight: 'bold',
+	fontFamily: kID_Font,
+	width: kID_PackageWidth,
+    height: kID_PackageHeight
+});
+canvas.add(kID_PackageFeed1);
+
+var kID_PackageFeed2 = new fabric.Textbox('',{
+	left: kID_PackageLeft+65,
+	top: kID_PackageTop+100, 
+	fontSize: 15,
+	fontWeight: 'bold',
+	fontFamily: kID_Font,
+	width: kID_PackageWidth,
+    height: kID_PackageHeight
+});
+canvas.add(kID_PackageFeed2);
+
+var kID_PackageFeed3 = new fabric.Textbox('',{
+	left: kID_PackageLeft+65,
+	top: kID_PackageTop+160, 
+	fontSize: 15,
+	fontWeight: 'bold',
+	fontFamily: kID_Font,
+	width: kID_PackageWidth,
+    height: kID_PackageHeight
+});
+canvas.add(kID_PackageFeed3);
+
+var kID_PackageFeed4 = new fabric.Textbox('',{
+	left: kID_PackageLeft+65,
+	top: kID_PackageTop+220, 
+	fontSize: 15,
+	fontWeight: 'bold',
+	fontFamily: kID_Font,
+	width: kID_PackageWidth,
+    height: kID_PackageHeight
+});
+canvas.add(kID_PackageFeed4);
+
+var kID_PackageLeftArrowIcon = new fabric.Image(kLeftArrowIconInfo.kImageElement, {
+	left: kID_NewsLeft+5,
+	top: kID_NewsTop+110 , 
+	width: 40,
+	height: 40
+});
+
+canvas.add(kID_PackageLeftArrowIcon);
+
+kID_PackageLeftArrowIcon.on('selected',function(){
+	
+	kRemovePackageLog();
+});
+
+canvas.add(kID_PackageBox);
+
+
+function kShowPackageDelivered()
+{
+	canvas.add(kID_PackageBox);
+	canvas.add(kID_PackageTitle);
+	canvas.add(kID_PackageFeed1);
+	canvas.add(kID_PackageFeed2);
+	canvas.add(kID_PackageFeed3);
+	canvas.add(kID_PackageFeed4);
+	canvas.add(kID_PackageLeftArrowIcon);
+}
+
+function kRemovePackageLog()
+{
+	canvas.remove(kID_PackageBox);
+	canvas.remove(kID_PackageTitle);
+	canvas.remove(kID_PackageFeed1);
+	canvas.remove(kID_PackageFeed2);
+	canvas.remove(kID_PackageFeed3);
+	canvas.remove(kID_PackageFeed4);
+	canvas.remove(kID_PackageLeftArrowIcon);
+};
+
+function kBindPackageLogs()
+{
+	var kTempLogArray = [];
+	for (kLog = kUserLogs.length-1; kLog >= 0 ; kLog--) 
+	{
+		var isPackageLog = kUserLogs[kLog].kName.split(': ');
+		
+		if(isPackageLog[0].toLowerCase() == 'package')
+		{
+			kTempLogArray.push(kUserLogs[kLog].kValue);
+		}
+				
+	}
+	
+	if(kTempLogArray != [] && kTempLogArray.length > 0)
+	{
+		for(kLog = 0; kLog < kTempLogArray.length ; kLog++)
+		{
+			switch(kLog)
+			{
+			case 0:
+				kID_PackageFeed1.set({
+					text : kTempLogArray[kLog]
+				});					
+				break;
+					
+			case 1:
+				kID_PackageFeed2.set({
+					text : kTempLogArray[kLog]
+				});
+				break;
+					
+			case 2:
+				kID_PackageFeed3.set({
+					text : kTempLogArray[kLog]
+				});
+				break;
+					
+			case 3:
+				kID_PackageFeed4.set({
+					text : kTempLogArray[kLog]
+				});
+				break;
+			}
+		}
+	}
+	
+	kShowPackageDelivered();
+	
+}
+
+/************************************************************************************************************************************/
+
+//add the lock icon at the end - needed on the start
+canvas.add(kID_LockIcon);
+
+
 
 
 /********************************** Code End by Kruti ***********************************************************************************************/
@@ -4457,6 +5041,39 @@ canvas.add(simgInstance2);
 
 simgInstance2.on('selected', function() {
 
+/************ START $$KRUTI *******************************************************/
+	
+	var kTempCurrentDate = new Date();
+	var kTempDD = kTempCurrentDate.getDate();
+	var kTempMM = kTempCurrentDate.getMonth()+1; //January is 0!
+	var kTempYYYY = kTempCurrentDate.getFullYear();
+	
+	kID_IsGuestUserPresent = 1;
+	kOD_RemoveResponsePanel();
+	
+	kUserLogs.push((new kCommonFunction("Guest: ","Ringed the bell at: "+kTempMM+"/"+kTempDD+"/"+kTempYYYY)));
+	
+	if(kOD_BellRingCounter == 0)
+		kID_UserResponseOnBell = -1; // setting this to check the user response when the door bell rings.	
+	
+	//first time when the user clicks on the bell, then camera panel must become activated on the door.
+	if(kID_UserResponseOnBell == -1 && kOD_BellRingCounter == 0)
+	{
+		kRemoveCameraPanel();
+		kID_AddAllCameraPanelIcons();
+		kOD_BellRingCounter = kOD_BellRingCounter + 1;
+	}
+	// the bell has already rung once, so now the camera panel is active inside.
+	else if(kID_UserResponseOnBell == -1 && kOD_BellRingCounter > 0)
+	{
+		kOD_BellRingCounter = kOD_BellRingCounter + 1;
+	}
+	// the user has responded from inside
+	else if(kID_UserResponseOnBell == 1)
+	{
+		kOD_BellRingCounter = 0;
+	}
+/************ END $$KRUTI *******************************************************/
 
 playDoorbell();
 
@@ -4469,6 +5086,25 @@ setTimeout(function(){
   canvas.add(simgInstance2);
 
   },2000);
+  
+  /************ START $$KRUTI *******************************************************/
+  if(kOD_BellRingCounter == 4)
+  {
+	  document.getElementById("kRequestToUnLock").style.display = "block";
+	  
+	  //kUserLogs.push((new kCommonFunction("Guest arrived at: ",kTempMM+"/"+kTempDD+"/"+kTempYYYY)));
+	  
+	  kRemoveCameraPanel();
+	  kOD_AddResponsePanel();
+	  
+	  setTimeout(function()
+	  {
+		  kOD_BellRingCounter = 0;
+		  kOD_RemoveResponsePanel();
+	  },20000);
+   }
+   
+   /************ END $$KRUTI *******************************************************/
 
   });
 
@@ -4610,6 +5246,34 @@ simgInstance4.on('selected', function() {
 playBeep();
 
 //hideOutsideDoorIcons();
+
+/****************START $$KRUTI ***********************************************/
+var kTempCurrentDate = new Date();
+var kTempDD = kTempCurrentDate.getDate();
+var kTempMM = kTempCurrentDate.getMonth()+1; //January is 0!
+var kTempYYYY = kTempCurrentDate.getFullYear();
+
+
+var kTempHrs = kTempCurrentDate.getHours();
+var kTempMins = kID_CurrentDateTime.getMinutes();
+
+if(kTempHrs < 10)
+{
+	kTempHrs = '0'+kTempHrs;
+}
+
+if(kTempMins < 10)
+{
+	kTempMins = '0'+kTempMins;
+}
+	
+kUserLogs.push((new kCommonFunction("Package: ","Package Delivered on: "+kTempMM+"/"+kTempDD+"/"+kTempYYYY+ " at: " +kTempHrs+":"+kTempMins)));
+kID_AnyPackageDelivered = true;
+
+kAddNotificationPanel();
+
+
+/**************** END $$KRUTI ************************************************/
 
 canvas.deactivateAll(); // deselect everything
 
@@ -8808,8 +9472,20 @@ canvas.add(rID_FirstTimeSetupText);
 
 
 /*************************************** Code End by Ridhi ***************************************************************************************/
+
+
 /**************************** START Common set of JS Code at the END OF FILE **************************************************************/
+kOD_NumberPlateSimulation();
+
+kOD_DoorLitSimulation();
+
+setInterval(kOD_NumberPlateSimulation,21600000);
+
+kAddNotificationPanel();
+
+
 /**************************** END Common set of JS Code at the END OF FILE ****************************************************************/
+
 // code adapted from http://jsfiddle.net/tornado1979/39up3jcm/
 // this code deals with scaling all the elements on the canvas
 function zoomAll(SCALE_FACTOR) {
