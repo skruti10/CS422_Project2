@@ -10976,7 +10976,11 @@ else if (activeuser == 'Ankur')
 	  retake4 = 0;
   }
 }
+else if (activeuser == 'guest')
+{ 
+ 		aSettingsUserGuest2.visible = true;
 
+}
 
 
 rID_RenderCameraOnClick();
@@ -11070,6 +11074,7 @@ playBeep();
     rID_HideCameraOnClick();
 	rID_Circle2.fill = 'white';
 	rID_Circle3.fill = 'black';
+		aSettingsUserGuest2.visible = false;
 
 	rID_RenderScanFinger();
 	rID_ShowScanFinger();
