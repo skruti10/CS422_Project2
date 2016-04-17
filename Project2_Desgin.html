@@ -409,9 +409,21 @@ function playCameraClick()
 
 /*** START $$Kruti added the code for profiles***/
 
+
+/******************$$Ridhi- variables********************************************/
+
 var activeuser = '';
 var multipleActiveUser = [];
 
+var rID_ChooseText = new fabric.Text('Please identify yourself!',{
+  left: 450,
+  top: 300,
+  fontSize: 40,
+  fontWeight: 'bold',
+  fontFamily: 'Helvetica'
+});
+
+/************************************************/
 function kUserProfiles(kUserName,kImageIcon,kFingerIcon,kVoiceCommand,kPhoneSynced,kMessages,kToDoList,kCalendar,kHasUsedMenu)
 {
 	this.kUserName 		= kUserName;
@@ -5149,6 +5161,9 @@ kID_MenuIcon.on('selected', function()
 		kRemovePackageLog();
 		kRemoveNewsFeed();
 		/********** notification panel ***************/
+		  /**************$$ Ridhi tutorial page ***************************/
+		rID_HideRidhiTutorial();
+		/**********************************************/
 		
 		/********* lock panel removal ***********/
 		kRemoveLockUnlockIconPanel();
@@ -9210,6 +9225,44 @@ kID_TimeText.on('selected',function(){
 
 
 /*************************************** Code Added by Ridhi ***************************************************************************************/
+var rID_Font = 'Helvetica';
+var rID_FontSize = 20;
+var rID_TutorialLeft = 100;
+var rID_TutorialTop =170 ;
+var rID_Capture = 0;
+var rID_SyncPhone = 0;
+var isUsedTutorial = 0;
+var activeuser = '';
+var rID_TempClick = 0;
+var retake = 0;
+var retake2 = 0;
+var retake3 = 0;
+var retake4 = 0;
+var rID_Profile1Done =0;
+var rID_Profile2Done =0;
+var rID_Profile3Done = 0;
+var rID_Profile4Done = 0;
+
+var rID_Hour1 = new fabric.Text('default', {
+		left: rID_TutorialLeft+ 810,
+  top: rID_TutorialTop + 90,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'white',
+		fontFamily: kID_Font
+	});
+	
+
+	var rID_Hour2 = new fabric.Text('', {
+		left: rID_TutorialLeft+ 810,
+       top: rID_TutorialTop + 190,
+		fontSize: kID_FontSize,
+		fontWeight: 'normal',
+		fill:'white',
+		fontFamily: kID_Font
+	});
+
+
 var rID_Hour3 = new fabric.Text('', {
 		left: rID_TutorialLeft+ 810,
 		top: rID_TutorialTop + 290,
@@ -12476,7 +12529,8 @@ function loadTasksApi() {
 
 function rID_HideRidhiTutorial()
 {
-    rID_HideFirstTimeSetup();
+   // rID_HideFirstTimeSetup();
+    rID_HideChooseUser();
 	rID_HideChooseLangugage();
 	
 	rID_HideTutorialPage2();
