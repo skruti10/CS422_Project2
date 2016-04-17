@@ -211,6 +211,10 @@
 	<source src="http://sbajaj7.people.uic.edu/CS422/project2/samplesmall.ogv">
 	</video>	
 	
+	<audio id="audio8">
+    <source src="http://sbajaj7.people.uic.edu/CS422/project2/housealarmoffstate.mp3" type="audio/mp3" />
+    </audio>
+	
 	<!-- <iframe width="760" height="615" src="https://www.youtube.com/embed/ba3iwKFiNXM" id = "videoframe" frameborder="10" allowfullscreen></iframe> -->
 
 
@@ -6631,13 +6635,13 @@ kID_HouseAlarmIcon.on('selected', function() {
 	 
 	canvas.add(simgInstance21);
 	
-	sOnHouseAlarmText.fill = 'black';
+	sOnHouseAlarmText2.fill = 'black';
   
-	sOffHouseAlarmText.fill = 'black';
+	sOffHouseAlarmText2.fill = 'black';
 	
-	canvas.add(sOnHouseAlarmText);
+	canvas.add(sOnHouseAlarmText2);
 	
-	canvas.add(sOffHouseAlarmText);
+	canvas.add(sOffHouseAlarmText2);
 	
 	canvas.deactivateAll(); // deselect everything
 
@@ -6755,6 +6759,8 @@ var shousealarmbutton = document.getElementById('b10');
   
   playBeep();
   
+  if(housealarmstate == true){
+  
   PlayHouseAlarm();
   
   slider1.left = 450;
@@ -6769,13 +6775,13 @@ var shousealarmbutton = document.getElementById('b10');
   
   canvas.add(sliderLine2);
   
-  sOnHouseAlarmText.fill = 'white';
+  sOnHouseAlarmText1.fill = 'white';
   
-  sOffHouseAlarmText.fill = 'white';
+  sOffHouseAlarmText1.fill = 'white';
   
-  canvas.add(sOnHouseAlarmText);
+  canvas.add(sOnHouseAlarmText1);
 	
-  canvas.add(sOffHouseAlarmText);
+  canvas.add(sOffHouseAlarmText1);
   
   canvas.add(sHouseAlarmText);
 	
@@ -6785,6 +6791,14 @@ var shousealarmbutton = document.getElementById('b10');
 	
   canvas.add(sOutsideActivatedText);
   
+  }
+  
+  else{
+  
+  audio8.play();
+  
+  }
+  
   };
 
 
@@ -6793,7 +6807,7 @@ var shousealarmbutton = document.getElementById('b10');
 var slider2 = new fabric.Rect({
     width: 50,
     height: 80,
-    top: 630,
+    top: 640,
     left: 450,
     fill: 'black'
   });
@@ -6807,7 +6821,7 @@ slider2.lockMovementX = false;
 var sliderLine2 = new fabric.Rect({
     width: 450,
     height: 10,
-    top: 670,
+    top: 680,
     left: 450,
     fill: 'black'
   });
@@ -6818,8 +6832,26 @@ sliderLine2.lockMovementX = sliderLine2.lockMovementY = true;
 
  
 	
-//Text House Alarm ON
-var sOnHouseAlarmText = new fabric.Text('ON',{
+//Text House Alarm ON Outside menu
+var sOnHouseAlarmText1 = new fabric.Text('ON',{
+  left: 270,
+  top: 630,
+  fontSize: 90,
+  fontWeight: 'bold',
+  fontFamily: sID_Font
+});
+
+//Text House Alarm OFF Outside menu
+var sOffHouseAlarmText1 = new fabric.Text('OFF',{
+  left: 940,
+  top: 630,
+  fontSize: 90,
+  fontWeight: 'bold',
+  fontFamily: sID_Font
+});
+
+//Text House Alarm ON Inside menu
+var sOnHouseAlarmText2 = new fabric.Text('ON',{
   left: 270,
   top: 620,
   fontSize: 90,
@@ -6827,8 +6859,8 @@ var sOnHouseAlarmText = new fabric.Text('ON',{
   fontFamily: sID_Font
 });
 
-//Text House Alarm OFF
-var sOffHouseAlarmText = new fabric.Text('OFF',{
+//Text House Alarm OFF Inside menu
+var sOffHouseAlarmText2 = new fabric.Text('OFF',{
   left: 940,
   top: 620,
   fontSize: 90,
@@ -6897,13 +6929,33 @@ var sDeliverPackageText2 = new fabric.Text('Package',{
 });
 canvas.add(sDeliverPackageText2);
 
-
+var housealarmstate = true;
 canvas.on('object:moving', function(e) {
   var activeObject = e.target;
   
+  //Outside Menu
+  if(activeObject.get('top') == 640 && activeObject.get('left')<675)
+  {
+      activeObject.left = 450;
+      //slider3.left = 1360;
+
+  }
+  
+  if(activeObject.get('top') == 640 && activeObject.get('left')>675)
+  {
+      activeObject.left = 850;
+	  audio7.pause();
+	  RemoveHouseAlarmOutsideMenu();
+      //slider3.left = 1360;
+
+  }
+  
+  
+  //Inside menu
   if(activeObject.get('top') == 630 && activeObject.get('left')<675)
   {
       activeObject.left = 450;
+	  housealarmstate = true;
       //slider3.left = 1360;
 
   }
@@ -6911,8 +6963,7 @@ canvas.on('object:moving', function(e) {
   if(activeObject.get('top') == 630 && activeObject.get('left')>675)
   {
       activeObject.left = 850;
-	  audio7.pause();
-	  RemoveHouseAlarmOutsideMenu();
+	  housealarmstate = false;
       //slider3.left = 1360;
 
   }
@@ -7078,9 +7129,9 @@ canvas.remove(sliderLine1);
 
 canvas.remove(simgInstance21);
 
-canvas.remove(sOnHouseAlarmText);
+canvas.remove(sOnHouseAlarmText2);
 
-canvas.remove(sOffHouseAlarmText);
+canvas.remove(sOffHouseAlarmText2);
 
 
 }
@@ -7108,9 +7159,9 @@ canvas.remove(slider2);
 
 canvas.remove(sliderLine2);
 
-canvas.remove(sOnHouseAlarmText);
+canvas.remove(sOnHouseAlarmText1);
 
-canvas.remove(sOffHouseAlarmText);
+canvas.remove(sOffHouseAlarmText1);
 
 canvas.remove(sHouseAlarmText);
 
