@@ -12556,26 +12556,8 @@ setInterval(kOD_NumberPlateSimulation,21600000);
 kAddNotificationPanel();
 
 /*******************************$$ Ridhi clickable date and time**********************************/
-var rID_DateLeftArrow = new fabric.Image(aBackButtonx, {
-  left: 250,  
-  top: 680,
-  angle: 180,
-  width: 60, height: 60,
-  visible:true,
-  originY: 'center', originX: 'center'
-  
-});
 
 
-var rID_TimeLeftArrow = new fabric.Image(aBackButtonx, {
-  left: 220,  
-  top: 650,
-  angle: 180,
-  width: 60, height: 60,
-  visible:true,
-  originY: 'center', originX: 'center'
-  
-});
 
 
 
@@ -12583,7 +12565,7 @@ kID_DateText.on('selected', function()
 {
  playBeep();
 
-	canvas.add(rID_DateLeftArrow);
+
   
 	adisplaySettingsDate();
 
@@ -12594,18 +12576,12 @@ kID_DateText.on('selected', function()
 });
 
 
-rID_DateLeftArrow.on('selected', function()
-{
- playBeep();
-   canvas.remove(rID_DateLeftArrow);
-   aHideAnkurCodeSettings();
-   
-});
+
 
 kID_TimeText.on('selected', function()
 {
     playBeep();
-   canvas.add(rID_TimeLeftArrow);
+   
   
 	adisplaySettingsTime();
 
@@ -12614,13 +12590,7 @@ kID_TimeText.on('selected', function()
 
 });
 
-rID_TimeLeftArrow.on('selected', function()
-{
-   playBeep();
-   canvas.remove(rID_TimeLeftArrow);
-   aHideAnkurCodeSettings();
-   
-});
+
 
 rID_RenderChooseLanguage();
 rID_ShowChooseLanguage();
