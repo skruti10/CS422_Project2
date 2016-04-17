@@ -7771,6 +7771,26 @@ var aBackButton2 = new fabric.Image(aBackButtonx, {
   
 });
 
+var aBackButton3 = new fabric.Image(aBackButtonx, {
+  left: 50,  
+  top: 300,
+  angle: 180,
+  width: 25, height: 50,
+  visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
+var aBackButton4 = new fabric.Image(aBackButtonx, {
+  left: 50,  
+  top: 300,
+  angle: 180,
+  width: 25, height: 50,
+  visible:false,
+  originY: 'center', originX: 'center',
+  
+});
+
 
 var aSettingsTime = new fabric.Image(atime, {
   left: 125,  // 750
@@ -7956,9 +7976,9 @@ var aSettingsVolFill1 = new fabric.Image(avol1fill, {
   
 });
 
-var achimeText1 = new fabric.Text('Doorbell Chime', { left: 375, top: 225, fontFamily: 'Tahoma', fontSize: 20, originX: 'center',
+var achimeText1 = new fabric.Text('Doorbell Chime', { left: 375, top: 225, fontFamily: 'Helvetica', fontSize: 20, originX: 'center',
   originY: 'center', visible: false});
-var achimeText2 = new fabric.Text('Package Chime', { left: 375, top: 305, fontFamily: 'Tahoma', fontSize: 20, originX: 'center',
+var achimeText2 = new fabric.Text('Package Chime', { left: 375, top: 305, fontFamily: 'Helvetica', fontSize: 20, originX: 'center',
   originY: 'center', visible: false});
 
 
@@ -8022,7 +8042,7 @@ var achime6 = new fabric.Image(doorBell, {
   
 });
 
-var alangText = new fabric.Text('Select your Language', { left: 300, top: 175, fontFamily: 'Tahoma', fontSize: 20, originX: 'center',
+var alangText = new fabric.Text('Select your Language', { left: 300, top: 175, fontFamily: 'Helvetica', fontSize: 20, originX: 'center',
   originY: 'center', visible: false
 });
 
@@ -8231,12 +8251,21 @@ var aSettingsUserGuest = new fabric.Image(auserguest, {
   left: 300,
   top: 350,
   angle: 0,
-  width: 75, height: 75,
+  width: 100, height: 100,
   visible: false,
   originY: 'center', originX: 'center',
   
 });
 
+var aSettingsUserGuest2 = new fabric.Image(auserguest, {
+  left: 300,
+  top: 250,
+  angle: 0,
+  width: 100, height: 100,
+  visible: false,
+  originY: 'center', originX: 'center',
+  
+});
 
 var aSettingsUserFinger = new fabric.Image(auserfinger, {
   left: 300,
@@ -8391,6 +8420,9 @@ canvas.add(aSettingsUserPhoneEdit);
 canvas.add(aBackButton);
 canvas.add(aBackButton2);
 canvas.add(aSettingsUserGuest);
+canvas.add(aBackButton3);
+canvas.add(aBackButton4);
+canvas.add(aSettingsUserGuest2);
 
 function aHideAnkurCodeSettings(){
 
@@ -8461,6 +8493,18 @@ aSettingsUserPhoneEdit.visible = false;
 aBackButton.visible = false;
 aBackButton2.visible = false;
 aSettingsUserGuest.visible = false;
+
+
+aSettingsUserFinger.visible = false;
+aSettingsUserPhone.visible = false;
+aSettingsUserPhoneTab.visible = false;
+aSettingsUserPhoneTabSelected.visible = false;
+aSettingsUserFingerTab.visible = false;
+aSettingsUserFingerTabSelected.visible = false;
+aSettingsUserFingerEdit.visible = false;
+aSettingsUserPhoneEdit.visible =false;
+aBackButton3.visible = false;
+aBackButton4.visible = false;
 
 }
 
@@ -8546,7 +8590,12 @@ function adisplaySettingsUsers(){
 	aSettingsUser2.visible = true;
 	aSettingsUser3.visible = true;
 	aSettingsUser4.visible = true;
+	if(guest==0){
 	aSettingsUserPlus.visible = true;
+	}
+	else{
+	aSettingsUserGuest.visible = true;
+	}
 
 }
 function ahideSettingsUsers(){
@@ -8555,6 +8604,24 @@ function ahideSettingsUsers(){
 	aSettingsUser3.visible = false;
 	aSettingsUser4.visible = false;
 	aSettingsUserPlus.visible = false;
+	aSettingsUserGuest.visible = false;
+
+}
+
+function aHideUserPanel(){
+	aSettingsUserFinger.visible = false;
+	aSettingsUserPhone.visible = false;
+	aSettingsUserPhoneTab.visible = false;
+	aSettingsUserFingerTab.visible = false;
+	aSettingsUserPhoneTabSelected.visible = false;
+	aSettingsUserFingerTabSelected.visible = false;
+	aSettingsUserFingerEdit.visible = false;
+	aSettingsUserPhoneEdit.visible =false;
+	aBackButton3.visible = false;
+
+
+
+
 
 }
 
@@ -8564,6 +8631,7 @@ kID_SettingsIcon.on('selected',function(){
 	adisplaySettings();
 	kID_IsMenuOpen = false;
 	kID_IsDoorLocked = true;
+	//rID_FirstTimeSetupText.visible = false;
 	
 	/*** remove all the menu icons ****/
 	kRemoveMenuIcons();
@@ -8609,6 +8677,20 @@ aBackButton2.on('selected',function(){
 	playBeep();
 	aHideAnkurCodeSettings();
 	adisplaySettings();
+
+
+});
+
+aBackButton3.on('selected',function(){
+	aHideUserPanel();
+	adisplaySettingsUsers();
+});
+
+aBackButton4.on('selected',function(){
+	adisplaySettingsUsers();
+	rID_HideSyncPhone();
+	rID_HideScanFinger();
+	rID_HideTutorialPage2();
 
 
 });
@@ -8840,6 +8922,7 @@ aSettingsUser1.on('selected',function(){
 	aSettingsUserFingerTabSelected.visible = true;
 	aSettingsUserPhoneTab.visible = true;
 	aSettingsUserFingerEdit.visible = true;
+	aBackButton3.visible = true;
 });
 
 aSettingsUser2.on('selected',function(){
@@ -8849,6 +8932,7 @@ aSettingsUser2.on('selected',function(){
 	aSettingsUserFingerTabSelected.visible = true;
 	aSettingsUserPhoneTab.visible = true;
 	aSettingsUserFingerEdit.visible = true;
+	aBackButton3.visible = true;
 });
 aSettingsUser3.on('selected',function(){
 	playBeep();
@@ -8857,6 +8941,7 @@ aSettingsUser3.on('selected',function(){
 	aSettingsUserFingerTabSelected.visible = true;
 	aSettingsUserPhoneTab.visible = true;
 	aSettingsUserFingerEdit.visible = true;
+	aBackButton3.visible = true;
 });
 aSettingsUser4.on('selected',function(){
 	playBeep();
@@ -8865,7 +8950,10 @@ aSettingsUser4.on('selected',function(){
 	aSettingsUserFingerTabSelected.visible = true;
 	aSettingsUserPhoneTab.visible = true;
 	aSettingsUserFingerEdit.visible = true;
+	aBackButton3.visible = true;
 });
+
+
 
 
 aSettingsUserPhoneTab.on('selected',function(){
@@ -8980,40 +9068,56 @@ aSettingsDate4.on('selected',function(){
 	kID_Date();
 });
 
+var guest = 0;
 
 aSettingsUserPlus.on('selected',function(){
+	if(guest ==0){
 	playBeep();
-	if(aSettingsUserPlus.visible == true){
-		ahideSettingsUsers();
-	//need to set active user variable
-		rID_RenderClickPicture();
-    	rID_ShowClickPicture();
-    	aSettingsUserPlus.visible = false;
-    // ask ridhi to do this	
-    //	aSettingsUserGuest.visible = true;
+	activeuser = 'guest';
+	ahideSettingsUsers();
+	rID_RenderTutorialPage2();
+	rID_ShowTutorialPage2();
+	aBackButton4.visible = true;
+	
+	guest = 1;
+	}
+	else{
+
+	playBeep();
+	ahideSettingsUsers();
+	aSettingsUserFinger.visible = true;
+	aSettingsUserFingerTabSelected.visible = true;
+	aSettingsUserPhoneTab.visible = true;
+	aSettingsUserFingerEdit.visible = true;
+	aBackButton3.visible = true;
+
 	}
 
-	else
-	{
-		ahideSettingsUsers();
-		aSettingsUserFinger.visible = true;
-		aSettingsUserFingerTabSelected.visible = true;
-		aSettingsUserPhoneTab.visible = true;
-		aSettingsUserFingerEdit.visible = true;
 
-	}
 });
+
+aSettingsUserGuest.on('selected',function(){
+		playBeep();
+	ahideSettingsUsers();
+	aSettingsUserFinger.visible = true;
+	aSettingsUserFingerTabSelected.visible = true;
+	aSettingsUserPhoneTab.visible = true;
+	aSettingsUserFingerEdit.visible = true;
+	aBackButton3.visible = true;
+
+});
+
 
 function aSystemLangHindi(){
 		aSettingsHindi.opacity = 0.5;
 	aSettingsEnglish.opacity = 1.0;
 	playBeep();
 	// sahib's texts - uncomment at the end
-/*	sDeliverPackageText1.text = "पैकेज"; sDeliverPackageText2.text = "वितरण";
+	sDeliverPackageText1.text = "पैकेज"; sDeliverPackageText2.text = "वितरण";
 	sOnHouseAlarmText.text = "चालू"; sOffHouseAlarmText.text = "बंद";
 	sNewPlateText.text = "नया"; sPostPlateText.text = "संदेश"; 
 	sWriteMessageText1.text = "संदेश"; sWriteMessageText2.text = "लिखें"; 
-	sIncorrectAttemptText.text = "3 असफल खोलने के प्रयास";*/
+	sIncorrectAttemptText.text = "3 असफल खोलने के प्रयास";
 
 	//ankur's texts
 	alangText.text = "अपनी भाषा चुने";
@@ -9177,34 +9281,41 @@ achime6.on('selected',function(){
 	bell6.play();
 });
 
-kID_DateText.on('selected',function(){
-	playBeep();
-	ahideSettings();
-	adisplaySettingsDate();
-	kID_LockIcon.visible = false;
-	kID_UnLockIcon.visible = false;
 
-	aSettingsTime12.visible = false;
-	aSettingsTime24.visible = false;
 
-	aBackButton2.visible = true;
 
+aSettingsUserPhoneEdit.on('selected',function(){
+		rID_RenderSyncPhone();
+		rID_ShowSyncPhone();
+		setTimeout(rID_DisplayPhone,1000);
+		setTimeout(rID_Synced, 6000);
+		aHideUserPanel();
+		aBackButton4.visible = true;
+		rID_HideCircles();
+		rID_LeftArrowIcon3.visible = false;
+		rID_LeftArrowIcon4.visible = false;
+		rID_LeftArrowIcon5.visible = false;
+		rID_RightArrowIcon3.visible = false;
+		rID_RightArrowIcon4.visible = false;
+		rID_RightArrowIcon5.visible = false;
 
 });
 
-kID_TimeText.on('selected',function(){
+aSettingsUserFingerEdit.on('selected',function(){
+		rID_RenderScanFinger();
+		rID_ShowScanFinger();
+		aHideUserPanel();
+		aBackButton4.visible = true;
+				rID_HideCircles();
+		rID_LeftArrowIcon3.visible = false;
+		rID_LeftArrowIcon4.visible = false;
+		rID_LeftArrowIcon5.visible = false;
+		rID_RightArrowIcon3.visible = false;
+		rID_RightArrowIcon4.visible = false;
+		rID_RightArrowIcon5.visible = false;
 
-	playBeep();
-	ahideSettings();
-	adisplaySettingsTime();
-		kID_LockIcon.visible = false;
-	kID_UnLockIcon.visible = false;
-	aSettingsDate1.visible = false;
-	aSettingsDate2.visible = false;
-	aSettingsDate3.visible = false;
-	aSettingsDate4.visible = false;
 
-	aBackButton2.visible = true;
+
 
 });
 
