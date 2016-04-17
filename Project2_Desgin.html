@@ -400,6 +400,9 @@ function playBeep(){
 
 /*** START $$Kruti added the code for profiles***/
 
+var activeuser = '';
+var multipleActiveUser = [];
+
 function kUserProfiles(kUserName,kImageIcon,kFingerIcon,kVoiceCommand,kPhoneSynced,kMessages,kToDoList,kCalendar,kHasUsedMenu)
 {
 	this.kUserName 		= kUserName;
@@ -447,8 +450,10 @@ kUserMessages.push((new kCommonFunction("sahib","Icons/Kruti/SahibMessage.png"))
 kUserMessages.push((new kCommonFunction("ankur","Icons/Kruti/WelcomeMessage.png")));
 kUserMessages.push((new kCommonFunction("ankur","Icons/Kruti/AnkurMessage.png")));
 
+
 var rTasks= [];
 var rCalendarEvents = [];
+
 /********************************************************************************************************************/
 
 /***END $$Kruti added the code for profiles***/
@@ -1011,25 +1016,43 @@ var kID_NotificationPanel = new fabric.Rect({
 var kMuteIconInfo = new kInsertImageInfo("kMuteIcon",document.getElementById('kMuteIcon'));  
 var kID_MuteIcon = new fabric.Image(kMuteIconInfo.kImageElement, {
 	left: kID_NotificationPanelLeft+75, 
-	top: kID_NotificationPanelTop-3, 
+	top: kID_NotificationPanelTop-5, 
 	width: kID_NIconW+10,
 	height: kID_NIconH-10
 });
 
-
-var kOneUnreadMessageIconInfo = new kInsertImageInfo("kOneUnreadMessageIcon",document.getElementById('kOneUnreadMessageIcon'));  
-var kID_OneUnreadMessageIcon = new fabric.Image(kOneUnreadMessageIconInfo.kImageElement, {
-	left: kID_NotificationPanelLeft+192, 
-	top: kID_NotificationPanelTop+8, 
-	width: kID_NIconW,
-	height: kID_NIconH-20
+var kUnMuteIconInfo = new kInsertImageInfo("kUnMuteIcon",document.getElementById('kUnMuteIcon'));  
+var kID_NP_UnMuteIcon = new fabric.Image(kUnMuteIconInfo.kImageElement, {
+	left: kID_NotificationPanelLeft+75, 
+	top: kID_NotificationPanelTop-5, 
+	width: kID_NIconW+10,
+	height: kID_NIconH-10
 });
+
+kID_MuteIcon.on('selected',function()
+{
+	canvas.remove(kID_MuteIcon);
+	canvas.add(kID_NP_UnMuteIcon);
+	
+	kID_IsBellMuted = false;
+	
+	setTimeout(kID_Remove_NP_UnMute, 5000);
+	
+	canvas.deactivateAll(); // deselect everything
+	
+});
+
+function kID_Remove_NP_UnMute()
+{
+	canvas.remove(kID_NP_UnMuteIcon);
+}
+
 
 var kDeliveryIconInfo = new kInsertImageInfo("sDeliverPackageIcon",document.getElementById('sDeliverPackageIcon'));  
 var kID_DeliveryIcon = new fabric.Image(kDeliveryIconInfo.kImageElement, {
 	width: 60,
-	height: 55,
-	left: kID_NotificationPanelLeft+310, 
+	height: 52,
+	left: kID_NotificationPanelLeft+245, 
 	top: kID_NotificationPanelTop-3
 });
 
@@ -1052,9 +1075,8 @@ var kID_GlobalNewsIcon = new fabric.Image(kGlobalNewsIconInfo.kImageElement, {
 
 function kAddNotificationPanel_WithHidingPanel()
 {
-
+	canvas.add(kID_NP_UnMuteIcon);
 	canvas.add(kID_MuteIcon);
-	canvas.add(kID_OneUnreadMessageIcon);
 	canvas.add(kID_DeliveryIcon);
 	canvas.add(kID_GlobalNewsIcon);
 	
@@ -1065,9 +1087,9 @@ kAddNotificationPanel_WithHidingPanel();
 
 function kRemoveNotificationPanel()
 {
+	canvas.remove(kID_NP_UnMuteIcon);
 	canvas.remove(kID_NotificationPanel);
 	canvas.remove(kID_MuteIcon);
-	canvas.remove(kID_OneUnreadMessageIcon);
 	canvas.remove(kID_DeliveryIcon);
 	canvas.remove(kID_GlobalNewsIcon);
 };
@@ -1085,12 +1107,6 @@ function kAddNotificationPanel()
 	{
 		canvas.remove(kID_MuteIcon);
 		canvas.add(kID_MuteIcon);
-	}
-	
-	if(kID_AnyUnReadMsg)
-	{
-		canvas.remove(kID_OneUnreadMessageIcon);
-		canvas.add(kID_OneUnreadMessageIcon);
 	}
 	
 	if(kID_AnyPackageDelivered)
@@ -1133,7 +1149,295 @@ kID_DeliveryIcon.on('selected',function()
 	
 });
 
-/********************** code for notification panel end ******************************************************************************************/
+/********************** code for notification panel end ***************************************************************************************/
+
+/********************************************** Multiple user approach ***********************************************/
+
+var kID_Multiple = new fabric.Text('Multiple users',{
+  left: 213, 
+  top: 380, 
+  fontSize: 25,
+  fontWeight: 'bold',
+  fontFamily: kID_Font
+});
+
+
+kID_Multiple.on('selected',function()
+{
+	kID_IsMenuOpen = false;
+	kID_IsMenuItemOpen = true;
+	
+	
+	//kID_RemoveAllIcons();
+	kRemoveMultiUserPanel();
+	
+	multipleActiveUser.push('ridhi');
+	multipleActiveUser.push('kruti');
+	
+	kID_MultiUser1.set({
+		text: 'Ridhi'
+	});
+	
+	kID_MultiUser2.set({
+		text: 'Kruti'
+	});
+	
+	kID_MultiUser3.set({
+		text: 'Sahib'
+	});
+	
+	kAddMultiUserPanel();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+var kID_MultiPanelLeft = 23;
+var kID_MultiPanelTop = 180;
+
+var kID_MultipleUserPanel = new fabric.Rect({
+left: kID_MultiPanelLeft,
+  top: kID_MultiPanelTop,
+  fill: 'white',
+  width: 552,
+  height: 60
+});
+
+var kID_MultiUser1 = new fabric.Text('',{
+  left: kID_MultiPanelLeft+65, 
+  top: kID_MultiPanelTop+13, 
+  fontSize: 25,
+  fontWeight: 'bold',
+  fontFamily: kID_Font
+});
+
+var kID_MultiUser2 = new fabric.Text('',{
+  left: kID_MultiPanelLeft+420, 
+  top: kID_MultiPanelTop+13, 
+  fontSize: 25,
+  fontWeight: 'bold',
+  fontFamily: kID_Font
+});
+
+var kID_MultiUser3 = new fabric.Text('',{
+  left: kID_MultiPanelLeft+245, 
+  top: kID_MultiPanelTop+13, 
+  fontSize: 25,
+  fontWeight: 'bold',
+  fontFamily: kID_Font
+});
+
+function kAddMultiUserPanel()
+{
+	kID_MultipleUserPanel.set({
+		fill: 'grey',
+		strokeWidth: 5,
+		stroke: 'rgba(0,0,0,20)'
+	})
+	canvas.add(kID_MultipleUserPanel);
+	canvas.add(kID_MultiUser1);
+	canvas.add(kID_MultiUser2);
+	canvas.add(kID_MultiUser3);
+};
+
+function kRemoveMultiUserPanel()
+{
+	canvas.remove(kID_MultipleUserPanel);
+	canvas.remove(kID_MultiUser1);
+	canvas.remove(kID_MultiUser2);
+	canvas.remove(kID_MultiUser3);
+};
+
+function kAddMultiUserPanel_WithHiding()
+{
+	canvas.add(kID_MultiUser1);
+	canvas.add(kID_MultiUser2);
+	canvas.add(kID_MultiUser3);
+	canvas.add(kID_MultipleUserPanel);
+}
+
+kAddMultiUserPanel_WithHiding();
+
+kID_MultiUser1.on('selected',function()
+{
+	kRemoveMultiUserPanel();
+	kRemoveUserSpecificPanel();
+	activeuser = kID_MultiUser1.getText();
+	
+	kAddUserSpecificPanel();
+	
+});
+
+/*********************************************************************************************************************/
+
+/**************************** user specific panel *************************************************************************************/
+
+var kID_UserSpecificPanelLeft = 23;
+var kID_UserSpecificPanelTop = 230;
+var kID_US_IconW = 60;
+var kID_US_IconH = 70;
+
+var kID_UserSpecificPanel = new fabric.Rect({
+left: kID_UserSpecificPanelLeft,
+  top: kID_UserSpecificPanelTop,
+  fill: 'white',
+  width: 552,
+  height: 120
+});
+
+var kLeftArrowIconInfo = new kInsertImageInfo("kLeftArrowIcon",document.getElementById('kLeftArrowIcon'));  
+var kID_US_LeftArrowIcon = new fabric.Image(kLeftArrowIconInfo.kImageElement, {
+	left: kID_UserSpecificPanelLeft+15, 
+	top: kID_UserSpecificPanelTop + 10 , 
+	width: 30,
+	height: 30
+});
+
+kID_US_LeftArrowIcon.on('selected',function()
+{
+	kRemoveUserSpecificPanel();	
+	canvas.deactivateAll(); // deselect everything
+});
+
+var kNoUnreadMessageIconInfo = new kInsertImageInfo("kNoUnreadMessageIcon",document.getElementById('kNoUnreadMessageIcon')); 
+var kID_US_NoUnreadMessage = new fabric.Image(kNoUnreadMessageIconInfo.kImageElement, {
+	left: kID_UserSpecificPanelLeft+65, 
+	top: kID_UserSpecificPanelTop, 
+	width: kID_US_IconW+10,
+	height: kID_US_IconH-5
+});
+
+kID_US_NoUnreadMessage.on('selected',function()
+{
+	kRemoveUserSpecificPanel();
+	kRemoveNotificationPanel();
+	kCallNoUnReadFunc();
+	canvas.deactivateAll(); // deselect everything
+});
+
+var kOneUnreadMessageIconInfo = new kInsertImageInfo("kOneUnreadMessageIcon",document.getElementById('kOneUnreadMessageIcon')); 
+var kID_US_OneUnreadMessageIcon = new fabric.Image(kOneUnreadMessageIconInfo.kImageElement, {
+	left: kID_UserSpecificPanelLeft+65, 
+	top: kID_UserSpecificPanelTop, 
+	width: kID_US_IconW+10,
+	height: kID_US_IconH-5
+});
+
+kID_US_OneUnreadMessageIcon.on('selected',function()
+{
+	kRemoveUserSpecificPanel();
+	kRemoveNotificationPanel();
+	kCallUnReadFunc();
+	canvas.deactivateAll(); // deselect everything
+});
+
+var kCalendarIconInfo = new kInsertImageInfo("kCalendarIcon",document.getElementById('kCalendarIcon'));  
+var kID_US_CalendarIcon = new fabric.Image(kCalendarIconInfo.kImageElement, {
+	left: kID_UserSpecificPanelLeft+245, 
+	top: kID_UserSpecificPanelTop, 
+	width: kID_US_IconW+10,
+	height: kID_US_IconH-5
+});
+
+kID_US_CalendarIcon.on('selected',function()
+{
+	kRemoveUserSpecificPanel();
+	kRemoveNotificationPanel();
+	
+	kID_IsMenuOpen = false;
+	kID_IsMenuItemOpen = true;
+	//kRemoveMenuIcons();
+	rCalendarEvents = [];
+	 rEvent0.set({
+	 text: activeuser + "'s Calendar!"
+	});
+
+	canvas.add(kID_CalendarLeftArrowIcon);
+	handleAuthClick();
+	canvas.add(rEvent0);
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+var kToDoListIconInfo = new kInsertImageInfo("kToDoListIcon",document.getElementById('kToDoListIcon')); 
+var kID_US_ToDoListIcon = new fabric.Image(kToDoListIconInfo.kImageElement, {
+	left: kID_UserSpecificPanelLeft+425, 
+	top: kID_UserSpecificPanelTop, 
+	width: kID_US_IconW+10,
+	height: kID_US_IconH-5
+});
+
+kID_US_ToDoListIcon.on('selected',function()
+{
+	kRemoveUserSpecificPanel();
+	kRemoveNotificationPanel();
+	
+	kID_IsMenuOpen = false;
+	kID_IsMenuItemOpen = true;
+	
+	rTasks = [];
+	rID_HideTodoList();
+	canvas.add(kID_TaskLeftArrowIcon);
+	rTask1.set({
+	 text: activeuser + "'s tasks!"
+	});
+	canvas.add(rTask1);
+
+
+	TaskHandleAuthClick();
+	//getUserTasks(activeuser);
+	canvas.deactivateAll();
+});
+
+function kAddUserSpecificPanel_WithHidingPanel()
+{
+	canvas.add(kID_US_LeftArrowIcon);
+	canvas.add(kID_US_NoUnreadMessage);
+	canvas.add(kID_US_OneUnreadMessageIcon);
+	canvas.add(kID_US_CalendarIcon);
+	canvas.add(kID_US_ToDoListIcon);
+	canvas.add(kID_UserSpecificPanel);
+};
+
+function kRemoveUserSpecificPanel()
+{
+	canvas.remove(kID_US_LeftArrowIcon);
+	canvas.remove(kID_UserSpecificPanel);
+	canvas.remove(kID_US_NoUnreadMessage);
+	canvas.remove(kID_US_OneUnreadMessageIcon);
+	canvas.remove(kID_US_CalendarIcon);
+	canvas.remove(kID_US_ToDoListIcon);
+};
+
+function kAddUserSpecificPanel()
+{
+	canvas.add(kID_UserSpecificPanel);
+	canvas.add(kID_US_LeftArrowIcon);
+	
+	for(kCounter = 0 ; kCounter < kUserMessages.length; kCounter++)
+	{
+		console.log(activeuser);
+		
+		if( ( activeuser != '' && (kUserMessages[kCounter].kName.toLowerCase() == 'all' || kUserMessages[kCounter].kName.toLowerCase() == activeuser.toLowerCase())) && kUserMessages[kCounter].kIsUsed == false)
+		{
+			kID_AnyUnReadMsg = true;
+			break;
+		}
+		
+	}
+	
+	if(kID_AnyUnReadMsg)
+		canvas.add(kID_US_OneUnreadMessageIcon);
+	else
+		canvas.add(kID_US_NoUnreadMessage);
+	
+	canvas.add(kID_US_CalendarIcon);
+	canvas.add(kID_US_ToDoListIcon);
+}
+
+kAddUserSpecificPanel_WithHidingPanel();
+
+
+/***************************************************************************************************************************************/
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1188,7 +1492,6 @@ var kID_CameraPanel = new fabric.Rect({
 });
 //canvas.add(kID_CameraPanel);
 
-var kLeftArrowIconInfo = new kInsertImageInfo("kLeftArrowIcon",document.getElementById('kLeftArrowIcon'));  
 var kID_CameraLeftArrowIcon = new fabric.Image(kLeftArrowIconInfo.kImageElement, {
 	left: kID_CameraPanelLeft+5,
 	top: kID_CameraPanelTop+110 , 
@@ -1644,7 +1947,7 @@ kID_MicrophoneOffIcon.on('selected', function()
 /************* code end for camera panel icons ************************************************/
 /**********************************************************************************************************************************/
 
-var kNoUnreadMessageIconInfo = new kInsertImageInfo("kNoUnreadMessageIcon",document.getElementById('kNoUnreadMessageIcon'));  
+ 
 var kID_NoUnreadIcon = new fabric.Image(kNoUnreadMessageIconInfo.kImageElement, {
 	left: kID_MenuPanelLeft+ kID_IconW + 185, 
 	top: kID_MenuPanelTop-50  , 
@@ -1654,6 +1957,7 @@ var kID_NoUnreadIcon = new fabric.Image(kNoUnreadMessageIconInfo.kImageElement, 
 
 
 //add the un read message icon along with read message icons in menu - use same id as used for notification panel.
+
 var kID_OneUnreadMessageIcon_Menu = new fabric.Image(kOneUnreadMessageIconInfo.kImageElement, {
 	left: kID_MenuPanelLeft+ kID_IconW + 185, 
 	top: kID_MenuPanelTop-30  ,
@@ -2207,29 +2511,33 @@ function kID_ResetAllMsgIcons()
 /**********************************END Message Panel ****************************************************************/
 
 /**************START bind on selected for message icons ***************************************************************/
+function kCallNoUnReadFunc()
+{
+	// make the open menu as false - if the user again clicks on menu icon - this will open up the menu again.
+	kID_IsMenuOpen = false;
+	//kID_IsDoorLocked = true;
+	kID_IsMenuItemOpen = true;
+	
+	kID_CurMsgUser = activeuser;
+	kID_IsReadMode = true;
+	kID_RightArrowCounter = 0;
+	
+	kID_ResetAllMsgIcons();
+	
+	kRemoveMessagePanel();
+	kRemoveMenuIcons();
+	
+	kAddMessagePanel_WithoutHidingPanel();
+	canvas.deactivateAll(); // deselect everything
+};
 
 kID_NoUnreadIcon.on('selected', function() 
 {
-	// make the open menu as false - if the user again clicks on menu icon - this will open up the menu again.
-	kID_IsMenuOpen = false;
-	//kID_IsDoorLocked = true;
-	kID_IsMenuItemOpen = true;
-	
-	kID_CurMsgUser = activeuser;
-	kID_IsReadMode = true;
-	kID_RightArrowCounter = 0;
-	
-	kID_ResetAllMsgIcons();
-	
-	kRemoveMessagePanel();
-	kRemoveMenuIcons();
-	
-	kAddMessagePanel_WithoutHidingPanel();
-	
+	kCallNoUnReadFunc();
 	canvas.deactivateAll(); // deselect everything
 });
 
-kID_OneUnreadMessageIcon_Menu.on('selected', function() 
+function kCallUnReadFunc()
 {
 	// make the open menu as false - if the user again clicks on menu icon - this will open up the menu again.
 	kID_IsMenuOpen = false;
@@ -2246,7 +2554,11 @@ kID_OneUnreadMessageIcon_Menu.on('selected', function()
 	kRemoveMenuIcons();
 	
 	kAddMessagePanel_WithoutHidingPanel();
-	
+};
+
+kID_OneUnreadMessageIcon_Menu.on('selected', function() 
+{
+	kCallUnReadFunc();
 	canvas.deactivateAll(); // deselect everything
 });
 
@@ -2262,9 +2574,29 @@ kID_MsgTopLeftArrowIcon.on('selected', function()
 	canvas.deactivateAll(); // deselect everything
 });
 
-kID_MsgRead.on('selected', function() 
-{	
+function kID_ReadMessage()
+{
 	kID_ResetRWMsgIcons('read');
+	
+	kID_MsgKruti.set({
+		fill:'grey'
+	});
+		
+	
+	kID_MsgRidhi.set({
+		fill:'grey'
+	});
+	
+	kID_MsgSahib.set({
+		fill:'grey'
+	});
+
+		
+	kID_MsgAnkur.set({
+		fill:'grey'
+	});
+	
+	
 	kID_ResetNamesMsgIcons(activeuser);
 	
 	if(kID_IsReadMode == false)
@@ -2295,10 +2627,25 @@ kID_MsgRead.on('selected', function()
 	}
 	
 	canvas.deactivateAll(); // deselect everything
+};
+
+
+kID_MsgRead.on('selected', function() 
+{	
+	kID_ReadMessage();
+	
+	canvas.deactivateAll(); // deselect everything
 });
 
-kID_MsgWrite.on('selected', function() 
+kID_MsgReadTxt.on('selected', function() 
 {	
+	kID_ReadMessage();
+	
+	canvas.deactivateAll(); // deselect everything
+});
+
+function kID_WriteMessage()
+{
 	kID_ResetRWMsgIcons('write');
 	kID_ResetNamesMsgIcons('none');
 	kID_ResetPostMsgIcons('none');
@@ -2334,6 +2681,18 @@ kID_MsgWrite.on('selected', function()
 		canvas.remove(kID_MsgMidGreyLeftArrowIcon);
 		canvas.remove(kID_MsgMidGreyRightArrowIcon);
 	}
+	canvas.deactivateAll(); // deselect everything
+};
+
+kID_MsgWrite.on('selected', function() 
+{	
+	kID_WriteMessage();
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_MsgWriteTxt.on('selected', function() 
+{	
+	kID_WriteMessage();
 	canvas.deactivateAll(); // deselect everything
 });
 
@@ -2564,8 +2923,8 @@ kID_MsgMidLeftArrowIcon.on('selected', function()
 	canvas.deactivateAll(); // deselect everything
 });
 
-kID_MsgPostIN.on('selected', function() 
-{	
+function kID_PostINMessage()
+{
 	kID_ResetPostMsgIcons('postIn');
 	if(kID_IsPostInSel == false)
 	{
@@ -2579,10 +2938,22 @@ kID_MsgPostIN.on('selected', function()
 		
 	}
 	canvas.deactivateAll(); // deselect everything
+};
+
+kID_MsgPostIN.on('selected', function() 
+{	
+	kID_PostINMessage();
+	canvas.deactivateAll(); // deselect everything
 });
 
-kID_MsgPostOUT.on('selected', function() 
+kID_MsgPostINTxt.on('selected', function() 
 {	
+	kID_PostINMessage();
+	canvas.deactivateAll(); // deselect everything
+});
+
+function kID_PostOutMessage()
+{
 	kID_ResetPostMsgIcons('postOut');
 	if(kID_IsPostOutSel == false)
 	{
@@ -2593,12 +2964,23 @@ kID_MsgPostOUT.on('selected', function()
 		});
 	}
 	canvas.deactivateAll(); // deselect everything
+};
+
+kID_MsgPostOUT.on('selected', function() 
+{	
+	kID_PostOutMessage();	
+	canvas.deactivateAll(); // deselect everything
+});
+
+kID_MsgPostOUTTxt.on('selected', function() 
+{	
+	kID_PostOutMessage();	
+	canvas.deactivateAll(); // deselect everything
 });
 
 /***************END of bind on selected for message icons*************************************************************/
 
 
-var kCalendarIconInfo = new kInsertImageInfo("kCalendarIcon",document.getElementById('kCalendarIcon'));  
 var kID_CalendarIcon = new fabric.Image(kCalendarIconInfo.kImageElement, {
 	left: kID_MenuPanelLeft+ kID_IconW*2 + 300, 
 	top: kID_MenuPanelTop-38 , 
@@ -2606,7 +2988,6 @@ var kID_CalendarIcon = new fabric.Image(kCalendarIconInfo.kImageElement, {
 	height: kID_MenuIconH
 });
 
-var kUnMuteIconInfo = new kInsertImageInfo("kUnMuteIcon",document.getElementById('kUnMuteIcon'));  
 var kID_UnMuteIcon = new fabric.Image(kUnMuteIconInfo.kImageElement, {
 	left: kID_MenuPanelLeft+ 60, 
 	top: kID_MenuPanelTop + 90 , 
@@ -2906,6 +3287,7 @@ var kID_ThemeLeftArrowIcon = new fabric.Image(kLeftArrowIconInfo.kImageElement, 
 	width: kID_MenuIconW-20,
 	height: kID_MenuIconH-30
 });
+
 var kID_TaskLeftArrowIcon = new fabric.Image(kLeftArrowIconInfo.kImageElement, {
 	left: 100, 
 	top: 500, 
@@ -3786,11 +4168,17 @@ function kOAddThemePanelIcons_WithoutHidingPanel()
 
 
 /******************************* end icons for theme panel ******************************************/
+
+
 /*******************************texts for tasks************************************************/
 
+var kID_TaskPanelLeft = 23;
+var kID_TaskPanelTop = 2;
+var kID_TaskFontSize = 25;
+
 var rTask0 = new fabric.Textbox('No tasks for today!', {
-   left: kID_HeaderPanelLeft + 500,
-  top: kID_HeaderPanelTop + 450,
+   left: kID_TaskPanelLeft + 500,
+  top: kID_TaskPanelTop + 450,
 		fontSize: kID_FontSize,
 		fontWeight: 'normal',
 		fill:'black',
@@ -3815,7 +4203,7 @@ var rTask0 = new fabric.Textbox('No tasks for today!', {
   top: 320,
    width : 800,
   height: 50,
-  fontSize: kID_FontSize + 20,
+  fontSize: kID_TaskFontSize + 20,
 		fontWeight: 'bold',
 		fill:'black',
 		fontFamily: kID_Font
@@ -3823,20 +4211,20 @@ var rTask0 = new fabric.Textbox('No tasks for today!', {
 	
 	
 var rTaskr1 = new fabric.Textbox('', {
-   left: kID_HeaderPanelLeft + 300,
-  top: kID_HeaderPanelTop + 450,
+   left: kID_TaskPanelLeft + 300,
+  top: kID_TaskPanelTop + 450,
   width : 800,
   height: 50,
-		fontSize: kID_FontSize,
+		fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		fill:'black',
 		fontFamily: kID_Font
 	});	
 	
 	var rTaskr2 = new fabric.Textbox('', {
-   left: kID_HeaderPanelLeft + 300,
-  top: kID_HeaderPanelTop + 550,
-		fontSize: kID_FontSize,
+   left: kID_TaskPanelLeft + 300,
+  top: kID_TaskPanelTop + 550,
+		fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		 width : 500,
   height: 50,
@@ -3845,8 +4233,8 @@ var rTaskr1 = new fabric.Textbox('', {
 	});	
 	
 	var rTaskr3 = new fabric.Textbox('', {
-   left: kID_HeaderPanelLeft + 300,
-  top: kID_HeaderPanelTop + 650,
+   left: kID_TaskPanelLeft + 300,
+  top: kID_TaskPanelTop + 650,
    width : 500,
   height: 50,
 		fontSize: kID_FontSize,
@@ -3856,21 +4244,21 @@ var rTaskr1 = new fabric.Textbox('', {
 	});	
 	
 	var rTaskr4 = new fabric.Textbox('', {
-   left: kID_HeaderPanelLeft + 300,
-  top: kID_HeaderPanelTop + 750,
+   left: kID_TaskPanelLeft + 300,
+  top: kID_TaskPanelTop + 750,
    width : 500,
   height: 50,
-		fontSize: kID_FontSize,
+		fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		fill:'black',
 		fontFamily: kID_Font
 	});	
 		var rTaskr5 = new fabric.Textbox('', {
-   left: kID_HeaderPanelLeft + 300,
-  top: kID_HeaderPanelTop + 850,
+   left: kID_TaskPanelLeft + 300,
+  top: kID_TaskPanelTop + 850,
    width : 500,
   height: 50,
-		fontSize: kID_FontSize,
+		fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		fill:'black',
 		fontFamily: kID_Font
@@ -3879,8 +4267,8 @@ var rTaskr1 = new fabric.Textbox('', {
 	var rID_ToDoBox1 = new fabric.Rect({
 	
 	
-    left: kID_HeaderPanelLeft + 240,
-  top: kID_HeaderPanelTop + 450,
+    left: kID_TaskPanelLeft + 240,
+  top: kID_TaskPanelTop + 450,
   fill: 'white',
   stroke: 'black',
   strokeWidth : 5,
@@ -3893,8 +4281,8 @@ var rTaskr1 = new fabric.Textbox('', {
 	var rID_ToDoBox1 = new fabric.Rect({
 	
 	
-    left: kID_HeaderPanelLeft + 240,
-  top: kID_HeaderPanelTop + 450,
+    left: kID_TaskPanelLeft + 240,
+  top: kID_TaskPanelTop + 450,
   fill: 'white',
   stroke: 'black',
   strokeWidth : 5,
@@ -3907,8 +4295,8 @@ var rTaskr1 = new fabric.Textbox('', {
 	var rID_ToDoBox2 = new fabric.Rect({
 	
 	
-    left: kID_HeaderPanelLeft + 240,
-  top: kID_HeaderPanelTop + 550,
+    left: kID_TaskPanelLeft + 240,
+  top: kID_TaskPanelTop + 550,
   fill: 'white',
   stroke: 'black',
   strokeWidth : 5,
@@ -3921,8 +4309,8 @@ var rTaskr1 = new fabric.Textbox('', {
 	var rID_ToDoBox3 = new fabric.Rect({
 	
 	
-    left: kID_HeaderPanelLeft + 240,
-  top: kID_HeaderPanelTop + 650,
+    left: kID_TaskPanelLeft + 240,
+  top: kID_TaskPanelTop + 650,
   fill: 'white',
   stroke: 'black',
   strokeWidth : 5,
@@ -3935,8 +4323,8 @@ var rTaskr1 = new fabric.Textbox('', {
 	var rID_ToDoBox4 = new fabric.Rect({
 	
 	
-    left: kID_HeaderPanelLeft + 240,
-  top: kID_HeaderPanelTop + 750,
+    left: kID_TaskPanelLeft + 240,
+  top: kID_TaskPanelTop + 750,
   fill: 'white',
   stroke: 'black',
   strokeWidth : 5,
@@ -3949,8 +4337,8 @@ var rTaskr1 = new fabric.Textbox('', {
 	var rID_ToDoBox5 = new fabric.Rect({
 	
 	
-    left: kID_HeaderPanelLeft + 240,
-  top: kID_HeaderPanelTop + 850,
+    left: kID_TaskPanelLeft + 240,
+  top: kID_TaskPanelTop + 850,
   fill: 'white',
   stroke: 'black',
   strokeWidth : 5,
@@ -3961,11 +4349,11 @@ var rTaskr1 = new fabric.Textbox('', {
 	});
 	
 	var rEvent1 = new fabric.Textbox('', {
-   left: kID_HeaderPanelLeft + 700,
-  top: kID_HeaderPanelTop + 450,
+   left: kID_TaskPanelLeft + 700,
+  top: kID_TaskPanelTop + 450,
   width : 800,
   height: 50,
-		fontSize: kID_FontSize,
+		fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		fill:'black',
 		fontFamily: kID_Font
@@ -3974,7 +4362,7 @@ var rTaskr1 = new fabric.Textbox('', {
 	var rEvent2 = new fabric.Textbox('', {
    left: kID_HeaderPanelLeft + 700,
   top: kID_HeaderPanelTop + 550,
-		fontSize: kID_FontSize,
+		fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		 width : 500,
   height: 50,
@@ -3983,43 +4371,43 @@ var rTaskr1 = new fabric.Textbox('', {
 	});	
 	
 	var rEvent3 = new fabric.Textbox('', {
-   left: kID_HeaderPanelLeft + 700,
-  top: kID_HeaderPanelTop + 650,
+   left: kID_TaskPanelLeft + 700,
+  top: kID_TaskPanelTop + 650,
    width : 500,
   height: 50,
-		fontSize: kID_FontSize,
+		fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		fill:'black',
 		fontFamily: kID_Font
 	});	
 	
 	var rEvent4 = new fabric.Textbox('', {
-   left: kID_HeaderPanelLeft + 700,
-  top: kID_HeaderPanelTop + 750,
+   left: kID_TaskPanelLeft + 700,
+  top: kID_TaskPanelTop + 750,
    width : 500,
   height: 50,
-		fontSize: kID_FontSize,
+		fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		fill:'black',
 		fontFamily: kID_Font
 	});	
 		var rEvent5 = new fabric.Textbox('', {
-   left: kID_HeaderPanelLeft + 700,
-  top: kID_HeaderPanelTop + 850,
+   left: kID_TaskPanelLeft + 700,
+  top: kID_TaskPanelTop + 850,
    width : 500,
   height: 50,
-		fontSize: kID_FontSize,
+		fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		fill:'black',
 		fontFamily: kID_Font
 	});
 	
 			var rEvent6 = new fabric.Textbox('', {
-   left: kID_HeaderPanelLeft + 700,
-  top: kID_HeaderPanelTop + 850,
+   left: kID_TaskPanelLeft + 700,
+  top: kID_TaskPanelTop + 850,
    width : 500,
   height: 50,
-		fontSize: kID_FontSize,
+		fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		fill:'black',
 		fontFamily: kID_Font
@@ -4028,9 +4416,9 @@ var rTaskr1 = new fabric.Textbox('', {
 		var rHour1 = new fabric.Textbox('', {
 	
 	
-    left: kID_HeaderPanelLeft + 240,
-  top: kID_HeaderPanelTop + 450,
-  fontSize: kID_FontSize,
+    left: kID_TaskPanelLeft + 240,
+  top: kID_TaskPanelTop + 450,
+  fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		fill:'black',
 		fontFamily: kID_Font,
@@ -4044,9 +4432,9 @@ var rTaskr1 = new fabric.Textbox('', {
 	var rHour2 = new fabric.Textbox('', {
 	
 	
-    left: kID_HeaderPanelLeft + 240,
-  top: kID_HeaderPanelTop + 550,
-  fontSize: kID_FontSize,
+    left: kID_TaskPanelLeft + 240,
+  top: kID_TaskPanelTop + 550,
+  fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		fill:'black',
 		fontFamily: kID_Font,
@@ -4059,9 +4447,9 @@ var rTaskr1 = new fabric.Textbox('', {
 	var rHour3 = new fabric.Textbox('', {
 	
 	
-    left: kID_HeaderPanelLeft + 240,
-  top: kID_HeaderPanelTop + 650,
-  fontSize: kID_FontSize,
+    left: kID_TaskPanelLeft + 240,
+  top: kID_TaskPanelTop + 650,
+  fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		fill:'black',
 		fontFamily: kID_Font,
@@ -4074,9 +4462,9 @@ var rTaskr1 = new fabric.Textbox('', {
 	var rHour4 = new fabric.Textbox('', {
 	
 	
-    left: kID_HeaderPanelLeft + 240,
-  top: kID_HeaderPanelTop + 750,
-  fontSize: kID_FontSize,
+    left: kID_TaskPanelLeft + 240,
+  top: kID_TaskPanelTop + 750,
+  fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		fill:'black',
 		fontFamily: kID_Font,
@@ -4090,9 +4478,9 @@ var rTaskr1 = new fabric.Textbox('', {
 	var rHour5 = new fabric.Textbox('', {
 	
 	
-    left: kID_HeaderPanelLeft + 240,
-  top: kID_HeaderPanelTop + 850,
-  fontSize: kID_FontSize,
+    left: kID_TaskPanelLeft + 240,
+  top: kID_TaskPanelTop + 850,
+  fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		fill:'black',
 		fontFamily: kID_Font,
@@ -4106,9 +4494,9 @@ var rTaskr1 = new fabric.Textbox('', {
 		var rHour6 = new fabric.Textbox('', {
 	
 	
-    left: kID_HeaderPanelLeft + 240,
-  top: kID_HeaderPanelTop + 950,
-  fontSize: kID_FontSize,
+    left: kID_TaskPanelLeft + 240,
+  top: kID_TaskPanelTop + 950,
+  fontSize: kID_TaskFontSize,
 		fontWeight: 'normal',
 		fill:'black',
 		fontFamily: kID_Font,
@@ -4122,7 +4510,8 @@ var rTaskr1 = new fabric.Textbox('', {
 
 /***************************end of tasks**************************************************/
 
-var kToDoListIconInfo = new kInsertImageInfo("kToDoListIcon",document.getElementById('kToDoListIcon'));  
+
+ 
 var kID_ToDoListIcon = new fabric.Image(kToDoListIconInfo.kImageElement, {
 	left: kID_MenuPanelLeft+ 245, 
 	top: kID_MenuPanelTop-20  , 
@@ -4149,12 +4538,13 @@ var kID_HelpIcon = new fabric.Image(kHelpIconInfo.kImageElement, {
 	height: kID_MenuIconH+10
 });
 
+/****************** code added by $$$$ridhi ********************************************************/
 
 kID_CalendarIcon.on('selected', function()
 {
  kID_IsMenuOpen = false;
- kID_IsDoorLocked = true;
-kRemoveMenuIcons();
+ kID_IsMenuItemOpen = true;
+	kRemoveMenuIcons();
  rCalendarEvents = [];
  rEvent0.set({
  text: activeuser + "'s Calendar!"
@@ -4170,7 +4560,7 @@ canvas.deactivateAll();
 kID_ToDoListIcon.on('selected', function()
 {
 kID_IsMenuOpen = false;
-kID_IsDoorLocked = true;
+kID_IsMenuItemOpen = true;
 kRemoveMenuPanel2();
 rTasks = [];
 rID_HideTodoList();
@@ -4194,6 +4584,9 @@ rID_HideTodoList();
 kAddMenuPanel2();
 canvas.deactivateAll();
 });
+
+
+/**********************************************************************************************/
 
 function kAddMenuPanel2_WithHidingPanel()
 {
@@ -4224,11 +4617,12 @@ function kAddMenuPanel1()
 	kID_AnyUnReadMsg = false;
 	for(kCounter = 0 ; kCounter < kUserMessages.length; kCounter++)
 	{
-		if( kUserMessages[kCounter].kName.toLowerCase() == activeuser.toLowerCase() && kUserMessages[kCounter].kIsUsed == false)
+		if( (kUserMessages[kCounter].kName.toLowerCase() == 'all' || kUserMessages[kCounter].kName.toLowerCase() == activeuser.toLowerCase()) && kUserMessages[kCounter].kIsUsed == false)
 		{
 			kID_AnyUnReadMsg = true;
 			break;
 		}
+		
 	}
 		
 	if(kID_AnyUnReadMsg == false)
@@ -4332,9 +4726,9 @@ kID_UnLockIcon.on('selected', function()
 	
 	//Sahib
 	if(simgInstance11.visible == true)
-  {
-	   simgInstance11.visible = false;
-  }
+	{
+		simgInstance11.visible = false;
+	}
 	
 	canvas.deactivateAll(); // deselect everything
 });
@@ -4352,11 +4746,10 @@ kID_LockIcon.on('selected', function()
 	canvas.remove(kID_LockIcon);
 	
 	//Sahib
-		if(simgInstance12.visible == true)
-		{
-		   canvas.remove(simgInstance12);
-		   //simgInstance12.visible = false;
-		}
+	if(simgInstance12.visible == true)
+	{
+		canvas.remove(simgInstance12);
+	}
 	
 	canvas.deactivateAll(); // deselect everything
 });
@@ -4507,9 +4900,15 @@ kID_SOSIcon.on('selected', function()
 	kID_IsMenuOpen = false;
 	kID_IsMenuItemOpen = true;
 	//kID_IsDoorLocked = true;
-	kID_IsAvatarShown = false;
-	kID_IsMicrophoneMute = false;
+	
 /*************************************** Remove all icons - menu + lock + sos ****************************/
+
+	/********** notification panel ***************/
+	kRemoveNotificationPanel();
+	kRemovePackageLog();
+	kRemoveNewsFeed();
+	/********** notification panel ***************/
+		
 	/********* lock panel removal ***********/
 	kRemoveLockUnlockIconPanel();
 	/********* lock panel removal ***********/
@@ -4528,25 +4927,42 @@ kID_SOSIcon.on('selected', function()
 	kRemoveCameraPanel();
 	/************************************************************************************************************/
 	
+	/************ message panel **********************/
+	kRemoveMessagePanel();
+	/*************************************************/
+	
+	/***************** CALENDAR PANEL BY RIDHIPENDIGN *********************/
+		
+	/**********************************************************************/
+	
+	/*********************** settigns panel *******************************/
+	aHideAnkurCodeSettings();
+		
+	/**********************************************************************/
+	
+	//Sahib
+	RemoveHouseAlarmWindow();
+	RemoveHelpWindow();
+	
 	/********** remove theme panel icons **************/
 	kRemoveThemePanel();
 	/************************************************/
+	
+	/***************** TO DO LISTS **********************************/
+	rID_HideTodoList();
+		
+	/******************************************************************/
+	
 	/*** outside camera images removal ******/
 	kRemoveCameraPanel_WithHidingPanel_OD();
 	
 	/***************************************/
 	
-	/************ message panel **********************/
-	kRemoveMessagePanel();
-	/*************************************************/
+	
 	
 	/***************** remove settings screen ***********/
 	aHideAnkurCodeSettings();
 	/****************************************************/
-	
-	//Sahib
-	RemoveHouseAlarmWindow();
-	RemoveHelpWindow();
 	
 /*************************************** Remove all icons - menu + lock + sos ****************************/
 	//now add all the icons again
@@ -4578,9 +4994,9 @@ kID_SOS_MuteIcon.on('selected', function()
 
 function kID_Remove_Disconnecting911()
 {
-	if(kID_SOS_CallDisconnectIcon.kIsUsed)
+	if(kCallDisconnectIconInfo.kIsUsed)
 	{
-		kID_SOS_CallDisconnectIcon.kIsUsed = false;
+		kCallDisconnectIconInfo.kIsUsed = false;
 		canvas.remove(kID_SOSPanel);
 		if(kID_IsDoorLocked)
 		{
@@ -4591,23 +5007,27 @@ function kID_Remove_Disconnecting911()
 			canvas.add(kID_UnLockIcon);
 		}
 		canvas.remove(kID_Disconnecting911);
+		
+		kAddNotificationPanel();
 	}
 };
 
 kID_SOS_CallDisconnectIcon.on('selected', function()
 {
 	canvas.add(kID_Disconnecting911);
-	kID_SOS_CallDisconnectIcon.kIsUsed = true;
+	kCallDisconnectIconInfo.kIsUsed = true;
 	
 	canvas.remove(kID_Calling911);
 	canvas.remove(kID_SOS_UnMuteIcon);
 	canvas.remove(kID_SOS_CallDisconnectIcon);
 	canvas.remove(kID_SOS_MuteIcon);
 	
+	setTimeout(kID_Remove_Disconnecting911, 5000);
+	
 	canvas.deactivateAll(); // deselect everything
 });
 
-setInterval(kID_Remove_Disconnecting911, 5000);
+
 
 
 function kRemoveLockUnlockIconPanel()
@@ -4686,18 +5106,8 @@ kID_MenuIcon.on('selected', function()
 		
 		/**** add the lock icon on the door ************************/
 		
-	if(kID_IsDoorLocked)
-		{
-			canvas.remove(kID_LockIcon);
-			canvas.add(kID_LockIcon);
-		}
-		else
-		{
-			canvas.remove(kID_UnLockIcon);
-			canvas.add(kID_UnLockIcon);
-		}
-		//canvas.remove(kID_LockIcon);
-		//canvas.add(kID_LockIcon);
+		canvas.remove(kID_LockIcon);
+		canvas.add(kID_LockIcon);
 		
 		/**** add the lock icon on the door ************************/
 		
@@ -4705,7 +5115,7 @@ kID_MenuIcon.on('selected', function()
 	}
 	else
 	{
-		activeuser = 'RIDHI';
+		activeuser = 'Ridhi';
 		kID_IsMenuOpen = true;
 		kID_IsMenuItemOpen = true;
 	
@@ -4735,23 +5145,42 @@ kID_MenuIcon.on('selected', function()
 		kRemoveCameraPanel();
 		/************************************************************************************************************/
 		
+		/************ message panel **********************/
+		kRemoveMessagePanel();
+		/*************************************************/
+		
+		/***************** CALENDAR PANEL BY RIDHIPENDIGN *********************/
+		
+		/**********************************************************************/
+		
+		/*********************** settigns panel *******************************/
+		aHideAnkurCodeSettings();
+		
+		/**********************************************************************/
+		
+		//Sahib
+		RemoveHouseAlarmWindow();
+		RemoveHelpWindow();
+		
 		/******* theme panel icons removal *********************/
 		kRemoveThemePanel();
 		/*******************************************************/
+		
+		/***************** TO DO LISTS **********************************/
+		rID_HideTodoList();
+		
+		/******************************************************************/
 		
 		/*** outside camera images removal ******/
 		kRemoveCameraPanel_WithHidingPanel_OD();
 		/***************************************/
 		
-		/************ message panel **********************/
-		kRemoveMessagePanel();
-		/*************************************************/
+		/*********************************** user specific/multiple user panel ******************************/
+		kRemoveUserSpecificPanel();
+		kRemoveMultiUserPanel();
 		
-		aHideAnkurCodeSettings();
+		/*********************************** user specific/multiple user panel ******************************/
 		
-		//Sahib
-		RemoveHouseAlarmWindow();
-		RemoveHelpWindow();
 	
 	/*************************************** Remove all icons - menu + lock + sos ****************************/
 	
@@ -4830,74 +5259,61 @@ kID_CameraIcon.on('selected', function()
 
 function kID_RemoveAllIcons()
 {
-	/********* lock panel removal ***********/
-	canvas.remove(kID_LockUnlcokPanel);
-	canvas.remove(kID_LockIcon);
-	canvas.remove(kID_UnLockIcon);
-	
-	/********* lock panel removal ***********/
-	
-	/******** menu icons removal *************/
-	
-	canvas.remove(kID_MenuPanel);
-	
-	canvas.remove(kID_CameraIcon);
-	/****************camera panel icons removal *****************************************************************/
-	canvas.remove(kID_CameraLeftArrowIcon);
-	canvas.remove(kID_OutsideGuestImageIcon1);
-	canvas.remove(kID_OutsideGuestImageIcon2);
-	canvas.remove(kID_FOutsideGuestImageIcon1);
-	canvas.remove(kID_FOutsideGuestImageIcon2);
-	canvas.remove(kID_CorridorViewIcon);
-	canvas.remove(kID_CheckBoxUnCheckedIcon);
-	canvas.remove(kID_CheckBoxCheckedIcon);
-	canvas.remove(kID_ShowAvatar);
-	canvas.remove(kID_EscapeFullScreenCameraIcon);
-	canvas.remove(kID_FullScreenCameraIcon);
-	canvas.remove(kID_InsideCameraOffIcon);
-	canvas.remove(kID_InsideCameraOnIcon);
-	canvas.remove(kID_MicrophoneOnIcon);
-	canvas.remove(kID_MicrophoneOffIcon);
-	canvas.remove(kID_CameraPanel);
-	/************************************************************************************************************/
-	
-	
-	canvas.remove(kID_NoUnreadIcon);
-	canvas.remove(kID_OneUnreadMessageIcon_Menu);
-	/*********** add icons of message panel for removal ******/
-	
-	/*********************************************************/
-	
-	canvas.remove(kID_CalendarIcon);
-	/*************** add icons of calendar panel for removal ************/
-	
-	
-	/*******************************************************************/
-	
-	canvas.remove(kID_UnMuteIcon);
-	canvas.remove(kID_MuteIcon_Menu);
-	
-	canvas.remove(kID_SettingsIcon);
-	/*********** add icons of settings panel for removal *************/
-	
-	/****************************************************************/
-	
-	canvas.remove(kID_MirrorIcon);
-	/*************** add icons of mirror panel for removal **********/
-	
-	/****************************************************************/
-	
-	canvas.remove(kID_RightArrowIcon);
-	/******** menu icons removal *************/
-	
-	/********* remove all the sos related icons ***********/
-	canvas.remove(kID_SOSPanel);
-	canvas.remove(kID_Calling911);
-	canvas.remove(kID_Disconnecting911);
-	canvas.remove(kID_SOS_UnMuteIcon);
-	canvas.remove(kID_SOS_MuteIcon);
-	canvas.remove(kID_SOS_CallDisconnectIcon);
-	/********* remove all the sos related icons ***********/
+	/********** notification panel ***************/
+		kRemoveNotificationPanel();
+		kRemovePackageLog();
+		kRemoveNewsFeed();
+		/********** notification panel ***************/
+		
+		/********* lock panel removal ***********/
+		kRemoveLockUnlockIconPanel();
+		/********* lock panel removal ***********/
+		
+		/******** menu icons removal *************/
+		kRemoveMenuIcons();
+		kRemoveMenuPanel2();
+		
+		/******** menu icons removal *************/
+		
+		/********* remove all the sos related icons ***********/
+		kRemoveSOSPanel();
+		/********* remove all the sos related icons ***********/
+		
+		/****************camera panel icons removal *****************************************************************/
+		kRemoveCameraPanel();
+		/************************************************************************************************************/
+		
+		/************ message panel **********************/
+		kRemoveMessagePanel();
+		/*************************************************/
+		
+		/***************** CALENDAR PANEL BY RIDHIPENDIGN *********************/
+		
+		/**********************************************************************/
+		
+		/*********************** settigns panel *******************************/
+		aHideAnkurCodeSettings();
+		
+		/**********************************************************************/
+		
+		/******* theme panel icons removal *********************/
+		kRemoveThemePanel();
+		/*******************************************************/
+		
+		/***************** TO DO LISTS **********************************/
+		rID_HideTodoList();
+		
+		/******************************************************************/
+		
+		/*** outside camera images removal ******/
+		kRemoveCameraPanel_WithHidingPanel_OD();
+		/***************************************/
+		
+		/*********************************** user specific/multiple user panel ******************************/
+		kRemoveUserSpecificPanel();
+		kRemoveMultiUserPanel();
+		
+		/*********************************** user specific/multiple user panel ******************************/
 };
 
 
@@ -4913,13 +5329,11 @@ function kID_LockDoor_Auto()
 			canvas.add(kID_LockIcon);
 		
 			canvas.remove(kID_UnLockIcon);
-		
-		//Sahib
-		if(simgInstance12.visible == true)
-		{
-		   canvas.remove(simgInstance12);
-		   //simgInstance12.visible = false;
-		}
+			//Sahib
+			if(simgInstance12.visible == true)
+			{
+				canvas.remove(simgInstance12);
+			}
 		
 	}
 };
@@ -5208,6 +5622,17 @@ canvas.add(kID_GlobalNewsLeftArrowIcon);
 kID_GlobalNewsLeftArrowIcon.on('selected',function(){
 	
 	kRemoveNewsFeed();
+	kAddNotificationPanel();
+	
+	canvas.remove(kID_LockIcon);
+	canvas.remove(kID_UnLockIcon);
+	
+	if(kID_IsDoorLocked)
+		canvas.add(kID_LockIcon);
+	else
+		canvas.add(kID_UnLockIcon);
+		
+	
 });
 
 canvas.add(kID_NewsFeedBox);
@@ -5382,6 +5807,15 @@ canvas.add(kID_PackageLeftArrowIcon);
 kID_PackageLeftArrowIcon.on('selected',function(){
 	
 	kRemovePackageLog();
+	kAddNotificationPanel();
+	
+	canvas.remove(kID_LockIcon);
+	canvas.remove(kID_UnLockIcon);
+	
+	if(kID_IsDoorLocked)
+		canvas.add(kID_LockIcon);
+	else
+		canvas.add(kID_UnLockIcon);
 });
 
 canvas.add(kID_PackageBox);
@@ -5409,7 +5843,7 @@ function kRemovePackageLog()
 	canvas.remove(kID_PackageLeftArrowIcon);
 };
 
-function kBindPackageLogs()
+function kBindPackageLogs(position)
 {
 	var kTempLogArray = [];
 	for (kLog = kUserLogs.length-1; kLog >= 0 ; kLog--) 
@@ -5460,6 +5894,18 @@ function kBindPackageLogs()
 	
 }
 
+/************************************************************************************************************************************/
+
+
+
+
+
+
+
+//add the lock icon at the end - needed on the start
+canvas.add(kID_LockIcon);
+
+canvas.add(kID_Multiple);
 /************************************************************************************************************************************/
 
 //add the lock icon at the end - needed on the start
