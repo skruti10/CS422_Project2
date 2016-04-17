@@ -19,6 +19,22 @@
 
 <!-- /************************************************** Common set of codes for everyone end - HTML HEAD *****************************************************************/ -->
 
+<!--Added by Sahib-->
+<style type="text/css">
+        #b1{position:relative; left:2800px; top: -2000px}
+		#b2{position:relative; left:2500px; top: -1700px}
+		#b3{position:relative; left:2200px; top: -1400px}
+		#b4{position:relative; left:1900px; top: -1100px}
+		#b5{position:relative; left:1600px; top: -800px}
+		#b6{position:relative; left:1700px; top: -800px}
+		#b7{position:relative; left:1800px; top: -800px}
+		#b8{position:relative; left:680px; top: -500px}
+		#b9{position:relative; left:800px; top: -500px}
+		#b10{position:relative; left:-325px; top: -200px}
+</style>
+
+
+
    
 <body>
   <!-- canvas tag for Fabric.js to draw into -->
@@ -29,16 +45,6 @@
   
 <!-- /************************************************** Common set of codes for everyone start -HTML BODY ***************************************************************/ -->
   
-  <audio id="audio1">
-    <source src="http://sbajaj7.people.uic.edu/CS422/images/bell.mp3" type="audio/wav" />
-    </audio>
-
-    <audio id="audio2">
-    <source src="http://sbajaj7.people.uic.edu/CS422/images/beep1.mp3" type="audio/mp3" />
-    </audio>
-  
-  
-
 <!-- /************************************************** Common set of codes for everyone end - HTML BODY *****************************************************************/ -->
 
     
@@ -126,13 +132,86 @@
 
 <!-- ************************************HTML Code Added by Sahib ************************************************************************************* -->
 
-<img src="Icons/keyhole1.png" id="sKeyHoleIcon" style="display:none">
-<img src="Icons/doorbell1.png" id="sDoorBellIcon" style="display:none">
-<img src="Icons/writemessage1.png" id="sWriteMessageIcon" style="display:none">
-<img src="Icons/DeliveringPackage.jpg" id="sDeliverPackageIcon" style="display:none">
-<img src="Icons/doorbellsoundsettings.png" id="sDoorBellRingingIcon" style="display:none">
-<img src="Icons/new message.jpg" id="sWritingPad" style="display:none">
-<img src="Icons/leftarrow1.png" id="sLeftArrow" style="display:none">
+<img src="..//CS422_Project2//Icons//keyhole1.png" id="sKeyHoleIcon" style="display:none">
+<img src="..//CS422_Project2//Icons//doorbell1.png" id="sDoorBellIcon" style="display:none">
+<img src="..//CS422_Project2//Icons//writemessage1.png" id="sWriteMessageIcon" style="display:none">
+<img src="..//CS422_Project2//Icons//DeliveringPackage.jpg" id="sDeliverPackageIcon" style="display:none">
+<img src="..//CS422_Project2//Icons//doorbellsoundsettings.png" id="sDoorBellRingingIcon" style="display:none">
+<img src="..//CS422_Project2//Icons//new message.jpg" id="sWritingPad" style="display:none">
+<img src="..//CS422_Project2//Icons//leftarrow1.png" id="sLeftArrow" style="display:none">
+
+<img src="..//CS422_Project2//Icons//bankur.png" id="b1" width="300" height="150">
+<img src="..//CS422_Project2//Icons//bkruti.png" id="b2" width="300" height="150">
+<img src="..//CS422_Project2//Icons//bridhi.png" id="b3" width="300" height="150">
+<img src="..//CS422_Project2//Icons//bsahib.png" id="b4" width="300" height="150">
+
+<img src="..//CS422_Project2//Icons//autumn.png" id="b5" width="300" height="150">
+<img src="..//CS422_Project2//Icons//microphone.png" id="smicrophone" style="display:none">
+
+<img src="..//CS422_Project2//Icons//openthedoor.png" id="b6" width="300" height="150">
+<img src="..//CS422_Project2//Icons//closethedoor.png" id="b7" width="300" height="150">
+<img src="..//CS422_Project2//Icons//speakingmicrophone1.png" id="slisteningmicrophone" style="display:none">
+
+<img src="..//CS422_Project2//Icons//white.PNG" id="swhite" style="display:none">
+
+<img src="..//CS422_Project2//Icons//correctattempt.png" id="b8" width="500" height="150">
+<img src="..//CS422_Project2//Icons//incorrectattempt.png" id="b9" width="500" height="150" onclick="showIncorrectFingerprint()">
+
+<img src="..//CS422_Project2//Icons//handpointer1.png" id="shandpointer" style="display:none">
+<img src="..//CS422_Project2//Icons//locked1.png" id="slocked" style="display:none">
+<img src="..//CS422_Project2//Icons//unlock.png" id="sunlock" style="display:none">
+
+<img src="..//CS422_Project2//Icons//incorrectprint.png" id="sincorrectprint" style="display:none">
+<img src="..//CS422_Project2//Icons//black.jpg" id="sblack" style="display:none">
+<img src="..//CS422_Project2//Icons//men1.png" id="smen" style="display:none">
+<img src="..//CS422_Project2//Icons//salesman.png" id="ssalesman" style="display:none">
+
+<img src="..//CS422_Project2//Icons//housealarmbutton.png" id="b10" width="500" height="150">
+<img src="..//CS422_Project2//Icons//red.png" id="sred" style="display:none">
+
+	<audio id="audio1">
+    <source src="http://sbajaj7.people.uic.edu/CS422/images/bell.mp3" type="audio/wav" />
+    </audio>
+
+    <audio id="audio2">
+    <source src="http://sbajaj7.people.uic.edu/CS422/images/beep1.mp3" type="audio/mp3" />
+    </audio>
+	
+	<audio id="audio3">
+    <source src="http://sbajaj7.people.uic.edu/CS422/project2/heyautumn.mp3" type="audio/mp3" />
+    </audio>
+
+	<audio id="audio4">
+    <source src="http://sbajaj7.people.uic.edu/CS422/project2/openthedoor.mp3" type="audio/mp3" />
+    </audio>
+	
+	<audio id="audio5">
+    <source src="http://sbajaj7.people.uic.edu/CS422/project2/closethedoor.mp3" type="audio/mp3" />
+    </audio>
+	
+	<audio id="audio6">
+    <source src="http://sbajaj7.people.uic.edu/CS422/project2/alreadyunlocked.mp3" type="audio/mp3" />
+    </audio>
+	
+	<audio id="audio7">
+    <source src="http://sbajaj7.people.uic.edu/CS422/project2/housealarm.mp3" type="audio/mp3" />
+    </audio>
+	
+	<!--
+	<video id="video1" controls width="270" autoplay>
+	<source src="http://sbajaj7.people.uic.edu/CS422/project2/samplesmall.mp4" type='video/mp4'>
+	<source src="http://sbajaj7.people.uic.edu/CS422/project2/samplesmall.ogg" type='video/ogg'>
+	<source src="http://sbajaj7.people.uic.edu/CS422/project2/samplesmall.webm" type='video/webm'>
+	</video>
+	-->
+	
+	<video height="600" width="750" id="video2" style="display: none">
+	<source src="http://sbajaj7.people.uic.edu/CS422/project2/samplesmall.mp4">
+	<source src="http://sbajaj7.people.uic.edu/CS422/project2/samplesmall.ogv">
+	</video>	
+	
+	<!-- <iframe width="760" height="615" src="https://www.youtube.com/embed/ba3iwKFiNXM" id = "videoframe" frameborder="10" allowfullscreen></iframe> -->
+
 
 
 
@@ -4234,6 +4313,12 @@ kID_UnLockIcon.on('selected', function()
 	
 	canvas.add(kID_LockIcon);
 	
+	//Sahib
+	if(simgInstance11.visible == true)
+  {
+	   simgInstance11.visible = false;
+  }
+	
 	canvas.deactivateAll(); // deselect everything
 });
 
@@ -4248,6 +4333,13 @@ kID_LockIcon.on('selected', function()
 	canvas.add(kID_UnLockIcon);
 	
 	canvas.remove(kID_LockIcon);
+	
+	//Sahib
+		if(simgInstance12.visible == true)
+		{
+		   canvas.remove(simgInstance12);
+		   //simgInstance12.visible = false;
+		}
 	
 	canvas.deactivateAll(); // deselect everything
 });
@@ -4435,6 +4527,10 @@ kID_SOSIcon.on('selected', function()
 	aHideAnkurCodeSettings();
 	/****************************************************/
 	
+	//Sahib
+	RemoveHouseAlarmWindow();
+	RemoveHelpWindow();
+	
 /*************************************** Remove all icons - menu + lock + sos ****************************/
 	//now add all the icons again
 	canvas.add(kID_SOSPanel);
@@ -4573,8 +4669,18 @@ kID_MenuIcon.on('selected', function()
 		
 		/**** add the lock icon on the door ************************/
 		
-		canvas.remove(kID_LockIcon);
-		canvas.add(kID_LockIcon);
+	if(kID_IsDoorLocked)
+		{
+			canvas.remove(kID_LockIcon);
+			canvas.add(kID_LockIcon);
+		}
+		else
+		{
+			canvas.remove(kID_UnLockIcon);
+			canvas.add(kID_UnLockIcon);
+		}
+		//canvas.remove(kID_LockIcon);
+		//canvas.add(kID_LockIcon);
 		
 		/**** add the lock icon on the door ************************/
 		
@@ -4625,6 +4731,10 @@ kID_MenuIcon.on('selected', function()
 		/*************************************************/
 		
 		aHideAnkurCodeSettings();
+		
+		//Sahib
+		RemoveHouseAlarmWindow();
+		RemoveHelpWindow();
 	
 	/*************************************** Remove all icons - menu + lock + sos ****************************/
 	
@@ -4786,6 +4896,13 @@ function kID_LockDoor_Auto()
 			canvas.add(kID_LockIcon);
 		
 			canvas.remove(kID_UnLockIcon);
+		
+		//Sahib
+		if(simgInstance12.visible == true)
+		{
+		   canvas.remove(simgInstance12);
+		   //simgInstance12.visible = false;
+		}
 		
 	}
 };
@@ -5336,12 +5453,58 @@ canvas.add(kID_LockIcon);
 
 /********************************** Code End by Kruti ***********************************************************************************************/
 
-
-
-
-
-
 //Code Added by Sahib 
+
+
+
+//Functions for playing sound
+
+function playDoorbell() {
+    console.log("Play Doorbell");
+    audio1.play(); // audio will load and then play
+}
+
+function playBeep(){
+
+    audio2.play(); 
+}
+
+function playHeyAutumn(){
+
+    audio3.play();
+	
+}
+
+function playOpenTheDoor(){
+
+	audio4.play();
+
+}
+
+function playCloseTheDoor(){
+
+	audio5.play();
+	
+}
+
+function alreadyUnlocked(){
+
+	audio6.play();
+	
+}
+
+function PlayHouseAlarm(){
+
+	audio7.load();
+	audio7.play();
+	
+}
+
+audio7.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+}, false);
+
 
 //code for main menu strip for Outside door start
 
@@ -5546,6 +5709,12 @@ canvas.add(sNewPlateText);
 canvas.add(sPostPlate);
 canvas.add(sPostPlateText);
 
+if(simgInstance12.visible == true)
+	{
+	   canvas.remove(simgInstance12);
+	   //simgInstance12.visible = false;
+	}	
+
 /*var el = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var isDrawing;
@@ -5673,6 +5842,31 @@ kAddNotificationPanel();
 
 /**************** END $$KRUTI ************************************************/
 
+
+if(simgInstance4.opacity == 0.5)
+  {
+  simgInstance4.opacity = 1;
+  sDeliverPackageText1.fontSize = 20;
+  sDeliverPackageText1.left = 2150;
+  sDeliverPackageText1.top = 667;
+  
+  sDeliverPackageText2.fontSize = 20;
+  sDeliverPackageText2.left = 2150;
+  sDeliverPackageText2.top = 730;
+  }
+
+  else
+  {
+    simgInstance4.opacity = 0.5;
+	sDeliverPackageText1.fontSize = 25;
+	sDeliverPackageText1.left = 2150;
+	sDeliverPackageText1.top = 665;
+	
+	sDeliverPackageText2.fontSize = 25;
+	sDeliverPackageText2.left = 2150;
+	sDeliverPackageText2.top = 730;
+	
+  }
 canvas.deactivateAll(); // deselect everything
 
   });
@@ -5727,13 +5921,7 @@ simgInstance7.on('selected', function() {
 
 playBeep();
 
-canvas.remove(simgInstance7);
-
-canvas.remove(sNewPlate);
-canvas.remove(sNewPlateText);
-
-canvas.remove(sPostPlate);
-canvas.remove(sPostPlateText);
+RemoveWriteMessageWindow();
 
 showOutsideDoorIcons();
 
@@ -5741,6 +5929,940 @@ canvas.deactivateAll(); // deselect everything
 
   });
   
+
+var simgElement8 = document.getElementById('smicrophone');
+var simgInstance8 = new fabric.Image(simgElement8, {
+  
+  width: 650,
+  height: 500,
+  left: 1725,
+  top: 370,    
+});
+
+simgInstance8.hasControls = simgInstance8.hasBorders = false;
+
+simgInstance8.lockMovementX = simgInstance8.lockMovementY = true;
+
+
+var simgElement9 = document.getElementById('shandpointer');
+var simgInstance9 = new fabric.Image(simgElement9, {
+  
+  width: 200,
+  height: 200,
+  left: 1950,
+  top: 1800,    
+});
+
+simgInstance9.hasControls = simgInstance9.hasBorders = false;
+
+simgInstance9.lockMovementX = simgInstance9.lockMovementY = true;
+
+//canvas.add(simgInstance9);
+
+//var sIsLocked = "true";
+
+var animateBtn = document.getElementById('b8');
+
+  animateBtn.onclick = function() {
+  
+  playBeep();
+  
+  count = 0;
+  
+  
+  if(kID_IsDoorLocked == true){
+  
+	RemoveWriteMessageWindow();
+	showOutsideDoorIcons();
+  
+    animateBtn.disabled = true;	
+	canvas.add(simgInstance9);
+	canvas.add(simgInstance10);
+    simgInstance9.animate('top', simgInstance9.getTop() === 1800 ? 1180 : 1180, {
+      duration: 1000,
+      onChange: canvas.renderAll.bind(canvas),
+      
+	  onComplete: function() {
+        animateBtn.disabled = false;
+		canvas.remove(simgInstance10);
+		canvas.add(simgInstance11);
+		canvas.remove(simgInstance9);
+		simgInstance9.set({
+			top: 1800,
+			left: 1950,
+		});
+		//sIsLocked = "false";
+		
+		kID_IsDoorLocked = false;
+		
+		//Inside door change locked icon to unlocked icon
+		
+		if(kID_IsMenuOpen == false)
+		{
+		canvas.remove(kID_UnLockIcon);
+		canvas.remove(kID_LockUnlcokPanel);
+		
+		canvas.add(kID_UnLockIcon);
+		canvas.remove(kID_LockIcon);
+	
+		}
+	if(simgInstance12.visible == true)
+	{
+	
+	canvas.remove(simgInstance12);
+	canvas.remove(simgInstance13);
+	canvas.remove(simgInstance14);
+	     
+	}	
+				
+      }
+    });
+	}
+	else{
+		alreadyUnlocked();
+	}
+  
+  
+	
+	canvas.deactivateAll(); // deselect everything
+  
+  
+  };
+
+setInterval(RemoveUnlockOutside, 5000);
+
+function RemoveUnlockOutside(){
+
+	if(simgInstance11.visible == true)
+  {
+	   simgInstance11.visible = false;
+  }
+
+
+}
+  
+var simgElement10 = document.getElementById('slocked');
+var simgInstance10 = new fabric.Image(simgElement10, {
+  
+  width: 100,
+  height: 100,
+  left: 1590,
+  top: 900,    
+});
+
+simgInstance10.hasControls = simgInstance10.hasBorders = false;
+
+simgInstance10.lockMovementX = simgInstance10.lockMovementY = true;  
+  
+var simgElement11 = document.getElementById('sunlock');
+var simgInstance11 = new fabric.Image(simgElement11, {
+  
+  width: 100,
+  height: 100,
+  left: 1590,
+  top: 900,    
+});
+
+simgInstance11.hasControls = simgInstance11.hasBorders = false;
+
+simgInstance11.lockMovementX = simgInstance11.lockMovementY = true; 
+
+
+var simgElement12 = document.getElementById('sincorrectprint');
+var simgInstance12 = new fabric.Image(simgElement12, {
+  
+  width: 200,
+  height: 200,
+  left: 1950,
+  top: 830,    
+});
+
+simgInstance12.hasControls = simgInstance12.hasBorders = false;
+
+simgInstance12.lockMovementX = simgInstance12.lockMovementY = true;
+
+
+
+//Outside door upper half
+var simgElement13 = document.getElementById('sblack');
+var simgInstance13 = new fabric.Image(simgElement13, {
+  
+  width: 1231,
+  height: 820,
+  left: 1428,
+  top: 0,
+  opacity: 0.8,
+});
+
+simgInstance13.hasControls = simgInstance13.hasBorders = false;
+
+simgInstance13.lockMovementX = simgInstance13.lockMovementY = true;
+
+
+simgInstance13.on('selected', function() {
+
+playBeep();
+
+canvas.remove(simgInstance12);
+canvas.remove(simgInstance13);
+canvas.remove(simgInstance14);
+
+canvas.deactivateAll(); // deselect everything
+
+  });
+
+//Outside door lower half
+var simgElement14 = document.getElementById('sblack');
+var simgInstance14 = new fabric.Image(simgElement14, {
+  
+  width: 1231,
+  height: 1150,
+  left: 1428,
+  top: 1280,
+  opacity: 0.8,
+});
+
+simgInstance14.hasControls = simgInstance14.hasBorders = false;
+
+simgInstance14.lockMovementX = simgInstance14.lockMovementY = true;
+
+simgInstance14.on('selected', function() {
+
+playBeep();
+
+canvas.remove(simgInstance12);
+canvas.remove(simgInstance13);
+canvas.remove(simgInstance14);
+
+canvas.deactivateAll(); // deselect everything
+
+  });
+  
+//Inside door upper half
+var simgElement15 = document.getElementById('sblack');
+var simgInstance15 = new fabric.Image(simgElement15, {
+  
+  width: 1235,
+  height: 2350,
+  left: 50,
+  top: 0,
+  opacity: 0.8,
+});
+
+simgInstance15.hasControls = simgInstance15.hasBorders = false;
+
+simgInstance15.lockMovementX = simgInstance15.lockMovementY = true;
+
+
+simgInstance15.on('selected', function() {
+
+playBeep();
+
+RemoveInsideOutsideBlackScreen();
+
+canvas.deactivateAll(); // deselect everything
+
+  });
+  
+
+//Inside door men 1
+var simgElement16 = document.getElementById('smen');
+var simgInstance16 = new fabric.Image(simgElement16, {
+  
+  width: 450,
+  height: 450,
+  left: 70,
+  top: 330,
+  opacity: 1,
+});
+
+simgInstance16.hasControls = simgInstance16.hasBorders = false;
+
+simgInstance16.lockMovementX = simgInstance16.lockMovementY = true;
+
+simgInstance16.on('selected', function() {
+
+playBeep();
+
+RemoveInsideOutsideBlackScreen();
+
+canvas.deactivateAll(); // deselect everything
+
+  });
+  
+
+//Inside door men 2
+var simgElement17 = document.getElementById('ssalesman');
+var simgInstance17 = new fabric.Image(simgElement17, {
+  
+  width: 450,
+  height: 450,
+  left: 790,
+  top: 340,
+  opacity: 1,
+});
+
+simgInstance17.hasControls = simgInstance17.hasBorders = false;
+
+simgInstance17.lockMovementX = simgInstance17.lockMovementY = true;
+
+simgInstance17.on('selected', function() {
+
+playBeep();
+
+RemoveInsideOutsideBlackScreen();
+
+canvas.deactivateAll(); // deselect everything
+
+  });
+  
+var incorrectprint = document.getElementById('b9');
+var count = 0;
+
+  incorrectprint.onclick = function() {
+  
+  playBeep();
+  
+  
+		
+	if(simgInstance12.visible == true)
+	{
+	   canvas.remove(simgInstance12);
+	   //simgInstance12.visible = false;
+	}	
+		
+	if(kID_IsDoorLocked == true){
+	
+	RemoveWriteMessageWindow();
+	showOutsideDoorIcons();
+  
+    incorrectprint.disabled = true;	
+	canvas.add(simgInstance9);
+	canvas.add(simgInstance10);
+    simgInstance9.animate('top', simgInstance9.getTop() === 1800 ? 1180 : 1180, {
+      duration: 1000,
+      onChange: canvas.renderAll.bind(canvas),
+      
+	  onComplete: function() {
+        incorrectprint.disabled = false;
+		canvas.remove(simgInstance10);
+		//canvas.add(simgInstance11);
+		canvas.add(simgInstance12);
+		canvas.remove(simgInstance9);
+		
+		simgInstance9.set({
+			top: 1800,
+			left: 1950,
+		});
+		//sIsLocked = "false";
+		
+		count= count + 1;
+		
+		if(count == "6"){
+	
+	canvas.add(simgInstance17);
+	simgInstance13.set({
+			opacity: 1,
+		});
+	simgInstance14.set({
+			opacity: 1,
+		});
+	simgInstance15.set({
+			opacity: 1,
+		});
+		
+	}
+	
+	if(count == "3"){
+	console.log("Button pressed 3 times.");
+	
+	if(simgInstance15.visibile == true){
+	
+	canvas.remove(simgInstance15);
+	canvas.remove(simgInstance16);
+	canvas.remove(sIncorrectAttemptText);
+	}
+	
+	canvas.add(simgInstance13);
+	canvas.add(simgInstance14);
+	
+	canvas.add(simgInstance15);
+	canvas.add(simgInstance16);
+	canvas.add(sIncorrectAttemptText);
+	
+	simgInstance15.visibile = true;
+	
+	//Disabling all the buttons external to the door system.
+	document.getElementById('b9').disabled = true;
+	console.log(document.getElementById('b9').disabled);
+	animateBtn.disabled = true;	
+
+	}
+	
+      }
+    });
+	
+	}
+	
+	else{
+		alreadyUnlocked();
+	}
+	
+  //setTimeout(RemoveIncorrectPrint, 3000);
+  };
+  
+
+
+function RemoveIncorrectPrint(){
+
+	if(simgInstance12.visible == true)
+  {
+	   simgInstance12.visible = false;
+  }
+
+
+}
+
+
+function RemoveInsideOutsideBlackScreen(){
+
+canvas.remove(simgInstance12);
+canvas.remove(simgInstance13);
+canvas.remove(simgInstance14);
+
+canvas.remove(simgInstance15);
+canvas.remove(simgInstance16);
+canvas.remove(simgInstance17);
+canvas.remove(sIncorrectAttemptText);
+
+count = 0;
+
+simgInstance13.set({
+			opacity: 0.8,
+		});
+simgInstance14.set({
+		opacity: 0.8,
+	});
+simgInstance15.set({
+		opacity: 0.8,
+	});
+
+}
+  
+
+//Text
+var sIncorrectAttemptText = new fabric.Text('3 Unsuccessful Unlocking Attempts made.',{
+  left: 115,
+  top: 900, 
+  fontSize: 44,
+  fill : 'White',
+  fontWeight: 'bold',
+  fontFamily: sID_Font
+});
+
+sIncorrectAttemptText.on('selected', function() {
+
+  playBeep();
+
+canvas.remove(simgInstance12);
+canvas.remove(simgInstance13);
+canvas.remove(simgInstance14);
+
+canvas.remove(simgInstance15);
+canvas.remove(simgInstance16);
+canvas.remove(simgInstance17);
+canvas.remove(sIncorrectAttemptText);
+
+count = 0;
+
+  //canvas.renderAll();
+  canvas.deactivateAll(); // deselect everything
+
+});
+
+
+  
+  
+var heyautumn = document.getElementById('b5');
+
+  heyautumn.onclick = function() {
+  
+  playHeyAutumn();
+  
+  canvas.add(simgInstance18);
+  simgInstance18.visibile = true;
+  
+  };
+  
+var openthedoor = document.getElementById('b6');
+
+	openthedoor.onclick = function() {
+  
+	playOpenTheDoor();
+	
+	
+  
+		if(simgInstance18.visibile == true)
+	{
+	
+		kID_IsDoorLocked = false;
+		if(kID_IsMenuOpen == false)
+		{
+		canvas.remove(kID_UnLockIcon);
+		canvas.remove(kID_LockUnlcokPanel);
+		
+		canvas.remove(kID_LockIcon);	
+		canvas.add(kID_UnLockIcon);
+		}
+		
+	}
+  
+	
+
+	//Sahib
+		if(simgInstance12.visible == true)
+		{
+		   canvas.remove(simgInstance12);
+		   //simgInstance12.visible = false;
+		}
+
+		canvas.deactivateAll(); // deselect everything
+  
+  
+  };
+  
+var closethedoor = document.getElementById('b7');
+
+		closethedoor.onclick = function() {
+  
+		playCloseTheDoor();
+		
+		
+		
+		if(simgInstance18.visibile == true)
+		{
+		
+		kID_IsDoorLocked = true;
+		if(kID_IsMenuOpen == false){
+		
+		canvas.add(kID_LockIcon);
+		
+		canvas.remove(kID_UnLockIcon);
+		
+		}
+		
+		}
+	
+		//Sahib
+		if(simgInstance12.visible == true)
+		{
+		   canvas.remove(simgInstance12);
+		   //simgInstance12.visible = false;
+		}
+  
+  };  
+  
+setInterval(sRemoveMicrophone, 30000);  
+  
+function sRemoveMicrophone(){
+	
+	simgInstance18.visibile = false;
+	canvas.remove(simgInstance18);	
+		
+}  
+  
+var simgElement18 = document.getElementById('smicrophone');
+var simgInstance18 = new fabric.Image(simgElement18, {
+  
+  width:100,
+  height: 100,
+  left: 620,
+  top: 70,
+  opacity: 1,
+});
+
+simgInstance18.hasControls = simgInstance18.hasBorders = false;
+
+simgInstance18.lockMovementX = simgInstance18.lockMovementY = true;  
+  
+  
+var simgElement19 = document.getElementById('slisteningmicrophone');
+var simgInstance19 = new fabric.Image(simgElement19, {
+  
+  width: 100,
+  height: 130,
+  left: 620,
+  top: 40,
+  opacity: 1,
+});
+
+simgInstance19.hasControls = simgInstance19.hasBorders = false;
+
+simgInstance19.lockMovementX = simgInstance19.lockMovementY = true;  
+  
+  
+var video2El = document.getElementById('video2');
+   var video2 = new fabric.Image(video2El, {
+  left: 700,
+  top: 650,
+  angle: 0,
+  strokeWidth: 20, 
+  stroke: 'rgba(0,0,0,20)',
+  originX: 'center',
+  originY: 'center'
+}); 
+
+video2.hasControls = video2.hasBorders = false;
+
+video2.lockMovementX = video2.lockMovementY = true;
+
+var onvideoclick = 1;
+
+video2.on('selected', function() {
+
+  playBeep();
+  
+  if(onvideoclick% 2  == 0){
+  
+  video2.getElement().play();
+  
+  }
+
+  if(onvideoclick% 2  == 1)
+  {
+  video2.getElement().pause();
+  
+  }
+  
+  onvideoclick = onvideoclick + 1;
+  
+  
+
+  //canvas.renderAll();
+  canvas.deactivateAll(); // deselect everything
+
+});
+
+   
+kID_HelpIcon.on('selected', function() {
+
+	playBeep();
+
+	kRemoveMenuPanel2();
+	
+	kID_IsMenuOpen = false;
+	
+	simgInstance20.left = 130;
+	simgInstance20.top = 630,
+	
+	canvas.add(simgInstance20);
+
+	canvas.add(video2);
+	video2.getElement().load();
+	video2.getElement().play();
+	fabric.util.requestAnimFrame(function render() {
+	canvas.renderAll();
+	fabric.util.requestAnimFrame(render);
+	
+	});   
+	
+	canvas.deactivateAll(); // deselect everything
+
+});  
+  
+
+  
+  
+//Left arrow of help window
+var simgElement20 = document.getElementById('kLeftArrowIcon');
+var simgInstance20 = new fabric.Image(simgElement20, {
+  
+  width: 90,
+  height: 100,
+  left: 130,
+  top: 630,
+});
+
+simgInstance20.hasControls = simgInstance20.hasBorders = false;
+
+simgInstance20.lockMovementX = simgInstance20.lockMovementY = true;  
+
+simgInstance20.on('selected', function() {
+
+	playBeep();
+
+	kID_IsMenuOpen = true;
+	
+	RemoveHelpWindow();
+	
+	kAddMenuPanel2();
+	
+	canvas.deactivateAll(); // deselect everything
+
+});  
+  
+  
+//House Alarm
+
+kID_HouseAlarmIcon.on('selected', function() {
+
+	playBeep();
+	
+	kID_IsMenuOpen = false;
+
+	kRemoveMenuPanel2();
+	
+	canvas.add(slider1);
+
+	canvas.add(sliderLine1);
+	 
+	canvas.add(simgInstance21);
+	
+	sOnHouseAlarmText.fill = 'black';
+  
+	sOffHouseAlarmText.fill = 'black';
+	
+	canvas.add(sOnHouseAlarmText);
+	
+	canvas.add(sOffHouseAlarmText);
+	
+	canvas.deactivateAll(); // deselect everything
+
+});  
+  
+//Slider for House Alarm
+
+var slider1 = new fabric.Rect({
+    width: 50,
+    height: 80,
+    top: 630,
+    left: 450,
+    fill: 'black'
+  });
+
+slider1.hasControls = slider1.hasBorders = false;
+
+slider1.lockMovementY = true;
+
+slider1.lockMovementX = false;
+
+var sliderLine1 = new fabric.Rect({
+    width: 450,
+    height: 10,
+    top: 670,
+    left: 450,
+    fill: 'black'
+  });
+
+sliderLine1.hasControls = sliderLine1.hasBorders = false;
+
+sliderLine1.lockMovementX = sliderLine1.lockMovementY = true;  
+	
+	
+//Left arrow for house alarm
+var simgElement21 = document.getElementById('kLeftArrowIcon');
+var simgInstance21 = new fabric.Image(simgElement21, {
+  
+  width: 90,
+  height: 100,
+  left: 130,
+  top: 620,
+});
+
+simgInstance21.hasControls = simgInstance21.hasBorders = false;
+
+simgInstance21.lockMovementX = simgInstance21.lockMovementY = true;  
+
+simgInstance21.on('selected', function() {
+
+	playBeep();
+
+	kID_IsMenuOpen = true;
+	
+	RemoveHouseAlarmWindow();
+	
+	kAddMenuPanel2();
+	
+	canvas.deactivateAll(); // deselect everything
+
+});
+
+//Inside door upper Half Red House Alarm
+var simgElement22 = document.getElementById('sred');
+var simgInstance22 = new fabric.Image(simgElement22, {
+  
+  width: 1232,
+  height: 2350,
+  left: 50,
+  top: 0,
+  opacity: 0.8,
+});
+
+simgInstance22.hasControls = simgInstance22.hasBorders = false;
+
+simgInstance22.lockMovementX = simgInstance22.lockMovementY = true;
+
+//canvas.add(simgInstance22);
+
+//Outside door upper half Red House alarm
+
+var simgElement23 = document.getElementById('sred');
+var simgInstance23 = new fabric.Image(simgElement23, {
+  
+  width: 1231,
+  height: 1057,
+  left: 1429.5,
+  top: 0,
+  opacity: 0.8,
+});
+
+simgInstance23.hasControls = simgInstance23.hasBorders = false;
+
+simgInstance23.lockMovementX = simgInstance23.lockMovementY = true;
+
+
+//Outside door lower half Red House alarm
+var simgElement24 = document.getElementById('sred');
+var simgInstance24 = new fabric.Image(simgElement24, {
+  
+  width: 1232,
+  height: 1150,
+  left: 1428,
+  top: 1287,
+  opacity: 0.8,
+});
+
+simgInstance24.hasControls = simgInstance24.hasBorders = false;
+
+simgInstance24.lockMovementX = simgInstance24.lockMovementY = true;
+
+var shousealarmbutton = document.getElementById('b10');
+
+  shousealarmbutton.onclick = function() {
+  
+  playBeep();
+  
+  PlayHouseAlarm();
+  
+  slider1.left = 450;
+  
+  canvas.add(simgInstance22);
+  
+  canvas.add(simgInstance23);
+  
+  canvas.add(simgInstance24);
+  
+  canvas.add(slider2);
+  
+  canvas.add(sliderLine2);
+  
+  sOnHouseAlarmText.fill = 'white';
+  
+  sOffHouseAlarmText.fill = 'white';
+  
+  canvas.add(sOnHouseAlarmText);
+	
+  canvas.add(sOffHouseAlarmText);
+  
+  canvas.add(sHouseAlarmText);
+	
+  canvas.add(sActivatedText);
+  
+  canvas.add(sOutsideHouseAlarmText);
+	
+  canvas.add(sOutsideActivatedText);
+  
+  };
+
+
+//Slider for House Alarm
+
+var slider2 = new fabric.Rect({
+    width: 50,
+    height: 80,
+    top: 630,
+    left: 450,
+    fill: 'black'
+  });
+
+slider2.hasControls = slider2.hasBorders = false;
+
+slider2.lockMovementY = true;
+
+slider2.lockMovementX = false;
+
+var sliderLine2 = new fabric.Rect({
+    width: 450,
+    height: 10,
+    top: 670,
+    left: 450,
+    fill: 'black'
+  });
+
+sliderLine2.hasControls = sliderLine2.hasBorders = false;
+
+sliderLine2.lockMovementX = sliderLine2.lockMovementY = true;  
+
+ 
+	
+//Text House Alarm ON
+var sOnHouseAlarmText = new fabric.Text('ON',{
+  left: 270,
+  top: 620,
+  fontSize: 90,
+  fontWeight: 'bold',
+  fontFamily: sID_Font
+});
+
+//Text House Alarm OFF
+var sOffHouseAlarmText = new fabric.Text('OFF',{
+  left: 940,
+  top: 620,
+  fontSize: 90,
+  fontWeight: 'bold',
+  fontFamily: sID_Font
+});
+
+//Text House Alarm on Inside Door
+var sHouseAlarmText = new fabric.Text('House Alarm',{
+  left: 400,
+  top: 320,
+  fontSize: 90,
+  fill: 'white',
+  fontWeight: 'bold',
+  fontFamily: sID_Font
+});
+
+
+//Text Activated on Inside Door
+var sActivatedText = new fabric.Text('Activated',{
+  left: 470,
+  top: 420,
+  fill: 'white',
+  fontSize: 90,
+  fontWeight: 'bold',
+  fontFamily: sID_Font
+});
+
+//Text House Alarm on Outside Door
+var sOutsideHouseAlarmText = new fabric.Text('House Alarm',{
+  left: 1760,
+  top: 320,
+  fontSize: 90,
+  fill: 'white',
+  fontWeight: 'bold',
+  fontFamily: sID_Font
+});
+
+//Text Activated on Outside Door
+var sOutsideActivatedText = new fabric.Text('Activated',{
+  left: 1830,
+  top: 420,
+  fill: 'white',
+  fontSize: 90,
+  fontWeight: 'bold',
+  fontFamily: sID_Font
+});
 
 
 //Text
@@ -5763,7 +6885,26 @@ var sDeliverPackageText2 = new fabric.Text('Package',{
 canvas.add(sDeliverPackageText2);
 
 
+canvas.on('object:moving', function(e) {
+  var activeObject = e.target;
+  
+  if(activeObject.get('top') == 630 && activeObject.get('left')<675)
+  {
+      activeObject.left = 450;
+      //slider3.left = 1360;
 
+  }
+  
+  if(activeObject.get('top') == 630 && activeObject.get('left')>675)
+  {
+      activeObject.left = 850;
+	  audio7.pause();
+	  RemoveHouseAlarmOutsideMenu();
+      //slider3.left = 1360;
+
+  }
+  
+});
 
 
 
@@ -5850,7 +6991,7 @@ sPostPlateText.lockMovementX = sPostPlateText.lockMovementY = true;
 
 //Date and time
 
-var kID_DateText = new fabric.Text('',{
+var kOD_DateText = new fabric.Text('',{
   left: sID_HeaderPanelLeft +630,
   top: sID_HeaderPanelTop + 5,
   fontSize: sID_FontSize,
@@ -5858,14 +6999,14 @@ var kID_DateText = new fabric.Text('',{
   fontFamily: sID_Font
 });
 
-kID_DateText.set({
+kOD_DateText.set({
     text: kID_MM+"/"+kID_DD+"/"+kID_YYYY
   });
 
-canvas.add(kID_DateText);
+canvas.add(kOD_DateText);
 
 // add the time to canvas - initially blank, update from function
-var kID_TimeText = new fabric.Text('',{
+var kOD_TimeText = new fabric.Text('',{
   left: sID_HeaderPanelLeft +1090,
   top: sID_HeaderPanelTop + 5,
   fontSize: sID_FontSize,
@@ -5873,11 +7014,11 @@ var kID_TimeText = new fabric.Text('',{
   fontFamily: sID_Font
 });
 
-kID_TimeText.set({
+kOD_TimeText.set({
     text:kID_Hrs+":"+kID_Mins
   });
 
-canvas.add(kID_TimeText);
+canvas.add(kOD_TimeText);
 
 
 //Hide outside door icons
@@ -5894,6 +7035,7 @@ canvas.remove(sDeliverPackageText2);
 
 function showOutsideDoorIcons(){
 
+hideOutsideDoorIcons();
 canvas.add(simgInstance3);
 canvas.add(simgInstance4);
 canvas.add(sWriteMessageText1);
@@ -5902,6 +7044,73 @@ canvas.add(sDeliverPackageText1);
 canvas.add(sDeliverPackageText2);
 
 }
+
+function RemoveWriteMessageWindow(){ 
+
+canvas.remove(simgInstance7);
+
+canvas.remove(sNewPlate);
+canvas.remove(sNewPlateText);
+
+canvas.remove(sPostPlate);
+canvas.remove(sPostPlateText);
+
+}
+
+function RemoveHouseAlarmWindow(){
+
+canvas.remove(slider1);
+	
+canvas.remove(sliderLine1);
+
+canvas.remove(simgInstance21);
+
+canvas.remove(sOnHouseAlarmText);
+
+canvas.remove(sOffHouseAlarmText);
+
+
+}
+
+function RemoveHelpWindow(){
+
+
+video2.getElement().pause();
+
+canvas.remove(video2);
+
+canvas.remove(simgInstance20);
+
+}
+
+function RemoveHouseAlarmOutsideMenu(){
+
+canvas.remove(simgInstance22);
+  
+canvas.remove(simgInstance23);
+
+canvas.remove(simgInstance24);
+
+canvas.remove(slider2);
+
+canvas.remove(sliderLine2);
+
+canvas.remove(sOnHouseAlarmText);
+
+canvas.remove(sOffHouseAlarmText);
+
+canvas.remove(sHouseAlarmText);
+
+canvas.remove(sActivatedText);
+
+canvas.remove(sOutsideHouseAlarmText);
+
+canvas.remove(sOutsideActivatedText);	
+
+slider2.left = 450;
+
+}
+
 
 //On Mouse hover
 /*simgInstance1.on('mouse:move', function(e) {
