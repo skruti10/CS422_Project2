@@ -139,6 +139,18 @@
 <!-- ************************************HTML Code Added by Sahib ************************************************************************************* -->
 
 
+<!--New Code added by sahib for write message -->
+<div id= "main" style="position: absolute; top:0; left:0; display:none">
+  <canvas id="subC" width="820" height="352" style="border:2px solid black">
+  </canvas>
+  </div>
+  
+   <div id= "mainIt" style="position: absolute; top:0; left:0; display:none">
+  <canvas id="sheet" width="950" height="352" style="border:2px solid black">
+  </canvas>
+  </div>
+
+
 <img src="Icons//keyhole1.png" id="sKeyHoleIcon" style="display:none">
 <img src="Icons//doorbell1.png" id="sDoorBellIcon" style="display:none">
 <img src="Icons//writemessage1.png" id="sWriteMessageIcon" style="display:none">
@@ -416,12 +428,12 @@ outsideDoor.lockMovementX = outsideDoor.lockMovementY = true;
 /************************************************** Common set of codes for everyone start -JS ***************************************************************/
 
 //Functions for playing sound
-
+/*
 function playDoorbell() {
     console.log("Play Doorbell");
     audio1.play(); // audio will load and then play
 }
-
+*/
 function playBeep(){
 
     audio2.play(); 
@@ -3153,8 +3165,11 @@ function kOnSelectMsgAll()
 		kID_MsgAll.set({
 			fill:'grey'
 		});
-		if(kID_IsReadMode)
-			getMessagesAsPerUser(kID_CurMsgUser,0);
+		if(kID_IsReadMode){
+			//Added by Sahib 
+			//getMessagesAsPerUser(kID_CurMsgUser,0);
+			showMessageCommon();
+			}
 	}
 	canvas.deactivateAll(); // deselect everything
 };
@@ -5531,10 +5546,20 @@ kID_MenuIcon.on('selected', function()
 		/**** conditions to check whether there were any notifications - then add the notification panel icons***************/
 		
 		/**** add the lock icon on the door ************************/
-		
-		canvas.remove(kID_LockIcon);
-		canvas.add(kID_LockIcon);
-		
+	//Sahib start	
+	if(kID_IsDoorLocked)
+		{
+			canvas.remove(kID_LockIcon);
+			canvas.add(kID_LockIcon);
+		}
+		else
+		{
+			canvas.remove(kID_UnLockIcon);
+			canvas.add(kID_UnLockIcon);
+		}
+		//canvas.remove(kID_LockIcon);
+		//canvas.add(kID_LockIcon);
+	//Sahib ends	
 		/**** add the lock icon on the door ************************/
 		
 		
@@ -5947,11 +5972,11 @@ function kOD_DoorLitSimulation()
 	if(kOD_Hrs >= 18 || kOD_Hrs <= 5)
 	{
 		kOD_RemoveAllDoorIcons();
-		
+		/*
 		outsideDoor.set({
 			fill:'#666666'
 		})
-	
+		*/
 		kOD_AddAllDoorIcons();
 	}
 };
@@ -6356,7 +6381,21 @@ canvas.add(kID_LockIcon);
 
 function playDoorbell() {
     console.log("Play Doorbell");
-    audio1.play(); // audio will load and then play
+    if(aplayDoorbell==1)
+    	audio1.play(); // audio will load and then play
+    else if(aplayDoorbell==2)
+    	bell2.play();
+    else if(aplayDoorbell==3)
+    	bell3.play();
+}
+
+function playPackageBell(){
+	if(aplayPackagebell==1)
+		bell4.play();
+	else if(aplayPackagebell==2)
+		bell5.play();
+	else if(aplayPackagebell==3)
+		bell6.play();
 }
 
 function playBeep(){
@@ -6599,11 +6638,27 @@ canvas.add(simgInstance3);
 
 
 
+var writeMessageRect = new fabric.Rect({
+    width: 810,
+    height: 470,
+    top: 380,
+	strokeWidth: 20, 
+	stroke: 'rgba(0,0,0,20)',
+    left: 1650,
+    fill: 'yellow'
+  });
+
+writeMessageRect.hasControls = writeMessageRect.hasBorders = false;
+
+writeMessageRect.lockMovementX = writeMessageRect.lockMovementY = true;
 
 
+var canvas1=this.__canvas= new fabric.Canvas('subC');
+var canvas2=this.__canvas= new fabric.Canvas('sheet');
 
-
-
+var json;
+var mainApp=document.getElementById("main");
+var mainAppit=document.getElementById("mainIt");
 
 simgInstance3.on('selected', function() {
 
@@ -6620,13 +6675,20 @@ canvas.add(sNewPlateText);
 canvas.add(sPostPlate);
 canvas.add(sPostPlateText);
 
+//canvas.add(writeMessageRect);
+
+
+
 if(simgInstance12.visible == true)
 	{
 	   canvas.remove(simgInstance12);
 	   //simgInstance12.visible = false;
 	}	
 
-/*var el = document.getElementById('canvas');
+
+/*
+
+var el = document.getElementById('canvas');
 var ctx = canvas.getContext('2d');
 var isDrawing;
 
@@ -6639,12 +6701,27 @@ canvas.on('mouse:down', function(e) {
   ctx.lineJoin = ctx.lineCap = 'round';
   ctx.moveTo(e.clientX, e.clientY);
 });
-canvas.on('mouse:move', function(e) {
+canvas.on('mouse:move', function(o) {
 
   console.log('Mouse Moved');
 
   if (isDrawing) {
-    ctx.lineTo(e.clientX, e.clientY);
+    
+  /
+  var pointer = canvas.getPointer(o.e);
+  //Bounding the cursor along x-axis
+  if(pointer.x > 1690 && pointer.y > 400 && pointer.x < 2440 && pointer.y < 830)
+  {
+      //activeObject.left = 450;
+	  //console.log("Mouse moving event x less than 1000");
+      canvas.isDrawingMode = true;
+  }
+  else{
+	  canvas.isDrawingMode = false;
+  }
+  
+  
+    ctx.lineTo(o.clientX, o.clientY);
     ctx.stroke();
   }
 });
@@ -6653,18 +6730,32 @@ canvas.on('mouse:up', function(e) {
   console.log('Mouse Up');
 
   isDrawing = false;
-});*/
+});
 
 //var destinationcanvas = document.getElementById('c');
 //var ctx = canvas.getContext('2d');	
 
-/*var canvas1 = new fabric.Canvas('sheet');
+//var canvas1 = new fabric.Canvas('sheet');
 //ctx.drawImage(canvas1,0,0,100,100);
 
-canvas1.isDrawingMode = true;
-canvas1.freeDrawingBrush.width = 10;
-canvas1.freeDrawingBrush.color = "#000000";
+canvas.isDrawingMode = true;
+canvas.freeDrawingBrush.width = 10;
+canvas.freeDrawingBrush.color = "#000000";
+
 */
+
+
+
+
+
+		//Latest code for write message
+		mainApp.style.display = 'block';
+		//console.log(subC);
+		mainApp.style.left="1650px";
+		mainApp.style.top="500px";
+		canvas1.isDrawingMode = true;
+		canvas1.freeDrawingBrush.width=10;
+		canvas1.freeDrawingBrush.color="#000000";
 
 	canvas.deactivateAll(); // deselect everything
 
@@ -6744,6 +6835,8 @@ kAddNotificationPanel();
 
 if(simgInstance4.opacity == 0.5)
   {
+  
+  playBeep();
   simgInstance4.opacity = 1;
   sDeliverPackageText1.fontSize = 20;
   sDeliverPackageText1.left = 2150;
@@ -6756,6 +6849,7 @@ if(simgInstance4.opacity == 0.5)
 
   else
   {
+	playPackageBell();
     simgInstance4.opacity = 0.5;
 	sDeliverPackageText1.fontSize = 25;
 	sDeliverPackageText1.left = 2150;
@@ -6868,11 +6962,11 @@ var animateBtn = document.getElementById('b8');
   /*************** $$KRUTI DOOR LIT SIMULATION ********************/
   
 	kOD_RemoveAllDoorIcons();
-		
+	/*	
 	outsideDoor.set({
 		fill:'#ffffff'
 	});
-	
+	*/
 	kOD_AddAllDoorIcons();
 	
 	/*************** $$KRUTI DOOR LIT SIMULATION ********************/
@@ -7136,11 +7230,11 @@ var count = 0;
   /*************** $$KRUTI DOOR LIT SIMULATION ********************/
   
   kOD_RemoveAllDoorIcons();
-		
+	/*	
 	outsideDoor.set({
 		fill:'#ffffff'
 	});
-	
+	*/
 	kOD_AddAllDoorIcons();
 	
 	/*************** $$KRUTI DOOR LIT SIMULATION ********************/
@@ -7918,6 +8012,16 @@ sNewPlate.hasControls = sNewPlate.hasBorders = false;
 
 sNewPlate.lockMovementX = sNewPlate.lockMovementY = true;
 
+sNewPlate.on('selected', function() {
+
+	playBeep();
+	
+	canvas1.clear();
+	
+	canvas.deactivateAll(); // deselect everything
+
+});
+
 
 var sNewPlateText = new fabric.Text('New',{
   left: sID_MainPanelLeft +1200,
@@ -7929,6 +8033,16 @@ var sNewPlateText = new fabric.Text('New',{
 sNewPlateText.hasControls = sNewPlateText.hasBorders = false;
 
 sNewPlateText.lockMovementX = sNewPlateText.lockMovementY = true;
+
+sNewPlateText.on('selected', function() {
+
+	playBeep();
+	
+	canvas1.clear();
+	
+	canvas.deactivateAll(); // deselect everything
+
+});
 
 //Post Icon
 
@@ -7946,6 +8060,26 @@ sPostPlate.hasControls = sPostPlate.hasBorders = false;
 
 sPostPlate.lockMovementX = sPostPlate.lockMovementY = true;
 
+sPostPlate.on('selected', function() {
+
+	playBeep();
+	
+	json = JSON.stringify(canvas1);
+	canvas1.clear();
+	
+	//console.log(json);
+	//mainApp.style.display = 'none';
+	//console.log(subC);
+	/*
+	mainAppit.style.display = 'block';
+	mainAppit.style.left="400px";
+	mainAppit.style.top="500px";
+	canvas2.loadFromJSON(json);
+	*/
+	canvas.deactivateAll(); // deselect everything
+
+});
+
 var sPostPlateText = new fabric.Text('Post',{
   left: sID_MainPanelLeft +1500,
   top: sID_MainPanelTop + 435,
@@ -7956,6 +8090,33 @@ var sPostPlateText = new fabric.Text('Post',{
 sPostPlateText.hasControls = sPostPlateText.hasBorders = false;
 
 sPostPlateText.lockMovementX = sPostPlateText.lockMovementY = true;
+
+
+sPostPlateText.on('selected', function() {
+
+	playBeep();
+	
+	json = JSON.stringify(canvas1);
+	canvas1.clear();
+	
+	//console.log(json);
+	//mainApp.style.display = 'none';
+	//console.log(subC);
+	/*
+	mainAppit.style.display = 'block';
+	mainAppit.style.left="400px";
+	mainAppit.style.top="500px";
+	canvas2.loadFromJSON(json);
+	*/
+	canvas.deactivateAll(); // deselect everything
+
+});
+
+
+
+
+
+
 
 //Date and time
 
@@ -8022,6 +8183,9 @@ canvas.remove(sNewPlateText);
 
 canvas.remove(sPostPlate);
 canvas.remove(sPostPlateText);
+
+//canvas.remove(writeMessageRect);
+mainApp.style.display = 'none';
 
 }
 
@@ -8090,9 +8254,14 @@ slider2.left = 450;
 });
 */
 
+function showMessageCommon(){
 
-
-
+	canvas2.loadFromJSON(json);
+	mainAppit.style.left="210px";
+	mainAppit.style.top="500px";
+	mainAppit.style.display = 'block';
+	
+}
 
 
 
