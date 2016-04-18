@@ -145,7 +145,7 @@
   </canvas>
   </div>
   
-   <div id= "mainIt" style="position: absolute; top:0; left:0; display:none">
+  <div id= "mainIt" style="position: absolute; top:0; left:0; display:none">
   <canvas id="sheet" width="950" height="352" style="border:2px solid black">
   </canvas>
   </div>
@@ -187,6 +187,7 @@
 
 <img src="Icons//housealarmbutton.png" id="b10" width="500" height="150">
 <img src="Icons//red.png" id="sred" style="display:none">
+<img src="Icons//whitearrow.png" id="swhitearrow" style="display:none">
 
 	<audio id="audio1">
     <source src="http://sbajaj7.people.uic.edu/CS422/images/bell.mp3" type="audio/wav" />
@@ -225,6 +226,11 @@
 	-->
 	
 	<video height="600" width="750" id="video2" style="display: none">
+	<source src="http://sbajaj7.people.uic.edu/CS422/project2/samplesmall.mp4">
+	<source src="http://sbajaj7.people.uic.edu/CS422/project2/samplesmall.ogv">
+	</video>	
+	
+	<video height="600" width="750" id="video3" style="display: none">
 	<source src="http://sbajaj7.people.uic.edu/CS422/project2/samplesmall.mp4">
 	<source src="http://sbajaj7.people.uic.edu/CS422/project2/samplesmall.ogv">
 	</video>	
@@ -7586,6 +7592,7 @@ kID_HelpIcon.on('selected', function() {
 });  
   
 
+
   
   
 //Left arrow of help window
@@ -7615,6 +7622,52 @@ simgInstance20.on('selected', function() {
 	canvas.deactivateAll(); // deselect everything
 
 });  
+  
+  
+//Learn more video  
+var video3El = document.getElementById('video3');
+   var video3 = new fabric.Image(video3El, {
+  left: 700,
+  top: 650,
+  angle: 0,
+  strokeWidth: 20, 
+  stroke: 'rgba(0,0,0,20)',
+  originX: 'center',
+  originY: 'center'
+}); 
+
+video3.hasControls = video3.hasBorders = false;
+
+video3.lockMovementX = video3.lockMovementY = true;
+
+var onvideo3click = 1;
+
+video3.on('selected', function() {
+
+  playBeep();
+  
+  if(onvideo3click% 2  == 0){
+  
+  video3.getElement().play();
+  
+  }
+
+  if(onvideo3click% 2  == 1)
+  {
+  video3.getElement().pause();
+  
+  }
+  
+  onvideo3click = onvideo3click + 1;
+  
+  
+
+  //canvas.renderAll();
+  canvas.deactivateAll(); // deselect everything
+
+});  
+  
+  
   
   
 //House Alarm
@@ -8263,9 +8316,90 @@ function showMessageCommon(){
 	
 }
 
+var stooltipscreenelement = document.getElementById('sblack');
+var stooltipscreen = new fabric.Image(stooltipscreenelement, {
+  
+  width: 1235,
+  height: 2350,
+  left: 50,
+  top: 0,
+  opacity: 0.8,
+});
+
+stooltipscreen.hasControls = stooltipscreen.hasBorders = false;
+
+stooltipscreen.lockMovementX = stooltipscreen.lockMovementY = true;
 
 
+var sArrowelement = document.getElementById('swhitearrow');
+var sArrow = new fabric.Image(sArrowelement, {
+  
+  width: 200,
+  height: 200,
+  left: 560,
+  top: 600,   
+  opacity: 0.9,
+});
 
+sArrow.hasControls = sArrow.hasBorders = false;
+
+sArrow.lockMovementX = sArrow.lockMovementY = true;
+
+
+stooltipscreen.on('selected', function() {
+
+playBeep();
+
+RemoveToolTip();
+
+canvas.deactivateAll(); // deselect everything
+
+  });
+  
+  
+sArrow.on('selected', function() {
+
+playBeep();
+
+RemoveToolTip();
+
+canvas.deactivateAll(); // deselect everything
+
+  });
+
+  
+  
+function showToolTip(){
+
+	canvas.add(stooltipscreen);
+	
+	canvas.add(sArrow);
+	
+	setInterval(sAnimateTooltip, 1000);
+
+}
+
+function sAnimateTooltip(){
+
+sArrow.animate('top', sArrow.getTop() === 600 ? 910 : 600, {
+      duration: 100,
+      onChange: canvas.renderAll.bind(canvas),
+      
+	  onComplete: function() {
+	  
+	//canvas.remove(simgInstance9);
+			
+      }
+    });
+
+}
+
+function RemoveToolTip(){
+
+	canvas.remove(sArrow);
+	canvas.remove(stooltipscreen);
+
+}
 
 
 /*************************************** Code End by Sahib ***************************************************************************************/
@@ -12133,6 +12267,7 @@ kID_IsMenuOpen = false;
 rID_HideLastPage();
 kID_LockIcon.visible = true;
 	
+showToolTip();
 
 canvas.deactivateAll();
 
@@ -12307,23 +12442,37 @@ function rID_HideTutorialPage2()
 
 function rID_RenderVideo()
 {
-   canvas.add(rID_VideoIcon);
-   canvas.add(rID_LeftArrowIcon2);
+	//canvas.add(rID_VideoIcon);
+	canvas.add(rID_LeftArrowIcon2);
+   
+	canvas.add(video3);
+	video3.getElement().load();
+	video3.getElement().play();
+	fabric.util.requestAnimFrame(function render() {
+	canvas.renderAll();
+	fabric.util.requestAnimFrame(render);
+
+	});   
   
 }
 
 
 function rID_ShowVideo()
 {
-   rID_VideoIcon.visible =true;
+   //rID_VideoIcon.visible =true;
    rID_LeftArrowIcon2.visible = true;
    
 }
 
 function rID_HideVideo()
 {
-   rID_VideoIcon.visible =false;
+   //rID_VideoIcon.visible =false;
    rID_LeftArrowIcon2.visible = false;
+   
+   video3.getElement().pause();
+   
+   canvas.remove(video3);
+   
 }
 
 function rID_RenderClickPicture()
