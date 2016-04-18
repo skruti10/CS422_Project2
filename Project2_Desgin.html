@@ -215,9 +215,7 @@
     <source src="http://sbajaj7.people.uic.edu/CS422/project2/housealarmoffstate.mp3" type="audio/mp3" />
     </audio>
     
-    <audio id="audioCameraClick">
-    <source src="http://rrusta2.people.uic.edu/camera-shutter-click-01.mp3" type="audio/mp3" />
-    </audio>
+ 
 	
 	<!-- <iframe width="760" height="615" src="https://www.youtube.com/embed/ba3iwKFiNXM" id = "videoframe" frameborder="10" allowfullscreen></iframe> -->
 
@@ -338,8 +336,19 @@
 	<img src="Icons/rRidhiImageIcon.png" id="kRidhiImageIcon2" style="display:none">
 	<img src="Icons/rAnkurImageIcon.png" id="kAnkurImageIcon3" style="display:none">	
 	<img src="Icons/rSahibImageIcon.png" id="kSahibImageIcon4" style="display:none">
+	
+<img src="Icons/fingerRidhi.PNG" id="rscanridhi" style="display:none">
+<img src="Icons/fingerKruti.PNG" id="rscankruti" style="display:none">
+<img src="Icons/fingerSahib.PNG" id="rscansahib" style="display:none">
+<img src="Icons/fingerAnkur.PNG" id="rscanankur" style="display:none">
 
-
+   <audio id="audioCameraClick">
+    <source src="camera-shutter-click-01.mp3" type="audio/mp3" />
+    </audio>
+    
+     <audio id="scan">
+    <source src="Checkout Scanner.mp3" type="audio/mp3" />
+    </audio>
 
 
 <!-- ************************************ HTML Code End by Ridhi ************************************************************************************** -->
@@ -405,6 +414,11 @@ function playBeep(){
 function playCameraClick()
 {
    audioCameraClick.play();
+}
+
+function playScan()
+{
+   scan.play();
 }
 
 /*** START $$Kruti added the code for profiles***/
@@ -9513,6 +9527,7 @@ var rID_Profile1Done =0;
 var rID_Profile2Done =0;
 var rID_Profile3Done = 0;
 var rID_Profile4Done = 0;
+var scanned =0;
 
 var rID_Hour1 = new fabric.Text('default', {
 		left: rID_TutorialLeft+ 810,
@@ -9569,6 +9584,18 @@ var rID_Hour3 = new fabric.Text('', {
 		fill:'white',
 		fontFamily: kID_Font
 	});
+	
+	var rID_HandPointer = new fabric.Image(simgElement9, {
+  
+  width: 200,
+  height: 200,
+  left: rID_TutorialLeft + 900,
+  top: 1175,    
+});
+
+rID_HandPointer.hasControls = rID_HandPointer.hasBorders = false;
+
+rID_HandPointer.lockMovementX = rID_HandPointer.lockMovementY = true;
 	
 	var rTempIcon1Info = new kInsertImageInfo("rTempIcon1",document.getElementById('rTempIcon1'));  
 var rID_TempIcon1 = new fabric.Image(rTempIcon1Info.kImageElement, 
@@ -9823,7 +9850,8 @@ left: rID_TutorialLeft+ 600 ,
   top: rID_TutorialTop + 385,
             width: 50,
             height: 40
-        });		
+        });	
+	
 
 var rID_Tutorial = new fabric.Rect({
   left: rID_TutorialLeft,
@@ -9977,6 +10005,13 @@ left: rID_TutorialLeft+ 840 ,
         });			
 		
 var rID_TickMarkIcon5= new fabric.Image(rID_TickMarkImg, {
+left: rID_TutorialLeft+ 810 ,
+  top: rID_TutorialTop + 180,
+            width: 50,
+            height: 40
+        });
+		
+		var rID_ScanTickIcon= new fabric.Image(rID_TickMarkImg, {
 left: rID_TutorialLeft+ 810 ,
   top: rID_TutorialTop + 180,
             width: 50,
@@ -10598,11 +10633,11 @@ var rID_VoiceIcon = new fabric.Image(rID_VoiceImg, {
   top: rID_TutorialTop + 460,
 });*/
 var rFingerPrintInner = new fabric.Circle({
-     left: rID_TutorialLeft + 920,
-  top: rID_TutorialTop + 945,
+     left: rID_TutorialLeft + 910,
+  top: rID_TutorialTop + 947,
     fill: 'black',
     stroke: 'rgba(0,0,256,20)',
-    radius: 52
+    radius: 53
 });
 
 var rFingerPrintBox = new fabric.Circle({
@@ -10620,6 +10655,40 @@ var rID_HandIcon = new fabric.Image(rID_HandImg, {
   height: 70,
   left: rID_TutorialLeft+ 480,
   top: rID_TutorialTop + 410,
+});
+
+ 
+
+var rID_Finger1Info  = new kInsertImageInfo("rscanridhi",document.getElementById('rscanridhi'));
+var rID_RidhiPrint = new fabric.Image(rID_Finger1Info.kImageElement, {
+  left: rID_TutorialLeft+ 396,
+  top: rID_TutorialTop + 300, 
+  width: 250,
+  height: 240
+});
+
+var rID_Finger2Info  = new kInsertImageInfo("rscankruti",document.getElementById('rscankruti'));
+var rID_KrutiPrint = new fabric.Image(rID_Finger2Info.kImageElement, {
+  left: rID_TutorialLeft+ 396,
+  top: rID_TutorialTop + 300, 
+  width: 250,
+  height: 240
+});
+
+var rID_Finger3Info  = new kInsertImageInfo("rscansahib",document.getElementById('rscansahib'));
+var rID_SahibPrint = new fabric.Image(rID_Finger3Info.kImageElement, {
+  left: rID_TutorialLeft+ 396,
+  top: rID_TutorialTop + 300, 
+  width: 250,
+  height: 240
+});
+
+var rID_Finger4Info  = new kInsertImageInfo("rscanankur",document.getElementById('rscanankur'));
+var rID_AnkurPrint = new fabric.Image(rID_Finger4Info.kImageElement, {
+  left: rID_TutorialLeft+ 396,
+  top: rID_TutorialTop + 300, 
+  width: 250,
+  height: 240
 });
 
 var rID_ArrowImg = document.getElementById('rArrow');
@@ -10776,6 +10845,7 @@ rID_HideChooseUser();
 
 rID_Kruti.on('selected', function () 
 {
+    playBeep();
     kID_IsMenuOpen = false;
 	kID_IsMenuItemOpen = true;
 	rID_HideChooseUser();
@@ -10804,6 +10874,7 @@ rID_Kruti.on('selected', function ()
 
 rID_Sahib.on('selected', function () 
 {
+    playBeep();
     kID_IsMenuOpen = false;
 	kID_IsMenuItemOpen = true;
     // rID_HideFirstTimeSetup();
@@ -10828,7 +10899,8 @@ rID_Sahib.on('selected', function ()
 });
 
 rID_Ankur.on('selected', function () 
-{
+{ 
+    playBeep();
      kID_IsMenuOpen = false;
 	kID_IsMenuItemOpen = true;
     // rID_HideFirstTimeSetup();
@@ -11027,6 +11099,35 @@ rID_ShowScanFinger();
 rID_Circle2.fill = 'white';
 rID_Circle4.fill = 'white';
 rID_Circle3.fill = 'black';
+
+if(activeuser == 'Ridhi'&& rID_Finger1Info.kIsUsed == true)
+		{
+		   
+		   rID_RidhiPrint.visible = true;
+		   rID_ScanTickIcon.visible = true;
+		   //k_RidhiProfile.kFingerIcon = 
+		   
+		}
+		else if(activeuser == 'Kruti' && rID_Finger2Info.kIsUsed == true)
+		{
+		   rID_KrutiPrint.visible = true;
+		   rID_ScanTickIcon.visible = true;
+		   
+		}
+		
+		else if(activeuser == 'Sahib'&& rID_Finger3Info.kIsUsed == true )
+		{
+		   rID_SahibPrint.visible = true;
+		   rID_ScanTickIcon.visible = true;
+		   
+		}
+		else if(activeuser == 'Ankur' && rID_Finger4Info.kIsUsed == true)
+		{
+		   rID_AnkurPrint.visible = true;
+		   rID_ScanTickIcon.visible = true;
+		   
+		}
+	
 
 //rID_ShowVoiceCommand();
 //rID_TickMarkIcon3.visible =  true;
@@ -11247,11 +11348,7 @@ else if (activeuser == 'Ankur')
 	  retake4 = 0;
   }
 }
-else if (activeuser == 'guest')
-{ 
- 		aSettingsUserGuest2.visible = true;
 
-}
 
 
 rID_RenderCameraOnClick();
@@ -11345,15 +11442,12 @@ playBeep();
     rID_HideCameraOnClick();
 	rID_Circle2.fill = 'white';
 	rID_Circle3.fill = 'black';
-		aSettingsUserGuest2.visible = false;
 
 	rID_RenderScanFinger();
 	rID_ShowScanFinger();
+	//canvas.add(rID_HandPointer);
+	setTimeout(rID_AnimateHand,1000);
 	
-	/*if(activeuser == 'Ridhi')
-	{
-          	
-	}*/
    
  
 canvas.deactivateAll();
@@ -11471,6 +11565,8 @@ kID_IsMenuOpen = false;
 
 rID_HideLastPage();
 
+		canvas.add(kID_LockIcon);
+
 canvas.deactivateAll();
 
 });
@@ -11492,8 +11588,7 @@ kID_IsMenuOpen = false;
 	kID_IsMenuItemOpen = true;
   
  rID_HideLastPage();
- rID_RenderChooseUser();
- rID_ShowChooseUser();
+
 // rID_FirstTimeSetupText.visible = true;
 //  rID_UsersBox.visible = true;
   
@@ -11517,6 +11612,9 @@ kID_IsMenuOpen = false;
      canvas.add(rID_AnkurTick);
 	 rID_AnkurTick.visible = true;
   }
+  
+   rID_RenderChooseUser();
+ rID_ShowChooseUser();
  
  canvas.deactivateAll();
 });
@@ -11540,7 +11638,7 @@ function rID_RenderChooseLanguage ()
 //canvas.add(rID_Tutorial);
 //canvas.add(rID_RightArrowIcon1);
 //canvas.remove(kID_LockIcon);
-kID_LockIcon.visible = false;
+//kID_LockIcon.visible = false;
 canvas.add(rID_WelcomeText);
 //canvas.add(rID_WelcomeText2);
 canvas.add(rID_LanguageText);
@@ -11560,9 +11658,9 @@ canvas.add(rID_GroupPolishButton);
 
 function rID_ShowChooseLanguage ()
 {
-   rID_Tutorial.visible = true;
+   //rID_Tutorial.visible = true;
 //canvas.remove(kID_LockIcon.visible = true;
-kID_LockIcon.visible = false;
+//kID_LockIcon.visible = false;
 //rID_RightArrowIcon1.visible = true;
 rID_WelcomeText.visible = true;
 //rID_WelcomeText2.visible = true;
@@ -11765,6 +11863,7 @@ function rID_ShowScanFinger()
 	rID_ArrowIcon.visible = true;
 	rID_LeftArrowIcon4.visible = true;
 	rID_RightArrowIcon4.visible = true;
+	
 }
 
 function rID_HideScanFinger() 
@@ -11777,9 +11876,73 @@ function rID_HideScanFinger()
 	rID_ArrowIcon.visible= false;
 	rID_LeftArrowIcon4.visible = false;
 	rID_RightArrowIcon4.visible = false;
+	rID_ScanTickIcon.visible = false;
+	/*canvas.remove(rID_RidhiPrint);
+	canvas.remove(rID_KrutiPrint);
+	canvas.remove(rID_SahibPrint);
+	canvas.remove(rID_AnkurPrint);*/
+	rID_RidhiPrint.visible = false;
+	rID_KrutiPrint.visible = false;
+	rID_SahibPrint.visible = false;
+	rID_AnkurPrint.visible = false;
+	
 	
 }
 
+function rID_AnimateHand()
+{
+
+     canvas.add(rID_HandPointer);
+     playScan();
+	 scanned =1;
+	 
+	 setTimeout(function(){
+		 if(scanned == 1)
+	 { 
+	     canvas.remove(rID_HandPointer);
+		 if(activeuser == 'Ridhi')
+	     {
+	      canvas.add(rID_RidhiPrint);
+		  rID_Finger1Info.kIsUsed = true;
+		  
+	     }
+	  	else if(activeuser == 'Kruti')
+		{
+		   canvas.add(rID_KrutiPrint);
+		   rID_Finger2Info.kIsUsed = true;
+		   
+		   
+		   
+		}
+		
+		else if(activeuser == 'Sahib')
+		{
+		   canvas.add(rID_SahibPrint);
+		   rID_Finger3Info.kIsUsed = true;
+		   
+		   
+		}
+		else if(activeuser == 'Ankur')
+		{
+		   canvas.add(rID_AnkurPrint);
+		   rID_Finger4Info.kIsUsed = true;
+		   
+		   
+		}
+		
+	 }
+	 canvas.add(rID_ScanTickIcon);
+	 scanned =0;
+	 }, 1000);
+	 
+	 
+   
+		
+  
+	 
+	 
+	
+ }
 /*function rID_RenderVoiceCommand()
 {
    canvas.add(rID_VoiceCommandText);
@@ -12051,6 +12214,7 @@ rID_Circle5.set('fill','white');
   rID_RightArrowIcon6.visible = false;
   rID_GroupAnotherUserButton.visible = false;
   rID_Tutorial.visible = false;
+  
 }
 
 function rID_ShowCircles()
@@ -12800,6 +12964,13 @@ function loadTasksApi() {
 	canvas.remove(rEvent6);
 	canvas.remove(kID_CalendarLeftArrowIcon);
 	canvas.remove(rEventNull);
+	canvas.remove(rHour1);
+	canvas.remove(rHour2);
+	canvas.remove(rHour3);
+	canvas.remove(rHour4);
+	canvas.remove(rHour5);
+	canvas.remove(rHour6);
+	
 
  }
 
@@ -12870,6 +13041,22 @@ kID_TimeText.on('selected', function()
 
 rID_RenderChooseLanguage();
 rID_ShowChooseLanguage();
+canvas.remove(kID_LockIcon);
+
+
+
+//******************8hindilanguage************************
+rID_GroupHindiButton.on('selected', function()
+{
+
+rID_HideChooseLangugage();
+
+rID_RenderChooseUser();
+rID_ShowChooseUser();
+aSystemLangHindi();
+
+
+});
 
 
 /**************************** END Common set of JS Code at the END OF FILE ****************************************************************/
